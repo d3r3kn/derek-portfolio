@@ -68,7 +68,7 @@ figcaption a{color:var(--accent);text-decoration:none;border-bottom:1px solid va
 .skills-row{margin-bottom:14px;font-size:14.5px;color:var(--dim)}
 .skills-row:last-child{margin-bottom:0}
 .skills-row b{color:var(--ink);font-weight:650}
-.plain{font-size:14.5px;color:var(--dim);max-width:70ch;margin:0}
+.plain{font-size:14.5px;color:var(--dim);margin:0}
 
 /* Home hub links */
 .hub{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:44px}
