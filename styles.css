@@ -50,6 +50,13 @@ figcaption a{color:var(--accent);text-decoration:none;border-bottom:1px solid va
   color:var(--dim);font-size:15px;max-width:62ch;
 }
 
+.note{
+  border-left:3px solid var(--accent);background:var(--panel);
+  border-radius:0 8px 8px 0;padding:16px 22px;margin:48px 0 0;max-width:74ch;
+}
+.note p{font-size:14.5px;color:var(--dim);margin:0;line-height:1.6}
+.note p + p{margin-top:12px}
+
 /* Resume page */
 .resume-section{padding:44px 0 8px;border-bottom:1px solid var(--line)}
 .resume-section:last-of-type{border-bottom:none}
