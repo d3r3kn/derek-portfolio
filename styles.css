@@ -68,9 +68,9 @@ figcaption a, .d a{color:var(--accent);text-decoration:none;border-bottom:1px so
 .resume-section h2{margin-bottom:22px}
 .role{margin-bottom:30px}
 .role:last-child{margin-bottom:0}
-.role-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:2px}
-.role-title{font-weight:650;font-size:17px}
-.role-when{font-size:13.5px;color:var(--dim)}
+.role-head{margin-bottom:4px}
+.role-title{font-weight:650;font-size:17px;display:block}
+.role-when{font-size:13.5px;color:var(--dim);display:block;margin-top:2px}
 .role-sub{font-size:14px;color:var(--dim);margin:0 0 12px;font-style:italic}
 .role ul{margin:0 0 14px;padding-left:20px}
 .role ul:last-child{margin-bottom:0}
