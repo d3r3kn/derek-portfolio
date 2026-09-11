@@ -70,6 +70,12 @@ figcaption a{color:var(--accent);text-decoration:none;border-bottom:1px solid va
 .skills-row b{color:var(--ink);font-weight:650}
 .plain{font-size:14.5px;color:var(--dim);max-width:70ch;margin:0}
 
+.project{margin-bottom:22px;max-width:74ch}
+.project:last-child{margin-bottom:0}
+.project-title{font-weight:650;font-size:15.5px;color:var(--ink);margin:0 0 2px}
+.project-tech{font-size:13px;color:var(--accent);font-style:italic;margin:0 0 8px;font-weight:600}
+.project p{font-size:14.5px;color:var(--dim);margin:0}
+
 /* Home hub links */
 .hub{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:44px}
 .hub a{

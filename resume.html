@@ -23,58 +23,149 @@
 
   <section class="resume-section">
     <h2>Summary</h2>
-    <p class="plain">Data scientist and builder with a background spanning healthcare, analytics, and organizational management. I also work as a video editor and compositor for a YouTube comedy channel and produce original AI-driven motion pieces end to end, from generation and compositing through edit and voice. When the software doesn't do what a job needs, I build the tool.</p>
-  </section>
-
-  <section class="resume-section">
-    <h2>Experience</h2>
-    <div class="role">
-      <div class="role-head">
-        <span class="role-title">Video Editor, Compositor &amp; Content Producer</span>
-        <span class="role-when">Jul 2025 to Present</span>
-      </div>
-      <p class="role-sub">Freelance / Self-Employed</p>
-
-      <p class="role-group">YouTube comedy channel, editing and compositing</p>
-      <ul>
-        <li>Edit and composite full episodes, including green-screen keying that places talent inside built environments.</li>
-        <li>Art direction on episode visuals: background selection, grade, and the look of composited elements.</li>
-        <li>Cut period-styled black-and-white sequences that hold a straight dramatic tone so the comedy lands on its own.</li>
-      </ul>
-
-      <p class="role-group">Original and client motion work</p>
-      <ul>
-        <li>Produce AI-generated image and video content for online creators with a combined audience of over 1 million subscribers across multiple platforms.</li>
-        <li>Wrote, edited, composited and voiced a narrative short built from game footage. Used documentary grammar throughout: slow push-ins, archival grade, and cloned-voice narration, cut for vertical.</li>
-        <li>Built the visual identity for an original project: animated title treatments, character key art, and matching 9:16 social cuts with kinetic type.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="resume-section">
-    <h2>Tools I Built</h2>
-    <ul>
-      <li>Desktop video trimmer (Electron, FFmpeg). Frame-accurate trimming, waveform timeline navigation, automatic proxy transcoding for codecs the runtime can't decode, packaged for Windows.</li>
-      <li>Automated multi-camera edit generation driven by user-supplied beat patterns and tempo maps, with automatic resolution and frame-rate conforming.</li>
-      <li>Batch media pipelines (FFmpeg, pydub), image compositing utilities, and a browser-based color palette tool.</li>
-    </ul>
+    <p class="plain">Data analyst with a dual MS in Data Science and MBA, pairing SQL, Python, and R analytics with five years of frontline public health and clinical practice. Builds complete analytical systems, from data ingestion and quality validation through statistical anomaly detection, dashboards, and stakeholder-ready reporting, with recent work centered on fraud, waste, and abuse detection and analysis of a 238-million-row Medicaid claims dataset. Experienced handling protected health information under HIPAA, forecasting operations for a 14-person clinical team, and delivering production Python systems processing 20,000+ transactions. Also works as a video editor and compositor for a YouTube comedy channel and produces original AI-driven motion pieces end to end.</p>
   </section>
 
   <section class="resume-section">
     <h2>Skills</h2>
-    <p class="skills-row"><b>Post:</b> editing, green-screen keying and compositing, motion graphics, color, sound sync, vertical and short-form formats.</p>
-    <p class="skills-row"><b>AI:</b> ComfyUI generation, voice cloning, AI-assisted content workflows.</p>
-    <p class="skills-row"><b>Technical:</b> FFmpeg, Electron, Python, JavaScript, batch automation.</p>
+    <p class="skills-row"><b>Languages &amp; Query:</b> SQL, Python (Pandas, NumPy, scikit-learn, Matplotlib, Plotly), R (Tidyverse), JavaScript, VBA.</p>
+    <p class="skills-row"><b>Statistics &amp; Analysis:</b> descriptive and inferential statistics, anomaly and outlier detection, Benford's Law analysis, forecasting, Isolation Forest, regression, automated data profiling.</p>
+    <p class="skills-row"><b>Data &amp; BI:</b> Tableau, Power BI, DuckDB, Streamlit, Excel (advanced, VBA), NetSuite Analytics, Parquet, data modeling.</p>
+    <p class="skills-row"><b>Platforms &amp; Practices:</b> Django, Node.js, Electron, Git, automated testing (pytest), process documentation, HIPAA-governed data handling.</p>
   </section>
 
   <section class="resume-section">
-    <h2>Earlier Career</h2>
-    <p class="plain">Data analyst and registered nurse. Built a fraud-detection platform and analyzed a 238-million-row claims dataset, and previously managed a 14-person remote team. Composites technician and liquid-rocket test crew at XCOR Aerospace, 2012 to 2015.</p>
+    <h2>Experience</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Freelance Data Analyst &amp; Application Developer</span>
+        <span class="role-when">Jul 2025 to Present</span>
+      </div>
+      <p class="role-sub">Self-Employed &middot; Murfreesboro, TN</p>
+      <ul>
+        <li>Designed and delivered AgDat under a client engagement: a fraud, waste, and abuse detection platform that ingests any CSV or Excel dataset, automatically profiles every column to infer semantic type, and applies nine statistical detectors to surface suspect records.</li>
+        <li>Implemented detection methods spanning duplicate-payment identification, robust median/MAD outlier scoring, Benford's Law first-digit testing (Nigrini MAD), round-number and approval-threshold gaming analysis, temporal volume-spike detection, sequence-gap analysis for deleted records, fuzzy vendor-name matching for shadow vendors, and Isolation Forest multivariate screening.</li>
+        <li>Architected the analytics layer on DuckDB so the full dataset is never held in Python memory, with all processing performed locally so sensitive data never leaves the machine.</li>
+        <li>Built severity-weighted scoring that consolidates detector output into a single ranked table with plain-language explanations, plus self-contained HTML reports written for non-technical reviewers. Validated the system with a pytest suite against synthetic datasets containing planted anomalies, checking that each detector catches its target pattern and handles malformed real-world files.</li>
+        <li>Developed full-stack Django web applications and Node.js data dashboards for clients, and built AI-assisted content workflows for online creators reaching a combined audience of over 1 million subscribers.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Data Analyst / Python Application Developer</span>
+        <span class="role-when">Oct 2024 to Jul 2025</span>
+      </div>
+      <p class="role-sub">Fulfillment Supply Innovation &middot; La Vergne, TN</p>
+      <ul>
+        <li>Built a custom Python data model converting customer takeoff orders into NetSuite assembly and work order imports, generating over 20,000 work orders in six months.</li>
+        <li>Reduced complex SKU order processing from days to minutes by automating the translation of customer orders into warehouse instructions.</li>
+        <li>Developed a pallet assembly and truck layout optimization model converting customer orders into efficient warehouse loading plans.</li>
+        <li>Created operational dashboards and visualizations in Excel, Matplotlib, and NetSuite Analytics to track key metrics for management.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Data Labeler</span>
+        <span class="role-when">Sep 2023 to Oct 2024</span>
+      </div>
+      <p class="role-sub">DataAnnotation &middot; Remote</p>
+      <ul>
+        <li>Performed data annotation, labeling, and validation across diverse datasets to improve machine learning model accuracy.</li>
+        <li>Identified patterns, inconsistencies, and edge cases in training data, applying structured quality-checking methodology to ensure reliable outputs.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Nurse Manager / Central Intake Manager</span>
+        <span class="role-when">Aug 2022 to Sep 2023</span>
+      </div>
+      <p class="role-sub">Landmark Recovery &middot; Franklin, TN</p>
+      <ul>
+        <li>Forecasted daily admission rates with Excel-based models, informing staffing and capacity decisions across a 24-hour intake operation.</li>
+        <li>Built scheduling automation tools using Excel VBA macros, replacing manual coordination for a 14-nurse remote team.</li>
+        <li>Managed 14 remote intake nurses and a 24-hour scheduling team, ensuring full day and night shift coverage. Implemented training programs for telemedicine, communications, and patient assessments.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Public Health Nurse</span>
+        <span class="role-when">Jun 2020 to Jul 2022</span>
+      </div>
+      <p class="role-sub">San Diego County Health &amp; Human Services Agency &middot; San Diego, CA</p>
+      <ul>
+        <li>Conducted case investigations and structured patient interviews to collect medical history and risk-factor data for communicable disease surveillance, working entirely within HIPAA and county data-privacy requirements.</li>
+        <li>Coordinated across hospitals and laboratories to confirm findings and drive timely response to antibiotic-resistant infection cases.</li>
+        <li>Delivered COVID-19 isolation and quarantine guidance, translating public health protocols into plain language for the public during active emergency response.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Cardiovascular Intensive Care Nurse</span>
+        <span class="role-when">Oct 2018 to May 2020</span>
+      </div>
+      <p class="role-sub">Rady Children's Hospital &middot; San Diego, CA</p>
+      <ul>
+        <li>Provided intensive-care monitoring for neonatal and pediatric patients with congenital heart defects, including support for patients on ECMO.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <p class="plain"><b>Earlier experience:</b> Volunteer Nurse, California Health Corps (2020). EMT / Field Training Officer, American Medical Response (2015 to 2018). Composites Technician / Liquid-Rocket Test Crew, XCOR Aerospace (2012 to 2015).</p>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2>Selected Technical Projects</h2>
+
+    <div class="project">
+      <p class="project-title">Medicaid NPI Analyzer</p>
+      <p class="project-tech">Python, DuckDB, Streamlit, Plotly</p>
+      <p>Interactive analysis of a 238-million-row, roughly 11 GB Medicaid claims dataset, comparing servicing versus billing NPI spending patterns with peer benchmarking and per-provider abuse markers. Columnar Parquet storage with input-validated, escaped SQL filtering over DuckDB. Data quality work surfaced a single HCPCS code carrying over $20 trillion in impossible charges across 34 rows; the finding was documented and the records excluded from the analysis set. Paired with a Jupyter notebook recording the full exploration and cleaning methodology.</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">AgDat</p>
+      <p class="project-tech">Python, DuckDB, pytest</p>
+      <p>Fraud, waste, and abuse detection platform. Ingests any CSV or Excel file, profiles every column to infer semantic type, runs nine statistical detectors, and ranks findings by severity with plain-language explanations. Runs fully locally, so sensitive data never leaves the machine.</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">RankOrder</p>
+      <p class="project-tech">Python, Streamlit</p>
+      <p>Elo-rating preference engine deriving a full ordinal ranking from repeated ten-way comparisons. Implements exposure-balanced sampling and randomized positioning to control for selection and position bias, with persistent rating state and a local cache layer for large libraries.</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">Video Clipper</p>
+      <p class="project-tech">JavaScript, Electron, FFmpeg</p>
+      <p>Desktop application for frame-accurate video trimming, with waveform-based timeline navigation, automatic proxy-transcoding fallback for codecs the runtime cannot decode natively, and an electron-builder Windows packaging configuration.</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">Local TTS Studio</p>
+      <p class="project-tech">Python, Gradio, PyTorch</p>
+      <p>Web interface unifying two speech-synthesis engines, Kokoro-82M preset voices across nine languages and Chatterbox zero-shot voice cloning across 23, behind one local interface with a shared engine calling convention. Runs fully offline after the first-run model download.</p>
+    </div>
+
+    <div class="project">
+      <p class="project-title">Additional tooling</p>
+      <p>Automated multi-camera video edit generation driven by user-supplied beat patterns and tempo maps with automatic resolution and frame-rate conforming, batch media processing pipelines (FFmpeg, pydub), image compositing utilities, and a browser-based color palette studio.</p>
+    </div>
   </section>
 
   <section class="resume-section">
     <h2>Education</h2>
-    <p class="plain">MS, Data Science and MBA, Organizational Management, Eastern University, 2025.<br>BS, Nursing, National University, 2019.</p>
+    <p class="plain">
+      Master of Science (MS), Data Science, Eastern University, 2023 to 2025.<br>
+      Master of Business Administration (MBA), Organizational Management, Eastern University, 2023 to 2025.<br>
+      Bachelor of Science (BS), Registered Nursing, National University, 2017 to 2019.
+    </p>
   </section>
 
   <footer>Derek Nye &middot; d3r3kn@gmail.com</footer>
