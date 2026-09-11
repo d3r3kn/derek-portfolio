@@ -28,6 +28,7 @@ nav a.current{color:var(--ink);border-bottom-color:var(--accent)}
 section{padding:64px 0 8px}
 h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:700}
 .snote{font-size:15px;color:var(--dim);margin:0 0 34px;max-width:62ch}
+.snote.wide{max-width:none}
 
 .grid{display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
 .grid.tall{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
