@@ -31,6 +31,7 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--acce
 .snote{font-size:15px;color:var(--dim);margin:0 0 34px;max-width:62ch}
 .snote.wide{max-width:none}
 .snote a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;font-weight:600}
+.social-links{display:flex;flex-direction:column;gap:8px}
 
 .grid{display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
 .grid.tall{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
