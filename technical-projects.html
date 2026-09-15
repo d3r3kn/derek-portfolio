@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Technical Projects, Derek Nye</title>
-<link rel="stylesheet" href="styles.css?v=20260915b">
+<link rel="stylesheet" href="styles.css?v=20260915d">
 </head>
 <body>
 <div class="wrap">
@@ -26,7 +26,7 @@
     <h2>Selected Technical Projects</h2>
 
     <div class="role shot">
-      <figure class="thumb"><img src="shots/sim01.png" alt="SIM_01, an ecology simulation screenshot" loading="lazy"></figure>
+      <figure class="thumb"><a class="zoom" href="shots/full/sim01.png" aria-label="View SIM_01, an ecology simulation screenshot at full size"><img src="shots/sim01.png" alt="SIM_01, an ecology simulation screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
         <span class="role-title">SIM_01, an ecology simulation</span>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="role shot">
-      <figure class="thumb"><img src="shots/site.png" alt="Personal Portfolio Site screenshot" loading="lazy"></figure>
+      <figure class="thumb"><a class="zoom" href="shots/full/site.png" aria-label="View Personal Portfolio Site screenshot at full size"><img src="shots/site.png" alt="Personal Portfolio Site screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
         <span class="role-title">Personal Portfolio Site</span>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="role shot">
-      <figure class="thumb"><img src="shots/medicaid.png" alt="Medicaid NPI Analyzer screenshot" loading="lazy"></figure>
+      <figure class="thumb"><a class="zoom" href="shots/full/medicaid.png" aria-label="View Medicaid NPI Analyzer screenshot at full size"><img src="shots/medicaid.png" alt="Medicaid NPI Analyzer screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
         <span class="role-title">Medicaid NPI Analyzer</span>
@@ -73,7 +73,7 @@
     </div>
 
     <div class="role shot">
-      <figure class="thumb"><img src="shots/agdat.png" alt="AgDat screenshot" loading="lazy"></figure>
+      <figure class="thumb"><a class="zoom" href="shots/full/agdat.png" aria-label="View AgDat screenshot at full size"><img src="shots/agdat.png" alt="AgDat screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
         <span class="role-title">AgDat</span>
@@ -89,7 +89,7 @@
 
 
     <div class="role shot">
-      <figure class="thumb"><img src="shots/clipper.png" alt="Video Clipper screenshot" loading="lazy"></figure>
+      <figure class="thumb"><a class="zoom" href="shots/full/clipper.png" aria-label="View Video Clipper screenshot at full size"><img src="shots/clipper.png" alt="Video Clipper screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
         <span class="role-title">Video Clipper</span>
@@ -104,7 +104,7 @@
     </div>
 
     <div class="role shot">
-      <figure class="thumb"><img src="shots/tts.png" alt="Local TTS Studio screenshot" loading="lazy"></figure>
+      <figure class="thumb"><a class="zoom" href="shots/full/tts.png" aria-label="View Local TTS Studio screenshot at full size"><img src="shots/tts.png" alt="Local TTS Studio screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
         <span class="role-title">Local TTS Studio</span>
@@ -133,5 +133,24 @@
   <footer>&copy; 2026 Derek Nye &middot; d3r3kn@gmail.com</footer>
 
 </div>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Screenshot preview">
+  <img alt="">
+</div>
+<script>
+(function(){
+  var box=document.getElementById('lightbox'), img=box.querySelector('img');
+  function close(){ box.hidden=true; img.src=''; document.body.style.overflow=''; }
+  document.querySelectorAll('a.zoom').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      img.src=a.getAttribute('href'); img.alt=a.querySelector('img').alt;
+      box.hidden=false; document.body.style.overflow='hidden';
+    });
+  });
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !box.hidden) close(); });
+})();
+</script>
 </body>
 </html>
