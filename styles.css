@@ -93,3 +93,11 @@ figcaption a, .d a{color:var(--accent);text-decoration:none;border-bottom:1px so
 .hub .hd{font-size:14px;color:var(--dim);margin:0}
 
 footer{margin-top:80px;padding:34px 0 60px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+
+/* Technical Projects: square thumbnail to the left of the entry, text to the right */
+.role.shot{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
+.role.shot .thumb{margin:0}
+.role.shot .thumb img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:#111}
+.role.shot .thumb a{display:block;border:0;padding:0}
+.role.shot .body{min-width:0}
+@media (max-width:640px){.role.shot{grid-template-columns:1fr;gap:12px}.role.shot .thumb{max-width:240px}}
