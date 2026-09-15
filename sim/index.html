@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIM_01: Organisms</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">SIM_01</div>
+
+    <div class="controls">
+      <div class="group">
+        <button id="btnPlay" title="Space">⏸ Pause</button>
+        <button id="btnStep" title="Advance one tick">Step</button>
+        <button id="btnReset" title="Restart with the seed in the box">Reset</button>
+        <button id="btnNewSeed" title="Restart with a fresh random seed">🎲 New seed</button>
+        <label>Seed <input id="inpSeed" type="text" size="9" spellcheck="false"></label>
+        <label>Speed <select id="selSpeed"></select></label>
+        <button id="btnFit" title="Show the whole world (F)">⛶ Fit</button>
+      </div>
+      <div class="group">
+        <label title="World size, restarts the simulation">World <select id="selSize"></select></label>
+        <label title="Starting population, applied on the next reset">Population <input id="inpPop" type="number" min="2" max="20000" step="10"></label>
+        <label title="Plant spawn rate relative to the reference density (live)">Food <input id="sldFood" type="range" min="0" max="5" step="0.1" value="1"><span class="val" id="valFood"></span></label>
+        <label title="Seconds per day/night cycle (live)">Day <input id="sldDay" type="range" min="10" max="300" step="5" value="60"><span class="val" id="valDay"></span></label>
+      </div>
+      <div class="group">
+        <label><input id="chkStates" type="checkbox" checked> State outlines</label>
+        <label><input id="chkSenses" type="checkbox"> Senses of selected</label>
+        <label title="Keep the camera centred on the selected organism"><input id="chkFollow" type="checkbox"> Follow selected</label>
+        <label title="Draw every home as a small diamond"><input id="chkHomes" type="checkbox" checked> Homes</label>
+      </div>
+    </div>
+
+    <div class="clock"><span id="clockDay">Day 1</span> <span id="clockTime">00:00</span> <span id="clockPhase">☀️</span></div>
+  </header>
+
+  <main>
+    <section id="canvasWrap">
+      <canvas id="world"></canvas>
+      <canvas id="minimap" title="Click or drag to move the view"></canvas>
+      <div id="hud">
+        <span>Pop <b id="hudPop">0</b></span>
+        <span>Plants <b id="hudFood">0</b></span>
+        <span>Corpses <b id="hudCorpses">0</b></span>
+        <span>Zoom <b id="hudZoom">1×</b></span>
+      </div>
+      <div id="legend">
+        <span><i class="sq" style="background:#5fd068"></i> plant</span>
+        <span><i class="sq corpse"></i> corpse</span>
+        <span><i class="sq" style="outline:1.5px solid #ffa640"></i> hunting</span>
+        <span><i class="sq" style="outline:1.5px solid #ff4d4d"></i> fighting</span>
+        <span><i class="sq" style="outline:1.5px solid #ffe066"></i> fleeing</span>
+        <span><i class="sq" style="outline:1.5px solid #ff7ac6"></i> mating</span>
+        <span><i class="sq" style="outline:1.5px solid #7fb3ff"></i> going home</span>
+        <span><i class="diamond"></i> home</span>
+        <span><i class="sq" style="opacity:.5"></i> asleep</span>
+        <span><i class="sq" style="filter:brightness(.55)"></i> hungry</span>
+      </div>
+    </section>
+
+    <aside id="side">
+      <section class="panel" id="inspector">
+        <div class="panel-head">
+          <h2 id="inspectorTitle">Inspector</h2>
+          <button id="btnDeselect" class="small">✕</button>
+        </div>
+        <div id="inspectorBody" class="panel-body"><p class="hint">Click an organism to inspect it.</p></div>
+      </section>
+
+      <section class="panel grow" id="tabs">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="log">Event log</button>
+          <button class="tab-btn" data-tab="stats">Statistics</button>
+        </div>
+        <div class="tab-pane" data-tab="log">
+          <div class="log-tools">
+            <select id="logFilter">
+              <option value="all">All events</option>
+              <option value="death">Deaths</option>
+              <option value="fight">Fights</option>
+              <option value="hunt">Hunts</option>
+              <option value="birth">Births</option>
+              <option value="eat">Scavenging</option>
+              <option value="home">Homes</option>
+              <option value="world">World</option>
+            </select>
+            <span class="hint">click an entry to select the organism</span>
+          </div>
+          <div id="logList"></div>
+        </div>
+        <div class="tab-pane" data-tab="stats" hidden>
+          <div id="stats"></div>
+        </div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/rng.js"></script>
+<script src="js/genetics.js"></script>
+<script src="js/spatial.js"></script>
+<script src="js/food.js"></script>
+<script src="js/organism.js"></script>
+<script src="js/senses.js"></script>
+<script src="js/behavior.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/reproduction.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/log.js"></script>
+<script src="js/world.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
