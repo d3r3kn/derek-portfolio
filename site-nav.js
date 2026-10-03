@@ -8,6 +8,7 @@
   var WORK = [
     ['technical-projects', 'technical-projects.html', 'Technical Projects', 'Data and software projects, built end to end'],
     ['data-analysis', 'data-analysis.html', 'Data Analysis', 'Interactive Medicaid spending charts, with methods'],
+    ['brand-race', 'brand-race.html', 'Brand Race', '45 years of automaker speed, power, and MPG'],
     ['freelance', 'freelance.html', 'Freelance', 'Independent client work since July 2025'],
     ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work']
   ];
