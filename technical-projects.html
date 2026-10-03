@@ -27,6 +27,53 @@
     <h2>Selected Technical Projects</h2>
 
     <div class="role shot">
+      <figure class="thumb"><a class="zoom" href="shots/full/medicaid.png" aria-label="View Medicaid NPI Analyzer screenshot at full size"><img src="shots/medicaid.png" alt="Medicaid NPI Analyzer screenshot" loading="lazy"></a></figure>
+      <div class="body">
+      <div class="role-head">
+        <span class="role-title">Medicaid NPI Analyzer</span>
+      </div>
+      <p class="role-sub">Python, DuckDB, Streamlit, Plotly</p>
+      <p class="d">The same dataset is charted on the <a href="data-analysis.html">Data Analysis</a> page.</p>
+      <ul>
+        <li>Interactive analysis of a 238-million-row, roughly 11 GB Medicaid claims dataset, comparing billing and servicing provider spending patterns, with peer benchmarking and provider-level summaries.</li>
+        <li>Columnar Parquet storage with input-validated, escaped SQL filtering over DuckDB.</li>
+        <li>Paired with a Jupyter notebook recording the full exploration and cleaning methodology.</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="role shot">
+      <figure class="thumb"><a class="zoom" href="shots/full/site.png" aria-label="View Personal Portfolio Site screenshot at full size"><img src="shots/site.png" alt="Personal Portfolio Site screenshot" loading="lazy"></a></figure>
+      <div class="body">
+      <div class="role-head">
+        <span class="role-title">Personal Portfolio Site</span>
+      </div>
+      <p class="role-sub">HTML, CSS, JavaScript, Python, DuckDB, Git, Cloudflare Pages</p>
+      <ul>
+        <li>Multi-page site (Home, Resume, Technical Projects, Data Analysis, Freelance, Content Production) with a shared design system built from scratch in plain HTML, CSS, and JavaScript, no framework.</li>
+        <li>Interactive <a href="data-analysis.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)">Data Analysis</a> page backed by a Python and DuckDB pipeline whose output is automatically checked against HHS's own published figures, matching to the cent.</li>
+        <li>Directed every structural and content decision, page architecture, copy, ordering, and design choices, built with Claude Code through an iterative process.</li>
+        <li>Deployed through a Git-based pipeline to Cloudflare Pages with automatic rebuilds on push, behind a pre-commit check that blocks phone numbers, secrets, local file paths, and image metadata from being published.</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="role shot">
+      <figure class="thumb"><a class="zoom" href="shots/full/agdat.png" aria-label="View AgDat screenshot at full size"><img src="shots/agdat.png" alt="AgDat screenshot" loading="lazy"></a></figure>
+      <div class="body">
+      <div class="role-head">
+        <span class="role-title">AgDat</span>
+      </div>
+      <p class="role-sub">Python, DuckDB, pytest</p>
+      <ul>
+        <li>Working demonstration of a fraud, waste, and abuse detection platform that ingests any CSV or Excel file and profiles every column to infer semantic type.</li>
+        <li>Runs nine statistical detectors and ranks findings by severity with plain-language explanations.</li>
+        <li>Runs fully locally, so sensitive data never leaves the machine.</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="role shot">
       <figure class="thumb"><a class="zoom" href="shots/full/sim01.png" aria-label="View SIM_01, an ecology simulation screenshot at full size"><img src="shots/sim01.png" alt="SIM_01, an ecology simulation screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
@@ -42,53 +89,6 @@
       </ul>
       </div>
     </div>
-
-    <div class="role shot">
-      <figure class="thumb"><a class="zoom" href="shots/full/site.png" aria-label="View Personal Portfolio Site screenshot at full size"><img src="shots/site.png" alt="Personal Portfolio Site screenshot" loading="lazy"></a></figure>
-      <div class="body">
-      <div class="role-head">
-        <span class="role-title">Personal Portfolio Site</span>
-      </div>
-      <p class="role-sub">HTML, CSS, Git, Cloudflare Pages</p>
-      <ul>
-        <li>Multi-page site (Home, Resume, Technical Projects, Freelance, Content Production) with a shared design system built from scratch in plain HTML and CSS, no framework.</li>
-        <li>Directed every structural and content decision, page architecture, copy, ordering, and design choices, built with Claude Code through an iterative process.</li>
-        <li>Deployed through a Git-based pipeline to Cloudflare Pages, with automatic rebuilds on push.</li>
-      </ul>
-      </div>
-    </div>
-
-    <div class="role shot">
-      <figure class="thumb"><a class="zoom" href="shots/full/medicaid.png" aria-label="View Medicaid NPI Analyzer screenshot at full size"><img src="shots/medicaid.png" alt="Medicaid NPI Analyzer screenshot" loading="lazy"></a></figure>
-      <div class="body">
-      <div class="role-head">
-        <span class="role-title">Medicaid NPI Analyzer</span>
-      </div>
-      <p class="role-sub">Python, DuckDB, Streamlit, Plotly</p>
-      <p class="d">The same dataset is charted on the <a href="data-analysis.html">Data Analysis</a> page.</p>
-      <ul>
-        <li>Interactive analysis of a 238-million-row, roughly 11 GB Medicaid claims dataset, comparing servicing versus billing NPI spending patterns with peer benchmarking and per-provider abuse markers.</li>
-        <li>Columnar Parquet storage with input-validated, escaped SQL filtering over DuckDB.</li>
-        <li>Paired with a Jupyter notebook recording the full exploration and cleaning methodology.</li>
-      </ul>
-      </div>
-    </div>
-
-    <div class="role shot">
-      <figure class="thumb"><a class="zoom" href="shots/full/agdat.png" aria-label="View AgDat screenshot at full size"><img src="shots/agdat.png" alt="AgDat screenshot" loading="lazy"></a></figure>
-      <div class="body">
-      <div class="role-head">
-        <span class="role-title">AgDat</span>
-      </div>
-      <p class="role-sub">Python, DuckDB, pytest</p>
-      <ul>
-        <li>Fraud, waste, and abuse detection platform that ingests any CSV or Excel file and profiles every column to infer semantic type.</li>
-        <li>Runs nine statistical detectors and ranks findings by severity with plain-language explanations.</li>
-        <li>Runs fully locally, so sensitive data never leaves the machine.</li>
-      </ul>
-      </div>
-    </div>
-
 
     <div class="role shot">
       <figure class="thumb"><a class="zoom" href="shots/full/clipper.png" aria-label="View Video Clipper screenshot at full size"><img src="shots/clipper.png" alt="Video Clipper screenshot" loading="lazy"></a></figure>
