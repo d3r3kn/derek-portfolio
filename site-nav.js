@@ -55,7 +55,7 @@
   var links = el('nav', { 'class': 'sn-links', 'aria-label': 'Main' }, [
     dd,
     current(el('a', { href: base + 'resume.html', 'class': 'sn-link', text: 'Resume' }), 'resume'),
-    el('a', { href: 'mailto:' + EMAIL, 'class': 'sn-contact', text: 'Contact' })
+    current(el('a', { href: base + 'get-help.html', 'class': 'sn-contact', text: 'Get help' }), 'get-help')
   ]);
   var menuBtn = el('button', { type: 'button', 'class': 'sn-menu-btn', 'aria-expanded': 'false', 'aria-controls': 'sn-overlay' },
     [icon('M0 1h16M0 6h16M0 11h16', 16, 12), document.createTextNode('Menu')]);
@@ -69,7 +69,9 @@
     el('div', { 'class': 'sn-ov-top' }, [el('a', { href: base ? base : 'index.html', 'class': 'sn-brand', text: 'Derek Nye' }), closeBtn]),
     el('div', { 'class': 'sn-ov-links' }, [el('p', { 'class': 'sn-grp', text: 'Work' })]
       .concat(WORK.map(function (w) { return current(el('a', { href: base + w[1], 'class': 'sn-ov-item' }, [document.createTextNode(w[2]), el('small', { text: w[3] })]), w[0]); }))
-      .concat([el('p', { 'class': 'sn-grp', text: 'About' }),
+      .concat([el('p', { 'class': 'sn-grp', text: 'Help' }),
+        current(el('a', { href: base + 'get-help.html', 'class': 'sn-ov-item' }, [document.createTextNode('Get help'), el('small', { text: 'Computer and AI help for people and small businesses' })]), 'get-help'),
+        el('p', { 'class': 'sn-grp', text: 'About' }),
         current(el('a', { href: base + 'resume.html', 'class': 'sn-ov-item', text: 'Resume' }), 'resume'),
         el('a', { href: 'mailto:' + EMAIL, 'class': 'sn-ov-item' }, [document.createTextNode('Contact'), el('small', { text: EMAIL })])]))
   ]);
