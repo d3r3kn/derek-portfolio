@@ -16,14 +16,14 @@
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Chart of monthly Medicaid provider spending rising from 2018 to 2024, with the $1.52 trillion total.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="styles.css?v=20261017">
+<link rel="stylesheet" href="styles.css?v=20261019">
 <style>
-/* Chart tokens. Data colors are the validated dark categorical steps, checked against --surface (#141417). */
+/* Chart tokens for the light Field Notebook theme. Every data color is at least 3:1 against --surface (#fffdf8), per WCAG 1.4.11. */
 :root{
-  --surface:#141417; --grid:#232328; --axis:#3a3a42;
-  --text-1:#f2f2f4; --text-2:#b4b4bd; --text-3:#7c7c86;
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --muted-mark:#4a4a54; --s1-soft:#2a5d9e;
-  --ok:#0ca30c;
+  --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
+  --text-1:#1f1d1a; --text-2:#4a463f; --text-3:#6b665c;
+  --s1:#2563b8; --s2:#c2531c; --s3:#12805c; --s4:#946200; --muted-mark:#c9c0ae; --s1-soft:#9dbbe6;
+  --ok:#2e7d32;
 }
 .lede{font-size:16.5px;color:var(--text-2);max-width:68ch;margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
@@ -48,7 +48,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{font:inherit;font-size:13px;color:var(--text-2);background:none;border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
 .seg button:hover{color:var(--text-1)}
-.seg button[aria-pressed="true"]{background:#24242a;color:var(--text-1);font-weight:600}
+.seg button[aria-pressed="true"]{background:#ece6da;color:var(--text-1);font-weight:600}
 .seg button:focus-visible,.tbl-btn:focus-visible{outline:2px solid var(--s1);outline-offset:1px}
 
 .kpis{display:grid;gap:16px;grid-template-columns:repeat(4,1fr);margin-bottom:22px}
@@ -74,7 +74,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 details.how{margin-top:12px;font-size:13px;color:var(--text-2)}
 details.how summary{cursor:pointer;color:var(--text-2);width:max-content;max-width:100%}
 details.how summary:hover{color:var(--text-1)}
-details.how pre{background:#0f0f12;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:12.5px;line-height:1.5;color:var(--text-1);margin:10px 0 6px}
+details.how pre{background:#f3eee3;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:12.5px;line-height:1.5;color:var(--text-1);margin:10px 0 6px}
 
 .chart{position:relative;outline:none}
 .chart:focus-visible{box-shadow:0 0 0 2px var(--s1);border-radius:6px}
@@ -93,7 +93,7 @@ details.how pre{background:#0f0f12;border:1px solid var(--line);border-radius:8p
 .hrow .track{display:flex;align-items:center;gap:8px;min-width:0}
 .hrow .bar{height:16px;background:var(--s1);border-radius:0 4px 4px 0;flex:none;transition:filter .12s}
 .hrow .val{font-size:13px;color:var(--text-1);font-variant-numeric:tabular-nums;white-space:nowrap}
-.hrow:hover .bar,.hrow:focus-visible .bar{filter:brightness(1.25)}
+.hrow:hover .bar,.hrow:focus-visible .bar{filter:brightness(.85)}
 .hrow:focus-visible{box-shadow:0 0 0 2px var(--s1)}
 @media (max-width:640px){.hrow{grid-template-columns:1fr;gap:4px}}
 
@@ -106,7 +106,7 @@ details.how pre{background:#0f0f12;border:1px solid var(--line);border-radius:8p
 .sbar{display:flex;gap:2px;height:24px}
 .seg-s{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;outline:none;transition:filter .12s;min-width:2px}
 .seg-s:last-child{border-radius:0 4px 4px 0}
-.seg-s:hover,.seg-s:focus-visible{filter:brightness(1.2)}
+.seg-s:hover,.seg-s:focus-visible{filter:brightness(.85)}
 .kinds{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin:18px 0 4px}
 .kinds div{font-size:13.5px;color:var(--text-2);line-height:1.45}
 .kinds b{display:flex;align-items:center;gap:7px;color:var(--text-1);font-weight:600;margin-bottom:2px}
@@ -117,12 +117,12 @@ details.how pre{background:#0f0f12;border:1px solid var(--line);border-radius:8p
 .col .cv{font-size:12.5px;color:var(--text-1);margin-bottom:6px;font-variant-numeric:tabular-nums}
 .col .cb{width:24px;background:var(--s1-soft);border-radius:4px 4px 0 0;transition:filter .12s}
 .col.median .cb{background:var(--s1)}
-.col:hover .cb,.col:focus-visible .cb{filter:brightness(1.25)}
+.col:hover .cb,.col:focus-visible .cb{filter:brightness(.85)}
 .collabels{display:flex;justify-content:space-around;gap:8px;padding:8px 4px 0}
 .collabels span{flex:1;text-align:center;font-size:12px;color:var(--text-3);line-height:1.3}
 @media (max-width:640px){.collabels span{font-size:11px}}
 
-.tip{position:fixed;z-index:40;pointer-events:none;background:#1d1d22;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(0,0,0,.45);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
+.tip{position:fixed;z-index:40;pointer-events:none;background:#fffdf8;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
 .tip.on{opacity:1}
 .tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
 .tip .t-row{display:flex;align-items:center;gap:8px}
@@ -564,10 +564,10 @@ function trend(){
   var X=function(i){return ml+i*pw/(d.length-1);},Y=function(v){return mt+ph-v/max*ph;};
   var svg=E('svg',{viewBox:'0 0 '+W+' '+H,height:H,role:'img','aria-label':M.label+', '+d[0].month+' to '+d[d.length-1].month},box);
   var p24=d.map(function(x){return x.month;}).indexOf('2024-01');
-  if(p24>0){E('rect',{x:X(p24),y:mt,width:X(d.length-1)-X(p24),height:ph,fill:'#ffffff','fill-opacity':.035},svg);
+  if(p24>0){E('rect',{x:X(p24),y:mt,width:X(d.length-1)-X(p24),height:ph,fill:'#1f1d1a','fill-opacity':.04},svg);
     E('text',{x:X(p24)+6,y:mt+12,class:'bandlbl'},svg).textContent='2024 preliminary';}
   var firstInc=-1;d.forEach(function(x,i){if(INCOMPLETE[x.month]&&firstInc<0)firstInc=i;});
-  if(firstInc>0){E('rect',{x:X(firstInc-1),y:mt,width:X(d.length-1)-X(firstInc-1),height:ph,fill:'#ffffff','fill-opacity':.05},svg);
+  if(firstInc>0){E('rect',{x:X(firstInc-1),y:mt,width:X(d.length-1)-X(firstInc-1),height:ph,fill:'#1f1d1a','fill-opacity':.06},svg);
     E('text',{x:X(d.length-1),y:mt+ph-8,'text-anchor':'end',class:'bandlbl'},svg).textContent='Incomplete';}
   for(var g=0;g<=4;g++){var gv=max*g/4,gy=Y(gv);
     E('line',{x1:ml,x2:ml+pw,y1:gy,y2:gy,stroke:g?'var(--grid)':'var(--axis)','stroke-width':1},svg);

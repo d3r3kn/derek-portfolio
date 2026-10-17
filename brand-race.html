@@ -11,12 +11,12 @@
 <meta property="og:url" content="https://dereknye.com/brand-race">
 <meta property="og:title" content="Brand Race: 45 Years of Speed, Power, and MPG">
 <meta property="og:description" content="14 automakers ranked on 0–60, horsepower, and real-world MPG from 1980 to 2025, using EPA Automotive Trends data.">
-<link rel="stylesheet" href="styles.css?v=20261017">
+<link rel="stylesheet" href="styles.css?v=20261019">
 <style>
 :root{
-  --surface:#141417; --grid:#232328; --axis:#3a3a42;
-  --text-1:#f2f2f4; --text-2:#b4b4bd; --text-3:#7c7c86;
-  --ok:#0ca30c;
+  --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
+  --text-1:#1f1d1a; --text-2:#4a463f; --text-3:#6b665c;
+  --ok:#2e7d32;
 }
 .lede{font-size:16.5px;color:var(--text-2);max-width:68ch;margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
@@ -37,8 +37,8 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{font:inherit;font-size:13px;color:var(--text-2);background:none;border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
 .seg button:hover{color:var(--text-1)}
-.seg button[aria-pressed="true"]{background:#24242a;color:var(--text-1);font-weight:600}
-.seg button:focus-visible,.tbl-btn:focus-visible,.chip:focus-visible{outline:2px solid #3987e5;outline-offset:1px}
+.seg button[aria-pressed="true"]{background:#ece6da;color:var(--text-1);font-weight:600}
+.seg button:focus-visible,.tbl-btn:focus-visible,.chip:focus-visible{outline:2px solid #2563b8;outline-offset:1px}
 .viewnote{font-size:13.5px;color:var(--text-3);margin:0 0 18px;max-width:80ch}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
@@ -80,8 +80,8 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .heat th.b{text-align:left;font-weight:600;color:var(--text-1);white-space:nowrap}
 .heat th.b i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:7px}
 .heat td{text-align:center;padding:7px 4px;border-radius:4px;cursor:default;outline:none}
-.heat td.na{color:var(--text-3);background:#1a1a1e}
-.heat td:focus-visible{box-shadow:0 0 0 2px #f2f2f4}
+.heat td.na{color:var(--text-3);background:#f3eee3}
+.heat td:focus-visible{box-shadow:0 0 0 2px #1f1d1a}
 .heat tr.ind th,.heat tr.ind td{border-top:2px solid var(--axis)}
 .heat tr.ind td{background:none;color:var(--text-1);font-weight:600}
 .heat.dim tbody tr:not(.hl):not(.ind){opacity:.25}
@@ -90,7 +90,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .ramp span.bar{display:inline-flex;height:10px;width:160px;border-radius:3px;overflow:hidden}
 .ramp span.bar i{flex:1}
 
-.tip{position:fixed;z-index:40;pointer-events:none;background:#1d1d22;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(0,0,0,.45);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
+.tip{position:fixed;z-index:40;pointer-events:none;background:#fffdf8;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
 .tip.on{opacity:1}
 .tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
 .tip .t-row{display:flex;align-items:center;gap:8px}
@@ -315,7 +315,8 @@ var YEARS=S.snapshots,LAST=YEARS[YEARS.length-1],PRE=S.preliminary;
 var BRANDS=[];S.rows.forEach(function(r){if(BRANDS.indexOf(r.brand)<0)BRANDS.push(r.brand);});BRANDS.sort();
 /* One color per automaker, fixed across views and charts. 14 colors can't all be told apart,
    so every chart also names each brand directly and a brand can be highlighted. */
-var PAL=['#3987e5','#d95926','#199e70','#c98500','#d55181','#43a843','#9085e9','#e66767','#86b6ef','#f0a27c','#7fd1b0','#e8c15a','#c4bdf5','#b9d97a'];
+// light-theme brand colors: each at least 3:1 against the chart surface, and at least dE 16 apart
+var PAL=['#2563b8','#c2531c','#12805c','#946200','#b8336a','#3b7d23','#6a4fc4','#c23b3b','#0e6f86','#8a5a2b','#4f5d75','#9a3fa6','#5e6e00','#d16b00'];
 var COLOR={};BRANDS.forEach(function(b,i){COLOR[b]=PAL[i];});
 var M={zero60:{name:'0–60',long:'0–60 time',unit:' s',d:1,better:'lower'},hp:{name:'Horsepower',long:'Horsepower',unit:' hp',d:0,better:'higher'},mpg:{name:'MPG',long:'Real-world MPG',unit:' mpg',d:1,better:'higher'}};
 var VIEWNAME={all:'all vehicles',cars:'cars',trucks:'trucks'};
@@ -441,8 +442,8 @@ function scatter(){
   for(var zv=zMin;zv<=zMax;zv+=2){E('line',{x1:L,x2:W-R,y1:y(zv),y2:y(zv),stroke:'var(--grid)'},svg);var t2=E('text',{x:L-8,y:y(zv)+4,'text-anchor':'end','class':'tick'},svg);t2.textContent=zv+'s';}
   var xl=E('text',{x:(L+W-R)/2,y:H-6,'text-anchor':'middle','class':'axlbl'},svg);xl.textContent='Horsepower →';
   var yl=E('text',{x:L,y:T-2,'class':'axlbl'},svg);yl.textContent=narrow?'':'↑ Quicker 0–60';
-  marker('ar-ind','#7c7c86');
-  E('line',{x1:x(i0.hp),y1:y(i0.zero60),x2:x(i1.hp),y2:y(i1.zero60),stroke:'#7c7c86','stroke-width':2,'stroke-dasharray':'5 4','marker-end':'url(#ar-ind)'},svg);
+  marker('ar-ind','#6b665c');
+  E('line',{x1:x(i0.hp),y1:y(i0.zero60),x2:x(i1.hp),y2:y(i1.zero60),stroke:'#6b665c','stroke-width':2,'stroke-dasharray':'5 4','marker-end':'url(#ar-ind)'},svg);
   var il=E('text',{x:x(i0.hp)+8,y:y(i0.zero60)+16,'class':'axlbl'},svg);il.textContent='Industry avg. '+YEARS[0];
   var labels=[];
   arrows.forEach(function(a,ai){
@@ -484,7 +485,8 @@ function scatterTable(){
 }
 
 /* ---------- heatmap ---------- */
-var RAMP=['#104281','#184f95','#1c5cab','#256abf','#2a78d6','#3987e5','#5598e7','#6da7ec','#86b6ef','#9ec5f4','#b7d3f6','#cde2fb'];
+// light to dark: better values get darker cells
+var RAMP=['#e8f0fb','#d3e2f6','#bcd3f1','#a3c2ea','#87afe2','#6a9bd9','#4f86cd','#3a72bf','#2d60a8','#234f8f','#1b3f75','#13305c'];
 var MPG_CAP=40;
 function heat(){
   var k=state.heat,view=state.view,t=document.getElementById('heat');t.textContent='';
@@ -501,7 +503,7 @@ function heat(){
     YEARS.forEach(function(y){var r=get(view,b,y);
       if(!r){tr.appendChild(el('td','na','—'));return;}
       var s=shade(r[k]),td=el('td',null,(k==='mpg'&&r[k]>MPG_CAP?'›':'')+r[k].toLocaleString('en-US',{minimumFractionDigits:M[k].d,maximumFractionDigits:M[k].d}));
-      td.style.background=RAMP[s];td.style.color=s>=7?'#0b0b0d':'#f2f2f4';td.tabIndex=0;
+      td.style.background=RAMP[s];td.style.color=s>=7?'#ffffff':'#1f1d1a';td.tabIndex=0;
       var show=function(){tipAt(td,b+' · '+ylabel(y),[{color:COLOR[b],value:'#'+r.rank[k]+' of '+count(view,y)},{value:fmt(r[k],k,true),name:M[k].long}],evNote(r,k));};
       td.addEventListener('pointerenter',show);td.addEventListener('focus',show);td.addEventListener('pointerleave',hideTip);td.addEventListener('blur',hideTip);
       tr.appendChild(td);});
