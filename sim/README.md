@@ -1,4 +1,4 @@
-# SIM_01: square organisms
+# Ecology simulation: square organisms
 
 A browser simulation of small square organisms that sense, eat, sleep, fight, flee and breed
 in a continuous 2D world with a day/night cycle. No build step, no dependencies.

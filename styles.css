@@ -176,3 +176,4 @@ h1,h2,h3,.t,.role-title,.ht{text-wrap:balance}
 @media (min-width:360px){.nw{white-space:nowrap}}
 /* phones: a narrower side gutter gives text more room per line */
 @media (max-width:420px){.wrap,.sn-in{padding-left:18px;padding-right:18px}}
+.nb{white-space:nowrap}

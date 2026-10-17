@@ -8,4 +8,4 @@ Source for my personal portfolio site: plain HTML and CSS, no build step, deploy
 
 All site content, including text, images, video, and design, may not be reused without permission.
 
-The exception is [`sim/`](sim/) (SIM_01), which is MIT licensed. See [`sim/LICENSE`](sim/LICENSE).
+The exception is [`sim/`](sim/) (the ecology simulation), which is MIT licensed. See [`sim/LICENSE`](sim/LICENSE).
