@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://dereknye.com/brand-race">
 <meta property="og:title" content="Brand Race: 45 Years of Speed, Power, and MPG">
 <meta property="og:description" content="14 automakers ranked on 0–60, horsepower, and real-world MPG from 1980 to 2025, using EPA Automotive Trends data.">
-<link rel="stylesheet" href="styles.css?v=20261023">
+<link rel="stylesheet" href="styles.css?v=20261024">
 <style>
 :root{
   --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
@@ -138,8 +138,8 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 
   <section>
     <h2>The Race</h2>
-    <p class="lede">Every year the EPA publishes the average horsepower, 0–60 time, and real-world fuel economy of the new vehicles each automaker sells in the U.S. Put side by side, those numbers turn into a 45-year race.</p>
-    <p class="lede">The typical new vehicle got much quicker. Its 0–60 time fell from <b data-fill="z1980"></b> in 1980 to <b data-fill="z2025"></b> in 2025, horsepower grew from <b data-fill="h1980"></b> to <b data-fill="h2025"></b>, and fuel economy still rose, from <b data-fill="m1980"></b> to <b data-fill="m2025"></b>, even as the average vehicle got <b data-fill="wGain"></b> heavier. In 1980 the quickest lineup belonged to <b data-fill="q1980"></b>; by 2025 even the slowest, <b data-fill="s2025"></b>, beat that.</p>
+    <p class="lede">Every year the EPA publishes the average horsepower, <span class="nb">0–60</span> time, and real-world fuel economy of the new vehicles each automaker sells in the U.S. Put side by side, those numbers turn into a 45-year race.</p>
+    <p class="lede">The typical new vehicle got much quicker. Its <span class="nb">0–60</span> time fell from <b data-fill="z1980"></b> in 1980 to <b data-fill="z2025"></b> in 2025, horsepower grew from <b data-fill="h1980"></b> to <b data-fill="h2025"></b>, and fuel economy still rose, from <b data-fill="m1980"></b> to <b data-fill="m2025"></b>, even as the average vehicle got <b data-fill="wGain"></b> heavier. In 1980 the quickest lineup belonged to <b data-fill="q1980"></b>; by 2025 even the slowest, <b data-fill="s2025"></b>, beat that.</p>
     <p class="lede">The charts below show which brands led, which fell behind, and when they traded places. How the data was prepared and what it can't tell us are covered further down.</p>
   </section>
 
@@ -178,7 +178,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
         </div>
         <div class="card-tools">
           <div class="seg" id="bumpMetric" role="group" aria-label="Rank by">
-            <button type="button" data-metric="zero60" aria-pressed="true">0–60</button>
+            <button type="button" data-metric="zero60" aria-pressed="true"><span class="nb">0–60</span></button>
             <button type="button" data-metric="hp">Horsepower</button>
             <button type="button" data-metric="mpg">MPG</button>
           </div>
@@ -213,7 +213,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
         </div>
         <div class="card-tools">
           <div class="seg" id="heatMetric" role="group" aria-label="Color by">
-            <button type="button" data-metric="zero60" aria-pressed="true">0–60</button>
+            <button type="button" data-metric="zero60" aria-pressed="true"><span class="nb">0–60</span></button>
             <button type="button" data-metric="hp">Horsepower</button>
             <button type="button" data-metric="mpg">MPG</button>
           </div>
@@ -223,7 +223,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <div class="ramp" id="ramp"></div>
       <p class="card-foot" id="heat-foot"></p>
     </div>
-    <p class="card-foot">2025 values are preliminary (EPA). Values are averages of each automaker's new vehicles, weighted by production. EPA estimates 0–60 times from vehicle specifications.</p>
+    <p class="card-foot">2025 values are preliminary (EPA). Values are averages of each automaker's new vehicles, weighted by production. EPA estimates <span class="nb">0–60</span> times from vehicle specifications.</p>
   </section>
 
   <section style="padding-top:44px" id="prep">
@@ -248,7 +248,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <li><b>Automakers are counted as parent companies.</b> GM includes Chevrolet, Cadillac, Buick, and GMC; Stellantis includes Jeep, Ram, Dodge, and Chrysler; Hyundai and Kia are listed separately.</li>
       <li><b>"Truck" is a regulatory term.</b> EPA counts most SUVs and crossovers as trucks, so the Trucks view is mostly SUVs, not just pickups.</li>
       <li><b>Electric vehicles are rated in energy-equivalent terms.</b> EPA counts EVs in its fuel-economy averages using the distance they travel on the energy in a gallon of gas. Tesla sells only EVs, so its figure is far above the rest. Brands selling a mix of EVs and gas vehicles get a smaller boost.</li>
-      <li><b>0–60 times are estimates.</b> EPA calculates them from each vehicle's power, weight, and other specifications, not from track tests.</li>
+      <li><b><span class="nb">0–60</span> times are estimates.</b> EPA calculates them from each vehicle's power, weight, and other specifications, not from track tests.</li>
       <li><b>2025 is preliminary.</b> EPA's 2025 data come from automakers' projected production before the vehicles went on sale. 1975 to 2024 are final.</li>
       <li><b>Not every brand is here.</b> The 14 automakers make up most of the market, but smaller brands, like Volvo, Porsche, or Mitsubishi, appear only in the industry average.</li>
     </ul>
@@ -260,7 +260,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <dt>Model year</dt><dd>The year an automaker assigns to a vehicle, which usually goes on sale in the fall of the year before.</dd>
       <dt>Production-weighted</dt><dd>An average where each model counts in proportion to how many were built. A model built 300,000 times counts 100 times as much as one built 3,000 times.</dd>
       <dt>Real-world MPG</dt><dd>EPA's estimate of fuel economy in everyday driving, lower than the older lab-test figures that regulations use.</dd>
-      <dt>0–60 time</dt><dd>Seconds to accelerate from a stop to 60 mph. Lower is quicker.</dd>
+      <dt><span class="nb">0–60</span> time</dt><dd>Seconds to accelerate from a stop to 60 mph. Lower is quicker.</dd>
       <dt>Car vs. truck</dt><dd>EPA's regulatory classes. Trucks include pickups, vans, and most SUVs and crossovers.</dd>
     </dl>
   </section>
