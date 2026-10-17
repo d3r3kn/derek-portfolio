@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Derek Nye, Data, AI, and Computer Help</title>
 <meta name="description" content="Derek Nye: clear, checked charts from public data, working tools built with AI, and patient one-on-one computer and AI help. Based in Middle Tennessee.">
-<link rel="stylesheet" href="styles.css?v=20261022">
+<link rel="stylesheet" href="styles.css?v=20261023">
 <style>
 /* Home page */
 .home-hero{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:64px 0 36px}
 .home-hero .kicker{font:italic 500 16px var(--serif);color:var(--clay);margin:0 0 12px}
 .home-hero h1{margin:0 0 16px}
-.home-hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--dim);max-width:52ch;margin:0 0 28px}
+.home-hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--dim);max-width:60ch;margin:0 0 28px}
 .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
 .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:17px;line-height:1;padding:15px 22px;border-radius:6px}
 .btn:hover{background:#264c42}
@@ -19,8 +19,10 @@
 .text-link{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .me{width:200px;height:200px;object-fit:cover;border-radius:4px;box-shadow:12px 12px 0 #ddd3bf;display:block}
 @media (max-width:760px){
-  .home-hero{grid-template-columns:1fr;gap:20px;padding:32px 0 28px}
-  .me{order:-1;width:88px;height:88px;border-radius:50%;box-shadow:none}
+  .home-hero{grid-template-columns:1fr;gap:20px;padding:32px 0 28px;text-align:center;justify-items:center}
+  .home-hero .lede{margin-left:auto;margin-right:auto;text-wrap:balance}
+  .cta-row{flex-direction:column;justify-content:center}
+  .me{order:-1;width:96px;height:96px;border-radius:50%;box-shadow:none}
 }
 
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -29,11 +31,11 @@
 .facts dt{font-weight:600;color:var(--ink);font-size:16px}
 .facts dd{margin:2px 0 0;color:var(--dim);font-size:14.5px}
 .facts a{color:inherit;text-decoration:underline;text-decoration-color:#c9bfa9;text-underline-offset:3px}
-@media (max-width:860px){.facts{grid-template-columns:1fr 1fr;gap:14px 0}.facts div:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:860px){.facts{grid-template-columns:1fr 1fr;gap:14px 0}.facts div{padding:4px 12px;text-align:center}.facts div:nth-child(3){border-left:0}.facts div:first-child{padding-left:12px}}
 
 .home-sec{padding:56px 0 0}
 .home-sec>h2{font:650 clamp(26px,3vw,34px)/1.2 var(--serif);text-transform:none;letter-spacing:-.01em;color:var(--ink);margin:0 0 6px}
-.home-sec>.sub{color:var(--dim);margin:0 0 24px;max-width:62ch}
+.home-sec>.sub{color:var(--dim);margin:0 0 24px;max-width:80ch}
 .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media (max-width:960px){.feats{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.feats{grid-template-columns:1fr}}
@@ -69,7 +71,7 @@
 
   <header class="home-hero">
     <div>
-      <p class="kicker">Data, AI, and healthcare &middot; Based in Middle Tennessee</p>
+      <p class="kicker"><span class="nw">Data, AI, and healthcare</span> &middot; <span class="nw">Based in Middle Tennessee</span></p>
       <h1>Derek Nye</h1>
       <p class="lede">I turn public data into clear, checked charts, build working tools with AI, and help people get comfortable with their computers.</p>
       <div class="cta-row">
