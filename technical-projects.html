@@ -112,6 +112,20 @@
       </ul>
     </div>
 
+    <div class="role" id="gpu-video-editor">
+      <div class="role-head">
+        <span class="role-title">GPU Video Editor</span>
+      </div>
+      <p class="role-sub">TypeScript, Electron, WebGL2 and GLSL, Web Audio, FFmpeg &middot; Windows desktop app</p>
+      <p class="d">A desktop video editor I use on my own projects, started October 2026. All editing and exporting runs on the graphics card, fully offline.</p>
+      <ul>
+        <li>A multi-track timeline with ripple editing, trimming, keyframes, speed changes, reverse, and freeze frames, previewed in real time on the GPU.</li>
+        <li>19 picture effects written as custom shaders (color, glow, lens, CRT, film grain, LUTs), 12 transitions, titles, and a sound mixer with EQ, compression, reverb, a master limiter, and loudness normalization.</li>
+        <li>Exports to H.264, H.265, WebM, GIF, WAV, or MP3 through the same renderer as the preview, and 136 automated checks confirm the export matches the preview frame for frame. Export on a 20-second 1080p test project went from 3.2 to 43 frames per second.</li>
+        <li>I set the requirements and design and tested every step on my own footage before the next began. Claude Code wrote the code and its 328 unit tests under my direction.</li>
+      </ul>
+    </div>
+
     <div class="role shot">
       <figure class="thumb"><a class="zoom" href="shots/full/clipper.png" aria-label="View Video Clipping Tool screenshot at full size"><img src="shots/clipper.png" alt="Video Clipping Tool screenshot" loading="lazy"></a></figure>
       <div class="body">
