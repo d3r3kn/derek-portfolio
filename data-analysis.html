@@ -16,7 +16,7 @@
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Chart of monthly Medicaid provider spending rising from 2018 to 2024, with the $1.52 trillion total.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="styles.css?v=20261019">
+<link rel="stylesheet" href="styles.css?v=20261020">
 <style>
 /* Chart tokens for the light Field Notebook theme. Every data color is at least 3:1 against --surface (#fffdf8), per WCAG 1.4.11. */
 :root{
@@ -162,6 +162,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 <body data-page="data-analysis">
 <div id="site-nav"></div>
 <script src="site-nav.js?v=20261018"></script>
+<script src="motion.js?v=20261019" defer></script>
 <div class="wrap">
 
   <header>
@@ -290,7 +291,7 @@ GROUP BY BILLING_PROVIDER_NPI_NUM ORDER BY SUM(TOTAL_PAID) DESC LIMIT 20</pre>
         <div class="collabels" id="dist-labels"></div>
       </div>
       <div class="tablewrap" id="dist-table" hidden></div>
-      <p class="card-foot">Columns count providers; hover a column for its share of dollars. The brightest column holds the median provider. Excludes <span data-fill="unkBilling"></span> with no billing provider listed.</p>
+      <p class="card-foot">Columns count providers; hover a column for its share of dollars. The darkest column holds the median provider. Excludes <span data-fill="unkBilling"></span> with no billing provider listed.</p>
       <details class="how"><summary>How this was calculated</summary>
 <pre>SELECT BILLING_PROVIDER_NPI_NUM, SUM(TOTAL_PAID) AS provider_total
 FROM prepared_data

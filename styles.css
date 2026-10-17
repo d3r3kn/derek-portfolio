@@ -155,3 +155,8 @@ footer{margin-top:80px;padding:34px 0 60px;border-top:1px solid var(--line);colo
 .lightbox{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
 .lightbox[hidden]{display:none}
 .lightbox img{max-width:min(96vw,1100px);max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.6)}
+
+/* Scroll motion (motion.js adds html.motion only when reduced motion is off) */
+html.motion .rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1),border-color .15s}
+html.motion .rv.in{opacity:1;transform:none}
+@media print{html.motion .rv{opacity:1;transform:none}}
