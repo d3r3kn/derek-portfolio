@@ -1,0 +1,4010 @@
+{
+ "source": {
+  "publisher": "U.S. Environmental Protection Agency",
+  "title": "EPA Automotive Trends Report data: Detailed Data, A-1 View by Manufacturer",
+  "url": "https://www.epa.gov/automotive-trends/explore-automotive-trends-data",
+  "accessed": "2026-10-03",
+  "sha256": "391a3bc9e939cc9dc751affda191b933c22801d90a76c088d48a734bb2cc9872"
+ },
+ "pipeline": {
+  "raw": 5661,
+  "vehicle_types": 2295,
+  "snapshots": 270,
+  "with_values": 240,
+  "brand_rows": 222,
+  "industry_rows": 18
+ },
+ "snapshots": [
+  1980,
+  1990,
+  2000,
+  2010,
+  2020,
+  2025
+ ],
+ "preliminary": [
+  2025
+ ],
+ "views": {
+  "all": "All",
+  "cars": "All Car",
+  "trucks": "All Truck"
+ },
+ "metrics": {
+  "zero60": {
+   "column": "Acceleration (0-60 time in seconds)",
+   "better": "lower"
+  },
+  "hp": {
+   "column": "Horsepower (HP)",
+   "better": "higher"
+  },
+  "mpg": {
+   "column": "Real-World MPG",
+   "better": "higher"
+  }
+ },
+ "rows": [
+  {
+   "view": "all",
+   "brand": "BMW",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 13.14,
+   "hp": 122.0,
+   "mpg": 21.3,
+   "weight": 3064.0,
+   "production": 36.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Ford",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.17,
+   "hp": 111.7,
+   "mpg": 17.7,
+   "weight": 3459.0,
+   "production": 2084.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "all",
+   "brand": "GM",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.02,
+   "hp": 116.5,
+   "mpg": 18.1,
+   "weight": 3495.0,
+   "production": 5165.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Honda",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.0,
+   "hp": 68.0,
+   "mpg": 24.8,
+   "weight": 2330.0,
+   "production": 350.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 11,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mazda",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.15,
+   "hp": 78.2,
+   "mpg": 22.3,
+   "weight": 2578.0,
+   "production": 189.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 8,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mercedes",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.76,
+   "hp": 101.6,
+   "mpg": 20.3,
+   "weight": 3781.0,
+   "production": 52.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 4,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Nissan",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.63,
+   "hp": 83.7,
+   "mpg": 25.4,
+   "weight": 2531.0,
+   "production": 663.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 6,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Stellantis",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.56,
+   "hp": 94.1,
+   "mpg": 18.3,
+   "weight": 3188.0,
+   "production": 1266.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 5,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Subaru",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.12,
+   "hp": 68.4,
+   "mpg": 23.8,
+   "weight": 2412.0,
+   "production": 148.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 10,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Toyota",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.13,
+   "hp": 81.5,
+   "mpg": 22.1,
+   "weight": 2672.0,
+   "production": 723.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 7,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "all",
+   "brand": "VW",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.61,
+   "hp": 69.7,
+   "mpg": 26.0,
+   "weight": 2420.0,
+   "production": 459.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 9,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "all",
+   "brand": "BMW",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 9.14,
+   "hp": 187.1,
+   "mpg": 18.4,
+   "weight": 3584.0,
+   "production": 57.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 2,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Ford",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.83,
+   "hp": 133.7,
+   "mpg": 19.9,
+   "weight": 3669.0,
+   "production": 2708.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 6,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "all",
+   "brand": "GM",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.23,
+   "hp": 145.6,
+   "mpg": 20.6,
+   "weight": 3560.0,
+   "production": 4445.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 3,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Honda",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 10.91,
+   "hp": 121.2,
+   "mpg": 25.4,
+   "weight": 2884.0,
+   "production": 894.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 8,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Hyundai",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 12.94,
+   "hp": 89.0,
+   "mpg": 27.6,
+   "weight": 2636.0,
+   "production": 117.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 12,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mazda",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.82,
+   "hp": 114.7,
+   "mpg": 22.9,
+   "weight": 3063.0,
+   "production": 371.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 11,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mercedes",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 9.61,
+   "hp": 190.0,
+   "mpg": 17.8,
+   "weight": 3829.0,
+   "production": 58.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 1,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Nissan",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 10.63,
+   "hp": 138.4,
+   "mpg": 23.0,
+   "weight": 3109.0,
+   "production": 651.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 4,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Stellantis",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.82,
+   "hp": 135.8,
+   "mpg": 20.1,
+   "weight": 3529.0,
+   "production": 1651.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 5,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Subaru",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.87,
+   "hp": 116.1,
+   "mpg": 23.4,
+   "weight": 3080.0,
+   "production": 131.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 10,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Toyota",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.66,
+   "hp": 123.8,
+   "mpg": 23.2,
+   "weight": 3132.0,
+   "production": 975.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 7,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "all",
+   "brand": "VW",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.71,
+   "hp": 117.6,
+   "mpg": 23.3,
+   "weight": 2979.0,
+   "production": 161.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 9,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "all",
+   "brand": "BMW",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 8.51,
+   "hp": 200.9,
+   "mpg": 19.9,
+   "weight": 3721.0,
+   "production": 184.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Ford",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.77,
+   "hp": 187.1,
+   "mpg": 18.6,
+   "weight": 4030.0,
+   "production": 3459.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 4,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "all",
+   "brand": "GM",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.59,
+   "hp": 192.6,
+   "mpg": 19.4,
+   "weight": 3962.0,
+   "production": 4674.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Honda",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.92,
+   "hp": 159.0,
+   "mpg": 23.8,
+   "weight": 3381.0,
+   "production": 1163.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 9,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Hyundai",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.55,
+   "hp": 129.7,
+   "mpg": 24.4,
+   "weight": 3024.0,
+   "production": 251.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 12,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Kia",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.75,
+   "hp": 127.0,
+   "mpg": 21.7,
+   "weight": 3048.0,
+   "production": 168.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 13,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mazda",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.58,
+   "hp": 137.6,
+   "mpg": 22.3,
+   "weight": 3228.0,
+   "production": 272.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 11,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mercedes",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 8.39,
+   "hp": 239.5,
+   "mpg": 19.3,
+   "weight": 4390.0,
+   "production": 191.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Nissan",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.72,
+   "hp": 175.7,
+   "mpg": 19.7,
+   "weight": 3701.0,
+   "production": 805.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Stellantis",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.88,
+   "hp": 186.2,
+   "mpg": 18.2,
+   "weight": 3986.0,
+   "production": 2485.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 5,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Subaru",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.72,
+   "hp": 163.1,
+   "mpg": 22.5,
+   "weight": 3445.0,
+   "production": 144.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 8,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Toyota",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.87,
+   "hp": 171.2,
+   "mpg": 21.2,
+   "weight": 3623.0,
+   "production": 1657.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 7,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "all",
+   "brand": "VW",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.67,
+   "hp": 152.4,
+   "mpg": 22.8,
+   "weight": 3265.0,
+   "production": 415.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 10,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "all",
+   "brand": "BMW",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 7.5,
+   "hp": 255.0,
+   "mpg": 22.1,
+   "weight": 3899.0,
+   "production": 170.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Ford",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.59,
+   "hp": 231.4,
+   "mpg": 20.4,
+   "weight": 4367.0,
+   "production": 1797.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 4,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "all",
+   "brand": "GM",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.41,
+   "hp": 244.9,
+   "mpg": 21.3,
+   "weight": 4349.0,
+   "production": 1721.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Honda",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.01,
+   "hp": 193.4,
+   "mpg": 24.9,
+   "weight": 3686.0,
+   "production": 1235.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 9,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Hyundai",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.49,
+   "hp": 167.4,
+   "mpg": 27.0,
+   "weight": 3343.0,
+   "production": 401.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 12,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Kia",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.48,
+   "hp": 157.2,
+   "mpg": 27.0,
+   "weight": 3169.0,
+   "production": 248.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 13,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mazda",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.97,
+   "hp": 177.6,
+   "mpg": 24.4,
+   "weight": 3454.0,
+   "production": 311.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 10,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mercedes",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 7.47,
+   "hp": 276.6,
+   "mpg": 18.9,
+   "weight": 4474.0,
+   "production": 226.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Nissan",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.51,
+   "hp": 211.7,
+   "mpg": 23.2,
+   "weight": 3815.0,
+   "production": 854.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 6,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Stellantis",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.99,
+   "hp": 226.7,
+   "mpg": 19.5,
+   "weight": 4338.0,
+   "production": 1156.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 5,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Subaru",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.55,
+   "hp": 177.4,
+   "mpg": 23.4,
+   "weight": 3645.0,
+   "production": 258.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 11,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Toyota",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.11,
+   "hp": 193.6,
+   "mpg": 25.4,
+   "weight": 3821.0,
+   "production": 2205.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 8,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "all",
+   "brand": "VW",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.48,
+   "hp": 202.9,
+   "mpg": 24.7,
+   "weight": 3774.0,
+   "production": 336.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 7,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "all",
+   "brand": "BMW",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.61,
+   "hp": 304.8,
+   "mpg": 25.5,
+   "weight": 4324.0,
+   "production": 307.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Ford",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.09,
+   "hp": 290.4,
+   "mpg": 23.0,
+   "weight": 4537.0,
+   "production": 1689.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 4,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "all",
+   "brand": "GM",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.74,
+   "hp": 265.1,
+   "mpg": 23.0,
+   "weight": 4403.0,
+   "production": 2269.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 6,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Honda",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.0,
+   "hp": 207.5,
+   "mpg": 29.1,
+   "weight": 3711.0,
+   "production": 1340.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 9,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Hyundai",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.74,
+   "hp": 181.7,
+   "mpg": 28.4,
+   "weight": 3574.0,
+   "production": 743.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 14,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Kia",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.53,
+   "hp": 193.5,
+   "mpg": 27.7,
+   "weight": 3622.0,
+   "production": 645.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 12,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mazda",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.91,
+   "hp": 192.5,
+   "mpg": 27.9,
+   "weight": 3837.0,
+   "production": 234.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 13,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mercedes",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.85,
+   "hp": 288.0,
+   "mpg": 23.4,
+   "weight": 4533.0,
+   "production": 324.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 5,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Nissan",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.76,
+   "hp": 204.2,
+   "mpg": 27.9,
+   "weight": 3852.0,
+   "production": 1030.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 10,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Stellantis",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.28,
+   "hp": 295.3,
+   "mpg": 21.3,
+   "weight": 4661.0,
+   "production": 1548.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 3,
+    "mpg": 14
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Subaru",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 9.14,
+   "hp": 196.6,
+   "mpg": 28.5,
+   "weight": 3973.0,
+   "production": 606.0,
+   "rank": {
+    "zero60": 14,
+    "hp": 11,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Tesla",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 3.57,
+   "hp": 443.7,
+   "mpg": 119.1,
+   "weight": 4394.0,
+   "production": 182.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Toyota",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.81,
+   "hp": 222.8,
+   "mpg": 27.0,
+   "weight": 4037.0,
+   "production": 2022.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 8,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "all",
+   "brand": "VW",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.6,
+   "hp": 242.4,
+   "mpg": 24.9,
+   "weight": 4144.0,
+   "production": 430.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 7,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "all",
+   "brand": "BMW",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 5.6,
+   "hp": 352.3,
+   "mpg": 31.1,
+   "weight": 4737.0,
+   "production": null,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Ford",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 6.56,
+   "hp": 313.7,
+   "mpg": 24.4,
+   "weight": 4814.0,
+   "production": null,
+   "rank": {
+    "zero60": 4,
+    "hp": 5,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "all",
+   "brand": "GM",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.36,
+   "hp": 293.5,
+   "mpg": 24.1,
+   "weight": 4796.0,
+   "production": null,
+   "rank": {
+    "zero60": 8,
+    "hp": 6,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Honda",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.72,
+   "hp": 205.9,
+   "mpg": 29.6,
+   "weight": 3982.0,
+   "production": null,
+   "rank": {
+    "zero60": 9,
+    "hp": 12,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Hyundai",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.85,
+   "hp": 216.0,
+   "mpg": 30.4,
+   "weight": 4009.0,
+   "production": null,
+   "rank": {
+    "zero60": 10,
+    "hp": 10,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Kia",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.14,
+   "hp": 205.4,
+   "mpg": 29.2,
+   "weight": 3920.0,
+   "production": null,
+   "rank": {
+    "zero60": 11,
+    "hp": 13,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mazda",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.59,
+   "hp": 210.9,
+   "mpg": 28.1,
+   "weight": 4022.0,
+   "production": null,
+   "rank": {
+    "zero60": 13,
+    "hp": 11,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Mercedes",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 5.88,
+   "hp": 322.3,
+   "mpg": 28.1,
+   "weight": 5034.0,
+   "production": null,
+   "rank": {
+    "zero60": 3,
+    "hp": 4,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Nissan",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.34,
+   "hp": 222.9,
+   "mpg": 29.0,
+   "weight": 4138.0,
+   "production": null,
+   "rank": {
+    "zero60": 12,
+    "hp": 9,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Stellantis",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 6.62,
+   "hp": 335.2,
+   "mpg": 22.8,
+   "weight": 5044.0,
+   "production": null,
+   "rank": {
+    "zero60": 5,
+    "hp": 3,
+    "mpg": 14
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Subaru",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 9.02,
+   "hp": 192.3,
+   "mpg": 28.7,
+   "weight": 3917.0,
+   "production": null,
+   "rank": {
+    "zero60": 14,
+    "hp": 14,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Tesla",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 4.3,
+   "hp": 380.1,
+   "mpg": 119.4,
+   "weight": 4326.0,
+   "production": null,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "all",
+   "brand": "Toyota",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.35,
+   "hp": 227.2,
+   "mpg": 30.5,
+   "weight": 4340.0,
+   "production": null,
+   "rank": {
+    "zero60": 7,
+    "hp": 8,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "all",
+   "brand": "VW",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.06,
+   "hp": 278.2,
+   "mpg": 29.1,
+   "weight": 4490.0,
+   "production": null,
+   "rank": {
+    "zero60": 6,
+    "hp": 7,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "BMW",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 13.14,
+   "hp": 122.0,
+   "mpg": 21.3,
+   "weight": 3064.0,
+   "production": 36.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Ford",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.01,
+   "hp": 105.3,
+   "mpg": 19.1,
+   "weight": 3186.0,
+   "production": 1508.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "GM",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 14.96,
+   "hp": 113.8,
+   "mpg": 18.7,
+   "weight": 3384.0,
+   "production": 4508.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Honda",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.0,
+   "hp": 68.0,
+   "mpg": 24.8,
+   "weight": 2330.0,
+   "production": 350.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 11,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mazda",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.06,
+   "hp": 78.4,
+   "mpg": 22.2,
+   "weight": 2559.0,
+   "production": 179.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 8,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mercedes",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.76,
+   "hp": 101.6,
+   "mpg": 20.3,
+   "weight": 3781.0,
+   "production": 52.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 4,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Nissan",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.67,
+   "hp": 81.8,
+   "mpg": 26.6,
+   "weight": 2461.0,
+   "production": 537.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 6,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Stellantis",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.82,
+   "hp": 88.7,
+   "mpg": 19.4,
+   "weight": 3076.0,
+   "production": 989.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 5,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Subaru",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.95,
+   "hp": 68.6,
+   "mpg": 24.0,
+   "weight": 2402.0,
+   "production": 133.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 10,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Toyota",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 16.33,
+   "hp": 78.4,
+   "mpg": 23.3,
+   "weight": 2620.0,
+   "production": 578.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 7,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "VW",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.36,
+   "hp": 70.1,
+   "mpg": 26.6,
+   "weight": 2385.0,
+   "production": 417.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 9,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "BMW",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 9.14,
+   "hp": 187.1,
+   "mpg": 18.4,
+   "weight": 3584.0,
+   "production": 57.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 2,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Ford",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.78,
+   "hp": 125.9,
+   "mpg": 22.1,
+   "weight": 3403.0,
+   "production": 1726.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 5,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "GM",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.13,
+   "hp": 136.2,
+   "mpg": 23.0,
+   "weight": 3258.0,
+   "production": 3130.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 4,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Honda",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 10.91,
+   "hp": 121.2,
+   "mpg": 25.4,
+   "weight": 2884.0,
+   "production": 894.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 8,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Hyundai",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 12.94,
+   "hp": 89.0,
+   "mpg": 27.6,
+   "weight": 2636.0,
+   "production": 117.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 12,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mazda",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.21,
+   "hp": 114.3,
+   "mpg": 25.0,
+   "weight": 2870.0,
+   "production": 252.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 11,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mercedes",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 9.61,
+   "hp": 190.0,
+   "mpg": 17.8,
+   "weight": 3829.0,
+   "production": 58.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 1,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Nissan",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 10.55,
+   "hp": 138.5,
+   "mpg": 23.8,
+   "weight": 3025.0,
+   "production": 473.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Stellantis",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.67,
+   "hp": 125.1,
+   "mpg": 22.8,
+   "weight": 3219.0,
+   "production": 807.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 6,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Subaru",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.87,
+   "hp": 116.1,
+   "mpg": 23.4,
+   "weight": 3080.0,
+   "production": 131.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 10,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Toyota",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.57,
+   "hp": 121.6,
+   "mpg": 25.3,
+   "weight": 2970.0,
+   "production": 748.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 7,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "VW",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.43,
+   "hp": 118.9,
+   "mpg": 23.7,
+   "weight": 2929.0,
+   "production": 154.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 9,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "BMW",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 8.53,
+   "hp": 198.4,
+   "mpg": 20.2,
+   "weight": 3681.0,
+   "production": 178.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Ford",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.53,
+   "hp": 172.6,
+   "mpg": 21.6,
+   "weight": 3492.0,
+   "production": 1765.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "GM",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.4,
+   "hp": 175.1,
+   "mpg": 22.3,
+   "weight": 3476.0,
+   "production": 2576.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 5,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Honda",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.79,
+   "hp": 153.7,
+   "mpg": 24.8,
+   "weight": 3212.0,
+   "production": 942.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 9,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Hyundai",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.55,
+   "hp": 129.7,
+   "mpg": 24.4,
+   "weight": 3024.0,
+   "production": 251.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 11,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Kia",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.47,
+   "hp": 126.2,
+   "mpg": 22.6,
+   "weight": 2932.0,
+   "production": 133.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 13,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mazda",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.41,
+   "hp": 128.8,
+   "mpg": 24.1,
+   "weight": 2955.0,
+   "production": 190.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 12,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mercedes",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 7.84,
+   "hp": 242.5,
+   "mpg": 20.4,
+   "weight": 4018.0,
+   "production": 143.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Nissan",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.04,
+   "hp": 182.6,
+   "mpg": 21.8,
+   "weight": 3444.0,
+   "production": 500.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Stellantis",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.38,
+   "hp": 176.3,
+   "mpg": 21.7,
+   "weight": 3457.0,
+   "production": 927.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 4,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Subaru",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.64,
+   "hp": 162.7,
+   "mpg": 22.5,
+   "weight": 3431.0,
+   "production": 115.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 7,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Toyota",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.85,
+   "hp": 156.7,
+   "mpg": 24.5,
+   "weight": 3277.0,
+   "production": 1007.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 8,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "VW",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.64,
+   "hp": 152.5,
+   "mpg": 22.9,
+   "weight": 3252.0,
+   "production": 412.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 10,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "BMW",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 7.39,
+   "hp": 248.1,
+   "mpg": 22.8,
+   "weight": 3706.0,
+   "production": 144.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Ford",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.4,
+   "hp": 204.3,
+   "mpg": 24.1,
+   "weight": 3674.0,
+   "production": 940.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 5,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "GM",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.49,
+   "hp": 217.8,
+   "mpg": 23.8,
+   "weight": 3776.0,
+   "production": 1089.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 4,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Honda",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.97,
+   "hp": 175.0,
+   "mpg": 27.6,
+   "weight": 3321.0,
+   "production": 821.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 9,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Hyundai",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.53,
+   "hp": 163.8,
+   "mpg": 27.4,
+   "weight": 3294.0,
+   "production": 371.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 11,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Kia",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.52,
+   "hp": 150.3,
+   "mpg": 27.9,
+   "weight": 3054.0,
+   "production": 226.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 13,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mazda",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.04,
+   "hp": 164.9,
+   "mpg": 25.8,
+   "weight": 3293.0,
+   "production": 249.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 10,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mercedes",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 7.2,
+   "hp": 273.1,
+   "mpg": 19.9,
+   "weight": 4170.0,
+   "production": 154.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Nissan",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.49,
+   "hp": 196.5,
+   "mpg": 25.8,
+   "weight": 3491.0,
+   "production": 620.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Stellantis",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.49,
+   "hp": 221.6,
+   "mpg": 22.2,
+   "weight": 3847.0,
+   "production": 384.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 3,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Subaru",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.93,
+   "hp": 181.0,
+   "mpg": 23.8,
+   "weight": 3519.0,
+   "production": 73.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 8,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Toyota",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.43,
+   "hp": 159.5,
+   "mpg": 29.5,
+   "weight": 3406.0,
+   "production": 1498.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 12,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "VW",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.48,
+   "hp": 195.0,
+   "mpg": 25.8,
+   "weight": 3626.0,
+   "production": 286.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 7,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "BMW",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.62,
+   "hp": 284.6,
+   "mpg": 27.3,
+   "weight": 4009.0,
+   "production": 190.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 4,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Ford",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.76,
+   "hp": 230.9,
+   "mpg": 27.0,
+   "weight": 3858.0,
+   "production": 449.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "GM",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.63,
+   "hp": 189.1,
+   "mpg": 29.3,
+   "weight": 3559.0,
+   "production": 745.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 8,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Honda",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.14,
+   "hp": 180.8,
+   "mpg": 32.6,
+   "weight": 3318.0,
+   "production": 768.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 11,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Hyundai",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.94,
+   "hp": 168.7,
+   "mpg": 29.4,
+   "weight": 3463.0,
+   "production": 663.0,
+   "rank": {
+    "zero60": 14,
+    "hp": 13,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Kia",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.77,
+   "hp": 162.0,
+   "mpg": 31.8,
+   "weight": 3217.0,
+   "production": 401.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 14,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mazda",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.73,
+   "hp": 186.4,
+   "mpg": 29.5,
+   "weight": 3660.0,
+   "production": 118.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 10,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mercedes",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.38,
+   "hp": 290.0,
+   "mpg": 25.7,
+   "weight": 4015.0,
+   "production": 142.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 3,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Nissan",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.91,
+   "hp": 179.8,
+   "mpg": 30.9,
+   "weight": 3533.0,
+   "production": 706.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 12,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Stellantis",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.9,
+   "hp": 290.9,
+   "mpg": 23.4,
+   "weight": 4026.0,
+   "production": 234.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 2,
+    "mpg": 14
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Subaru",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.52,
+   "hp": 199.7,
+   "mpg": 28.1,
+   "weight": 3649.0,
+   "production": 109.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 7,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Tesla",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 3.55,
+   "hp": 440.1,
+   "mpg": 119.9,
+   "weight": 4351.0,
+   "production": 177.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Toyota",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.98,
+   "hp": 187.3,
+   "mpg": 33.3,
+   "weight": 3516.0,
+   "production": 1062.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 9,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "VW",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.46,
+   "hp": 231.9,
+   "mpg": 28.8,
+   "weight": 3796.0,
+   "production": 180.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 5,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "BMW",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 5.64,
+   "hp": 334.0,
+   "mpg": 35.2,
+   "weight": 4388.0,
+   "production": null,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Ford",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 6.34,
+   "hp": 275.9,
+   "mpg": 38.5,
+   "weight": 4181.0,
+   "production": null,
+   "rank": {
+    "zero60": 5,
+    "hp": 5,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "GM",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.48,
+   "hp": 193.8,
+   "mpg": 30.8,
+   "weight": 3625.0,
+   "production": null,
+   "rank": {
+    "zero60": 11,
+    "hp": 9,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Honda",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.1,
+   "hp": 166.6,
+   "mpg": 34.1,
+   "weight": 3502.0,
+   "production": null,
+   "rank": {
+    "zero60": 10,
+    "hp": 14,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Hyundai",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.97,
+   "hp": 200.5,
+   "mpg": 36.2,
+   "weight": 3732.0,
+   "production": null,
+   "rank": {
+    "zero60": 9,
+    "hp": 7,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Kia",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.55,
+   "hp": 169.8,
+   "mpg": 34.1,
+   "weight": 3402.0,
+   "production": null,
+   "rank": {
+    "zero60": 12,
+    "hp": 13,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mazda",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.94,
+   "hp": 192.6,
+   "mpg": 30.6,
+   "weight": 3333.0,
+   "production": null,
+   "rank": {
+    "zero60": 8,
+    "hp": 10,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Mercedes",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 5.87,
+   "hp": 302.9,
+   "mpg": 31.7,
+   "weight": 4642.0,
+   "production": null,
+   "rank": {
+    "zero60": 4,
+    "hp": 4,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Nissan",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.74,
+   "hp": 190.6,
+   "mpg": 33.8,
+   "weight": 3800.0,
+   "production": null,
+   "rank": {
+    "zero60": 14,
+    "hp": 11,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Stellantis",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 4.87,
+   "hp": 403.0,
+   "mpg": 53.5,
+   "weight": 5080.0,
+   "production": null,
+   "rank": {
+    "zero60": 2,
+    "hp": 1,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Subaru",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.57,
+   "hp": 195.8,
+   "mpg": 27.9,
+   "weight": 3651.0,
+   "production": null,
+   "rank": {
+    "zero60": 13,
+    "hp": 8,
+    "mpg": 14
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Tesla",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 4.3,
+   "hp": 374.5,
+   "mpg": 121.4,
+   "weight": 4247.0,
+   "production": null,
+   "rank": {
+    "zero60": 1,
+    "hp": 2,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "Toyota",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.55,
+   "hp": 183.7,
+   "mpg": 39.5,
+   "weight": 3704.0,
+   "production": null,
+   "rank": {
+    "zero60": 7,
+    "hp": 12,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "cars",
+   "brand": "VW",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.11,
+   "hp": 254.2,
+   "mpg": 31.7,
+   "weight": 3936.0,
+   "production": null,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Ford",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.59,
+   "hp": 128.5,
+   "mpg": 14.8,
+   "weight": 4172.0,
+   "production": 576.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 2,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "GM",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.47,
+   "hp": 135.0,
+   "mpg": 15.2,
+   "weight": 4252.0,
+   "production": 657.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 1,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mazda",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 17.66,
+   "hp": 75.9,
+   "mpg": 25.6,
+   "weight": 2907.0,
+   "production": 10.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Nissan",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.43,
+   "hp": 91.6,
+   "mpg": 21.3,
+   "weight": 2830.0,
+   "production": 126.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 5,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Stellantis",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.62,
+   "hp": 113.4,
+   "mpg": 15.4,
+   "weight": 3591.0,
+   "production": 277.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 3,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Subaru",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 18.67,
+   "hp": 67.0,
+   "mpg": 22.2,
+   "weight": 2500.0,
+   "production": 15.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 7,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Toyota",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.34,
+   "hp": 93.8,
+   "mpg": 18.2,
+   "weight": 2880.0,
+   "production": 145.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 4,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "VW",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 20.11,
+   "hp": 65.6,
+   "mpg": 21.5,
+   "weight": 2770.0,
+   "production": 42.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 8,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Ford",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.91,
+   "hp": 147.4,
+   "mpg": 16.9,
+   "weight": 4137.0,
+   "production": 982.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 2,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "GM",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.47,
+   "hp": 168.1,
+   "mpg": 16.6,
+   "weight": 4281.0,
+   "production": 1315.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 1,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mazda",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 13.14,
+   "hp": 115.6,
+   "mpg": 19.5,
+   "weight": 3472.0,
+   "production": 119.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Nissan",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 10.84,
+   "hp": 138.2,
+   "mpg": 21.2,
+   "weight": 3335.0,
+   "production": 178.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 4,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Stellantis",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.96,
+   "hp": 146.0,
+   "mpg": 18.0,
+   "weight": 3825.0,
+   "production": 844.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 3,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Toyota",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.94,
+   "hp": 131.2,
+   "mpg": 18.3,
+   "weight": 3666.0,
+   "production": 228.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 5,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "VW",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 17.57,
+   "hp": 90.0,
+   "mpg": 17.3,
+   "weight": 4020.0,
+   "production": 7.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 7,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "BMW",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 8.15,
+   "hp": 282.0,
+   "mpg": 14.3,
+   "weight": 5000.0,
+   "production": 6.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Ford",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.03,
+   "hp": 202.2,
+   "mpg": 16.3,
+   "weight": 4589.0,
+   "production": 1694.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 4,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "GM",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.81,
+   "hp": 214.0,
+   "mpg": 16.8,
+   "weight": 4559.0,
+   "production": 2098.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 3,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Honda",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.49,
+   "hp": 181.5,
+   "mpg": 20.2,
+   "weight": 4102.0,
+   "production": 221.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 7,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Kia",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 11.86,
+   "hp": 130.0,
+   "mpg": 18.9,
+   "weight": 3500.0,
+   "production": 34.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 12,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mazda",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.95,
+   "hp": 157.9,
+   "mpg": 18.9,
+   "weight": 3861.0,
+   "production": 82.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 10,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mercedes",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.02,
+   "hp": 230.6,
+   "mpg": 16.6,
+   "weight": 5500.0,
+   "production": 48.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 2,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Nissan",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.83,
+   "hp": 164.5,
+   "mpg": 17.0,
+   "weight": 4121.0,
+   "production": 305.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 9,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Stellantis",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.18,
+   "hp": 192.1,
+   "mpg": 16.6,
+   "weight": 4302.0,
+   "production": 1558.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 6,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Subaru",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.02,
+   "hp": 165.0,
+   "mpg": 22.4,
+   "weight": 3500.0,
+   "production": 29.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 8,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Toyota",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.91,
+   "hp": 193.6,
+   "mpg": 17.6,
+   "weight": 4160.0,
+   "production": 650.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 5,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "VW",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 14.04,
+   "hp": 140.0,
+   "mpg": 15.6,
+   "weight": 5116.0,
+   "production": 3.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 11,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "BMW",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.12,
+   "hp": 291.6,
+   "mpg": 18.9,
+   "weight": 4935.0,
+   "production": 27.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Ford",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.79,
+   "hp": 261.3,
+   "mpg": 17.5,
+   "weight": 5127.0,
+   "production": 856.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 5,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "GM",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.27,
+   "hp": 291.7,
+   "mpg": 18.0,
+   "weight": 5336.0,
+   "production": 633.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 1,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Honda",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.09,
+   "hp": 229.8,
+   "mpg": 20.9,
+   "weight": 4410.0,
+   "production": 414.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 8,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Hyundai",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.91,
+   "hp": 211.3,
+   "mpg": 23.0,
+   "weight": 3944.0,
+   "production": 30.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 12,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Kia",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.13,
+   "hp": 228.6,
+   "mpg": 20.0,
+   "weight": 4362.0,
+   "production": 22.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 11,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mazda",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.67,
+   "hp": 229.1,
+   "mpg": 20.1,
+   "weight": 4110.0,
+   "production": 61.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 10,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mercedes",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.03,
+   "hp": 284.1,
+   "mpg": 17.2,
+   "weight": 5121.0,
+   "production": 72.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 3,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Nissan",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.58,
+   "hp": 251.9,
+   "mpg": 18.2,
+   "weight": 4672.0,
+   "production": 234.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 6,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Stellantis",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.23,
+   "hp": 229.2,
+   "mpg": 18.4,
+   "weight": 4582.0,
+   "production": 772.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 9,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Subaru",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 9.8,
+   "hp": 176.0,
+   "mpg": 23.3,
+   "weight": 3694.0,
+   "production": 186.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 13,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Toyota",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.42,
+   "hp": 265.8,
+   "mpg": 19.6,
+   "weight": 4701.0,
+   "production": 707.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 4,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "VW",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.5,
+   "hp": 247.8,
+   "mpg": 19.7,
+   "weight": 4627.0,
+   "production": 50.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 7,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "BMW",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.61,
+   "hp": 337.7,
+   "mpg": 23.1,
+   "weight": 4834.0,
+   "production": 117.0,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Ford",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 6.85,
+   "hp": 311.9,
+   "mpg": 21.8,
+   "weight": 4783.0,
+   "production": 1241.0,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "GM",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.31,
+   "hp": 302.2,
+   "mpg": 20.9,
+   "weight": 4816.0,
+   "production": 1523.0,
+   "rank": {
+    "zero60": 6,
+    "hp": 4,
+    "mpg": 14
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Honda",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.82,
+   "hp": 243.5,
+   "mpg": 25.4,
+   "weight": 4238.0,
+   "production": 572.0,
+   "rank": {
+    "zero60": 10,
+    "hp": 12,
+    "mpg": 4
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Hyundai",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.01,
+   "hp": 291.0,
+   "mpg": 22.3,
+   "weight": 4500.0,
+   "production": 79.0,
+   "rank": {
+    "zero60": 4,
+    "hp": 6,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Kia",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.12,
+   "hp": 245.2,
+   "mpg": 22.9,
+   "weight": 4286.0,
+   "production": 244.0,
+   "rank": {
+    "zero60": 11,
+    "hp": 11,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mazda",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 9.08,
+   "hp": 198.6,
+   "mpg": 26.4,
+   "weight": 4014.0,
+   "production": 117.0,
+   "rank": {
+    "zero60": 13,
+    "hp": 13,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mercedes",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.22,
+   "hp": 286.4,
+   "mpg": 21.9,
+   "weight": 4935.0,
+   "production": 182.0,
+   "rank": {
+    "zero60": 5,
+    "hp": 7,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Nissan",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.42,
+   "hp": 257.5,
+   "mpg": 23.1,
+   "weight": 4548.0,
+   "production": 324.0,
+   "rank": {
+    "zero60": 12,
+    "hp": 9,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Stellantis",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.34,
+   "hp": 296.0,
+   "mpg": 21.0,
+   "weight": 4773.0,
+   "production": 1314.0,
+   "rank": {
+    "zero60": 7,
+    "hp": 5,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Subaru",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 9.28,
+   "hp": 195.9,
+   "mpg": 28.6,
+   "weight": 4044.0,
+   "production": 497.0,
+   "rank": {
+    "zero60": 14,
+    "hp": 14,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Tesla",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 4.3,
+   "hp": 560.9,
+   "mpg": 97.1,
+   "weight": 5791.0,
+   "production": 5.0,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Toyota",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.62,
+   "hp": 261.9,
+   "mpg": 22.3,
+   "weight": 4612.0,
+   "production": 961.0,
+   "rank": {
+    "zero60": 8,
+    "hp": 8,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "VW",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.69,
+   "hp": 250.0,
+   "mpg": 22.7,
+   "weight": 4395.0,
+   "production": 250.0,
+   "rank": {
+    "zero60": 9,
+    "hp": 10,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "BMW",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 5.56,
+   "hp": 369.1,
+   "mpg": 28.2,
+   "weight": 5057.0,
+   "production": null,
+   "rank": {
+    "zero60": 2,
+    "hp": 2,
+    "mpg": 3
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Ford",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 6.59,
+   "hp": 318.8,
+   "mpg": 23.3,
+   "weight": 4899.0,
+   "production": null,
+   "rank": {
+    "zero60": 4,
+    "hp": 6,
+    "mpg": 12
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "GM",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 6.86,
+   "hp": 338.6,
+   "mpg": 21.9,
+   "weight": 5325.0,
+   "production": null,
+   "rank": {
+    "zero60": 6,
+    "hp": 4,
+    "mpg": 14
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Honda",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.37,
+   "hp": 242.2,
+   "mpg": 26.4,
+   "weight": 4427.0,
+   "production": null,
+   "rank": {
+    "zero60": 9,
+    "hp": 10,
+    "mpg": 7
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Hyundai",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.72,
+   "hp": 231.5,
+   "mpg": 26.2,
+   "weight": 4286.0,
+   "production": null,
+   "rank": {
+    "zero60": 10,
+    "hp": 12,
+    "mpg": 8
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Kia",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.78,
+   "hp": 235.7,
+   "mpg": 26.0,
+   "weight": 4362.0,
+   "production": null,
+   "rank": {
+    "zero60": 11,
+    "hp": 11,
+    "mpg": 9
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mazda",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 8.64,
+   "hp": 212.4,
+   "mpg": 27.9,
+   "weight": 4079.0,
+   "production": null,
+   "rank": {
+    "zero60": 13,
+    "hp": 13,
+    "mpg": 5
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Mercedes",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 5.9,
+   "hp": 342.0,
+   "mpg": 25.2,
+   "weight": 5434.0,
+   "production": null,
+   "rank": {
+    "zero60": 3,
+    "hp": 3,
+    "mpg": 10
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Nissan",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.8,
+   "hp": 266.1,
+   "mpg": 24.3,
+   "weight": 4592.0,
+   "production": null,
+   "rank": {
+    "zero60": 12,
+    "hp": 8,
+    "mpg": 11
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Stellantis",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 6.72,
+   "hp": 331.4,
+   "mpg": 22.1,
+   "weight": 5042.0,
+   "production": null,
+   "rank": {
+    "zero60": 5,
+    "hp": 5,
+    "mpg": 13
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Subaru",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 9.07,
+   "hp": 191.9,
+   "mpg": 28.8,
+   "weight": 3949.0,
+   "production": null,
+   "rank": {
+    "zero60": 14,
+    "hp": 14,
+    "mpg": 2
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Tesla",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 4.37,
+   "hp": 562.9,
+   "mpg": 77.3,
+   "weight": 6935.0,
+   "production": null,
+   "rank": {
+    "zero60": 1,
+    "hp": 1,
+    "mpg": 1
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "Toyota",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.21,
+   "hp": 257.6,
+   "mpg": 26.4,
+   "weight": 4784.0,
+   "production": null,
+   "rank": {
+    "zero60": 8,
+    "hp": 9,
+    "mpg": 6
+   }
+  },
+  {
+   "view": "trucks",
+   "brand": "VW",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.04,
+   "hp": 288.6,
+   "mpg": 28.1,
+   "weight": 4729.0,
+   "production": null,
+   "rank": {
+    "zero60": 7,
+    "hp": 7,
+    "mpg": 4
+   }
+  }
+ ],
+ "industry": [
+  {
+   "view": "all",
+   "brand": "All",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.57,
+   "hp": 103.8,
+   "mpg": 19.2,
+   "weight": 3228.0,
+   "production": 11306.0
+  },
+  {
+   "view": "all",
+   "brand": "All",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.48,
+   "hp": 135.3,
+   "mpg": 21.2,
+   "weight": 3426.0,
+   "production": 12615.0
+  },
+  {
+   "view": "all",
+   "brand": "All",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.76,
+   "hp": 181.0,
+   "mpg": 19.8,
+   "weight": 3821.0,
+   "production": 16571.0
+  },
+  {
+   "view": "all",
+   "brand": "All",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.78,
+   "hp": 213.6,
+   "mpg": 22.6,
+   "weight": 4001.0,
+   "production": 11116.0
+  },
+  {
+   "view": "all",
+   "brand": "All",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.79,
+   "hp": 246.1,
+   "mpg": 25.4,
+   "weight": 4166.0,
+   "production": 13721.0
+  },
+  {
+   "view": "all",
+   "brand": "All",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.31,
+   "hp": 263.6,
+   "mpg": 28.1,
+   "weight": 4441.0,
+   "production": null
+  },
+  {
+   "view": "cars",
+   "brand": "All",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.55,
+   "hp": 100.5,
+   "mpg": 20.0,
+   "weight": 3101.0,
+   "production": 9444.0
+  },
+  {
+   "view": "cars",
+   "brand": "All",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.35,
+   "hp": 128.6,
+   "mpg": 23.3,
+   "weight": 3178.0,
+   "production": 8875.0
+  },
+  {
+   "view": "cars",
+   "brand": "All",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 9.54,
+   "hp": 168.3,
+   "mpg": 22.5,
+   "weight": 3401.0,
+   "production": 9742.0
+  },
+  {
+   "view": "cars",
+   "brand": "All",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.79,
+   "hp": 190.2,
+   "mpg": 25.7,
+   "weight": 3536.0,
+   "production": 6976.0
+  },
+  {
+   "view": "cars",
+   "brand": "All",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 8.1,
+   "hp": 204.1,
+   "mpg": 30.7,
+   "weight": 3582.0,
+   "production": 6030.0
+  },
+  {
+   "view": "cars",
+   "brand": "All",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.54,
+   "hp": 218.6,
+   "mpg": 36.6,
+   "weight": 3802.0,
+   "production": null
+  },
+  {
+   "view": "trucks",
+   "brand": "All",
+   "year": 1980,
+   "preliminary": false,
+   "zero60": 15.69,
+   "hp": 120.9,
+   "mpg": 15.8,
+   "weight": 3869.0,
+   "production": 1863.0
+  },
+  {
+   "view": "trucks",
+   "brand": "All",
+   "year": 1990,
+   "preliminary": false,
+   "zero60": 11.78,
+   "hp": 151.3,
+   "mpg": 17.4,
+   "weight": 4014.0,
+   "production": 3740.0
+  },
+  {
+   "view": "trucks",
+   "brand": "All",
+   "year": 2000,
+   "preliminary": false,
+   "zero60": 10.07,
+   "hp": 199.1,
+   "mpg": 16.8,
+   "weight": 4421.0,
+   "production": 6829.0
+  },
+  {
+   "view": "trucks",
+   "brand": "All",
+   "year": 2010,
+   "preliminary": false,
+   "zero60": 8.76,
+   "hp": 253.1,
+   "mpg": 18.8,
+   "weight": 4784.0,
+   "production": 4141.0
+  },
+  {
+   "view": "trucks",
+   "brand": "All",
+   "year": 2020,
+   "preliminary": false,
+   "zero60": 7.55,
+   "hp": 279.0,
+   "mpg": 22.4,
+   "weight": 4624.0,
+   "production": 7691.0
+  },
+  {
+   "view": "trucks",
+   "brand": "All",
+   "year": 2025,
+   "preliminary": true,
+   "zero60": 7.19,
+   "hp": 287.4,
+   "mpg": 25.0,
+   "weight": 4779.0,
+   "production": null
+  }
+ ],
+ "coverage": [
+  {
+   "view": "all",
+   "year": 1980,
+   "share": 0.985
+  },
+  {
+   "view": "all",
+   "year": 1990,
+   "share": 0.969
+  },
+  {
+   "view": "all",
+   "year": 2000,
+   "share": 0.958
+  },
+  {
+   "view": "all",
+   "year": 2010,
+   "share": 0.982
+  },
+  {
+   "view": "all",
+   "year": 2020,
+   "share": 0.974
+  },
+  {
+   "view": "cars",
+   "year": 1980,
+   "share": 0.983
+  },
+  {
+   "view": "cars",
+   "year": 1990,
+   "share": 0.963
+  },
+  {
+   "view": "cars",
+   "year": 2000,
+   "share": 0.938
+  },
+  {
+   "view": "cars",
+   "year": 2010,
+   "share": 0.983
+  },
+  {
+   "view": "cars",
+   "year": 2020,
+   "share": 0.986
+  },
+  {
+   "view": "trucks",
+   "year": 1980,
+   "share": 0.992
+  },
+  {
+   "view": "trucks",
+   "year": 1990,
+   "share": 0.982
+  },
+  {
+   "view": "trucks",
+   "year": 2000,
+   "share": 0.985
+  },
+  {
+   "view": "trucks",
+   "year": 2010,
+   "share": 0.981
+  },
+  {
+   "view": "trucks",
+   "year": 2020,
+   "share": 0.966
+  }
+ ],
+ "checks": [
+  {
+   "name": "raw file unchanged",
+   "ok": true,
+   "detail": "sha256 391a3bc9e939..."
+  },
+  {
+   "name": "raw shape",
+   "ok": true,
+   "detail": "5,661 rows x 57 columns"
+  },
+  {
+   "name": "all 1980: ranks",
+   "ok": true,
+   "detail": "11 brands ranked 1-11, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "all 1990: ranks",
+   "ok": true,
+   "detail": "12 brands ranked 1-12, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "all 2000: ranks",
+   "ok": true,
+   "detail": "13 brands ranked 1-13, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "all 2010: ranks",
+   "ok": true,
+   "detail": "13 brands ranked 1-13, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "all 2020: ranks",
+   "ok": true,
+   "detail": "14 brands ranked 1-14, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "all 2025: ranks",
+   "ok": true,
+   "detail": "14 brands ranked 1-14, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "cars 1980: ranks",
+   "ok": true,
+   "detail": "11 brands ranked 1-11, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "cars 1990: ranks",
+   "ok": true,
+   "detail": "12 brands ranked 1-12, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "cars 2000: ranks",
+   "ok": true,
+   "detail": "13 brands ranked 1-13, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "cars 2010: ranks",
+   "ok": true,
+   "detail": "13 brands ranked 1-13, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "cars 2020: ranks",
+   "ok": true,
+   "detail": "14 brands ranked 1-14, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "cars 2025: ranks",
+   "ok": true,
+   "detail": "14 brands ranked 1-14, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "trucks 1980: ranks",
+   "ok": true,
+   "detail": "8 brands ranked 1-8, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "trucks 1990: ranks",
+   "ok": true,
+   "detail": "7 brands ranked 1-7, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "trucks 2000: ranks",
+   "ok": true,
+   "detail": "12 brands ranked 1-12, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "trucks 2010: ranks",
+   "ok": true,
+   "detail": "13 brands ranked 1-13, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "trucks 2020: ranks",
+   "ok": true,
+   "detail": "14 brands ranked 1-14, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "trucks 2025: ranks",
+   "ok": true,
+   "detail": "14 brands ranked 1-14, no duplicates or ties, industry row present"
+  },
+  {
+   "name": "values in sensible ranges",
+   "ok": true,
+   "detail": "0-60 2-25 s, HP 50-1000, MPG 5-150"
+  },
+  {
+   "name": "all: brand rows",
+   "ok": true,
+   "detail": "77 (expected 77)"
+  },
+  {
+   "name": "cars: brand rows",
+   "ok": true,
+   "detail": "77 (expected 77)"
+  },
+  {
+   "name": "trucks: brand rows",
+   "ok": true,
+   "detail": "68 (expected 68)"
+  },
+  {
+   "name": "brand totals = weighted cars + trucks",
+   "ok": true,
+   "detail": "68 brand-years; largest gap HP 0.11%, MPG 0.10%"
+  },
+  {
+   "name": "pipeline reconciles",
+   "ok": true,
+   "detail": "270 snapshot rows - 30 empty placeholders = 240 (222 brand + 18 industry)"
+  }
+ ]
+}

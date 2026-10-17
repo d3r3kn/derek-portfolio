@@ -7,7 +7,7 @@
   var EMAIL = 'd3r3kn@gmail.com';
   var WORK = [
     ['technical-projects', 'technical-projects.html', 'Technical Projects', 'Data and software projects, built end to end'],
-    ['data-analysis', 'data-analysis.html', 'Data Analysis', 'Interactive Medicaid spending charts, with methods'],
+    ['data', 'data.html', 'Data Analysis', 'Explorations of public data: Medicaid spending and automaker trends'],
     ['freelance', 'freelance.html', 'Freelance', 'Independent client work since July 2025'],
     ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work']
   ];
@@ -16,7 +16,10 @@
   if (!host) return;
   var base = host.getAttribute('data-base') || '';
   var page = document.body.getAttribute('data-page') || '';
-  var inWork = WORK.some(function (w) { return w[0] === page; });
+  /* exploration pages live under Data Analysis and highlight it */
+  var PARENT = { 'data-analysis': 'data', 'brand-race': 'data' };
+  var section = PARENT[page] || page;
+  var inWork = WORK.some(function (w) { return w[0] === section; });
 
   function el(tag, attrs, children) {
     var e = document.createElement(tag);
@@ -36,7 +39,11 @@
     s.appendChild(p);
     return s;
   }
-  function current(a, key) { if (key === page) { a.className += ' on'; a.setAttribute('aria-current', 'page'); } return a; }
+  function current(a, key) {
+    if (key === page) { a.className += ' on'; a.setAttribute('aria-current', 'page'); }
+    else if (key === section) a.className += ' on';
+    return a;
+  }
 
   /* desktop bar */
   var panel = el('div', { 'class': 'sn-panel', id: 'sn-work' }, WORK.map(function (w) {

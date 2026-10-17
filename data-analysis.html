@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Data Analysis, Derek Nye</title>
+<title>Medicaid Provider Spending, Derek Nye</title>
 <meta name="description" content="An interactive look at public HHS Medicaid provider spending data, 2018 to 2024: how it was prepared, what it shows, and its limits.">
 <link rel="canonical" href="https://dereknye.com/data-analysis">
 <meta property="og:type" content="article">
@@ -16,7 +16,7 @@
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Chart of monthly Medicaid provider spending rising from 2018 to 2024, with the $1.52 trillion total.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="styles.css?v=20261003">
+<link rel="stylesheet" href="styles.css?v=20261017">
 <style>
 /* Chart tokens. Data colors are the validated dark categorical steps, checked against --surface (#141417). */
 :root{
@@ -161,16 +161,17 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 </head>
 <body data-page="data-analysis">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261003"></script>
+<script src="site-nav.js?v=20261017"></script>
 <div class="wrap">
 
   <header>
-    <h1>Data Analysis</h1>
+  <p class="crumb"><a href="data.html">← Data Analysis</a></p>
+    <h1>Medicaid Provider Spending</h1>
     <p class="tag">An interactive look at public Medicaid provider spending data, 2018 to 2024.</p>
   </header>
 
   <section>
-    <h2>Medicaid Provider Spending</h2>
+    <h2>Why This Data</h2>
     <p class="lede">As a nurse, I've worked at the front line of healthcare, where care is actually delivered. This dataset was a chance to see one of the system's most important parts from the other side: how Medicaid pays for that care, and where the money goes.</p>
     <p class="lede">Medicaid is one of the largest parts of the U.S. healthcare system. Together with CHIP, it covered about <b>73 million people</b> in June 2026, nearly half of them children,<sup><a href="#src-2" aria-label="Source 2">2</a></sup> and in 2024 Medicaid spending reached <b>$931.7 billion</b>, about 18% of all U.S. health spending.<sup><a href="#src-3" aria-label="Source 3">3</a></sup></p>
     <p class="lede">The charts below show what the public data says, as plainly as possible: how much was paid, for what services, to whom, and how that changed over time. How the data was prepared, how the numbers were checked, and what the data can't tell us are all covered further down.</p>
