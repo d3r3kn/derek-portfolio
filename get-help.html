@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computer and AI Help, Derek Nye</title>
+<meta name="description" content="Patient, one-on-one help getting comfortable with your computer and with AI, for individuals and small businesses. Based in Middle Tennessee.">
+<link rel="canonical" href="https://dereknye.com/get-help">
+<link rel="stylesheet" href="styles.css?v=20261017">
+<style>
+/* Field Notebook theme. Fonts are self-hosted from /fonts when present; until then, close system fallbacks. */
+@font-face{font-family:"Fraunces";src:url("fonts/fraunces-var.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Fraunces";src:url("fonts/fraunces-var-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url("fonts/source-sans-3-var.woff2") format("woff2");font-weight:200 900;font-display:swap}
+body.theme-notebook{
+  --bg:#f6f3ec;--panel:#fffdf8;--line:#e3dccd;--ink:#1f1d1a;--dim:#5a554c;--accent:#2f5d50;--clay:#9a5b2e;
+  background:var(--bg);color:var(--ink);
+  font:18px/1.6 "Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+.theme-notebook .serif,.theme-notebook h1,.theme-notebook h2,.theme-notebook h3{font-family:"Fraunces",Georgia,"Times New Roman",serif}
+/* shared nav, recolored for the light theme */
+.theme-notebook .sn-bar{background:rgba(246,243,236,.9);border-bottom-color:var(--line)}
+.theme-notebook .sn-brand{font-family:"Fraunces",Georgia,serif;font-size:20px}
+.theme-notebook .sn-link,.theme-notebook .sn-work-btn{color:var(--dim);font-size:15.5px}
+.theme-notebook .sn-link:hover,.theme-notebook .sn-work-btn:hover,.theme-notebook .sn-dd.open .sn-work-btn{color:var(--ink)}
+.theme-notebook .sn-panel{background:var(--panel);box-shadow:0 18px 40px rgba(31,29,26,.12)}
+.theme-notebook .sn-item:hover,.theme-notebook .sn-item:focus-visible{background:#f3eee3}
+.theme-notebook .sn-item.on{background:#f3eee3}
+.theme-notebook .sn-contact{color:#fff;background:var(--accent);border-color:var(--accent)}
+.theme-notebook .sn-contact:hover{background:#264c42}
+.theme-notebook .sn-contact.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+.theme-notebook .sn-overlay{background:var(--bg)}
+.theme-notebook .sn-menu-btn{color:var(--ink)}
+
+.gh-hero{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center;padding:56px 0 64px}
+@media (max-width:860px){.gh-hero{grid-template-columns:1fr;gap:28px;padding:32px 0 44px}}
+.kicker{font:italic 500 16px "Fraunces",Georgia,serif;color:var(--clay);margin:0 0 14px}
+.gh-hero h1{font-size:clamp(40px,5.4vw,64px);line-height:1.05;letter-spacing:-.02em;margin:0 0 20px;font-weight:650}
+.gh-hero h1 em{color:var(--accent)}
+.lede{font-size:20px;color:var(--dim);margin:0 0 28px;max-width:46ch}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font:600 18px/1 "Source Sans 3","Segoe UI",system-ui,sans-serif;padding:16px 24px;border-radius:6px;border:0;cursor:pointer}
+.btn:hover{background:#264c42}
+.btn:focus-visible,.theme-notebook a:focus-visible,.theme-notebook input:focus-visible,.theme-notebook textarea:focus-visible,.theme-notebook select:focus-visible{outline:3px solid #c98a3d;outline-offset:2px}
+.cta-note{display:block;margin-top:12px;font-size:15.5px;color:var(--dim)}
+.photo{justify-self:end;width:100%;max-width:400px}
+.photo img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;box-shadow:14px 14px 0 #ddd3bf}
+/* phones: a small round photo above the headline instead of a large square below it */
+@media (max-width:860px){.photo{order:-1;justify-self:start;width:96px;max-width:96px}.photo img{width:96px;height:96px;border-radius:50%;box-shadow:none}}
+
+.gh-sec{padding:40px 0 24px}
+.gh-sec>h2{font-size:clamp(28px,3.4vw,38px);font-weight:650;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 8px}
+.gh-sec>p.sub{color:var(--dim);margin:0 0 28px;max-width:60ch}
+.offers{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media (max-width:860px){.offers{grid-template-columns:1fr}}
+.offer{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:26px;display:flex;flex-direction:column}
+.offer h3{font-size:24px;font-weight:650;margin:0 0 8px}
+.offer p{color:var(--dim);margin:0 0 18px}
+.offer .price{margin:auto 0 0;color:var(--ink);font-size:16.5px}
+.offer .price b{color:var(--accent);font-size:20px}
+.offer .price span{display:block;color:var(--dim);font-size:15px;margin-top:2px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:860px){.steps{grid-template-columns:1fr;gap:18px}}
+.step{border-top:2px solid var(--ink);padding-top:14px;color:var(--dim)}
+.step b{display:block;font:650 21px "Fraunces",Georgia,serif;color:var(--ink);margin-bottom:6px}
+.promises{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;list-style:none;margin:0;padding:0}
+@media (max-width:860px){.promises{grid-template-columns:1fr}}
+.promises li{position:relative;padding-left:34px;color:var(--dim)}
+.promises li b{color:var(--ink)}
+.promises li::before{content:"";position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:20px}}
+.about p{margin:0 0 16px;max-width:58ch}
+.creds{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:22px 24px;margin:0;font-size:16.5px}
+.creds dt{font-weight:600;color:var(--ink)}
+.creds dd{margin:2px 0 14px;color:var(--dim)}
+.creds dd:last-child{margin-bottom:0}
+.theme-notebook main a:not(.btn){color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+
+/* questionnaire */
+.form-wrap{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:32px;max-width:760px}
+@media (max-width:640px){.form-wrap{padding:22px 18px}}
+.privacy{background:#eef3ef;border-radius:4px;padding:16px 18px;margin:0 0 28px;font-size:16.5px;color:#26443b}
+.privacy b{color:#1d3a31}
+fieldset{border:0;margin:0 0 26px;padding:0}
+legend,.q{display:block;font:650 20px/1.3 "Fraunces",Georgia,serif;color:var(--ink);margin:0 0 4px;padding:0}
+.hint{display:block;font-size:15.5px;color:var(--dim);margin:0 0 12px}
+.opt{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:0 0 8px;cursor:pointer;font-size:17px}
+.opt:hover{border-color:#c9bfa9}
+.opt input{width:20px;height:20px;margin:0;accent-color:var(--accent);flex:none}
+.opt:has(input:checked){border-color:var(--accent);background:#f3f7f4}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.scale .opt{flex-direction:column;gap:6px;text-align:center;padding:12px 6px;font-size:15px}
+.scale .opt b{font:650 20px "Fraunces",Georgia,serif}
+.scale-ends{display:flex;justify-content:space-between;font-size:14.5px;color:var(--dim);margin-top:6px}
+label.field{display:block;margin:0 0 18px}
+label.field .q{font-size:18px}
+input[type=text],input[type=email],input[type=tel],textarea,select{display:block;width:100%;font:inherit;font-size:17px;color:var(--ink);background:#fff;border:1px solid #cfc6b3;border-radius:6px;padding:12px 14px;margin-top:6px}
+textarea{min-height:110px;resize:vertical}
+.optional{font:400 15px "Source Sans 3","Segoe UI",system-ui,sans-serif;color:var(--dim)}
+.biz[hidden]{display:none}
+.form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:8px}
+.form-status{font-size:16px;color:var(--dim)}
+.form-status.err{color:#9b2c1f}
+.done{display:none}
+.done.show{display:block}
+.done h3{font-size:28px;margin:0 0 8px}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.updated{font-size:14.5px;color:var(--dim);margin:40px 0 0}
+.theme-notebook footer{border-top-color:var(--line);color:var(--dim)}
+</style>
+</head>
+<body data-page="get-help" class="theme-notebook">
+<div id="site-nav"></div>
+<script src="site-nav.js?v=20261018"></script>
+<div class="wrap">
+<main>
+
+  <section class="gh-hero">
+    <div>
+      <p class="kicker">Computer and AI help, one person at a time · Based in Middle Tennessee</p>
+      <h1>Technology doesn't have to feel <em>intimidating</em>.</h1>
+      <p class="lede">I help people, creators, and small businesses get comfortable with their computers and with AI: what it can actually do, what's safe to share, and how to keep going on your own.</p>
+      <a class="btn" href="#start">Start the questionnaire</a>
+      <span class="cta-note">About 3 minutes. No commitment.</span>
+    </div>
+    <div class="photo"><img src="img/derek-nye.jpg" alt="Derek Nye, smiling, outdoors" width="800" height="800"></div>
+  </section>
+
+  <section class="gh-sec" aria-labelledby="offers-h">
+    <h2 id="offers-h">How I can help</h2>
+    <p class="sub">Every session works on your own computer or phone, by phone or video call, at your pace.</p>
+    <div class="offers">
+      <div class="offer">
+        <h3>Getting started</h3>
+        <p>For anyone who feels behind. Your computer or phone, email, files, and staying safe online, explained clearly.</p>
+        <p class="price"><b>$60</b> per one-hour session<span>or 3 sessions for $165</span></p>
+      </div>
+      <div class="offer">
+        <h3>AI, without the anxiety</h3>
+        <p>What AI tools actually do, what's safe to share with them, and how to use them for everyday tasks you already have.</p>
+        <p class="price"><b>$60</b> per one-hour session<span>or 3 sessions for $165</span></p>
+      </div>
+      <div class="offer">
+        <h3>AI for creators</h3>
+        <p>Use AI for video, images, and audio in your own projects: what each tool is good at, how to get usable results, and how to finish the work yourself. <a href="content-production.html">See my creative work</a>.</p>
+        <p class="price"><b>$60</b> per one-hour session<span>or 3 sessions for $165</span></p>
+      </div>
+      <div class="offer">
+        <h3>For small businesses</h3>
+        <p>Find where AI can save your team time, set it up safely, and train your staff to use it without you depending on me.</p>
+        <p class="price"><b>$125</b> per one-hour session<span>or 3 sessions for $345</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gh-sec" aria-labelledby="how-h">
+    <h2 id="how-h">How it works</h2>
+    <p class="sub">No sales pitch. You decide after the first conversation whether this is a fit.</p>
+    <div class="steps">
+      <div class="step"><b>1. Tell me where you're stuck</b>A short questionnaire, so our first conversation starts with what matters to you.</div>
+      <div class="step"><b>2. A free 20-minute intro call</b>By phone or video. We agree on a plan and what it would cost before anything is booked.</div>
+      <div class="step"><b>3. Learn it, then own it</b>Sessions built around your goals, so you can keep going without me.</div>
+    </div>
+  </section>
+
+  <section class="gh-sec" aria-labelledby="promise-h">
+    <h2 id="promise-h">What you can count on</h2>
+    <p class="sub">Privacy is the biggest worry people have about technology and AI. Here's exactly how I handle it.</p>
+    <ul class="promises">
+      <li><b>I'll never ask for your passwords.</b> You type them yourself, and we pause screen sharing while you do.</li>
+      <li><b>I never take control of your computer.</b> I guide, you click, so nothing changes without you seeing it.</li>
+      <li><b>We go over what's safe to share with AI first,</b> before we use any AI tool together.</li>
+      <li><b>Your answers are stored privately in my own account.</b> They're never shared or sold, and I'll delete them whenever you ask.</li>
+      <li><b>I'll never contact you out of the blue.</b> You reach out first.</li>
+      <li><b>I'll never ask you to pay by gift card, wire transfer, or cryptocurrency.</b></li>
+    </ul>
+  </section>
+
+  <section class="gh-sec" aria-labelledby="about-h">
+    <h2 id="about-h">About me</h2>
+    <div class="about">
+      <div>
+        <p>I'm Derek. Ask me anything about your computer or AI. You'll get a straight, accurate answer with no judgment, so you can get more done and make more of what you want.</p>
+      </div>
+      <dl class="creds">
+        <dt>Registered Nurse, Tennessee</dt>
+        <dd>License status is public: <a href="https://internet.health.tn.gov/Licensure/" target="_blank" rel="noopener">verify with the Tennessee Department of Health</a></dd>
+        <dt>MS, Data Science · MBA</dt>
+        <dd>Eastern University</dd>
+        <dt>My work</dt>
+        <dd>See my <a href="data-analysis.html">analysis of public Medicaid data</a>, checked against HHS's own figures</dd>
+        <dt>Based in Middle Tennessee</dt>
+        <dd>Sessions by phone or video call, on Windows or Mac</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="gh-sec" id="start" aria-labelledby="start-h">
+    <h2 id="start-h">Start here</h2>
+    <p class="sub">A few questions so I can prepare. I'll reply by email to set up your free intro call.</p>
+    <div class="form-wrap">
+      <form id="intake" novalidate>
+        <p class="privacy"><b>Please don't include passwords, health, or financial information.</b> Your answers are stored privately in my own account and used only to prepare for our conversation. They aren't shared or sold, and you can ask me to delete them at any time.</p>
+
+        <fieldset>
+          <legend>Who is this help for?</legend>
+          <span class="hint">Choose one.</span>
+          <div class="grid2">
+            <label class="opt"><input type="radio" name="for_whom" value="me" required> Me</label>
+            <label class="opt"><input type="radio" name="for_whom" value="family"> A family member</label>
+            <label class="opt"><input type="radio" name="for_whom" value="business"> My business</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="biz" id="biz" hidden>
+          <legend>About your business</legend>
+          <span class="hint">So I can come prepared with relevant examples.</span>
+          <label class="field"><span class="q">What kind of business is it?</span><input type="text" name="biz_type" maxlength="120" placeholder="For example: dental office, landscaping, retail shop"></label>
+          <label class="field"><span class="q">How many people work there?</span>
+            <select name="biz_size"><option value="">Choose one</option><option>Just me</option><option>2 to 4</option><option>5 to 9</option><option>10 to 19</option><option>20 or more</option></select></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>What would you like help with?</legend>
+          <span class="hint">Choose any that apply.</span>
+          <label class="opt"><input type="checkbox" name="topics" value="devices"> Using my computer or phone</label>
+          <label class="opt"><input type="checkbox" name="topics" value="safety"> Staying safe online and avoiding scams</label>
+          <label class="opt"><input type="checkbox" name="topics" value="ai_basics"> Understanding what AI is</label>
+          <label class="opt"><input type="checkbox" name="topics" value="ai_everyday"> Using AI for everyday tasks</label>
+          <label class="opt"><input type="checkbox" name="topics" value="ai_creative"> Using AI for video, images, or audio</label>
+          <label class="opt"><input type="checkbox" name="topics" value="ai_build"> Building something with AI</label>
+          <label class="opt"><input type="checkbox" name="topics" value="ai_business"> Using AI in my business</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>What do you use?</legend>
+          <span class="hint">Choose any that apply.</span>
+          <div class="grid2">
+            <label class="opt"><input type="checkbox" name="devices" value="windows"> Windows PC</label>
+            <label class="opt"><input type="checkbox" name="devices" value="mac"> Mac</label>
+            <label class="opt"><input type="checkbox" name="devices" value="iphone"> iPhone</label>
+            <label class="opt"><input type="checkbox" name="devices" value="android"> Android phone</label>
+            <label class="opt"><input type="checkbox" name="devices" value="tablet"> iPad or tablet</label>
+            <label class="opt"><input type="checkbox" name="devices" value="unsure"> Not sure</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>How comfortable do you feel with technology today?</legend>
+          <span class="hint">There's no wrong answer. This just helps me start in the right place.</span>
+          <div class="scale">
+            <label class="opt"><input type="radio" name="comfort" value="1"><b>1</b></label>
+            <label class="opt"><input type="radio" name="comfort" value="2"><b>2</b></label>
+            <label class="opt"><input type="radio" name="comfort" value="3"><b>3</b></label>
+            <label class="opt"><input type="radio" name="comfort" value="4"><b>4</b></label>
+            <label class="opt"><input type="radio" name="comfort" value="5"><b>5</b></label>
+          </div>
+          <div class="scale-ends"><span>Very uneasy</span><span>Very confident</span></div>
+        </fieldset>
+
+        <label class="field"><span class="q">If you could do one thing with technology tomorrow, what would it be? <span class="optional">(optional)</span></span>
+          <textarea name="goal" maxlength="800" placeholder="In your own words"></textarea></label>
+
+        <fieldset>
+          <legend>How would you like to meet?</legend>
+          <div class="grid2">
+            <label class="opt"><input type="radio" name="meet" value="phone"> Phone call</label>
+            <label class="opt"><input type="radio" name="meet" value="video"> Video call</label>
+            <label class="opt"><input type="radio" name="meet" value="any"> No preference</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>How did you hear about me?</legend>
+          <select name="source" aria-label="How did you hear about me?">
+            <option value="">Choose one</option><option value="friend_family">Friend or family</option><option value="talk_event">A talk or event</option>
+            <option value="google">Google</option><option value="facebook">Facebook</option><option value="instagram_tiktok">Instagram or TikTok</option><option value="linkedin">LinkedIn</option><option value="other">Other</option>
+          </select>
+        </fieldset>
+
+        <label class="field"><span class="q">Your name</span><input type="text" name="name" maxlength="80" autocomplete="name" required></label>
+        <label class="field"><span class="q">Your email</span><span class="hint">So I can reply to you.</span><input type="email" name="email" maxlength="120" autocomplete="email" required></label>
+        <label class="field"><span class="q">Phone <span class="optional">(optional)</span></span><span class="hint">Only if you'd rather I call.</span><input type="tel" name="phone" maxlength="30" autocomplete="tel"></label>
+        <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">Send my answers</button>
+          <span class="form-status" id="form-status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+      <div class="done" id="done" tabindex="-1">
+        <h3>Thank you. I've got your answers.</h3>
+        <p>I'll email you within two business days to set up your free 20-minute intro call. If you'd like your answers deleted at any point, just reply and ask.</p>
+      </div>
+    </div>
+    <p class="updated">Last updated October 17, 2026</p>
+  </section>
+
+</main>
+<footer>&copy; 2026 Derek Nye &middot; d3r3kn@gmail.com</footer>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var form=document.getElementById('intake'),status=document.getElementById('form-status'),biz=document.getElementById('biz'),started=Date.now();
+  form.addEventListener('change',function(e){ if(e.target.name==='for_whom') biz.hidden=e.target.value!=='business'; });
+  function say(msg,err){status.textContent=msg;status.className='form-status'+(err?' err':'');}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var fd=new FormData(form);
+    if(!fd.get('for_whom')) return say('Please choose who this help is for.',true);
+    if(!String(fd.get('name')||'').trim()) return say('Please add your name.',true);
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(fd.get('email')||'').trim())) return say('Please check your email address.',true);
+    var data={};
+    fd.forEach(function(v,k){ v=String(v).trim(); if(k==='topics'||k==='devices'){(data[k]=data[k]||[]).push(v);} else data[k]=v; });
+    data.started_at=started;
+    var btn=form.querySelector('button[type=submit]'); btn.disabled=true; say('Sending...');
+    fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); form.style.display='none'; var d=document.getElementById('done'); d.classList.add('show'); d.focus(); })
+      .catch(function(){ btn.disabled=false; say('Sorry, that didn\'t go through. Please try again, or email d3r3kn@gmail.com.',true); });
+  });
+})();
+</script>
+</body>
+</html>
