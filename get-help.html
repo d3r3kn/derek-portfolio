@@ -44,7 +44,8 @@ body.theme-notebook{
 .cta-note{display:block;margin-top:12px;font-size:15.5px;color:var(--dim)}
 .photo{justify-self:end;width:100%;max-width:400px}
 .photo img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;box-shadow:14px 14px 0 #ddd3bf}
-@media (max-width:860px){.photo{justify-self:start;max-width:280px}}
+/* phones: a small round photo above the headline instead of a large square below it */
+@media (max-width:860px){.photo{order:-1;justify-self:start;width:96px;max-width:96px}.photo img{width:96px;height:96px;border-radius:50%;box-shadow:none}}
 
 .gh-sec{padding:40px 0 24px}
 .gh-sec>h2{font-size:clamp(28px,3.4vw,38px);font-weight:650;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 8px}
