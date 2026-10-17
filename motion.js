@@ -6,9 +6,9 @@
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   document.documentElement.classList.add('motion');
 
-  var BLOCKS='.help-strip,.hub a,.ex-card,.role,.grid figure,.note,.empty,.card,.kpis,.verified,.srcbox,.pipe,.checks,'+
+  var BLOCKS='.help-strip,.feat,.facts,.more a,.hub a,.ex-card,.role,.grid figure,.note,.empty,.card,.kpis,.verified,.srcbox,.pipe,.checks,'+
              '.offer,.step,.promises,.about,.form-wrap,.resume-section';
-  var CHARTS='.card,.kpis,.ex-stats';
+  var CHARTS='.card,.kpis,.ex-stats,.feat';
   var NUMBERS='.k-value,.ex-stat b';
   var EASE='cubic-bezier(.2,.7,.2,1)';
 
