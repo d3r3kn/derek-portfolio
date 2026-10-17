@@ -3,46 +3,194 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Derek Nye, Editor and Motion</title>
-<link rel="stylesheet" href="styles.css?v=20261017">
+<title>Derek Nye, Data, AI, and Computer Help</title>
+<meta name="description" content="Derek Nye: clear, checked charts from public data, working tools built with AI, and patient one-on-one computer and AI help. Based in Middle Tennessee.">
+<link rel="stylesheet" href="styles.css?v=20261022">
+<style>
+/* Home page */
+.home-hero{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:64px 0 36px}
+.home-hero .kicker{font:italic 500 16px var(--serif);color:var(--clay);margin:0 0 12px}
+.home-hero h1{margin:0 0 16px}
+.home-hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--dim);max-width:52ch;margin:0 0 28px}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:17px;line-height:1;padding:15px 22px;border-radius:6px}
+.btn:hover{background:#264c42}
+.btn:focus-visible,.text-link:focus-visible,.feat:focus-visible{outline:3px solid #c98a3d;outline-offset:2px}
+.text-link{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.me{width:200px;height:200px;object-fit:cover;border-radius:4px;box-shadow:12px 12px 0 #ddd3bf;display:block}
+@media (max-width:760px){
+  .home-hero{grid-template-columns:1fr;gap:20px;padding:32px 0 28px}
+  .me{order:-1;width:88px;height:88px;border-radius:50%;box-shadow:none}
+}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:4px 20px;border-left:1px solid var(--line)}
+.facts div:first-child{padding-left:0;border-left:0}
+.facts dt{font-weight:600;color:var(--ink);font-size:16px}
+.facts dd{margin:2px 0 0;color:var(--dim);font-size:14.5px}
+.facts a{color:inherit;text-decoration:underline;text-decoration-color:#c9bfa9;text-underline-offset:3px}
+@media (max-width:860px){.facts{grid-template-columns:1fr 1fr;gap:14px 0}.facts div:nth-child(3){padding-left:0;border-left:0}}
+
+.home-sec{padding:56px 0 0}
+.home-sec>h2{font:650 clamp(26px,3vw,34px)/1.2 var(--serif);text-transform:none;letter-spacing:-.01em;color:var(--ink);margin:0 0 6px}
+.home-sec>.sub{color:var(--dim);margin:0 0 24px;max-width:62ch}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:960px){.feats{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.feats{grid-template-columns:1fr}}
+.feat{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;text-decoration:none;color:var(--ink)}
+.feat:hover{border-color:var(--accent);box-shadow:0 10px 28px rgba(31,29,26,.08)}
+.feat .viz{height:170px;background:#f6f3ec;border-bottom:1px solid var(--line);position:relative}
+.feat .viz svg{display:block;width:100%;height:100%}
+.feat .viz img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.feat .body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.feat .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 8px}
+.feat .t{font:650 21px/1.25 var(--serif);margin:0 0 8px}
+.feat .d{font-size:15px;color:var(--dim);margin:0 0 16px}
+.feat .go{margin-top:auto;font-weight:600;font-size:15px;color:var(--accent)}
+.feat .go::after{content:" \2192"}
+.viz .vl{font-size:12px;fill:var(--dim);font-variant-numeric:tabular-nums}
+.viz .vv{font-size:13px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+
+.home .help-strip{margin-top:48px}
+.more{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:860px){.more{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.more{grid-template-columns:1fr}}
+.more a{display:block;padding:16px 18px;border:1px solid var(--line);border-radius:6px;background:var(--panel);text-decoration:none;color:var(--ink)}
+.more a:hover{border-color:var(--accent)}
+.more b{display:block;font:650 18px var(--serif)}
+.more span{display:block;font-size:14px;color:var(--dim);margin-top:2px}
+</style>
 </head>
-<body data-page="home">
+<body data-page="home" class="home">
 <div id="site-nav"></div>
 <script src="site-nav.js?v=20261018"></script>
+<script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
-  <header>
-    <h1>Derek Nye</h1>
-    <p class="tag">Background in data science and organizational management.<br>Video editing and AI-driven motion work on the side.</p>
+  <header class="home-hero">
+    <div>
+      <p class="kicker">Data, AI, and healthcare &middot; Based in Middle Tennessee</p>
+      <h1>Derek Nye</h1>
+      <p class="lede">I turn public data into clear, checked charts, build working tools with AI, and help people get comfortable with their computers.</p>
+      <div class="cta-row">
+        <a class="btn" href="#work">See my work</a>
+        <a class="text-link" href="get-help.html">Need computer or AI help?</a>
+      </div>
+    </div>
+    <img class="me" src="img/derek-nye.jpg" width="800" height="800" alt="Derek Nye">
   </header>
 
-  <section class="hub-section">
-    <div class="hub">
-      <a href="resume.html">
-        <p class="ht">Resume</p>
-        <p class="hd">Experience, tools I've built, and skills.</p>
+  <dl class="facts">
+    <div><dt>Registered Nurse</dt><dd><a href="https://internet.health.tn.gov/Licensure/" rel="noopener">Tennessee, verify my license</a></dd></div>
+    <div><dt>MS, Data Science</dt><dd>Eastern University</dd></div>
+    <div><dt>MBA</dt><dd>Eastern University</dd></div>
+    <div><dt>Windows and Mac</dt><dd>Phone or video help</dd></div>
+  </dl>
+
+  <section class="home-sec" id="work">
+    <h2>Featured work</h2>
+    <p class="sub">Each data exploration shows its sources, how the data was prepared, and how the numbers were checked.</p>
+    <div class="feats">
+      <a class="feat" href="data-analysis.html">
+        <div class="viz" id="viz-medicaid" aria-hidden="true"></div>
+        <div class="body">
+          <p class="k">HHS &middot; Medicaid</p>
+          <p class="t">Where <span data-fill="mTotal">$1.52 trillion</span> in Medicaid payments went</p>
+          <p class="d">Spending over time, the top services and providers, and who bills versus who delivers care. Matches HHS's own published charts to the cent.</p>
+          <span class="go">Explore the charts</span>
+        </div>
       </a>
-      <a href="technical-projects.html">
-        <p class="ht">Technical Projects</p>
-        <p class="hd">Selected data and software projects, built end to end.</p>
+      <a class="feat" href="brand-race.html">
+        <div class="viz" id="viz-brand" aria-hidden="true"></div>
+        <div class="body">
+          <p class="k">EPA &middot; Automotive Trends</p>
+          <p class="t">45 years of the automaker race</p>
+          <p class="d">How 14 automakers' new vehicles changed on 0&ndash;60 time, horsepower, and real-world fuel economy, ranked decade by decade.</p>
+          <span class="go">Explore the charts</span>
+        </div>
       </a>
-      <a href="data.html">
-        <p class="ht">Data Analysis</p>
-        <p class="hd">Interactive explorations of public data: Medicaid provider spending and 45 years of automaker performance, with sources and methods.</p>
+      <a class="feat" href="content-production.html">
+        <div class="viz"><img src="posters/noir-trailer.jpg" width="768" height="1168" alt="Still from an AI-generated noir trailer" loading="lazy"></div>
+        <div class="body">
+          <p class="k">Creative</p>
+          <p class="t">AI video, 3D, and compositing</p>
+          <p class="d">Original AI-generated video, Blender scenes, and edits, each directed and finished by hand.</p>
+          <span class="go">See the creative work</span>
+        </div>
       </a>
-      <a href="freelance.html">
-        <p class="ht">Freelance</p>
-        <p class="hd">Self-directed client work and content production since July 2025.</p>
-      </a>
-      <a href="content-production.html">
-        <p class="ht">Creative</p>
-        <p class="hd">Client editing and compositing work, plus original AI-generated video, 3D, and image pieces.</p>
-      </a>
+    </div>
+  </section>
+
+  <a class="help-strip" href="get-help.html">
+    <span class="hs-text"><b>Need help with your computer or AI?</b> One-on-one help by phone or video, at your pace.</span>
+    <span class="hs-go">Get help</span>
+  </a>
+
+  <section class="home-sec">
+    <h2>More</h2>
+    <div class="more">
+      <a href="resume.html"><b>Resume</b><span>Experience, tools I've built, and skills</span></a>
+      <a href="technical-projects.html"><b>Technical Projects</b><span>Data and software projects, built end to end</span></a>
+      <a href="data.html"><b>Data Analysis</b><span>All data explorations</span></a>
+      <a href="freelance.html"><b>Freelance</b><span>Independent client work since July 2025</span></a>
     </div>
   </section>
 
   <footer>&copy; 2026 Derek Nye &middot; d3r3kn@gmail.com</footer>
 
 </div>
+
+<script>
+/* The two small charts are drawn from each exploration's verified summary data. */
+(function(){
+  'use strict';
+  var NS='http://www.w3.org/2000/svg';
+  function E(tag,at,parent){var e=document.createElementNS(NS,tag);for(var k in at)e.setAttribute(k,at[k]);if(parent)parent.appendChild(e);return e;}
+  function T(parent,x,y,txt,cls,anchor){var t=E('text',{x:x,y:y,'class':cls,'text-anchor':anchor||'start'},parent);t.textContent=txt;return t;}
+  function frame(el){var w=el.clientWidth||320,h=el.clientHeight||170;return {w:w,h:h,svg:E('svg',{viewBox:'0 0 '+w+' '+h},el)};}
+
+  // Medicaid: monthly provider payments, Jan 2018 to Oct 2024 (Nov and Dec 2024 are still incomplete)
+  function medicaid(s){
+    var el=document.getElementById('viz-medicaid');if(!el)return;el.textContent='';
+    var d=s.monthly.filter(function(m){return m.month<='2024-10';}),f=frame(el),L=16,R=16,Tp=30,B=26;
+    var max=Math.max.apply(null,d.map(function(m){return m.paid;}));
+    var X=function(i){return L+i*(f.w-L-R)/(d.length-1);},Y=function(v){return Tp+(1-v/max)*(f.h-Tp-B);};
+    E('line',{x1:L,x2:f.w-R,y1:f.h-B,y2:f.h-B,stroke:'var(--line)','stroke-width':1},f.svg);
+    var pts=d.map(function(m,i){return X(i)+','+Y(m.paid);});
+    E('polygon',{points:X(0)+','+(f.h-B)+' '+pts.join(' ')+' '+X(d.length-1)+','+(f.h-B),fill:'#2563b8','fill-opacity':.08},f.svg);
+    E('polyline',{points:pts.join(' '),fill:'none',stroke:'#2563b8','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},f.svg);
+    var last=d[d.length-1];E('circle',{cx:X(d.length-1),cy:Y(last.paid),r:3.5,fill:'#2563b8'},f.svg);
+    T(f.svg,L,18,'Paid to providers per month','vl');
+    T(f.svg,f.w-R,Y(last.paid)-10,'$'+(last.paid/1e9).toFixed(1)+'B','vv','end');
+    T(f.svg,L,f.h-8,'Jan 2018','vl');T(f.svg,f.w-R,f.h-8,'Oct 2024','vl','end');
+  }
+
+  // Brand Race: industry-average 0-60 time at each snapshot (2025 is preliminary, drawn hollow)
+  function brand(s){
+    var el=document.getElementById('viz-brand');if(!el)return;el.textContent='';
+    var d=s.industry.filter(function(r){return r.view==='all';}).sort(function(a,b){return a.year-b.year;});
+    var f=frame(el),L=20,R=56,Tp=30,B=26,ys=d.map(function(r){return r.zero60;});
+    var max=Math.ceil(Math.max.apply(null,ys)),min=Math.floor(Math.min.apply(null,ys))-1;
+    var X=function(y){return L+(y-1980)/(2025-1980)*(f.w-L-R);},Y=function(v){return Tp+(1-(v-min)/(max-min))*(f.h-Tp-B);};
+    E('line',{x1:L,x2:f.w-R,y1:f.h-B,y2:f.h-B,stroke:'var(--line)','stroke-width':1},f.svg);
+    E('polyline',{points:d.map(function(r){return X(r.year)+','+Y(r.zero60);}).join(' '),fill:'none',stroke:'#c2531c','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},f.svg);
+    d.forEach(function(r){E('circle',{cx:X(r.year),cy:Y(r.zero60),r:3.5,fill:r.preliminary?'var(--panel)':'#c2531c',stroke:'#c2531c','stroke-width':1.5},f.svg);});
+    var a=d[0],b=d[d.length-1];
+    T(f.svg,L,18,'Average 0–60 time, all new vehicles','vl');
+    T(f.svg,X(a.year)+8,Y(a.zero60)+4,a.zero60.toFixed(1)+'s','vv');
+    T(f.svg,X(b.year)+8,Y(b.zero60)+4,b.zero60.toFixed(1)+'s','vv');
+    T(f.svg,L,f.h-8,'1980','vl');T(f.svg,f.w-R,f.h-8,'2025 (prelim.)','vl','end');
+  }
+
+  var data={};
+  function drawAll(){if(data.m)medicaid(data.m);if(data.b)brand(data.b);}
+  fetch('data/medicaid/summary.json').then(function(r){return r.json();}).then(function(s){
+    data.m=s;medicaid(s);
+    document.querySelectorAll('[data-fill="mTotal"]').forEach(function(e){e.textContent='$'+(s.quality.paid/1e12).toFixed(2)+' trillion';});
+  }).catch(function(){});
+  fetch('data/brand-race/summary.json').then(function(r){return r.json();}).then(function(s){data.b=s;brand(s);}).catch(function(){});
+  var rt,lw=window.innerWidth;window.addEventListener('resize',function(){if(window.innerWidth===lw)return;lw=window.innerWidth;clearTimeout(rt);rt=setTimeout(drawAll,150);});
+})();
+</script>
 </body>
 </html>
