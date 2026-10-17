@@ -136,6 +136,23 @@
     </div>
 
     <div class="role shot">
+      <figure class="thumb"><a class="zoom" href="shots/full/ai-news-feed.png" aria-label="View Local AI News Feed screenshot at full size"><img src="shots/ai-news-feed.png" alt="Local AI news feed with rated stories and a system health panel" loading="lazy"></a></figure>
+      <div class="body">
+      <div class="role-head">
+        <span class="role-title">Local AI News Feed</span>
+      </div>
+      <p class="role-sub">Python, FastAPI, HTMX, SQLite, Ollama with Qwen models &middot; runs locally on Windows</p>
+      <p class="d">A personal news feed I use daily, started October 2026. It collects AI and tech news and uses a local AI model to sort and rate stories, with no cloud AI services.</p>
+      <ul>
+        <li>Checks 47 public news sources on a schedule and merges coverage of the same event into one story, using an embedding model to find matches and the local AI to confirm borderline ones.</li>
+        <li>Places each story in a section, labels it news or discussion, and rates it 1 to 5 stars with a one-sentence reason, learning from my up and down votes. Major stories trigger a desktop alert.</li>
+        <li>I chose the models by testing them: on 20 hand-labeled headlines, the 9B model sorted 17 correctly versus 9 for a 4B model, and duplicate detection matched my judgment on 17 of 18 pairs.</li>
+        <li>I defined the requirements and design and tested it through daily use. It was built with AI-assisted development using Claude Code, and 138 automated tests pass.</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="role shot">
       <figure class="thumb"><a class="zoom" href="shots/full/clipper.png" aria-label="View Video Clipping Tool screenshot at full size"><img src="shots/clipper.png" alt="Video Clipping Tool screenshot" loading="lazy"></a></figure>
       <div class="body">
       <div class="role-head">
