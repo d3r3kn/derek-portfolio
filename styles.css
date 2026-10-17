@@ -17,6 +17,11 @@ h1{font-size:clamp(38px,6vw,64px);line-height:1.02;margin:0 0 14px;letter-spacin
 .contact{margin-top:26px;font-size:15px;color:var(--dim)}
 .contact a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
 
+.crumb{margin:0 0 14px;font-size:14px}
+.crumb a{color:var(--dim);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.crumb a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
 /* Site navigation (built by site-nav.js) */
 [id]{scroll-margin-top:84px}
 .sn-bar{position:sticky;top:0;z-index:30;background:rgba(11,11,13,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}

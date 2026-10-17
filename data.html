@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Analysis, Derek Nye</title>
+<meta name="description" content="Interactive explorations of public datasets, each with its sources, preparation steps, checks, and limitations.">
+<link rel="canonical" href="https://dereknye.com/data">
+<link rel="stylesheet" href="styles.css?v=20261017">
+<style>
+.explore{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));margin-top:8px}
+.ex-card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px 26px 22px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.ex-card:hover,.ex-card:focus-visible{border-color:var(--accent)}
+.ex-card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ex-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 10px}
+.ex-title{font-size:22px;font-weight:650;letter-spacing:-.01em;margin:0 0 8px}
+.ex-desc{font-size:15px;color:var(--dim);margin:0 0 20px;max-width:56ch}
+.ex-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 20px}
+.ex-stat{background:#0f0f12;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.ex-stat b{display:block;font-size:24px;font-weight:650;letter-spacing:-.02em;line-height:1.15;min-height:1.15em}
+.ex-stat span{display:block;font-size:13px;color:var(--dim);margin-top:4px}
+.ex-meta{font-size:13px;color:var(--dim);margin:auto 0 14px}
+.ex-go{font-size:14.5px;font-weight:600;color:var(--ink)}
+.ex-go::after{content:" \2192";color:var(--accent)}
+@media (max-width:420px){.ex-card{padding:20px 18px 18px}.ex-stat b{font-size:20px}}
+</style>
+</head>
+<body data-page="data">
+<div id="site-nav"></div>
+<script src="site-nav.js?v=20261017"></script>
+<div class="wrap">
+
+  <header>
+    <h1>Data Analysis</h1>
+    <p class="tag">Explorations of public datasets. Each one shows what the data says, how it was prepared and checked, and what it can't tell us.</p>
+  </header>
+
+  <section class="hub-section">
+    <div class="explore">
+      <a class="ex-card" href="data-analysis.html">
+        <p class="ex-kicker">HHS &middot; Medicaid</p>
+        <p class="ex-title">Medicaid Provider Spending</p>
+        <p class="ex-desc">Where Medicaid's provider payments went from 2018 to 2024: spending over time, the top services and providers, and who bills versus who delivers the care.</p>
+        <div class="ex-stats">
+          <div class="ex-stat"><b data-fill="mTotal"></b><span>paid to providers</span></div>
+          <div class="ex-stat"><b>To the cent</b><span>match with HHS's own published charts</span></div>
+        </div>
+        <p class="ex-meta">Data: HHS Medicaid Provider Spending by HCPCS &middot; <span data-fill="mRows"></span> rows</p>
+        <span class="ex-go">Explore the charts</span>
+      </a>
+
+      <a class="ex-card" href="brand-race.html">
+        <p class="ex-kicker">EPA &middot; Automotive Trends</p>
+        <p class="ex-title">Brand Race</p>
+        <p class="ex-desc">How 14 automakers' new vehicles changed from 1980 to 2025 on 0–60 time, horsepower, and real-world fuel economy, ranked decade by decade.</p>
+        <div class="ex-stats">
+          <div class="ex-stat"><b data-fill="bZero60"></b><span>average 0–60 time, 1980 to 2025</span></div>
+          <div class="ex-stat"><b data-fill="bHp"></b><span>average horsepower, 1980 to 2025</span></div>
+        </div>
+        <p class="ex-meta">Data: EPA Automotive Trends Report &middot; <span data-fill="bBrands"></span> automakers</p>
+        <span class="ex-go">Explore the charts</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>&copy; 2026 Derek Nye &middot; d3r3kn@gmail.com</footer>
+</div>
+
+<script>
+/* Card numbers come from each exploration's verified summary data, not typed by hand. */
+(function(){
+  'use strict';
+  function fill(key,val){document.querySelectorAll('[data-fill="'+key+'"]').forEach(function(e){e.textContent=val;});}
+  fetch('data/medicaid/summary.json').then(function(r){return r.json();}).then(function(s){
+    fill('mTotal','$'+(s.quality.paid/1e12).toFixed(2)+' trillion');
+    fill('mRows',Math.round(s.quality.rows/1e6)+' million');
+  }).catch(function(){});
+  fetch('data/brand-race/summary.json').then(function(r){return r.json();}).then(function(s){
+    var ind={};s.industry.forEach(function(r){if(r.view==='all')ind[r.year]=r;});
+    var a=ind[1980],b=ind[2025],brands={};
+    s.rows.forEach(function(r){brands[r.brand]=1;});
+    fill('bZero60',a.zero60.toFixed(1)+'s → '+b.zero60.toFixed(1)+'s');
+    fill('bHp',Math.round(a.hp)+' → '+Math.round(b.hp));
+    fill('bBrands',String(Object.keys(brands).length));
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>
