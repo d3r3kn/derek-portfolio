@@ -177,3 +177,9 @@ h1,h2,h3,.t,.role-title,.ht{text-wrap:balance}
 /* phones: a narrower side gutter gives text more room per line */
 @media (max-width:420px){.wrap,.sn-in{padding-left:18px;padding-right:18px}}
 .nb{white-space:nowrap}
+
+/* End-of-page pointer to Get help on pages where it fits (data, projects, creative) */
+.help-note{margin:72px 0 0;padding:0;font-size:17px;color:var(--dim);max-width:80ch}
+.help-note a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.help-note a::after{content:"\2192";display:inline-block;margin-left:.25em;text-decoration:none}
+.help-note + footer{margin-top:28px}
