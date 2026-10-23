@@ -7,7 +7,6 @@ Every number on the Brand Race page ([brand-race.html](../../brand-race.html)) c
 | `raw/epa-trends-by-manufacturer.csv` | The untouched EPA export (see Source). Not edited by hand. Kept out of the repo; download it from EPA as described below and check its SHA-256. |
 | `build_summary.py` | Reads the raw CSV, keeps the All/Car/Truck rows for the snapshot years, skips EPA's empty placeholder rows, ranks brands within each year, runs 26 checks, and writes `summary.json`. Exits with an error if any check fails. |
 | `summary.json` | What the page charts: one row per brand, view and snapshot year (0–60, horsepower, MPG, weight, production, ranks), the industry row, the 14 brands' share of sales, and the check results. |
-| `review.html` | One-page review of every number in `summary.json`, for sign-off before the charts are built. |
 
 Run: download the CSV (see Source), save it as `raw/epa-trends-by-manufacturer.csv`, then `python build_summary.py` (standard library only). The script stops if the file's fingerprint doesn't match. EPA updates this data each year, so a later download will differ.
 
