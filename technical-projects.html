@@ -38,10 +38,11 @@
       <div class="role-head">
         <span class="role-title">Personal Portfolio Site</span>
       </div>
-      <p class="role-sub">HTML, CSS, JavaScript, Python, DuckDB, Git, Cloudflare Pages</p>
+      <p class="role-sub">HTML, CSS, JavaScript, Python, DuckDB, Git, Cloudflare Pages, Pages Functions, D1, Turnstile</p>
       <ul>
-        <li>Multi-page site (Home, Resume, Technical Projects, Data Analysis, Freelance, Creative) with a shared design system built from scratch in plain HTML, CSS, and JavaScript, no framework.</li>
+        <li>Multi-page site (Home, Resume, Technical Projects, Data Analysis, Freelance, Creative, Get help) with a shared design system built from scratch in plain HTML, CSS, and JavaScript, no framework.</li>
         <li>Interactive <a href="data-analysis.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)">Data Analysis</a> page backed by a Python and DuckDB pipeline whose output is automatically checked against HHS's own published figures, matching to the cent.</li>
+        <li>A Get help intake questionnaire that saves to a private Cloudflare D1 database through a serverless function. It stores no IP addresses and is protected by a Cloudflare Turnstile check, a rate limit, spam traps, and strict security headers. Preview builds write to a separate test database.</li>
         <li>Directed every structural and content decision, page architecture, copy, ordering, and design choices, built with Claude Code through an iterative process.</li>
         <li>Deployed through a Git-based pipeline to Cloudflare Pages with automatic rebuilds on push, behind a pre-commit check that blocks phone numbers, secrets, local file paths, and image metadata from being published.</li>
       </ul>
