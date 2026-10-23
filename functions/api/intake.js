@@ -1,6 +1,6 @@
 // POST /api/intake: saves a "Get help" questionnaire to the D1 database bound as `DB`.
 // Privacy: stores only what the form asks for. No IP address, browser details, or cookies.
-// Spam: a hidden honeypot field, a minimum fill time, and a per-email daily cap.
+// Spam: a Cloudflare Turnstile check, a hidden honeypot field, a minimum fill time, and a per-email daily cap.
 
 const ALLOWED = {
   for_whom: ['me', 'family', 'business'],
@@ -14,6 +14,8 @@ const ALLOWED = {
 const MAX_LEN = { name: 80, email: 120, phone: 30, goal: 800, biz_type: 120 };
 const MIN_FILL_MS = 3000;     // humans take longer than 3 seconds
 const MAX_PER_EMAIL_DAY = 3;
+const SITEVERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const OK_HOST = /^(www\.)?dereknye\.com$|^([a-z0-9-]+\.)?dereknye\.pages\.dev$/;
 
 const SCHEMA = `CREATE TABLE IF NOT EXISTS intake (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -62,6 +64,23 @@ export function validate(data, now = Date.now()) {
   return { row };
 }
 
+// Asks Cloudflare whether the Turnstile token is real, unused, and from this form on this site.
+// Sends only the secret and the token, not the visitor's IP address.
+export async function verifyTurnstile(token, secret, fetchFn = fetch) {
+  if (!token || typeof token !== 'string' || token.length > 2048) return false;
+  try {
+    const res = await fetchFn(SITEVERIFY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret, response: token }),
+    });
+    const out = await res.json();
+    return out.success === true && out.action === 'intake' && OK_HOST.test(String(out.hostname || ''));
+  } catch {
+    return false;
+  }
+}
+
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ ok: false, error: 'not_configured' }, 503);
   const type = request.headers.get('Content-Type') || '';
@@ -74,6 +93,10 @@ export async function onRequestPost({ request, env }) {
   const result = validate(data);
   if (result.spam) return json({ ok: true }, 200);          // look successful to bots, store nothing
   if (result.error) return json({ ok: false, error: result.error }, 400);
+  if (!env.TURNSTILE_SECRET) return json({ ok: false, error: 'not_configured' }, 503);
+  if (!(await verifyTurnstile(data['cf-turnstile-response'], env.TURNSTILE_SECRET))) {
+    return json({ ok: false, error: 'verify' }, 403);
+  }
   const r = result.row;
 
   await env.DB.prepare(SCHEMA).run();
