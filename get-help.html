@@ -94,6 +94,7 @@ input[type=text],input[type=email],input[type=tel],textarea,select{display:block
 textarea{min-height:110px;resize:vertical}
 .optional{font:400 15px "Source Sans 3","Segoe UI",system-ui,sans-serif;color:var(--dim)}
 .biz[hidden]{display:none}
+.cf-turnstile{margin:0 0 18px;min-height:65px}
 .form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:8px}
 .form-status{font-size:16px;color:var(--dim)}
 .form-status.err{color:#9b2c1f}
@@ -109,6 +110,7 @@ textarea{min-height:110px;resize:vertical}
 <div id="site-nav"></div>
 <script src="site-nav.js?v=20261018"></script>
 <script src="motion.js?v=20261022" defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <div class="wrap">
 <main>
 
@@ -280,6 +282,8 @@ textarea{min-height:110px;resize:vertical}
         <label class="field"><span class="q">Phone <span class="optional">(optional)</span></span><span class="hint">Only if you'd rather I call.</span><input type="tel" name="phone" maxlength="30" autocomplete="tel"></label>
         <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
 
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFilI_Wx0Zf2ekXu" data-action="intake" data-theme="light"></div>
+
         <div class="form-actions">
           <button class="btn" type="submit">Send my answers</button>
           <span class="form-status" id="form-status" role="status" aria-live="polite"></span>
@@ -311,11 +315,12 @@ textarea{min-height:110px;resize:vertical}
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(fd.get('email')||'').trim())) return say('Please check your email address.',true);
     var data={};
     fd.forEach(function(v,k){ v=String(v).trim(); if(k==='topics'||k==='devices'){(data[k]=data[k]||[]).push(v);} else data[k]=v; });
+    if(!data['cf-turnstile-response']) return say('Please wait a moment for the security check above the button to finish, then send again.',true);
     data.started_at=started;
     var btn=form.querySelector('button[type=submit]'); btn.disabled=true; say('Sending...');
     fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){ if(!r.ok) throw new Error(r.status); form.style.display='none'; var d=document.getElementById('done'); d.classList.add('show'); d.focus(); })
-      .catch(function(){ btn.disabled=false; say('Sorry, that didn\'t go through. Please try again, or email d3r3kn@gmail.com.',true); });
+      .catch(function(){ btn.disabled=false; if(window.turnstile) window.turnstile.reset(); say('Sorry, that didn\'t go through. Please try again, or email d3r3kn@gmail.com.',true); });
   });
 })();
 </script>
