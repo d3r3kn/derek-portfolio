@@ -32,11 +32,7 @@
       "url": "https://dereknye.com/",
       "image": "https://dereknye.com/img/derek-nye.jpg",
       "description": "Patient, one-on-one help with your computer and AI, by phone or video. Based in Middle Tennessee.",
-      "knowsAbout": [
-        "Artificial intelligence",
-        "Personal computers",
-        "Data analysis"
-      ],
+      "knowsAbout": ["Artificial intelligence", "Personal computers", "Data analysis", "Claude", "Grok", "Grok Bot", "Grok Imagine", "ComfyUI", "Comfy Cloud", "Higgsfield", "Meshy", "Tripo", "Qwen", "Local AI models"],
       "sameAs": [
         "https://www.linkedin.com/in/dereknye01/",
         "https://github.com/d3r3kn",
@@ -67,6 +63,9 @@
   .me{order:-1;width:96px;height:96px;border-radius:50%;box-shadow:none}
 }
 
+.tools-h{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 10px}
+.creds-line{color:var(--dim);font-size:14.5px;margin:12px 0 0}
+@media (max-width:860px){.tools-h,.creds-line{text-align:center}}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .facts div{padding:4px 20px;border-left:1px solid var(--line)}
 .facts div:first-child{padding-left:0;border-left:0}
@@ -123,12 +122,16 @@
     <img class="me" src="img/derek-nye.jpg" width="800" height="800" alt="Derek Nye">
   </header>
 
+  <section class="tools-strip" aria-labelledby="tools-h">
+  <h2 id="tools-h" class="tools-h">AI tools I use every day</h2>
   <dl class="facts">
-    <div><dt>Taught at Apple</dt><dd>One-on-one and group classes</dd></div>
-    <div><dt>MS, Data Science</dt><dd>Eastern University</dd></div>
-    <div><dt>MBA</dt><dd>Eastern University</dd></div>
-    <div><dt>Windows and Mac</dt><dd>Phone or video help</dd></div>
+    <div><dt>Writing, research and building tools</dt><dd>Claude, Grok, Grok Bot</dd></div>
+    <div><dt>Images and video</dt><dd>Grok Imagine, ComfyUI and Comfy Cloud, Higgsfield</dd></div>
+    <div><dt>3D models</dt><dd>Meshy, Tripo</dd></div>
+    <div><dt>Running AI on your own computer</dt><dd>Local models like Qwen</dd></div>
   </dl>
+  <p class="creds-line">MS, Data Science &middot; MBA (Eastern University) &middot; Registered Nurse</p>
+  </section>
 
   <section class="home-sec" id="work">
     <h2>Featured work</h2>
