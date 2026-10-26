@@ -8,7 +8,7 @@ const ALLOWED = {
   devices: ['windows', 'mac', 'iphone', 'android', 'tablet', 'unsure'],
   comfort: ['1', '2', '3', '4', '5'],
   meet: ['phone', 'video', 'any'],
-  source: ['friend_family', 'talk_event', 'google', 'facebook', 'instagram_tiktok', 'linkedin', 'other'],
+  source: ['friend_family', 'client', 'talk_event', 'google', 'facebook', 'instagram_tiktok', 'linkedin', 'x', 'youtube', 'other'],
   biz_size: ['Just me', '2 to 4', '5 to 9', '10 to 19', '20 or more'],
 };
 const MAX_LEN = { name: 80, email: 120, phone: 30, goal: 800, biz_type: 120 };
