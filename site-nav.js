@@ -9,7 +9,8 @@
     ['technical-projects', 'technical-projects.html', 'Technical Projects', 'Data and software projects, built end to end'],
     ['data', 'data.html', 'Data Analysis', 'Explorations of public data: Medicaid spending and automaker trends'],
     ['freelance', 'freelance.html', 'Freelance', 'Independent client work since July 2025'],
-    ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work']
+    ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work'],
+    ['education-channel', 'anatomy-channel.html', 'Education Channel', 'Anatomy and physiology lessons on YouTube since 2017']
   ];
 
   var host = document.getElementById('site-nav');
