@@ -76,6 +76,17 @@
         <p class="ex-meta">Data: EPA Automotive Trends Report &middot; <span data-fill="bBrands"></span> automakers</p>
         <span class="ex-go">Explore the charts</span>
       </a>
+      <a class="ex-card" href="ai-adoption.html">
+        <p class="ex-kicker">Gallup &middot; AI at work</p>
+        <p class="ex-title">AI Adoption by Industry</p>
+        <p class="ex-desc">How AI use at work grew across 10 U.S. industries from 2023 to 2026, how often people use it, and why published adoption numbers disagree.</p>
+        <div class="ex-stats">
+          <div class="ex-stat"><b data-fill="aTotal"></b><span>of employees use AI at work, 2023 to 2026</span></div>
+          <div class="ex-stat"><b data-fill="aRange"></b><span>late 2025 estimates, depending on what's counted</span></div>
+        </div>
+        <p class="ex-meta">Data: Gallup, with Pew and Census &middot; <span data-fill="aInd"></span> industries</p>
+        <span class="ex-go">Explore the charts</span>
+      </a>
     </div>
   </section>
 
@@ -100,6 +111,12 @@
     fill('bZero60',a.zero60.toFixed(1)+'s → '+b.zero60.toFixed(1)+'s');
     fill('bHp',Math.round(a.hp)+' → '+Math.round(b.hp));
     fill('bBrands',String(Object.keys(brands).length));
+  }).catch(function(){});
+  fetch('data/ai-adoption/summary.json').then(function(r){return r.json();}).then(function(s){
+    var o=s.overall,m=s.late_2025;
+    fill('aTotal',o[0].total+'% → '+o[o.length-1].total+'%');
+    fill('aRange',m[0].pct+'% to '+m[m.length-1].pct+'%');
+    fill('aInd',String(s.industries.length));
   }).catch(function(){});
 })();
 </script>

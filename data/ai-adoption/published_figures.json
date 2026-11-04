@@ -1,0 +1,63 @@
+{
+  "accessed": "2026-11-04",
+  "gallup_overall": {
+    "note": "U.S. employees, percent. Q2 2023 to Q4 2025 from Gallup's topline; Q1 and Q2 2026 from Gallup's releases.",
+    "question": "How often do you use artificial intelligence in your role?",
+    "url_topline": "https://www.gallup.com/file/workplace/701867/Workplace%20Q4%20Topline%20AI%20Trends.pdf",
+    "url_indicator": "https://www.gallup.com/699797/indicator-artificial-intelligence.aspx",
+    "waves": [
+      {"wave": "Q2 2023", "field": "May 11-25, 2023", "n": 18871, "moe": 1.1, "daily": 4, "frequent": 11, "total": 21},
+      {"wave": "Q2 2024", "field": "May 11-25, 2024", "n": 21543, "moe": 1.0, "daily": 4, "frequent": 12, "total": 27},
+      {"wave": "Q2 2025", "field": "May 7-16, 2025", "n": 19043, "moe": 1.1, "daily": 8, "frequent": 19, "total": 40},
+      {"wave": "Q3 2025", "field": "Aug 5-19, 2025", "n": 23068, "moe": 1.0, "daily": 10, "frequent": 23, "total": 45},
+      {"wave": "Q4 2025", "field": "Oct 30-Nov 14, 2025", "n": 22368, "moe": 1.0, "daily": 12, "frequent": 26, "total": 46},
+      {"wave": "Q1 2026", "field": "Feb 4-19, 2026", "n": 23717, "moe": 0.9, "daily": 13, "frequent": 28, "total": 50},
+      {"wave": "Q2 2026", "field": "May 6-20, 2026", "n": 22573, "moe": 0.9, "daily": 15, "frequent": 30, "total": 52}
+    ]
+  },
+  "pew_chatgpt": {
+    "url": "https://www.pewresearch.org/chart/the-share-of-americans-who-say-they-use-chatgpt-has-more-than-doubled-since-2023/",
+    "note": "U.S. adults. 2023 to 2025 asked 'Have you ever used ChatGPT?' of adults who had heard of it. In 2026 the question also asked about other chatbots.",
+    "points": [
+      {"year": 2023, "pct": 18},
+      {"year": 2024, "pct": 23},
+      {"year": 2025, "pct": 34},
+      {"year": 2026, "pct": 44, "wording_changed": true}
+    ]
+  },
+  "pew_chatbots": {
+    "url": "https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/",
+    "url_topline": "https://www.pewresearch.org/wp-content/uploads/sites/20/2026/06/PI_2026.06.17_Americans-and-AI_TOPLINE.pdf",
+    "question_2026": "Do you ever use an artificial intelligence (AI) chatbot like ChatGPT, Gemini or Copilot?",
+    "pct_2024": 33,
+    "pct_2026": 49,
+    "daily_2026": 24,
+    "n_2026": 5119,
+    "moe_2026": 1.6,
+    "field_2026": "Feb 17-23, 2026"
+  },
+  "rps": {
+    "url": "https://www.genaiadoptiontracker.com/",
+    "method_url": "https://doi.org/10.1287/mnsc.2025.02523",
+    "aug_2026_any_use_18_64": 60.8,
+    "aug_2026_work_employed": 40.5
+  },
+  "late_2025": {
+    "url_fed": "https://www.federalreserve.gov/econres/notes/feds-notes/monitoring-ai-adoption-in-the-u-s-economy-20260403.html",
+    "url_census_wp": "https://ideas.repec.org/p/cen/wpaper/26-25.html",
+    "measures": [
+      {"pct": 18, "label": "Firms using AI", "detail": "Each firm counts once, large or small", "source": "Census business survey, December 2025"},
+      {"pct": 32, "label": "Firms using AI, weighted by employees", "detail": "Large firms count for more", "source": "Census working paper, November 2025 to January 2026"},
+      {"pct": 41, "label": "Workers using generative AI for work", "detail": "Asks people, not firms", "source": "Real-Time Population Survey, November 2025"},
+      {"pct": 46, "label": "Employees using AI at work at least a few times a year", "detail": "A low bar for use", "source": "Gallup, Q4 2025"},
+      {"pct": 78, "label": "Workers at firms that use AI", "detail": "The worker may not use it", "source": "Atlanta Fed survey of executives, November 2025"}
+    ]
+  },
+  "census_story": {
+    "url": "https://census.gov/library/stories/2026/05/ai-use-businesses.html",
+    "period": "202609",
+    "national_pct": 19.8,
+    "information_pct": 39.7,
+    "finance_pct": 33.9
+  }
+}
