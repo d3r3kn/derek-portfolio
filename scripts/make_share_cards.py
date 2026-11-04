@@ -4,6 +4,7 @@ Writes, with no embedded metadata:
   shots/share-site.png       general card (Home, Resume, projects, creative, freelance, data hub)
   shots/share-get-help.png   Get help page
   shots/share-brand-race.png Brand Race page; figures come from data/brand-race/summary.json
+  shots/share-ai-adoption.png AI Adoption page; figures come from data/ai-adoption/summary.json
 
 Uses the site's own self-hosted fonts (Fraunces, Source Sans 3) and Field Notebook colors.
 The Medicaid card is drawn separately by data/medicaid/make_share_card.py.
@@ -143,7 +144,54 @@ def brand_race_card():
     save(img, "share-brand-race.png")
 
 
+def ai_adoption_card():
+    s = json.loads((ROOT / "data" / "ai-adoption" / "summary.json").read_text(encoding="utf-8"))
+    overall, inds = s["overall"], s["industries"]
+    a, b = overall[0], overall[-1]
+    # waves sit on a true time axis: Q1 was fielded in February, Q2 in May, and so on
+    when = lambda w: int(w[3:]) + (int(w[1]) * 3 - 2) / 12
+    img, d = canvas()
+    # chart panel on the right: the 10 industries in gray, all employees in orange
+    cx0, cy0, cx1, cy1 = 640, 110, W - M, 470
+    d.rounded_rectangle([p(cx0), p(cy0), p(cx1), p(cy1)], radius=p(14), fill=PANEL, outline=LINE, width=p(1))
+    d.text((p(cx0 + 28), p(cy0 + 22)), "Employees who use AI at work", font=font("sans", 17, 600), fill=INK)
+    px0, py0, px1, py1 = cx0 + 40, cy0 + 66, cx1 - 142, cy1 - 56
+    t0, t1 = when(a["wave"]), when(b["wave"])
+    X = lambda w: px0 + (when(w) - t0) / (t1 - t0) * (px1 - px0)
+    Y = lambda v: py1 - v / 100 * (py1 - py0)
+    d.line([p(px0), p(py1 + 14), p(px1), p(py1 + 14)], fill=(185, 176, 158), width=p(1))
+    for ind in inds:
+        d.line([(p(X(r["wave"])), p(Y(r["total"]))) for r in ind["series"]], fill=(205, 198, 184), width=p(2), joint="curve")
+    pts = [(X(r["wave"]), Y(r["total"])) for r in overall]
+    d.line([(p(x), p(y)) for x, y in pts], fill=ORANGE, width=p(4), joint="curve")
+    for x, y in (pts[0], pts[-1]):
+        d.ellipse([p(x - 6), p(y - 6), p(x + 6), p(y + 6)], fill=ORANGE)
+    lab, small = font("sans", 18, 600), font("sans", 16)
+    d.text((p(pts[0][0] - 8), p(pts[0][1] + 12)), f"{a['total']}%", font=lab, fill=INK)
+    d.text((p(pts[-1][0] + 12), p(pts[-1][1] - 13)), f"All {b['total']}%", font=lab, fill=INK)
+    ranked = sorted(inds, key=lambda i: i["series"][-1]["total"])
+    for ind in (ranked[-1], ranked[0]):
+        last = ind["series"][-1]
+        d.text((p(px1 + 12), p(Y(last["total"]) - 11)), f"{ind['name']} {last['total']}%", font=small, fill=DIM)
+    tick = font("sans", 14)
+    d.text((p(px0 - 10), p(py1 + 24)), "2023", font=tick, fill=DIM)
+    d.text((p(px1) - d.textlength("2026", font=tick) + p(10), p(py1 + 24)), "2026", font=tick, fill=DIM)
+
+    # left column
+    d.text((p(M), p(M - 4)), "DATA ANALYSIS  ·  DEREK NYE", font=font("sans", 15, 700), fill=ACCENT)
+    title = font("serif", 48, 650)
+    d.text((p(M), p(M + 30)), "AI Adoption", font=title, fill=INK)
+    d.text((p(M), p(M + 86)), "by Industry", font=title, fill=INK)
+    d.text((p(M), p(262)), f"{a['total']}% to {b['total']}%", font=font("serif", 60, 650), fill=INK)
+    sub = font("sans", 20)
+    d.text((p(M), p(338)), "U.S. employees using AI at work at least a few", font=sub, fill=DIM)
+    d.text((p(M), p(364)), f"times a year, 2023 to 2026, from Gallup data", font=sub, fill=DIM)
+    footer(d, f"{len(s['checks'])} automated checks on the data", "dereknye.com/ai-adoption", check=True)
+    save(img, "share-ai-adoption.png")
+
+
 if __name__ == "__main__":
     site_card()
     get_help_card()
     brand_race_card()
+    ai_adoption_card()
