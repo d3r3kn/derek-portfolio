@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Adoption by Industry, Derek Nye</title>
+<meta name="description" content="How AI use at work grew across 10 U.S. industries from 2023 to 2026, charted from Gallup data, and why published adoption numbers disagree.">
+<link rel="canonical" href="https://dereknye.com/ai-adoption">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Derek Nye">
+<meta property="og:url" content="https://dereknye.com/ai-adoption">
+<meta property="og:title" content="AI Adoption by Industry, 2023 to 2026">
+<meta property="og:description" content="AI use at work across 10 U.S. industries, with the sources, checks, and limits behind every number.">
+<meta property="og:image" content="https://dereknye.com/shots/share-site.png?v=1">
+<meta property="og:image:alt" content="Derek Nye: computer and AI help, training and tools. Based in Middle Tennessee.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@DerekNyeX">
+<meta name="twitter:title" content="AI Adoption by Industry, 2023 to 2026">
+<meta name="twitter:description" content="AI use at work across 10 U.S. industries, with the sources, checks, and limits behind every number.">
+<meta name="twitter:image" content="https://dereknye.com/shots/share-site.png?v=1">
+<meta name="twitter:image:alt" content="Derek Nye: computer and AI help, training and tools. Based in Middle Tennessee.">
+<link rel="stylesheet" href="styles.css?v=20261026">
+<style>
+:root{
+  --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
+  --text-1:#1f1d1a; --text-2:#4a463f; --text-3:#6b665c;
+  --ok:#2e7d32; --c-total:#12805c; --c-freq:#c2531c; --c-daily:#2563b8;
+}
+.lede{font-size:16.5px;color:var(--text-2);max-width:68ch;margin:0 0 14px}
+.lede b{color:var(--ink);font-weight:600}
+sup a{color:var(--accent);text-decoration:none;font-size:11px;font-weight:700;padding:0 1px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;margin:22px 0 0;max-width:900px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.tile b{display:block;font-family:var(--serif);font-size:38px;line-height:1.1;font-weight:650;letter-spacing:-.02em;min-height:1.1em;font-variant-numeric:tabular-nums}
+.tile span{display:block;font-size:14px;color:var(--text-2);margin-top:6px}
+
+.srcbox{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0;font-size:14.5px;max-width:820px}
+.srcbox dt{color:var(--text-3)}
+.srcbox dd{margin:0;color:var(--text-1)}
+.srcbox a,.prose a,.card-sub a,.card-foot a,.sources a,ul.limits a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+@media (max-width:560px){.srcbox{grid-template-columns:1fr;gap:2px}.srcbox dd{margin-bottom:8px}}
+.prose{font-size:15.5px;color:var(--dim);max-width:70ch;margin:0 0 16px}
+.prose b{color:var(--ink);font-weight:600}
+h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 24px 18px;margin-bottom:22px;min-width:0}
+@media (max-width:640px){.card{padding:18px 12px 14px}}
+.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;align-items:flex-start;margin-bottom:16px}
+.card-title{font-weight:650;font-size:17px;margin:0 0 4px}
+.card-sub{font-size:14.5px;color:var(--text-2);margin:0;max-width:72ch}
+.card-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tbl-btn{font:inherit;font-size:13px;color:var(--text-2);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tbl-btn:hover{color:var(--text-1);border-color:var(--axis)}
+.tbl-btn:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid #2563b8;outline-offset:2px}
+.card-foot{font-size:12.5px;color:var(--text-3);margin:14px 0 0}
+.card-foot + .card-foot{margin-top:4px}
+.chart{position:relative}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart text{font-family:inherit}
+.tick{font-size:12px;fill:var(--text-3);font-variant-numeric:tabular-nums}
+.val{font-size:12.5px;fill:var(--text-1);font-weight:650;font-variant-numeric:tabular-nums}
+.rowlbl{font-size:13.5px;fill:var(--text-1)}
+.note{font-size:12.5px;fill:var(--text-3)}
+
+.sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:18px 20px}
+@media (max-width:480px){.sm{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}}
+.panel{min-width:0;border-radius:6px;touch-action:pan-y}
+.panel h4{font-size:14px;font-weight:650;margin:0;color:var(--text-1);line-height:1.25;min-height:2.5em}
+.panel p{font-size:12.5px;color:var(--text-3);margin:2px 0 0;font-variant-numeric:tabular-nums}
+.panel svg{display:block;width:100%;height:auto;overflow:visible;margin-top:4px}
+
+.key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--text-2);margin:0 0 10px}
+.key span{display:inline-flex;align-items:center;gap:7px}
+.key svg{flex:none}
+
+.pair{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:24px;align-items:center}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.aside{background:#f6f3ec;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.aside + .aside{margin-top:12px}
+.aside b{display:block;font-family:var(--serif);font-size:30px;font-weight:650;line-height:1.1;font-variant-numeric:tabular-nums}
+.aside span{display:block;font-size:13.5px;color:var(--text-2);margin-top:5px}
+
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:6px 22px;align-items:center;padding:11px 0;border-bottom:1px solid var(--grid)}
+.mrow:last-of-type{border-bottom:0}
+.mrow b{display:block;font-size:14.5px;font-weight:600;color:var(--text-1);line-height:1.3}
+.mrow small{display:block;font-size:12.5px;color:var(--text-3);margin-top:2px}
+.track{position:relative;height:24px;margin-right:38px}
+.track::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--axis)}
+.track i{position:absolute;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:var(--c-total);box-shadow:0 0 0 2px var(--surface)}
+.track em{position:absolute;top:50%;transform:translateY(-50%);margin-left:12px;font-style:normal;font-size:14px;font-weight:650;background:var(--surface);padding:0 3px;font-variant-numeric:tabular-nums}
+.mscale{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:0 22px}
+.mscale div{display:flex;justify-content:space-between;font-size:12px;color:var(--text-3);margin-right:38px}
+@media (max-width:640px){.mrow,.mscale{grid-template-columns:1fr}.mscale>span{display:none}}
+
+.brow{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:4px 14px;align-items:center;padding:4px 0;border-radius:4px}
+.brow>span{font-size:13.5px;color:var(--text-1)}
+.brow .bw{position:relative;height:18px;display:flex;align-items:center;gap:7px}
+.brow .bw i{display:block;height:14px;background:var(--c-total);border-radius:0 4px 4px 0;flex:none}
+.brow .bw b{font-size:12.5px;font-weight:650;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.brow{grid-template-columns:1fr;gap:1px;padding:5px 0}}
+
+.tip{position:fixed;z-index:40;pointer-events:none;background:#fffdf8;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .1s}
+.tip.on{opacity:1}
+.tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
+.tip .t-row{display:flex;align-items:center;gap:8px}
+.tip .t-key{width:10px;height:10px;border-radius:50%;flex:none}
+.tip .t-val{color:var(--text-1);font-weight:650;font-variant-numeric:tabular-nums}
+.tip .t-name{color:var(--text-2)}
+.tip .t-note{color:var(--text-3);font-size:12px;margin-top:4px}
+
+table.dt{width:100%;border-collapse:collapse;font-size:13.5px}
+table.dt th,table.dt td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+table.dt th{color:var(--text-3);font-weight:600;font-size:12.5px}
+table.dt td.n,table.dt th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{max-height:420px;overflow:auto}
+.pipe{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:820px;margin:0 0 16px}
+.pipe table.dt td,.pipe table.dt th{padding:9px 14px}
+.checks{list-style:none;padding:0;margin:0 0 16px;max-width:820px}
+.checks li{display:flex;gap:10px;font-size:14.5px;color:var(--dim);margin-bottom:8px}
+.checks li b{color:var(--ink);font-weight:600}
+.checks svg{flex:none;margin-top:4px}
+ul.limits{max-width:76ch;padding-left:20px;margin:0}
+ul.limits li{font-size:14.5px;color:var(--dim);margin-bottom:9px}
+ul.limits li b{color:var(--ink);font-weight:600}
+dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;max-width:860px;margin:0;font-size:14.5px}
+dl.gloss dt{font-weight:650;color:var(--ink)}
+dl.gloss dd{margin:0;color:var(--dim)}
+@media (max-width:560px){dl.gloss{grid-template-columns:1fr;gap:2px}dl.gloss dd{margin-bottom:10px}}
+ol.sources{padding-left:22px;margin:0;max-width:820px}
+ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
+.loading{color:var(--text-3);font-size:14px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body data-page="ai-adoption">
+<div id="site-nav"></div>
+<script src="site-nav.js?v=20261104"></script>
+<script src="motion.js?v=20261022" defer></script>
+<div class="wrap">
+
+  <header>
+    <p class="crumb"><a href="data.html">← Data Analysis</a></p>
+    <h1>AI Adoption by Industry</h1>
+    <p class="tag">How AI use at work grew across 10 U.S. industries from 2023 to 2026, and <b>why published adoption numbers disagree</b>.</p>
+  </header>
+
+  <section>
+    <h2>The Short Version</h2>
+    <p class="lede">In May 2023, <b data-fill="t0"></b> of U.S. employees told Gallup they used AI at work at least a few times a year. By May 2026 that was <b data-fill="t1"></b>. Daily use went from <b data-fill="d0"></b> to <b data-fill="d1"></b>.<sup><a href="#src-1">1</a></sup></p>
+    <p class="lede">The growth was uneven. In Q2 2026, <b data-fill="techT"></b> of technology employees used AI at work, compared with <b data-fill="healthT"></b> in healthcare and <b data-fill="retailT"></b> in retail.<sup><a href="#src-2">2</a></sup></p>
+    <p class="lede">There is no single adoption number. Late 2025 estimates run from 18% to 78%, depending on what is being counted. The last section of charts shows why.</p>
+    <div class="tiles">
+      <div class="tile"><b data-fill="t1"></b><span>of U.S. employees use AI at work at least a few times a year (Gallup, Q2 2026)</span></div>
+      <div class="tile"><b data-fill="chatbots"></b><span>of U.S. adults use AI chatbots (Pew, February 2026)</span></div>
+      <div class="tile"><b data-fill="d1"></b><span>of U.S. employees use AI at work daily (Gallup, Q2 2026)</span></div>
+    </div>
+  </section>
+
+  <section style="padding-top:36px">
+    <h2>The Data</h2>
+    <dl class="srcbox">
+      <dt>Main dataset</dt><dd><a href="https://www.gallup.com/699797/indicator-artificial-intelligence.aspx" target="_blank" rel="noopener">Gallup AI use by industry</a><sup><a href="#src-1">1</a></sup></dd>
+      <dt>Publisher</dt><dd>Gallup, from its quarterly workforce surveys</dd>
+      <dt>Accessed</dt><dd>November 4, 2026</dd>
+      <dt>Question</dt><dd>"How often do you use artificial intelligence in your role?"<sup><a href="#src-3">3</a></sup></dd>
+      <dt>Coverage</dt><dd>U.S. employees, 7 surveys from Q2 2023 to Q2 2026, 10 industries</dd>
+      <dt>Sample</dt><dd>About 19,000 to 24,000 employees per survey, from a panel recruited by random sampling, with a margin of error of about 1 point for all employees</dd>
+      <dt>Also used</dt><dd>Pew Research Center, the Real-Time Population Survey, the Census Bureau's business survey, and a Federal Reserve note comparing them. Each is labeled where it appears.</dd>
+    </dl>
+  </section>
+
+  <section style="padding-top:44px" id="charts">
+    <h2>What the Data Shows</h2>
+    <p class="loading" id="loading">Loading data&hellip;</p>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">AI use at work by industry</p>
+          <p class="card-sub">Share of employees who use AI at work at least a few times a year, Q2 2023 to Q2 2026. The green line is the named industry; the gray lines are the other nine.</p>
+        </div>
+        <div class="card-tools"><button type="button" class="tbl-btn" data-table="ind">Table</button></div>
+      </div>
+      <div class="sm" id="ind"></div>
+      <div class="tablewrap" id="ind-table" hidden></div>
+      <p class="card-foot">Hover or tap a chart for each survey's numbers. Gallup surveyed once a year through 2025, then every quarter, so dots are closer together on the right. Source: Gallup.<sup><a href="#src-2">2</a></sup></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">How often each industry uses it</p>
+          <p class="card-sub">Using AI at all is different from using it every day. Q2 2026, sorted by total use.</p>
+        </div>
+        <div class="card-tools"><button type="button" class="tbl-btn" data-table="freq">Table</button></div>
+      </div>
+      <div class="key" id="freq-key"></div>
+      <div class="chart" id="freq"></div>
+      <div class="tablewrap" id="freq-table" hidden></div>
+      <p class="card-foot">Total: at least a few times a year. Frequent: at least a few times a week. Daily: every day. Source: Gallup.<sup><a href="#src-2">2</a></sup></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">U.S. adults who have used ChatGPT</p>
+          <p class="card-sub">This chart counts adults, working or not, and one product.</p>
+        </div>
+        <div class="card-tools"><button type="button" class="tbl-btn" data-table="pew">Table</button></div>
+      </div>
+      <div class="pair">
+        <div class="chart" id="pew"></div>
+        <div>
+          <div class="aside"><b data-fill="rps"></b><span>of adults ages 18 to 64 use generative AI for any purpose (Real-Time Population Survey, August 2026)<sup><a href="#src-7">7</a></sup></span></div>
+          <div class="aside"><b data-fill="chatbotChange"></b><span>of adults use any AI chatbot, 2024 to 2026 (Pew; the wording changed between them)<sup><a href="#src-5">5</a>,<a href="#src-6">6</a></sup></span></div>
+        </div>
+      </div>
+      <div class="tablewrap" id="pew-table" hidden></div>
+      <p class="card-foot">The dashed line marks a change in Pew's question. From 2023 to 2025, Pew asked "Have you ever used ChatGPT?" of adults who had heard of it. In 2026, the question also asked about other chatbots. Source: Pew Research Center.<sup><a href="#src-4">4</a></sup></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">Why the numbers differ</p>
+          <p class="card-sub">Five estimates from late 2025, all describing the same economy. A Federal Reserve note says the biggest cause is likely who is sampled and what is being counted: 57% of U.S. firms have fewer than five employees, so a share of firms looks very different from a share of workers.<sup><a href="#src-12">12</a></sup></p>
+        </div>
+        <div class="card-tools"><button type="button" class="tbl-btn" data-table="why">Table</button></div>
+      </div>
+      <div id="why"></div>
+      <div class="tablewrap" id="why-table" hidden></div>
+      <p class="card-foot">These measures should not be joined into one trend line. Sources: Federal Reserve note,<sup><a href="#src-12">12</a></sup> Census working paper,<sup><a href="#src-11">11</a></sup> Gallup.<sup><a href="#src-3">3</a></sup></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">Firms using AI by sector, spring 2026</p>
+          <p class="card-sub">The Census view: share of businesses, not employees, that used AI in the past two weeks. All sectors: <span data-fill="censusAll"></span>. Collected <span data-fill="censusDates"></span>.</p>
+        </div>
+        <div class="card-tools"><button type="button" class="tbl-btn" data-table="census">Table</button></div>
+      </div>
+      <div id="census"></div>
+      <div class="tablewrap" id="census-table" hidden></div>
+      <p class="card-foot">One recent snapshot only, because Census changed this question in November 2025. <span data-fill="censusOut"></span> Sector names are shortened, and they don't match Gallup's industries one for one. Source: Census Bureau.<sup><a href="#src-9">9</a>,<a href="#src-10">10</a></sup></p>
+    </div>
+  </section>
+
+  <section style="padding-top:44px" id="prep">
+    <h2>How the Data Was Prepared</h2>
+    <p class="prose">A Python script reads the two downloaded files without editing them, combines them with figures typed from publishers' pages, and writes the summary file these charts use.</p>
+    <div class="pipe"><table class="dt">
+      <thead><tr><th>Step</th><th>What happened</th></tr></thead>
+      <tbody>
+        <tr><td>Gallup file</td><td>10 industries, 7 surveys, 3 use levels: 210 values, all kept</td></tr>
+        <tr><td>Census file</td><td>Kept the "yes" answers on AI use for one collection period. Of 19 sectors, 17 have published values. The group for companies spanning several sectors was left out.</td></tr>
+        <tr><td>Published figures</td><td>Gallup's all-employee numbers and the Pew, Real-Time Population Survey, and Federal Reserve figures were typed from the publishers' pages, with each link saved beside the numbers</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub">How the numbers were checked</h3>
+    <ul class="checks">
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Gallup's file matches Gallup's own reports.</b> Spot values agree with its survey tables and its indicator page.</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Census's file matches Census's own article.</b> Information at 39.7% and finance at 33.9% agree with its May 2026 story.</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>The values make sense together.</b> In every industry and survey, daily use is never above frequent use, and frequent use is never above total use.</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>The source files are unchanged.</b> The script confirms each file's fingerprint before it runs.</span></li>
+    </ul>
+    <p class="prose">All <span data-fill="checkCount"></span> checks run every time the numbers are rebuilt, and the build fails if any don't pass. The <a href="https://github.com/d3r3kn/derek-portfolio/tree/main/data/ai-adoption" target="_blank" rel="noopener">script and summary data are on GitHub</a>, along with the steps to download the source files.</p>
+  </section>
+
+  <section style="padding-top:44px">
+    <h2>What the Data Can't Tell Us</h2>
+    <ul class="limits">
+      <li><b>These are shares, not head counts.</b> No source here counts how many people use AI. Company user figures are left out because they could not be confirmed with the companies, and they measure accounts, not people.</li>
+      <li><b>People report their own use.</b> Each person may picture different tools when asked about AI, and how people understand the term may have changed since 2023.</li>
+      <li><b>Small changes within an industry may be noise.</b> Gallup publishes a margin of error for all employees, not for each industry. Industry groups are much smaller. In its survey tables through Q4 2025, the smallest had 353 people. Finance moving from 74% to 71% in Q2 2026 is not clear evidence of a drop.</li>
+      <li><b>Ten industries aren't the whole economy.</b> Gallup's industry list is not the same as the Census list, so the two can't be matched exactly.</li>
+      <li><b>The story starts in 2023.</b> No U.S. survey found for this page tracks people's AI use by industry before then.</li>
+      <li><b>"Total" use is a low bar.</b> Someone who uses AI a few times a year counts the same as someone who uses it hourly. The frequency chart shows the difference.</li>
+      <li><b>Survey questions changed.</b> Pew changed its wording in 2026. Census moved from AI use "in producing goods or services" to use "in any of its business functions" in November 2025, so its older rates aren't comparable.<sup><a href="#src-12">12</a></sup> Census data is also labeled experimental.</li>
+      <li><b>Early worker survey results were revised.</b> The Real-Time Population Survey reweighted its 2024 and early 2025 surveys after a test of question order showed they undercounted use.<sup><a href="#src-8">8</a></sup></li>
+      <li><b>Census's newest files use a different name for AI.</b> After a September 2026 executive order,<sup><a href="#src-13">13</a></sup> its file now calls AI "Super Intelligence or SI (formerly referred to as Artificial Intelligence or AI)." This page says AI. The snapshot shown was collected before that order.</li>
+    </ul>
+  </section>
+
+  <section style="padding-top:44px">
+    <h2>Glossary</h2>
+    <dl class="gloss">
+      <dt>Generative AI</dt><dd>AI that produces text, images, or other content, such as ChatGPT.</dd>
+      <dt>Total use</dt><dd>Gallup's term for using AI at work at least a few times a year.</dd>
+      <dt>Frequent use</dt><dd>Gallup's term for using AI at work at least a few times a week.</dd>
+      <dt>Margin of error</dt><dd>How far a survey result could differ from the true figure because only a sample was asked.</dd>
+      <dt>Employment-weighted</dt><dd>Counting each firm by how many people it employs, so large firms matter more.</dd>
+      <dt>Standard error</dt><dd>A measure of how much a survey estimate could vary by chance. Smaller is more precise.</dd>
+    </dl>
+  </section>
+
+  <section style="padding-top:44px">
+    <h2>Sources</h2>
+    <ol class="sources">
+      <li id="src-1">Gallup. <a href="https://www.gallup.com/699797/indicator-artificial-intelligence.aspx" target="_blank" rel="noopener">Artificial Intelligence indicator</a>. Accessed November 4, 2026.</li>
+      <li id="src-2">Gallup. <a href="https://www.gallup.com/file/education/712643/AI-Use-Trends-by-Industry.xlsx" target="_blank" rel="noopener">AI Use Trends by Industry</a> (spreadsheet). Accessed November 4, 2026.</li>
+      <li id="src-3">Gallup. <a href="https://www.gallup.com/file/workplace/701867/Workplace%20Q4%20Topline%20AI%20Trends.pdf" target="_blank" rel="noopener">Workplace Q4 Topline AI Trends</a> (PDF). Accessed November 4, 2026.</li>
+      <li id="src-4">Pew Research Center. <a href="https://www.pewresearch.org/chart/the-share-of-americans-who-say-they-use-chatgpt-has-more-than-doubled-since-2023/" target="_blank" rel="noopener">The share of Americans who say they use ChatGPT has more than doubled since 2023</a>. Accessed November 4, 2026.</li>
+      <li id="src-5">Pew Research Center. <a href="https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/" target="_blank" rel="noopener">Americans and AI 2026: Chatbots, Smart Devices and Views on Impact</a>, June 17, 2026. Survey of 5,119 U.S. adults, February 17 to 23, 2026, margin of error 1.6 points. Accessed November 4, 2026.</li>
+      <li id="src-6">Pew Research Center. <a href="https://www.pewresearch.org/wp-content/uploads/sites/20/2026/06/PI_2026.06.17_Americans-and-AI_TOPLINE.pdf" target="_blank" rel="noopener">American Trends Panel Wave 187 topline</a> (PDF). Accessed November 4, 2026.</li>
+      <li id="src-7">Bick, Blandin, Deming, and McKittrick. <a href="https://www.genaiadoptiontracker.com/" target="_blank" rel="noopener">GenAI Adoption Tracker</a>, from the Real-Time Population Survey. Findings are the authors' and not necessarily those of the Federal Reserve. Accessed November 4, 2026.</li>
+      <li id="src-8">Bick, Blandin, and Deming. <a href="https://www.stlouisfed.org/on-the-economy/2025/nov/state-generative-ai-adoption-2025" target="_blank" rel="noopener">The State of Generative AI Adoption in 2025</a>, St. Louis Fed, November 13, 2025. Accessed November 4, 2026.</li>
+      <li id="src-9">U.S. Census Bureau. <a href="https://census.gov/library/stories/2026/05/ai-use-businesses.html" target="_blank" rel="noopener">Large Firms With at Least 20 Employees Biggest AI Users</a>, May 2026. Accessed November 4, 2026.</li>
+      <li id="src-10">U.S. Census Bureau. <a href="https://www.census.gov/hfp/btos/downloads/Sector.xlsx" target="_blank" rel="noopener">Business Trends and Outlook Survey, sector data</a> (spreadsheet, updated October 22, 2026). Accessed November 4, 2026.</li>
+      <li id="src-11">Bonney, Breaux, Dinlersoz, Foster, Haltiwanger, and Pande. <a href="https://ideas.repec.org/p/cen/wpaper/26-25.html" target="_blank" rel="noopener">The Microstructure of AI Diffusion: Evidence from Firms, Business Functions, and Worker Tasks</a>, Census working paper 26-25. Accessed November 4, 2026.</li>
+      <li id="src-12">Allen. <a href="https://www.federalreserve.gov/econres/notes/feds-notes/monitoring-ai-adoption-in-the-u-s-economy-20260403.html" target="_blank" rel="noopener">Monitoring AI Adoption in the U.S. Economy</a>, FEDS Notes, April 3, 2026. Accessed November 4, 2026.</li>
+      <li id="src-13">Executive Order 14434. <a href="https://www.federalregister.gov/documents/2026/10/02/2026-20321/inaugurating-the-era-of-super-intelligence" target="_blank" rel="noopener">Inaugurating the Era of Super Intelligence</a>, signed September 29, 2026. Accessed November 4, 2026.</li>
+    </ol>
+  </section>
+
+  <p class="help-note">Want to make sense of your own data, or learn to use AI for it? I can help. <a href="get-help.html">Get help</a></p>
+
+  <footer>&copy; 2026 Derek Nye &middot; d3r3kn@gmail.com<p class="elsewhere"><a href="https://www.linkedin.com/in/dereknye01/" rel="me">LinkedIn</a> &middot; <a href="https://github.com/d3r3kn" rel="me">GitHub</a> &middot; <a href="https://x.com/dereknyex" rel="me">X</a></p></footer>
+</div>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+fetch('data/ai-adoption/summary.json').then(function(r){if(!r.ok)throw new Error();return r.json();})
+  .then(init)
+  .catch(function(){document.getElementById('loading').textContent='The chart data could not be loaded. Please refresh the page.';});
+
+var NS='http://www.w3.org/2000/svg';
+function E(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function H(tag,cls,text,parent){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+function T(x,y,text,cls,anchor,parent){var t=E('text',{x:x,y:y,class:cls,'text-anchor':anchor||'start'},parent);t.textContent=text;return t;}
+function fill(k,v){document.querySelectorAll('[data-fill="'+k+'"]').forEach(function(e){e.textContent=v;});}
+
+/* tooltip (textContent only) */
+var tip=document.getElementById('tip');
+function placeTip(x,y){var w=tip.offsetWidth,h=tip.offsetHeight,px=x+14,py=y-h-12;
+  if(px+w>window.innerWidth-8)px=Math.max(8,x-w-14);if(py<8)py=y+18;tip.style.left=px+'px';tip.style.top=py+'px';}
+function showTip(head,rows,note,x,y){
+  tip.textContent='';H('div','t-head',head,tip);
+  rows.forEach(function(r){var row=H('div','t-row',null,tip);
+    if(r.color){H('span','t-key',null,row).style.background=r.color;}
+    H('span','t-val',r.value,row);if(r.name)H('span','t-name',r.name,row);});
+  if(note)H('div','t-note',note,tip);
+  tip.classList.add('on');placeTip(x,y);}
+function hideTip(){tip.classList.remove('on');}
+window.addEventListener('scroll',hideTip,{passive:true});
+
+var COL={total:'#12805c',frequent:'#c2531c',daily:'#2563b8'};
+var pct=function(v){return v+'%';};
+function useRows(p){return [{color:COL.total,value:pct(p.total),name:'total'},{color:COL.frequent,value:pct(p.frequent),name:'frequent'},{color:COL.daily,value:pct(p.daily),name:'daily'}];}
+function marker(kind,x,y,parent){
+  if(kind==='total')return E('circle',{cx:x,cy:y,r:6,fill:COL.total,stroke:'#fffdf8','stroke-width':2},parent);
+  if(kind==='frequent')return E('rect',{x:x-5,y:y-5,width:10,height:10,fill:COL.frequent,stroke:'#fffdf8','stroke-width':2},parent);
+  return E('polygon',{points:x+','+(y-7)+' '+(x-6.5)+','+(y+5)+' '+(x+6.5)+','+(y+5),fill:COL.daily,stroke:'#fffdf8','stroke-width':2},parent);
+}
+function table(id,head,rows,numFrom){
+  var host=document.getElementById(id+'-table'),t=H('table','dt',null,host),tr=H('tr',null,null,H('thead',null,null,t)),b=H('tbody',null,null,t);
+  head.forEach(function(h,i){H('th',i>=numFrom?'n':null,h,tr);});
+  rows.forEach(function(r){var row=H('tr',null,null,b);r.forEach(function(c,i){H('td',i>=numFrom?'n':null,c,row);});});
+}
+
+function init(S){
+document.getElementById('loading').hidden=true;
+var O=S.overall,first=O[0],last=O[O.length-1];
+function ind(n){return S.industries.filter(function(i){return i.name===n;})[0].series;}
+fill('t0',pct(first.total));fill('t1',pct(last.total));fill('d0',pct(first.daily));fill('d1',pct(last.daily));
+fill('techT',pct(ind('Technology')[6].total));fill('healthT',pct(ind('Healthcare')[6].total));fill('retailT',pct(ind('Retail')[6].total));
+fill('chatbots',pct(S.pew_chatbots.pct_2026));fill('chatbotChange',S.pew_chatbots.pct_2024+'% → '+S.pew_chatbots.pct_2026+'%');
+fill('rps',S.rps.aug_2026_any_use_18_64.toFixed(1)+'%');
+var C=S.census_sectors;fill('censusAll',C.national_pct.toFixed(1)+'%');fill('censusDates',C.collected);
+fill('censusOut','Census did not publish a value for '+C.suppressed.join(' or ').toLowerCase()+' in this period.');
+fill('checkCount',S.checks.length);
+
+/* true time axis */
+var D=S.waves.map(function(w){return Date.parse(w.date);}),d0=D[0],dN=D[D.length-1];
+var SHORT={'College or University':'College or university','K-12 Education':'K-12 education','Government or Public Policy':'Government or public policy','Community/Social Services':'Community and social services','Professional Services':'Professional services'};
+function nm(n){return SHORT[n]||n;}
+
+/* chart 1: small multiples */
+(function(){
+  var host=document.getElementById('ind'),W=200,Hh=120,L=4,R=30,Tp=8,B=20;
+  function x(i){return L+(D[i]-d0)/(dN-d0)*(W-L-R);}
+  function y(v){return Tp+(100-v)/100*(Hh-Tp-B);}
+  function path(s){return s.map(function(p,i){return (i?'L':'M')+x(i).toFixed(1)+' '+y(p.total).toFixed(1);}).join(' ');}
+  S.industries.forEach(function(it){
+    var s=it.series,p=H('div','panel',null,host);
+    p.tabIndex=0;p.setAttribute('role','img');
+    p.setAttribute('aria-label',nm(it.name)+': total use rose from '+s[0].total+' percent in Q2 2023 to '+s[6].total+' percent in Q2 2026. Use the arrow keys to read each survey.');
+    H('h4',null,nm(it.name),p);
+    H('p',null,s[0].total+'% to '+s[6].total+'%',p);
+    var g=E('svg',{viewBox:'0 0 '+W+' '+Hh,'aria-hidden':'true'},p);
+    [0,50,100].forEach(function(v){E('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v?'#ece6da':'#b9b09e'},g);T(W-R+4,y(v)+4,v+'%','tick','start',g);});
+    S.industries.forEach(function(o){if(o!==it)E('path',{d:path(o.series),fill:'none',stroke:'#b9b09e','stroke-opacity':.5,'stroke-width':1},g);});
+    E('path',{d:path(s),fill:'none',stroke:COL.total,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},g);
+    s.forEach(function(q,i){E('circle',{cx:x(i),cy:y(q.total),r:i===6?4:2.5,fill:COL.total,stroke:'#fffdf8','stroke-width':1},g);});
+    T(x(0),Hh-4,'2023','tick','start',g);T(x(6),Hh-4,'2026','tick','end',g);
+    var cross=E('line',{y1:Tp,y2:Hh-B,stroke:'#6b665c','stroke-width':1,visibility:'hidden'},g),cur=6;
+    function show(i){cur=i;cross.setAttribute('x1',x(i));cross.setAttribute('x2',x(i));cross.setAttribute('visibility','visible');
+      var b=g.getBoundingClientRect();showTip(nm(it.name)+', '+s[i].wave,useRows(s[i]),null,b.left+x(i)/W*b.width,b.top+y(s[i].total)/Hh*b.height);}
+    function off(){cross.setAttribute('visibility','hidden');hideTip();}
+    function move(e){var b=g.getBoundingClientRect(),vx=(e.clientX-b.left)/b.width*W,best=0,dist=1e9;
+      s.forEach(function(_,i){var d=Math.abs(x(i)-vx);if(d<dist){dist=d;best=i;}});show(best);}
+    p.addEventListener('pointermove',move);p.addEventListener('pointerdown',move);p.addEventListener('pointerleave',off);
+    p.addEventListener('focus',function(){show(cur);});p.addEventListener('blur',off);
+    p.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){e.preventDefault();show(Math.max(0,cur-1));}if(e.key==='ArrowRight'){e.preventDefault();show(Math.min(6,cur+1));}});
+  });
+  table('ind',['Industry'].concat(S.waves.map(function(w){return w.wave;})),
+    S.industries.map(function(it){return [nm(it.name)].concat(it.series.map(function(q){return pct(q.total);}));}).concat([['All employees'].concat(O.map(function(q){return pct(q.total);}))]),1);
+})();
+
+/* chart 2: frequency */
+(function(){
+  var key=document.getElementById('freq-key');
+  [['total','Total'],['frequent','Frequent'],['daily','Daily']].forEach(function(k){
+    var s=H('span',null,null,key),g=E('svg',{width:16,height:16,viewBox:'0 0 16 16','aria-hidden':'true'},s);marker(k[0],8,8,g);s.appendChild(document.createTextNode(k[1]));});
+  var host=document.getElementById('freq');
+  function draw(){
+    host.textContent='';
+    var W=Math.max(300,host.clientWidth),small=W<560,L=small?10:210,R=44,rowH=small?50:34,Tp=4,n=S.industries.length,Hh=Tp+n*rowH+24;
+    function x(v){return L+v/100*(W-L-R);}
+    var g=E('svg',{viewBox:'0 0 '+W+' '+Hh,role:'img','aria-label':'Total, frequent and daily AI use for 10 industries in Q2 2026. Values are in the table view.'},host);
+    [0,25,50,75,100].forEach(function(v){E('line',{x1:x(v),x2:x(v),y1:Tp,y2:Hh-22,stroke:'#ece6da'},g);T(x(v),Hh-6,v+'%','tick','middle',g);});
+    S.industries.forEach(function(it,i){
+      var q=it.series[6],top=Tp+i*rowH,cy=top+(small?rowH-15:rowH/2);
+      T(small?L:0,small?top+16:cy+5,nm(it.name),'rowlbl','start',g);
+      E('line',{x1:x(q.daily),x2:x(q.total),y1:cy,y2:cy,stroke:'#b9b09e','stroke-width':1.5},g);
+      marker('daily',x(q.daily),cy,g);marker('frequent',x(q.frequent),cy,g);marker('total',x(q.total),cy,g);
+      T(x(q.total)+11,cy+4,pct(q.total),'val','start',g);
+      var hit=E('rect',{x:0,y:top,width:W,height:rowH,fill:'transparent',tabindex:0,'aria-label':nm(it.name)+': total '+q.total+', frequent '+q.frequent+', daily '+q.daily+' percent'},g);
+      function on(e){var b=hit.getBoundingClientRect();showTip(nm(it.name)+', Q2 2026',useRows(q),null,e&&e.clientX?e.clientX:b.left+b.width/2,b.top+4);}
+      hit.addEventListener('pointermove',on);hit.addEventListener('pointerdown',on);hit.addEventListener('pointerleave',hideTip);hit.addEventListener('focus',function(){on();});hit.addEventListener('blur',hideTip);
+    });
+  }
+  draw();redraw.push(draw);
+  table('freq',['Industry','Total','Frequent','Daily'],S.industries.map(function(it){var q=it.series[6];return [nm(it.name),pct(q.total),pct(q.frequent),pct(q.daily)];}).concat([['All employees',pct(last.total),pct(last.frequent),pct(last.daily)]]),1);
+})();
+
+/* chart 3: Pew ChatGPT */
+(function(){
+  var host=document.getElementById('pew'),P=S.pew_chatgpt;
+  function draw(){
+    host.textContent='';
+    var W=Math.max(280,host.clientWidth),Hh=250,L=40,R=26,Tp=26,B=26;
+    function x(i){return L+i*(W-L-R)/(P.length-1);}
+    function y(v){return Tp+(60-v)/60*(Hh-Tp-B);}
+    var g=E('svg',{viewBox:'0 0 '+W+' '+Hh,role:'img','aria-label':'Share of U.S. adults who have used ChatGPT: 18 percent in 2023, 23 in 2024, 34 in 2025, 44 in 2026. The 2026 question wording changed.'},host);
+    [0,20,40,60].forEach(function(v){E('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v?'#ece6da':'#b9b09e'},g);T(L-8,y(v)+4,v+'%','tick','end',g);});
+    E('path',{d:'M'+x(0)+' '+y(P[0].pct)+' L'+x(1)+' '+y(P[1].pct)+' L'+x(2)+' '+y(P[2].pct),fill:'none',stroke:COL.total,'stroke-width':2,'stroke-linejoin':'round'},g);
+    E('line',{x1:x(2),y1:y(P[2].pct),x2:x(3),y2:y(P[3].pct),stroke:COL.total,'stroke-width':2,'stroke-dasharray':'3 5','stroke-linecap':'round'},g);
+    P.forEach(function(p,i){
+      E('circle',{cx:x(i),cy:y(p.pct),r:6,fill:COL.total,stroke:'#fffdf8','stroke-width':2},g);
+      T(x(i),y(p.pct)-13,pct(p.pct),'val','middle',g);T(x(i),Hh-6,String(p.year),'tick','middle',g);
+      var hit=E('rect',{x:x(i)-30,y:Tp-20,width:60,height:Hh-Tp,fill:'transparent'},g);
+      function on(){var b=hit.getBoundingClientRect();showTip(String(p.year),[{color:COL.total,value:pct(p.pct),name:'of U.S. adults'}],p.wording_changed?'Wording changed in 2026.':null,b.left+b.width/2,b.top+20);}
+      hit.addEventListener('pointerenter',on);hit.addEventListener('pointerdown',on);hit.addEventListener('pointerleave',hideTip);
+    });
+  }
+  draw();redraw.push(draw);
+  table('pew',['Year','Have used ChatGPT','Note'],P.map(function(p){return [String(p.year),pct(p.pct),p.wording_changed?'Wording changed':''];}),9);
+})();
+
+/* chart 4: late 2025 measures */
+(function(){
+  var host=document.getElementById('why');
+  S.late_2025.forEach(function(m){
+    var r=H('div','mrow',null,host),t=H('div',null,null,r);H('b',null,m.label,t);H('small',null,m.detail+'. '+m.source+'.',t);
+    var k=H('div','track',null,r);k.setAttribute('role','img');k.setAttribute('aria-label',m.pct+' percent');
+    H('i',null,null,k).style.left=m.pct+'%';var e=H('em',null,pct(m.pct),k);e.style.left=m.pct+'%';
+  });
+  var sc=H('div','mscale',null,host);H('span',null,null,sc);var d=H('div',null,null,sc);['0%','50%','100%'].forEach(function(v){H('span',null,v,d);});
+  table('why',['Measure','Source','Share'],S.late_2025.map(function(m){return [m.label,m.source,pct(m.pct)];}),2);
+})();
+
+/* chart 5: Census sectors */
+(function(){
+  var host=document.getElementById('census'),max=50;
+  C.rows.forEach(function(r){
+    var row=H('div','brow',null,host);H('span',null,r.sector,row);
+    var w=H('div','bw',null,row);H('i',null,null,w).style.width='calc((100% - 52px) * '+(r.pct/max)+')';H('b',null,r.pct.toFixed(1)+'%',w);
+    row.tabIndex=0;row.setAttribute('aria-label',r.sector+': '+r.pct.toFixed(1)+' percent of firms, standard error '+r.se.toFixed(2));
+    function on(e){var b=row.getBoundingClientRect();showTip(r.sector,[{color:COL.total,value:r.pct.toFixed(1)+'%',name:'of firms'}],'Standard error: '+r.se.toFixed(2)+' points',e&&e.clientX?e.clientX:b.left+120,b.top);}
+    row.addEventListener('pointermove',on);row.addEventListener('pointerdown',on);row.addEventListener('pointerleave',hideTip);row.addEventListener('focus',function(){on();});row.addEventListener('blur',hideTip);
+  });
+  table('census',['Sector','Firms using AI','Standard error'],C.rows.map(function(r){return [r.sector,r.pct.toFixed(1)+'%',r.se.toFixed(2)];}),1);
+})();
+
+/* table buttons */
+document.querySelectorAll('[data-table]').forEach(function(b){b.addEventListener('click',function(){
+  var id=b.getAttribute('data-table'),t=document.getElementById(id+'-table'),c=document.getElementById(id),open=t.hidden;
+  t.hidden=!open;c.hidden=open;b.textContent=open?'Chart':'Table';
+  if(id==='freq')document.getElementById('freq-key').hidden=open;
+  if(id==='pew')c.parentNode.hidden=open;
+  if(!open)redraw.forEach(function(f){f();});
+});});
+var timer;window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(function(){redraw.forEach(function(f){f();});},150);});
+}
+var redraw=[];
+})();
+</script>
+</body>
+</html>
