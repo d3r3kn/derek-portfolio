@@ -211,7 +211,7 @@ header.scene{padding-bottom:0}
 .amb-flap{animation:amb-flap .9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
 .amb-fa{animation:amb-frame .5s steps(1,end) infinite}
 @keyframes amb-x{to{transform:translateX(-1200px)}}
-@keyframes amb-dash{to{stroke-dashoffset:-64}}
+@keyframes amb-dash{to{stroke-dashoffset:64}}
 @keyframes amb-turn{to{transform:rotate(360deg)}}
 @keyframes amb-sway{0%,100%{transform:translateX(-34px)}50%{transform:translateX(34px)}}
 @keyframes amb-pkt{from{stroke-dashoffset:103}to{stroke-dashoffset:0}}

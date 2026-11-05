@@ -9,6 +9,7 @@ W, H = 1200, 180
 PAT = (
     '<pattern id="amb-h1" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 7L7-1M-1 1L1-1M5 7L7 5" fill="none" stroke="currentColor" stroke-width=".7"/></pattern>'
     '<pattern id="amb-h2" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 7L7-1M-1 1L1-1M5 7L7 5M-1-1L7 7M-1 5L1 7M5-1L7 1" fill="none" stroke="currentColor" stroke-width=".7"/></pattern>'
+    '<pattern id="amb-h2w" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 7L7-1M-1 1L1-1M5 7L7 5M-1-1L7 7M-1 5L1 7M5-1L7 1" fill="none" stroke="var(--bg)" stroke-width=".7"/></pattern>'
     '<pattern id="amb-h3" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M0 2H4" fill="none" stroke="currentColor" stroke-width=".6"/></pattern>'
     '<pattern id="amb-hv" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M2 0V4" fill="none" stroke="currentColor" stroke-width=".6"/></pattern>'
     '<pattern id="amb-dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r=".55" fill="currentColor"/></pattern>'
@@ -38,23 +39,24 @@ def scallop(cx, cy, r, n=9, bulge=1.22, start=0.0):
         d.append(f"Q{c[0]:.1f} {c[1]:.1f} {p[0]:.1f} {p[1]:.1f}")
     return "".join(d) + "Z"
 
+WHITE = 'fill="url(#amb-h2w)" stroke="none" opacity=".35"'
+
 def tree(x, g, r, lean=0):
-    """A round tree on ground y=g with a solid ink crown and a paper highlight on the lit side."""
+    """A round tree on ground y=g: solid ink crown with a faint paper cross-hatch."""
     cy = g - r * 1.9
     crown = scallop(x, cy, r, n=10, start=.3)
-    glint = scallop(x - r * .3, cy - r * .25, r * .32, n=6, start=1)
     trunk = f"M{x-1.8} {g}L{x-1.3+lean} {cy+r*.3}H{x+1.3+lean}L{x+1.8} {g}Z"
     return (f'<path d="{trunk}" fill="currentColor" stroke-width="1.1"/>'
-            f'<path d="{crown}" fill="currentColor" stroke-width="1.1"/>'
-            f'<path d="{glint}" fill="var(--bg)" stroke="none" opacity=".6"/>')
+            f'<path d="{crown}" fill="currentColor" stroke-width="1.1"/><path d="{crown}" {WHITE}/>')
 
 def cypress(x, g, h):
     d = (f"M{x} {g}L{x-4} {g-h*.35}L{x-3} {g-h*.6}L{x-1.5} {g-h*.85}L{x} {g-h}"
          f"L{x+1.5} {g-h*.85}L{x+3} {g-h*.6}L{x+4} {g-h*.35}Z")
-    return f'<path d="{d}" fill="currentColor" stroke-width="1"/>'
+    return f'<path d="{d}" fill="currentColor" stroke-width="1"/><path d="{d}" {WHITE}/>'
 
 def bush(x, g, r):
-    return f'<path d="{scallop(x, g - r * .4, r, n=7, start=3.3)}" fill="currentColor" stroke-width=".9"/>'
+    d = scallop(x, g - r * .4, r, n=7, start=3.3)
+    return f'<path d="{d}" fill="currentColor" stroke-width=".9"/><path d="{d}" {WHITE}/>'
 
 def wheel(wx, wy, r=8):
     return (f'<g transform="translate({wx} {wy})"><circle r="{r}" fill="var(--bg)" stroke-width="1.6"/>'
