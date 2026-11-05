@@ -155,7 +155,7 @@ def road():
             f'<rect x="0" y="147" width="1200" height="5" fill="url(#amb-dots)" stroke="none" opacity=".5"/>'
             f'<rect x="0" y="153" width="1200" height="27" fill="url(#amb-h3)" stroke="none" opacity=".16"/>'
             f'<path class="amb-lane" d="M0 164H1200" stroke-width="1.6" stroke-dasharray="34 30" opacity=".5"/>'
-            + car("coupe", 120, 29, -4) + car("sedan", 390, 23, -15) + car("suv", 680, 36, -9) + car("wagon", 950, 27, -21)
+            + car("coupe", 80, 29, -4) + car("sedan", 320, 23, -15) + car("suv", 556, 36, -9) + car("wagon", 900, 27, -21)
             + '</g>')
     return wrap("sc-road", defs, body)
 
@@ -186,13 +186,31 @@ def gable(x, top, w, rise, depth, over=4):
 
 def ecg():
     g = H
-    # hospital: wide block with a central bay (its own roof and side), pediment, cross, steps and a flag
-    hx, hw, ht = 70, 230, 80
+    # modern wing at the left, with a helipad sign and a blinking mast
+    wx, ww, wt = 30, 150, g - 104
+    wing = block(wx, wt, ww, depth=14)
+    for yy in range(wt + 12, g - 18, 18):
+        for xx in range(wx + 10, wx + ww - 14, 20):
+            wing += window(xx, yy, 12, 11)
+    wing += (f'<path d="M{wx+10} {wt-2}V{wt-24}" stroke-width="1.2"/><circle cx="{wx+10}" cy="{wt-27}" r="3" fill="var(--bg)" stroke-width="1"/>'
+             f'<g class="amb-fa"><circle cx="{wx+10}" cy="{wt-27}" r="2" fill="currentColor" stroke="none"/></g>'
+             f'<circle cx="{wx+ww-30}" cy="{wt-12}" r="10" fill="var(--bg)" stroke-width="1.2"/><path d="M{wx+ww-30} {wt-2}V{wt}" stroke-width="1.2"/>'
+             f'<path d="M{wx+ww-34} {wt-17}V{wt-7}M{wx+ww-26} {wt-17}V{wt-7}M{wx+ww-34} {wt-12}H{wx+ww-26}" stroke-width="1.6"/>')
+    # clinic with a pitched roof and a signpost
+    cx, cw, ct = 250, 110, g - 54
+    clinic = (block(cx, ct, cw, depth=10, roof=False) + gable(cx, ct, cw, 26, 10, over=6)
+              + f'{window(cx+12, ct+14, 14, 18)}{window(cx+cw-26, ct+14, 14, 18)}'
+              f'<path d="M{cx+cw/2-9} {g}V{ct+16}H{cx+cw/2+9}V{g}" fill="url(#amb-hv)" stroke-width="1.1"/>'
+              f'<path d="M{cx+cw/2+9} {ct-14}V{ct-22}M{cx+cw/2+3} {ct-18}H{cx+cw/2+15}" stroke-width="2.6"/>'
+              f'<path d="M{cx-26} {g}V{g-40}M{cx-36} {g-40}H{cx-16}V{g-56}H{cx-36}Z" fill="var(--bg)" stroke-width="1.1"/>'
+              f'<path d="M{cx-26} {g-45}V{g-51}M{cx-29} {g-48}H{cx-23}" stroke-width="2"/>')
+    # hospital in the middle: wide block with a central bay, pediment, cross, steps and a waving flag
+    hx, hw, ht = 485, 230, 80
     hosp = block(hx, g - ht, hw)
     hosp += f'<path d="M{hx} {g-ht+8}H{hx+hw}" stroke-width=".8"/>'
     for yy, arch in ((g - ht + 14, True), (g - ht + 38, False), (g - ht + 58, False)):
-        for cx in list(range(hx + 12, hx + 80, 18)) + list(range(hx + 152, hx + 220, 18)):
-            hosp += window(cx, yy, 10, 16, arch)
+        for wcx in list(range(hx + 12, hx + 80, 18)) + list(range(hx + 152, hx + 220, 18)):
+            hosp += window(wcx, yy, 10, 16, arch)
     bx, bw_, bt = hx + 85, 60, g - ht - 12
     hosp += (box(bx, bt, bw_, g, depth=12)
              + gable(bx, bt, bw_, 16, 12, over=3)
@@ -203,17 +221,9 @@ def ecg():
              f'<path d="M{bx+30} {bt+58}V{g}" stroke-width=".8"/>'
              f'<path d="M{bx-6} {g-3}H{bx+bw_+6}M{bx-10} {g-6}H{bx+bw_+10}" stroke-width=".9"/>'
              f'<path d="M{bx+bw_/2} {bt-16}V{bt-34}" stroke-width="1.1"/>'
-             f'<path d="M{bx+bw_/2} {bt-33}q7 2 14 0v8q-7 2-14 0Z" fill="url(#amb-h3)" stroke-width="1"/>')
-    # clinic with a pitched roof and a signpost
-    cx, cw, ct = 390, 110, g - 54
-    clinic = (block(cx, ct, cw, depth=10, roof=False) + gable(cx, ct, cw, 26, 10, over=6)
-              + f'{window(cx+12, ct+14, 14, 18)}{window(cx+cw-26, ct+14, 14, 18)}'
-              f'<path d="M{cx+cw/2-9} {g}V{ct+16}H{cx+cw/2+9}V{g}" fill="url(#amb-hv)" stroke-width="1.1"/>'
-              f'<path d="M{cx+cw/2+9} {ct-14}V{ct-22}M{cx+cw/2+3} {ct-18}H{cx+cw/2+15}" stroke-width="2.6"/>'
-              f'<path d="M{cx-26} {g}V{g-40}M{cx-36} {g-40}H{cx-16}V{g-56}H{cx-36}Z" fill="var(--bg)" stroke-width="1.1"/>'
-              f'<path d="M{cx-26} {g-45}V{g-51}M{cx-29} {g-48}H{cx-23}" stroke-width="2"/>')
+             f'<g transform="translate({bx+bw_/2} {bt-33})"><path class="amb-wave" d="M0 0q7 2 14 0v8q-7 2-14 0Z" fill="url(#amb-h3)" stroke-width="1"/></g>')
     # pharmacy: scalloped awning, big window with mortar and pestle, sign board
-    px, pw, pt = 600, 150, g - 62
+    px, pw, pt = 800, 150, g - 62
     awn = "".join("a7 5 0 0 1 14 0" for _ in range(pw // 14))
     pharm = (block(px, pt, pw, depth=12)
              + f'<path d="M{px} {pt+14}H{px+pw}V{pt+6}H{px}Z" fill="url(#amb-h3)" stroke-width="1"/>'
@@ -223,19 +233,10 @@ def ecg():
              f'<path d="M{px+36} {pt+52}h30l-5 14h-20zM{px+58} {pt+44}l10-9" stroke-width="1.3" fill="var(--bg)"/>'
              f'<path d="M{px+104} {g}V{pt+42}A11 11 0 0 1 {px+126} {pt+42}V{g}Z" fill="url(#amb-h2)" stroke-width="1.1"/>'
              f'<path d="M{px+12} {g-6}H{px+90}M{px+12} {g-3}H{px+90}" stroke-width=".8"/>')
-    # lamp post, a modern wing with a helipad sign and a blinking mast, trees
-    lamp = ('<path d="M820 180V116M814 116H826M820 116V108a6 6 0 0 1 12 0v8h-12" stroke-width="1.3" fill="var(--bg)"/>'
-            '<path d="M814 180H826" stroke-width="1.4"/>')
-    wx, ww, wt = 880, 150, g - 104
-    wing = block(wx, wt, ww, depth=14)
-    for yy in range(wt + 12, g - 18, 18):
-        for xx in range(wx + 10, wx + ww - 14, 20):
-            wing += window(xx, yy, 12, 11)
-    wing += (f'<path d="M{wx+10} {wt-2}V{wt-24}" stroke-width="1.2"/><circle cx="{wx+10}" cy="{wt-27}" r="3" fill="var(--bg)" stroke-width="1"/>'
-             f'<g class="amb-fa"><circle cx="{wx+10}" cy="{wt-27}" r="2" fill="currentColor" stroke="none"/></g>'
-             f'<circle cx="{wx+ww-30}" cy="{wt-12}" r="10" fill="var(--bg)" stroke-width="1.2"/><path d="M{wx+ww-30} {wt-2}V{wt}" stroke-width="1.2"/>'
-             f'<path d="M{wx+ww-34} {wt-17}V{wt-7}M{wx+ww-26} {wt-17}V{wt-7}M{wx+ww-34} {wt-12}H{wx+ww-26}" stroke-width="1.6"/>')
-    trees = tree(348, g, 13) + tree(545, g, 11) + bush(575, g, 7) + tree(1118, g, 14, lean=2) + bush(1150, g, 8) + bush(30, g, 9) + bush(52, g, 6)
+    lamp = ('<path d="M990 180V116M984 116H996M990 116V108a6 6 0 0 1 12 0v8h-12" stroke-width="1.3" fill="var(--bg)"/>'
+            '<path d="M984 180H996" stroke-width="1.4"/>')
+    trees = (bush(12, g, 7) + tree(212, g, 12) + tree(398, g, 13) + bush(430, g, 6) + tree(748, g, 11) + bush(778, g, 7)
+             + tree(1050, g, 14, lean=2) + bush(1082, g, 8) + tree(1140, g, 10) + bush(1172, g, 6))
     # the trace, kept clear above the rooftops
     beat = "M0 30L62 30Q72 22 82 30L112 30L118 36L126 4L134 44L140 30L184 30Q198 18 212 30L300 30"
     parts = []
@@ -243,7 +244,7 @@ def ecg():
         seg = re.sub(r"(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)", lambda m: f"{float(m.group(1))+i*300:g} {m.group(2)}", beat)
         parts.append(seg if i == 0 else seg.replace("M", "L", 1))
     trace = " ".join(parts)
-    # the ambulance: box body, cab, belt stripe, cross, alternating light bar, spinning wheels
+    # the ambulance: drives in, stops at the entrance with lights going, drives off (amb-arrive)
     amb = ('<g transform="translate(0 180)">'
            '<ellipse cx="38" cy="0" rx="44" ry="3.2" fill="url(#amb-h3)" stroke="none" opacity=".75"/>'
            '<path d="M1-9V-36Q1-38 3-38H45Q47-38 47-36V-31H52L62-20 72-18Q75-17 75-12V-9Z" fill="var(--bg)" stroke-width="1.5"/>'
@@ -256,13 +257,28 @@ def ecg():
            '<g class="amb-fa"><path d="M14-40h9v1.5h-9z" fill="currentColor" stroke="none"/></g>'
            '<g class="amb-fb"><path d="M25-40h9v1.5h-9z" fill="currentColor" stroke="none"/></g>'
            + wheel(13, -7, 7) + wheel(61, -7, 7) + '</g>')
+    # a helicopter crossing right to left above the street, rotor blurring, gentle bob
+    heli = ('<g class="amb-heli"><g class="amb-bob" transform="translate(0 58)">'
+            '<path d="M-8 0q0-9 10-9h14q8 0 10 7l0 6q-2 4-8 4H0q-8 0-8-8Z" fill="var(--bg)" stroke-width="1.2"/>'
+            '<path d="M14-9q0-5 8-5h2q6 0 6 5v3H14Z" fill="url(#amb-h1)" stroke-width="1"/>'
+            '<path d="M26-1L54-3V2L26 4Z" fill="var(--bg)" stroke-width="1.1"/><path d="M52-11V6" stroke-width="1.1"/>'
+            '<path class="amb-tail" d="M48-3h8" stroke-width="1"/>'
+            '<path d="M4 8V11M20 8V11M0 11H26" stroke-width="1.1"/><path d="M10-9V-13" stroke-width="1.2"/>'
+            '<path d="M6-2V2M4 0H8" stroke-width="1.6"/>'
+            '<g transform="translate(10 -13)"><path class="amb-rotor" d="M-26 0H26" stroke-width="1.3"/></g></g></g>')
+    # a pedestrian walking along the street
+    walker = ('<g class="amb-walk"><g transform="translate(0 180)">'
+              '<circle cx="0" cy="-20" r="2.6" fill="var(--bg)" stroke-width="1"/><path d="M0-17V-8" stroke-width="1.3"/>'
+              '<path d="M0-15l-3 5M0-15l3 4" stroke-width="1"/>'
+              '<g class="amb-fa"><path d="M0-8l-3 8M0-8l3 8" stroke-width="1.2"/></g>'
+              '<g class="amb-fb"><path d="M0-8l-1 8M0-8l1 8" stroke-width="1.2"/></g></g></g>')
     defs = ('<pattern id="amb-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-width="1"/></pattern>'
             f'<path id="amb-beat" d="{trace}"/>')
     body = (f'<rect width="{W}" height="{H}" fill="url(#amb-grid)" opacity=".08"/>'
-            f'<g {INK}>{hosp}{clinic}{pharm}{lamp}{wing}{trees}'
+            f'<g {INK}>{heli}{wing}{clinic}{hosp}{pharm}{lamp}{trees}'
             f'<rect x="0" y="172" width="1200" height="8" fill="url(#amb-h3)" stroke="none" opacity=".25"/>'
             f'<g class="amb-scroll" stroke-width="1.7" opacity=".85"><use href="#amb-beat"/><use href="#amb-beat" x="1200"/></g>'
-            f'<g class="amb-cross">{amb}</g></g>')
+            f'{walker}<g class="amb-arrive">{amb}</g></g>')
     return wrap("sc-ecg", defs, body)
 
 # ---------------------------------------------------------------- AI Adoption: signals over industries
