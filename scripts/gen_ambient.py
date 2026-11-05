@@ -39,21 +39,28 @@ def scallop(cx, cy, r, n=9, bulge=1.22, start=0.0):
     return "".join(d) + "Z"
 
 def tree(x, g, r, lean=0):
-    """A round tree on ground y=g with a hatched crown and a darker shadow side."""
+    """A round tree on ground y=g: solid paper under a cross-hatched crown, denser on the shadow side."""
     cy = g - r * 1.9
     crown = scallop(x, cy, r, n=10, start=.3)
     shade = scallop(x + r * .3, cy + r * .1, r * .62, n=8, start=1)
-    return (f'<path d="M{x-1.6} {g}L{x-1.2+lean} {cy+r*.3}M{x+1.6} {g}L{x+1.2+lean} {cy+r*.3}" stroke-width="1.1"/>'
-            f'<path d="{crown}" fill="url(#amb-h1)" stroke-width="1"/>'
-            f'<path d="{shade}" fill="url(#amb-h2)" stroke="none" opacity=".7"/>')
+    trunk = f"M{x-1.8} {g}L{x-1.3+lean} {cy+r*.3}H{x+1.3+lean}L{x+1.8} {g}Z"
+    return (f'<path d="{trunk}" fill="url(#amb-hv)" stroke-width="1.1"/>'
+            f'<path d="{crown}" fill="var(--bg)" stroke="none"/>'
+            f'<path d="{crown}" fill="url(#amb-h2)" stroke-width="1.1"/>'
+            f'<path d="{shade}" fill="url(#amb-h2)" stroke="none"/>'
+            f'<path d="{shade}" fill="url(#amb-h3)" stroke="none" opacity=".8"/>')
 
 def cypress(x, g, h):
     d = (f"M{x} {g}L{x-4} {g-h*.35}L{x-3} {g-h*.6}L{x-1.5} {g-h*.85}L{x} {g-h}"
          f"L{x+1.5} {g-h*.85}L{x+3} {g-h*.6}L{x+4} {g-h*.35}Z")
-    return f'<path d="{d}" fill="url(#amb-hv)" stroke-width="1"/>'
+    return (f'<path d="{d}" fill="var(--bg)" stroke="none"/>'
+            f'<path d="{d}" fill="url(#amb-h2)" stroke-width="1"/>'
+            f'<path d="{d}" fill="url(#amb-hv)" stroke="none" opacity=".8"/>')
 
 def bush(x, g, r):
-    return f'<path d="{scallop(x, g - r * .4, r, n=7, start=3.3)}" fill="url(#amb-dots)" stroke-width=".9"/>'
+    d = scallop(x, g - r * .4, r, n=7, start=3.3)
+    return (f'<path d="{d}" fill="var(--bg)" stroke="none"/>'
+            f'<path d="{d}" fill="url(#amb-h2)" stroke-width=".9"/>')
 
 def wheel(wx, wy, r=8):
     return (f'<g transform="translate({wx} {wy})"><circle r="{r}" fill="var(--bg)" stroke-width="1.6"/>'
@@ -140,7 +147,8 @@ def road():
              f'<g transform="translate(0 40)">{bird}</g><g transform="translate(22 32)">{bird}</g><g transform="translate(38 46)">{bird}</g></g>')
     defs = (f'<g id="amb-mts" clip-path="url(#amb-c)">{mts(-W)}{mts(0)}{mts(W)}</g>'
             f'<clipPath id="amb-hillc"><path d="{hill}"/></clipPath>{hills}'
-            f'{layer("amb-near", near)}{cloud}')
+            f'<g id="amb-nearobj">{near(0)}</g>'
+            f'<g id="amb-near" clip-path="url(#amb-c)"><use href="#amb-nearobj" x="{-W}"/><use href="#amb-nearobj"/><use href="#amb-nearobj" x="{W}"/></g>{cloud}')
     body = (f'<g {INK}>{sky}{sun}{birds}'
             f'<g class="amb-drift">' + "".join(f'<use href="#amb-cloud" x="{x}" y="{y}" opacity=".8"/>' for x, y in
             ((160, 46), (620, 24), (980, 60), (1360, 46), (1820, 24), (2180, 60))) + '</g>'
