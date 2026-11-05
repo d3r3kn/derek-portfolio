@@ -39,28 +39,22 @@ def scallop(cx, cy, r, n=9, bulge=1.22, start=0.0):
     return "".join(d) + "Z"
 
 def tree(x, g, r, lean=0):
-    """A round tree on ground y=g: solid paper under a cross-hatched crown, denser on the shadow side."""
+    """A round tree on ground y=g with a solid ink crown and a paper highlight on the lit side."""
     cy = g - r * 1.9
     crown = scallop(x, cy, r, n=10, start=.3)
-    shade = scallop(x + r * .3, cy + r * .1, r * .62, n=8, start=1)
+    glint = scallop(x - r * .3, cy - r * .25, r * .32, n=6, start=1)
     trunk = f"M{x-1.8} {g}L{x-1.3+lean} {cy+r*.3}H{x+1.3+lean}L{x+1.8} {g}Z"
-    return (f'<path d="{trunk}" fill="url(#amb-hv)" stroke-width="1.1"/>'
-            f'<path d="{crown}" fill="var(--bg)" stroke="none"/>'
-            f'<path d="{crown}" fill="url(#amb-h2)" stroke-width="1.1"/>'
-            f'<path d="{shade}" fill="url(#amb-h2)" stroke="none"/>'
-            f'<path d="{shade}" fill="url(#amb-h3)" stroke="none" opacity=".8"/>')
+    return (f'<path d="{trunk}" fill="currentColor" stroke-width="1.1"/>'
+            f'<path d="{crown}" fill="currentColor" stroke-width="1.1"/>'
+            f'<path d="{glint}" fill="var(--bg)" stroke="none" opacity=".6"/>')
 
 def cypress(x, g, h):
     d = (f"M{x} {g}L{x-4} {g-h*.35}L{x-3} {g-h*.6}L{x-1.5} {g-h*.85}L{x} {g-h}"
          f"L{x+1.5} {g-h*.85}L{x+3} {g-h*.6}L{x+4} {g-h*.35}Z")
-    return (f'<path d="{d}" fill="var(--bg)" stroke="none"/>'
-            f'<path d="{d}" fill="url(#amb-h2)" stroke-width="1"/>'
-            f'<path d="{d}" fill="url(#amb-hv)" stroke="none" opacity=".8"/>')
+    return f'<path d="{d}" fill="currentColor" stroke-width="1"/>'
 
 def bush(x, g, r):
-    d = scallop(x, g - r * .4, r, n=7, start=3.3)
-    return (f'<path d="{d}" fill="var(--bg)" stroke="none"/>'
-            f'<path d="{d}" fill="url(#amb-h2)" stroke-width=".9"/>')
+    return f'<path d="{scallop(x, g - r * .4, r, n=7, start=3.3)}" fill="currentColor" stroke-width=".9"/>'
 
 def wheel(wx, wy, r=8):
     return (f'<g transform="translate({wx} {wy})"><circle r="{r}" fill="var(--bg)" stroke-width="1.6"/>'
