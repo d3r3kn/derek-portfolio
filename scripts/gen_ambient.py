@@ -163,84 +163,95 @@ def window(x, y, w, h, arch=False, hatch="amb-h1"):
         d = f"M{x} {y}h{w}v{h}h-{w}Z"
     return f'<path d="{d}" fill="url(#{hatch})" stroke-width=".9"/><path d="M{x+w/2} {y+(w/2 if arch else 0)}V{y+h}" stroke-width=".5" opacity=".6"/>'
 
-def block(x, top, w, depth=12, roof=True):
-    """Front face, hatched side face in slight perspective, dotted roof."""
-    d = depth; s = d * .5
-    out = (f'<path d="M{x+w} {top}L{x+w+d} {top-s}V{H-s}L{x+w} {H}Z" fill="url(#amb-h2)" stroke-width="1"/>')
-    if roof: out += f'<path d="M{x} {top}H{x+w}L{x+w+d} {top-s}H{x+d}Z" fill="url(#amb-dots)" stroke-width="1"/>'
-    out += f'<path d="M{x} {top}H{x+w}V{H}H{x}Z" fill="var(--bg)" stroke-width="1.3"/>'
+def box(x, top, w, bottom=H, depth=12, roof=True):
+    """Front face, hatched side face in slight perspective, dotted roof; bottom defaults to the ground."""
+    d = depth; sh = d * .5
+    out = f'<path d="M{x+w} {top}L{x+w+d} {top-sh}V{bottom-sh}L{x+w} {bottom}Z" fill="url(#amb-h2)" stroke-width="1"/>'
+    if roof: out += f'<path d="M{x} {top}H{x+w}L{x+w+d} {top-sh}H{x+d}Z" fill="url(#amb-dots)" stroke-width="1"/>'
+    out += f'<path d="M{x} {top}H{x+w}V{bottom}H{x}Z" fill="var(--bg)" stroke-width="1.3"/>'
     return out
+
+def block(x, top, w, depth=12, roof=True):
+    return box(x, top, w, H, depth, roof)
+
+def gable(x, top, w, rise, depth, over=4):
+    """A pitched roof with depth: the near slope as a hatched parallelogram, then the front triangle."""
+    d = depth; sh = d * .5
+    return (f'<path d="M{x+w/2} {top-rise}L{x+w+over} {top}L{x+w+over+d} {top-sh}L{x+w/2+d} {top-rise-sh}Z" fill="url(#amb-h2)" stroke-width="1"/>'
+            f'<path d="M{x-over} {top}L{x+w/2} {top-rise}L{x+w+over} {top}Z" fill="url(#amb-h1)" stroke-width="1.2"/>')
 
 def ecg():
     g = H
-    # hospital: wide block with a central bay, pediment, cross, steps and a flag
-    hx, hw, ht = 70, 230, 96
+    # hospital: wide block with a central bay (its own roof and side), pediment, cross, steps and a flag
+    hx, hw, ht = 70, 230, 80
     hosp = block(hx, g - ht, hw)
     hosp += f'<path d="M{hx} {g-ht+8}H{hx+hw}" stroke-width=".8"/>'
-    for r, (yy, arch) in enumerate(((g - ht + 16, True), (g - ht + 44, False), (g - ht + 70, False))):
+    for yy, arch in ((g - ht + 14, True), (g - ht + 38, False), (g - ht + 58, False)):
         for cx in list(range(hx + 12, hx + 80, 18)) + list(range(hx + 152, hx + 220, 18)):
-            hosp += window(cx, yy, 10, 18, arch)
-    bx, bw_, bt = hx + 85, 60, g - ht - 14
-    hosp += (f'<path d="M{bx} {bt}H{bx+bw_}V{g}H{bx}Z" fill="var(--bg)" stroke-width="1.3"/>'
-             f'<path d="M{bx-3} {bt}L{bx+bw_/2} {bt-20}L{bx+bw_+3} {bt}Z" fill="url(#amb-h1)" stroke-width="1.2"/>'
-             f'<circle cx="{bx+bw_/2}" cy="{bt+22}" r="11" fill="var(--bg)" stroke-width="1.2"/>'
-             f'<path d="M{bx+bw_/2} {bt+15}V{bt+29}M{bx+bw_/2-7} {bt+22}H{bx+bw_/2+7}" stroke-width="3.2"/>'
-             f'{window(bx+8, bt+44, 10, 18, True)}{window(bx+bw_-18, bt+44, 10, 18, True)}'
+            hosp += window(cx, yy, 10, 16, arch)
+    bx, bw_, bt = hx + 85, 60, g - ht - 12
+    hosp += (box(bx, bt, bw_, g, depth=12)
+             + gable(bx, bt, bw_, 16, 12, over=3)
+             + f'<circle cx="{bx+bw_/2}" cy="{bt+20}" r="10" fill="var(--bg)" stroke-width="1.2"/>'
+             f'<path d="M{bx+bw_/2} {bt+14}V{bt+26}M{bx+bw_/2-6} {bt+20}H{bx+bw_/2+6}" stroke-width="3"/>'
+             f'{window(bx+8, bt+40, 10, 16, True)}{window(bx+bw_-18, bt+40, 10, 16, True)}'
              f'<path d="M{bx+20} {g}V{bt+58}A10 10 0 0 1 {bx+40} {bt+58}V{g}Z" fill="url(#amb-h2)" stroke-width="1.1"/>'
              f'<path d="M{bx+30} {bt+58}V{g}" stroke-width=".8"/>'
              f'<path d="M{bx-6} {g-3}H{bx+bw_+6}M{bx-10} {g-6}H{bx+bw_+10}" stroke-width=".9"/>'
-             f'<path d="M{bx+bw_/2} {bt-20}V{bt-46}M{bx+bw_/2} {bt-45}q7 2 14 0v9q-7 2-14 0Z" stroke-width="1.1"/>'
-             f'<path d="M{bx+bw_/2} {bt-45}q7 2 14 0v9q-7 2-14 0Z" fill="url(#amb-h3)" stroke="none"/>')
-    # clinic with a gable roof and a signpost
-    cx, cw, ct = 390, 110, g - 60
-    clinic = (block(cx, ct, cw, depth=10, roof=False)
-              + f'<path d="M{cx-6} {ct}L{cx+cw/2} {ct-30}L{cx+cw+6} {ct}Z" fill="url(#amb-h1)" stroke-width="1.2"/>'
-              f'<path d="M{cx+cw+4} {ct}L{cx+cw+14} {ct-5}L{cx+cw/2+10} {ct-35}L{cx+cw/2} {ct-30}" fill="url(#amb-h2)" stroke-width="1"/>'
-              f'{window(cx+12, ct+16, 14, 20)}{window(cx+cw-26, ct+16, 14, 20)}'
-              f'<path d="M{cx+cw/2-9} {g}V{ct+18}H{cx+cw/2+9}V{g}" fill="url(#amb-hv)" stroke-width="1.1"/>'
-              f'<path d="M{cx+cw/2+9} {ct-16}V{ct-26}M{cx+cw/2+2} {ct-21}H{cx+cw/2+16}" stroke-width="2.6"/>'
-              f'<path d="M{cx-26} {g}V{g-44}M{cx-36} {g-44}H{cx-16}V{g-62}H{cx-36}Z" fill="var(--bg)" stroke-width="1.1"/>'
-              f'<path d="M{cx-26} {g-50}V{g-56}M{cx-29} {g-53}H{cx-23}" stroke-width="2"/>')
+             f'<path d="M{bx+bw_/2} {bt-16}V{bt-34}" stroke-width="1.1"/>'
+             f'<path d="M{bx+bw_/2} {bt-33}q7 2 14 0v8q-7 2-14 0Z" fill="url(#amb-h3)" stroke-width="1"/>')
+    # clinic with a pitched roof and a signpost
+    cx, cw, ct = 390, 110, g - 54
+    clinic = (block(cx, ct, cw, depth=10, roof=False) + gable(cx, ct, cw, 26, 10, over=6)
+              + f'{window(cx+12, ct+14, 14, 18)}{window(cx+cw-26, ct+14, 14, 18)}'
+              f'<path d="M{cx+cw/2-9} {g}V{ct+16}H{cx+cw/2+9}V{g}" fill="url(#amb-hv)" stroke-width="1.1"/>'
+              f'<path d="M{cx+cw/2+9} {ct-14}V{ct-22}M{cx+cw/2+3} {ct-18}H{cx+cw/2+15}" stroke-width="2.6"/>'
+              f'<path d="M{cx-26} {g}V{g-40}M{cx-36} {g-40}H{cx-16}V{g-56}H{cx-36}Z" fill="var(--bg)" stroke-width="1.1"/>'
+              f'<path d="M{cx-26} {g-45}V{g-51}M{cx-29} {g-48}H{cx-23}" stroke-width="2"/>')
     # pharmacy: scalloped awning, big window with mortar and pestle, sign board
-    px, pw, pt = 600, 150, g - 70
-    awn = "".join(f"a7 5 0 0 1 14 0" for _ in range(pw // 14))
+    px, pw, pt = 600, 150, g - 62
+    awn = "".join("a7 5 0 0 1 14 0" for _ in range(pw // 14))
     pharm = (block(px, pt, pw, depth=12)
              + f'<path d="M{px} {pt+14}H{px+pw}V{pt+6}H{px}Z" fill="url(#amb-h3)" stroke-width="1"/>'
-             f'<path d="M{px-4} {pt+32}{awn}" fill="url(#amb-h1)" stroke-width="1"/>'
-             f'<path d="M{px-4} {pt+32}L{px+8} {pt+22}H{px+pw-8}L{px+pw+4} {pt+32}" fill="url(#amb-h1)" stroke-width="1"/>'
-             f'<path d="M{px+12} {g-6}V{pt+40}H{px+90}V{g-6}Z" fill="url(#amb-dots)" stroke-width="1.1"/>'
-             f'<path d="M{px+36} {pt+56}h30l-5 14h-20zM{px+58} {pt+48}l10-9" stroke-width="1.3" fill="var(--bg)"/>'
-             f'<path d="M{px+104} {g}V{pt+44}A11 11 0 0 1 {px+126} {pt+44}V{g}Z" fill="url(#amb-h2)" stroke-width="1.1"/>'
+             f'<path d="M{px-4} {pt+30}L{px+8} {pt+20}H{px+pw-8}L{px+pw+4} {pt+30}Z" fill="url(#amb-h1)" stroke-width="1"/>'
+             f'<path d="M{px-4} {pt+30}{awn}" fill="var(--bg)" stroke-width="1"/>'
+             f'<path d="M{px+12} {g-6}V{pt+38}H{px+90}V{g-6}Z" fill="url(#amb-dots)" stroke-width="1.1"/>'
+             f'<path d="M{px+36} {pt+52}h30l-5 14h-20zM{px+58} {pt+44}l10-9" stroke-width="1.3" fill="var(--bg)"/>'
+             f'<path d="M{px+104} {g}V{pt+42}A11 11 0 0 1 {px+126} {pt+42}V{g}Z" fill="url(#amb-h2)" stroke-width="1.1"/>'
              f'<path d="M{px+12} {g-6}H{px+90}M{px+12} {g-3}H{px+90}" stroke-width=".8"/>')
-    # lamp post, a modern wing with a helipad sign, trees
+    # lamp post, a modern wing with a helipad sign and a blinking mast, trees
     lamp = ('<path d="M820 180V116M814 116H826M820 116V108a6 6 0 0 1 12 0v8h-12" stroke-width="1.3" fill="var(--bg)"/>'
             '<path d="M814 180H826" stroke-width="1.4"/>')
-    wx, ww, wt = 880, 150, g - 120
+    wx, ww, wt = 880, 150, g - 104
     wing = block(wx, wt, ww, depth=14)
-    for yy in range(wt + 14, g - 20, 20):
+    for yy in range(wt + 12, g - 18, 18):
         for xx in range(wx + 10, wx + ww - 14, 20):
-            wing += window(xx, yy, 12, 12)
-    wing += (f'<path d="M{wx+10} {wt-2}V{wt-30}" stroke-width="1.2"/><circle cx="{wx+10}" cy="{wt-33}" r="3" fill="var(--bg)" stroke-width="1"/>'
-             f'<g class="amb-fa"><circle cx="{wx+10}" cy="{wt-33}" r="2" fill="currentColor" stroke="none"/></g>'
-             f'<circle cx="{wx+ww-30}" cy="{wt-14}" r="11" fill="var(--bg)" stroke-width="1.2"/><path d="M{wx+ww-30} {wt-2}V{wt}" stroke-width="1.2"/>'
-             f'<path d="M{wx+ww-35} {wt-20}V{wt-8}M{wx+ww-25} {wt-20}V{wt-8}M{wx+ww-35} {wt-14}H{wx+ww-25}" stroke-width="1.6"/>')
-    trees = tree(348, g, 13) + tree(545, g, 11) + bush(575, g, 7) + tree(1150, g, 14, lean=2) + bush(1185, g, 8) + bush(30, g, 9) + bush(52, g, 6)
-    # the trace, rasterised as a scrolling path above the street
-    beat = ("M0 44L62 44Q72 34 82 44L112 44L118 50L126 8L134 62L140 44L184 44Q198 30 212 44L300 44")
+            wing += window(xx, yy, 12, 11)
+    wing += (f'<path d="M{wx+10} {wt-2}V{wt-24}" stroke-width="1.2"/><circle cx="{wx+10}" cy="{wt-27}" r="3" fill="var(--bg)" stroke-width="1"/>'
+             f'<g class="amb-fa"><circle cx="{wx+10}" cy="{wt-27}" r="2" fill="currentColor" stroke="none"/></g>'
+             f'<circle cx="{wx+ww-30}" cy="{wt-12}" r="10" fill="var(--bg)" stroke-width="1.2"/><path d="M{wx+ww-30} {wt-2}V{wt}" stroke-width="1.2"/>'
+             f'<path d="M{wx+ww-34} {wt-17}V{wt-7}M{wx+ww-26} {wt-17}V{wt-7}M{wx+ww-34} {wt-12}H{wx+ww-26}" stroke-width="1.6"/>')
+    trees = tree(348, g, 13) + tree(545, g, 11) + bush(575, g, 7) + tree(1118, g, 14, lean=2) + bush(1150, g, 8) + bush(30, g, 9) + bush(52, g, 6)
+    # the trace, kept clear above the rooftops
+    beat = "M0 30L62 30Q72 22 82 30L112 30L118 36L126 4L134 44L140 30L184 30Q198 18 212 30L300 30"
     parts = []
     for i in range(4):
         seg = re.sub(r"(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)", lambda m: f"{float(m.group(1))+i*300:g} {m.group(2)}", beat)
         parts.append(seg if i == 0 else seg.replace("M", "L", 1))
     trace = " ".join(parts)
-    # the ambulance: hatched windows, cross, flashing beacon, spinning wheels
+    # the ambulance: box body, cab, belt stripe, cross, alternating light bar, spinning wheels
     amb = ('<g transform="translate(0 180)">'
-           '<ellipse cx="36" cy="0" rx="42" ry="3.2" fill="url(#amb-h3)" stroke="none" opacity=".75"/>'
-           '<path d="M0-9V-30L8-32H44L56-20 68-18Q72-17 72-12V-9Z" fill="var(--bg)" stroke-width="1.5"/>'
-           '<path d="M46-30L54-20H38V-30ZM6-29H34V-21H6Z" fill="url(#amb-h1)" stroke-width="1"/>'
-           '<path d="M36-20V-10M18-19V-9M13-14H23M66-9H74" stroke-width="1"/><path d="M18-19V-9M13-14H23" stroke-width="2.6"/>'
-           '<circle cx="69" cy="-14" r="1.7" stroke-width="1"/>'
-           '<path d="M20-36h8v4h-8z" fill="var(--bg)" stroke-width="1"/><g class="amb-fa"><path d="M21-35h6v2h-6z" fill="currentColor" stroke="none"/></g>'
-           + wheel(14, -8, 7) + wheel(58, -8, 7) + '</g>')
+           '<ellipse cx="38" cy="0" rx="44" ry="3.2" fill="url(#amb-h3)" stroke="none" opacity=".75"/>'
+           '<path d="M1-9V-36Q1-38 3-38H45Q47-38 47-36V-31H52L62-20 72-18Q75-17 75-12V-9Z" fill="var(--bg)" stroke-width="1.5"/>'
+           '<path d="M53-30H58L66-21H53ZM38-34H45V-27H38Z" fill="url(#amb-h1)" stroke-width="1"/>'
+           '<path d="M1-25H47V-21H1Z" fill="url(#amb-h3)" stroke-width=".9"/>'
+           '<path d="M49-31V-10M55-18H59M70-9H78" stroke-width="1"/>'
+           '<path d="M22-18V-9M17.5-13.5H26.5" stroke-width="2.6"/>'
+           '<circle cx="73" cy="-14" r="1.6" stroke-width="1"/>'
+           '<path d="M13-41H35V-38H13Z" fill="var(--bg)" stroke-width="1"/>'
+           '<g class="amb-fa"><path d="M14-40h9v1.5h-9z" fill="currentColor" stroke="none"/></g>'
+           '<g class="amb-fb"><path d="M25-40h9v1.5h-9z" fill="currentColor" stroke="none"/></g>'
+           + wheel(13, -7, 7) + wheel(61, -7, 7) + '</g>')
     defs = ('<pattern id="amb-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-width="1"/></pattern>'
             f'<path id="amb-beat" d="{trace}"/>')
     body = (f'<rect width="{W}" height="{H}" fill="url(#amb-grid)" opacity=".08"/>'
@@ -264,14 +275,15 @@ def net():
     x = 20; b.append(block(x, G-120, 70, depth=10)); windows(x, G-120, 4, 8)
     b.append(f'<path d="M{x+35} {G-120}V{G-150}M{x+29} {G-140}H{x+41}" stroke-width="1.2"/><g class="amb-fa"><circle cx="{x+35}" cy="{G-152}" r="2.2" fill="currentColor" stroke="none"/></g>')
     # hospital
-    x = 120; b.append(block(x, G-58, 110, depth=10) + f'<path d="M{x+38} {G-80}H{x+72}V{G-58}H{x+38}Z" fill="var(--bg)" stroke-width="1.2"/>'
-                      f'<path d="M{x+55} {G-75}v12M{x+49} {G-69}h12" stroke-width="2.6"/>'); windows(x, G-58, 6, 3, cx=16, cy=15, pad=10)
+    x = 120; b.append(block(x, G-58, 110, depth=10) + box(x+38, G-80, 34, G-58, depth=10)
+                      + f'<path d="M{x+55} {G-75}v12M{x+49} {G-69}h12" stroke-width="2.6"/>'); windows(x, G-58, 6, 3, cx=16, cy=15, pad=10)
     # factory with sawtooth roof and chimney
     x = 262; saw = "".join(f"L{x+i*30} {G-70}L{x+i*30+30} {G-48}" for i in range(4))
     b.append(f'<path d="M{x+120} {G-48}L{x+130} {G-53}V{G-5}L{x+120} {G}Z" fill="url(#amb-h2)" stroke-width="1"/>'
              f'<path d="M{x} {G}V{G-48}{saw}V{G}Z" fill="var(--bg)" stroke-width="1.3"/>'
              + "".join(f'<path d="M{x+i*30} {G-48}V{G-70}L{x+i*30+30} {G-48}Z" fill="url(#amb-h1)" stroke="none"/>' for i in range(4))
-             + f'<path d="M{x+100} {G-96}h9v30h-9z" fill="url(#amb-hv)" stroke-width="1.1"/>')
+             + f'<path d="M{x+90} {G-70}L{x+120} {G-48}L{x+130} {G-53}L{x+100} {G-75}Z" fill="url(#amb-h2)" stroke-width="1"/>'
+             + f'<path d="M{x+100} {G-96}h9v30h-9z" fill="url(#amb-hv)" stroke-width="1.1"/><path d="M{x+109} {G-96}l4-2v30l-4 2z" fill="url(#amb-h2)" stroke-width="1"/>')
     windows(x, G-48, 7, 2, cx=16, cy=16, pad=10, ww=9, hh=8)
     smoke = "".join(f'<path class="amb-smoke" d="M{x+104.5} {G-100}c-3-3 2-7 0-10s3-6 0-9" stroke-width="1.1" style="animation-delay:-{d}s"/>' for d in (0, 2.5, 5))
     # retail with awning
@@ -280,12 +292,12 @@ def net():
     w.append(f'<rect class="amb-win" x="{x+16}" y="{G-28}" width="22" height="18" style="--d:-3s;--p:11s"/>'
              f'<rect class="amb-win" x="{x+52}" y="{G-28}" width="22" height="18" style="--d:-9s;--p:13s"/>')
     # school with a gable, bell tower and clock
-    x = 532; b.append(block(x, G-56, 100, depth=8, roof=False) + f'<path d="M{x-2} {G-56}L{x+50} {G-84}L{x+102} {G-56}Z" fill="url(#amb-h1)" stroke-width="1.2"/>'
-                      f'<path d="M{x+42} {G-80}V{G-98}H{x+58}V{G-80}M{x+42} {G-98}L{x+50} {G-108}L{x+58} {G-98}" fill="var(--bg)" stroke-width="1.1"/>'
+    x = 532; b.append(block(x, G-56, 100, depth=8, roof=False) + gable(x, G-56, 100, 28, 8, over=2)
+                      + f'<path d="M{x+42} {G-80}V{G-98}H{x+58}V{G-80}M{x+42} {G-98}L{x+50} {G-108}L{x+58} {G-98}" fill="var(--bg)" stroke-width="1.1"/>'
                       f'<circle cx="{x+50}" cy="{G-90}" r="5" stroke-width=".9"/><path d="M{x+50} {G-90}v-3.5M{x+50} {G-90}h2.5" stroke-width=".9"/>')
     windows(x, G-56, 5, 3, cx=17, cy=15, pad=11)
     # bank with pediment and columns
-    x = 662; b.append(block(x, G-64, 100, depth=8, roof=False) + f'<path d="M{x-4} {G-64}L{x+50} {G-86}L{x+104} {G-64}Z" fill="url(#amb-h1)" stroke-width="1.2"/>'
+    x = 662; b.append(block(x, G-64, 100, depth=8, roof=False) + gable(x, G-64, 100, 22, 8, over=4)
                       + "".join(f'<path d="M{x+11+i*18} {G-58}h6V{G-8}h-6z" fill="url(#amb-hv)" stroke-width="1"/>' for i in range(5))
                       + f'<path d="M{x-2} {G-4}H{x+102}" stroke-width="1"/>')
     windows(x+2, G-64, 4, 1, cx=18, cy=14, pad=21, ww=10, hh=24)
@@ -295,6 +307,7 @@ def net():
     windows(x, G-60, 6, 3, cx=16, cy=15, pad=11)
     # warehouse with barrel roof
     x = 932; b.append(f'<path d="M{x+110} {G-50}L{x+120} {G-55}V{G-5}L{x+110} {G}Z" fill="url(#amb-h2)" stroke-width="1"/>'
+                      f'<path d="M{x+110} {G-50}A55 30 0 0 0 {x+55} {G-80}L{x+65} {G-85}A55 30 0 0 1 {x+120} {G-55}Z" fill="url(#amb-h2)" stroke-width="1"/>'
                       f'<path d="M{x} {G}V{G-50}A55 30 0 0 1 {x+110} {G-50}V{G}Z" fill="var(--bg)" stroke-width="1.3"/>'
                       f'<path d="M{x} {G-50}A55 30 0 0 1 {x+110} {G-50}V{G-44}A55 30 0 0 0 {x} {G-44}Z" fill="url(#amb-h1)" stroke="none"/>'
                       f'<path d="M{x+38} {G-34}h34v34h-34z" fill="url(#amb-h3)" stroke-width="1"/><path d="M{x+38} {G-24}H{x+72}M{x+38} {G-14}H{x+72}" stroke-width=".8"/>')
@@ -304,11 +317,11 @@ def net():
     x = 1152; b.append(block(x, G-70, 56, depth=8)); windows(x, G-70, 3, 4, cx=16, cy=14, pad=8)
     trees = tree(105, G, 9) + tree(245, G, 10) + bush(400, G, 6) + tree(520, G, 8) + bush(648, G, 6) + tree(778, G, 10) + bush(918, G, 7) + tree(1058, G, 8)
 
-    nodes = [(60, 46), (170, 22), (300, 60), (430, 26), (545, 62), (665, 20), (790, 56),
+    nodes = [(96, 38), (170, 22), (300, 60), (430, 26), (545, 62), (665, 20), (790, 56),
              (905, 24), (1020, 62), (1125, 28), (1190, 64)]
     edges = [(0, 1), (1, 2), (1, 3), (0, 2), (2, 3), (2, 4), (3, 5), (3, 4), (4, 5), (4, 6), (5, 6), (5, 7),
              (6, 7), (6, 8), (7, 9), (7, 8), (8, 9), (8, 10), (9, 10)]
-    drops = [(0, 55, G-152), (2, 300, G-70), (4, 545, G-108), (6, 847, G-104), (8, 1020, G-80), (10, 1102, G-90)]
+    drops = [(0, 55, G-150), (2, 300, G-70), (4, 545, G-108), (6, 847, G-104), (8, 1020, G-80), (10, 1102, G-90)]
     base, pk, nd = [], [], []
     for a, c in edges:
         (x1, y1), (x2, y2) = nodes[a], nodes[c]
