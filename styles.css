@@ -236,4 +236,10 @@ header.scene{padding-bottom:0}
 @keyframes amb-rotor{from{transform:scaleX(1)}to{transform:scaleX(.15)}}
 @keyframes amb-wave{from{transform:skewY(-6deg)}to{transform:skewY(6deg)}}
 @keyframes amb-walk{from{transform:translateX(-30px)}to{transform:translateX(1230px)}}
+.amb-fly{animation:amb-fly 26s linear infinite}
+.amb-hop{animation:amb-hop 1.9s linear infinite;transform-box:fill-box;transform-origin:center}
+.amb-thrust{animation:amb-thrust 1.9s linear infinite}
+@keyframes amb-fly{from{transform:translateX(-160px)}to{transform:translateX(1360px)}}
+@keyframes amb-hop{0%{transform:translateY(0) rotate(10deg);animation-timing-function:ease-out}14%{transform:translateY(-14px) rotate(-12deg);animation-timing-function:ease-out}42%{transform:translateY(-30px) rotate(-5deg);animation-timing-function:ease-in}100%{transform:translateY(0) rotate(10deg)}}
+@keyframes amb-thrust{0%,40%{opacity:1}50%,100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.ambient *{animation:none!important}}

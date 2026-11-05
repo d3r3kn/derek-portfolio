@@ -84,6 +84,22 @@ def car(kind, x, dur, delay):
             f'<path d="{c["lines"]}" stroke-width="1"/><circle cx="{lx}" cy="{ly}" r="1.7" stroke-width="1"/>'
             + "".join(wheel(wx, -8) for wx in c["wheels"]) + '</g></g>')
 
+
+def roadster():
+    """A low roadster that crosses above the traffic, hopping on rocket thrusters."""
+    flame = lambda cls, dx, dy: (f'<g class="{cls}"><path d="M{dx} 0l{-6+dy*-.3:.1f} {10+dy}l{10:.0f} -4Z" fill="currentColor" stroke="none" opacity=".8"/>'
+                                 f'<path d="M{dx+2} 0l{-3} {6+dy*.6:.1f}l{5} -2Z" fill="var(--bg)" stroke="none"/></g>')
+    thrusters = "".join(
+        f'<g transform="translate({x} -5)"><path d="M-3 0h6v3h-6z" fill="currentColor" stroke="none"/>'
+        f'<g class="amb-thrust">{flame("amb-fa", 0, 0)}{flame("amb-fb", 0, 5)}</g></g>' for x in (28, 58))
+    return ('<g class="amb-fly"><g transform="translate(0 112)"><g class="amb-hop">'
+            + thrusters +
+            '<ellipse cx="44" cy="-6" rx="46" ry="2.4" fill="url(#amb-h3)" stroke="none" opacity=".4"/>'
+            '<path d="M2-8V-12L14-15 30-25H56L70-16 84-13Q88-12 88-9V-8Z" fill="var(--bg)" stroke-width="1.5"/>'
+            '<path d="M32-23H54L64-16H26Z" fill="url(#amb-h1)" stroke-width="1"/>'
+            '<path d="M44-16V-9M47-13H51M4-17H12M82-8H90" stroke-width="1"/><circle cx="85" cy="-12" r="1.5" stroke-width="1"/>'
+            + wheel(18, -8, 7) + wheel(68, -8, 7) + '</g></g></g>')
+
 def road():
     rnd = random.Random(5)
     # far mountains: lit face left (paper), shadow face right (hatch)
@@ -155,7 +171,7 @@ def road():
             f'<rect x="0" y="147" width="1200" height="5" fill="url(#amb-dots)" stroke="none" opacity=".5"/>'
             f'<rect x="0" y="153" width="1200" height="27" fill="url(#amb-h3)" stroke="none" opacity=".16"/>'
             f'<path class="amb-lane" d="M0 164H1200" stroke-width="1.6" stroke-dasharray="34 30" opacity=".5"/>'
-            + car("coupe", 80, 29, -4) + car("sedan", 320, 23, -15) + car("suv", 556, 36, -9) + car("wagon", 900, 27, -21)
+            + car("coupe", 80, 29, -4) + car("sedan", 320, 23, -15) + car("suv", 556, 36, -9) + car("wagon", 900, 27, -21) + roadster()
             + '</g>')
     return wrap("sc-road", defs, body)
 
