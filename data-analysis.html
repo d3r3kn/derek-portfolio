@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="$1.52 trillion in Medicaid provider payments from 238 million rows of public HHS data, charted and explained. Figures match HHS's own published charts to the cent.">
 <meta name="twitter:image" content="https://dereknye.com/shots/share-data-analysis.png?v=2">
 <meta name="twitter:image:alt" content="Chart of monthly Medicaid provider spending rising from 2018 to 2024, with the $1.52 trillion total.">
-<link rel="stylesheet" href="styles.css?v=20261026">
+<link rel="stylesheet" href="styles.css?v=20261105">
 <style>
 /* Chart tokens for the light Field Notebook theme. Every data color is at least 3:1 against --surface (#fffdf8), per WCAG 1.4.11. */
 :root{
@@ -170,10 +170,11 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
-  <header>
+  <header class="scene">
   <p class="crumb"><a href="data.html">← Data Analysis</a></p>
     <h1>Medicaid Provider Spending</h1>
     <p class="tag">An interactive look at public Medicaid provider spending data, 2018 to 2024.</p>
+<div class="ambient sc-ecg" aria-hidden="true"><svg viewBox="0 0 1200 180" preserveAspectRatio="xMidYMax slice" focusable="false"><defs><pattern id="amb-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-width="1"/></pattern><pattern id="amb-grid2" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="currentColor" stroke-width="1"/></pattern><path id="amb-bars" d="M3 180v-19h9v19zM19 180v-18h9v18zM35 180v-28h9v28zM51 180v-20h9v20zM67 180v-30h9v30zM83 180v-28h9v28zM99 180v-24h9v24zM115 180v-33h9v33zM131 180v-25h9v25zM147 180v-33h9v33zM163 180v-27h9v27zM179 180v-28h9v28zM195 180v-34h9v34zM211 180v-41h9v41zM227 180v-28h9v28zM243 180v-29h9v29zM259 180v-36h9v36zM275 180v-41h9v41zM291 180v-34h9v34zM307 180v-29h9v29zM323 180v-39h9v39zM339 180v-22h9v22zM355 180v-35h9v35zM371 180v-25h9v25zM387 180v-22h9v22zM403 180v-21h9v21zM419 180v-24h9v24zM435 180v-33h9v33zM451 180v-22h9v22zM467 180v-30h9v30zM483 180v-32h9v32zM499 180v-28h9v28zM515 180v-32h9v32zM531 180v-25h9v25zM547 180v-26h9v26zM563 180v-31h9v31zM579 180v-41h9v41zM595 180v-38h9v38zM611 180v-38h9v38zM627 180v-45h9v45zM643 180v-44h9v44zM659 180v-43h9v43zM675 180v-54h9v54zM691 180v-53h9v53zM707 180v-46h9v46zM723 180v-53h9v53zM739 180v-53h9v53zM755 180v-60h9v60zM771 180v-58h9v58zM787 180v-50h9v50zM803 180v-63h9v63zM819 180v-47h9v47zM835 180v-52h9v52zM851 180v-58h9v58zM867 180v-46h9v46zM883 180v-51h9v51zM899 180v-42h9v42zM915 180v-53h9v53zM931 180v-54h9v54zM947 180v-50h9v50zM963 180v-54h9v54zM979 180v-44h9v44zM995 180v-50h9v50zM1011 180v-48h9v48zM1027 180v-48h9v48zM1043 180v-46h9v46zM1059 180v-53h9v53zM1075 180v-56h9v56zM1091 180v-48h9v48zM1107 180v-52h9v52zM1123 180v-43h9v43zM1139 180v-56h9v56zM1155 180v-56h9v56zM1171 180v-64h9v64zM1187 180v-63h9v63z"/><path id="amb-beat" d="M0 84 L62 84 Q72 72 82 84 L112 84 L118 91 L126 30 L134 106 L140 84 L184 84 Q198 66 212 84 L300 84 L300 84 L362 84 Q372 72 382 84 L412 84 L418 91 L426 30 L434 106 L440 84 L484 84 Q498 66 512 84 L600 84 L600 84 L662 84 Q672 72 682 84 L712 84 L718 91 L726 30 L734 106 L740 84 L784 84 Q798 66 812 84 L900 84 L900 84 L962 84 Q972 72 982 84 L1012 84 L1018 91 L1026 30 L1034 106 L1040 84 L1084 84 Q1098 66 1112 84 L1200 84"/></defs><rect width="1200" height="180" fill="url(#amb-grid)" opacity=".09"/><rect width="1200" height="180" fill="url(#amb-grid2)" opacity=".12"/><g class="amb-slow" fill="currentColor" opacity=".13"><use href="#amb-bars"/><use href="#amb-bars" x="1200"/></g><g class="amb-scroll" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" opacity=".85"><use href="#amb-beat"/><use href="#amb-beat" x="1200"/></g></svg></div>
   </header>
 
   <section>
