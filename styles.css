@@ -206,6 +206,10 @@ header.scene{padding-bottom:0}
 .amb-ring{animation:amb-ring 5s ease-out infinite;transform-box:fill-box;transform-origin:center}
 .amb-win{opacity:.14;animation:amb-win var(--p,10s) ease-in-out infinite var(--d,0s)}
 .amb-smoke{animation:amb-smoke 7.5s linear infinite}
+.amb-near{animation:amb-x 50s linear infinite}
+.amb-birds{animation:amb-birds 90s linear infinite}
+.amb-flap{animation:amb-flap .9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.amb-fa{animation:amb-frame .5s steps(1,end) infinite}
 @keyframes amb-x{to{transform:translateX(-1200px)}}
 @keyframes amb-dash{to{stroke-dashoffset:-64}}
 @keyframes amb-turn{to{transform:rotate(360deg)}}
@@ -214,4 +218,9 @@ header.scene{padding-bottom:0}
 @keyframes amb-ring{0%{transform:scale(.3);opacity:.7}100%{transform:scale(1.5);opacity:0}}
 @keyframes amb-win{0%,42%{opacity:.14}58%,78%{opacity:.62}100%{opacity:.14}}
 @keyframes amb-smoke{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-46px) translateX(10px);opacity:0}}
+@keyframes amb-birds{from{transform:translateX(1300px)}to{transform:translateX(-120px)}}
+@keyframes amb-flap{from{transform:scaleY(1)}to{transform:scaleY(-.7)}}
+@keyframes amb-frame{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+.amb-cross{animation:amb-cross 60s linear infinite}
+@keyframes amb-cross{from{transform:translateX(-100px)}to{transform:translateX(1300px)}}
 @media (prefers-reduced-motion:reduce){.ambient *{animation:none!important}}
