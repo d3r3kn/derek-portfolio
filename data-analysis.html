@@ -30,21 +30,22 @@
   --s1:#2563b8; --s2:#c2531c; --s3:#12805c; --s4:#946200; --muted-mark:#c9c0ae; --s1-soft:#9dbbe6;
   --ok:#2e7d32;
 }
-.lede{font-size:16.5px;color:var(--text-2);max-width:68ch;margin:0 0 14px}
+.lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
+header .tag{max-width:none}
 sup a{color:var(--accent);text-decoration:none;font-size:11px;font-weight:700;padding:0 1px}
-.verified{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:0 12px 12px 0;padding:16px 20px;margin:28px 0 8px;max-width:820px}
+.verified{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:0 12px 12px 0;padding:16px 20px;margin:28px 0 8px}
 .verified svg{flex:none;margin-top:3px}
 .verified p{margin:0;font-size:15px;color:var(--text-2)}
 .verified .vt{font-weight:650;color:var(--ink);font-size:16.5px;margin-bottom:3px}
 
-.srcbox{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0;font-size:14.5px;max-width:820px}
+.srcbox{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0;font-size:14.5px}
 .srcbox dt{color:var(--text-3)}
 .srcbox dd{margin:0;color:var(--text-1)}
 .srcbox a,.prose a,.card-sub a,.card-foot a,details.how a,.sources a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
 @media (max-width:560px){.srcbox{grid-template-columns:1fr;gap:2px}.srcbox dd{margin-bottom:8px}}
 
-.prose{font-size:15.5px;color:var(--dim);max-width:70ch;margin:0 0 16px}
+.prose{font-size:15.5px;color:var(--dim);margin:0 0 16px}
 .prose b{color:var(--ink);font-weight:600}
 h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 
@@ -69,7 +70,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 @media (max-width:640px){.card{padding:18px 16px 14px}}
 .card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;align-items:flex-start;margin-bottom:16px}
 .card-title{font-weight:650;font-size:17px;margin:0 0 4px}
-.card-sub{font-size:14.5px;color:var(--text-2);margin:0;max-width:72ch}
+.card-sub{font-size:14.5px;color:var(--text-2);margin:0}
 .card-sub b{color:var(--text-1);font-weight:600}
 .card-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .tbl-btn{font:inherit;font-size:13px;color:var(--text-2);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
@@ -144,21 +145,21 @@ table.dt th,table.dt td{text-align:left;padding:7px 10px;border-bottom:1px solid
 table.dt th{color:var(--text-3);font-weight:600;font-size:12.5px}
 table.dt td.n,table.dt th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .tablewrap{max-height:380px;overflow:auto}
-.pipe{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:820px;margin:0 0 16px}
+.pipe{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 16px}
 .pipe table.dt td,.pipe table.dt th{padding:9px 14px}
 .pipe tr.final td{color:var(--ink);font-weight:600;border-bottom:0}
-.checks{list-style:none;padding:0;margin:0 0 16px;max-width:820px}
+.checks{list-style:none;padding:0;margin:0 0 16px}
 .checks li{display:flex;gap:10px;font-size:14.5px;color:var(--dim);margin-bottom:8px}
 .checks li b{color:var(--ink);font-weight:600}
 .checks svg{flex:none;margin-top:4px}
-ul.limits{max-width:76ch;padding-left:20px;margin:0}
+ul.limits{padding-left:20px;margin:0}
 ul.limits li{font-size:14.5px;color:var(--dim);margin-bottom:9px}
 ul.limits li b{color:var(--ink);font-weight:600}
-dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;max-width:860px;margin:0;font-size:14.5px}
+dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;margin:0;font-size:14.5px}
 dl.gloss dt{font-weight:650;color:var(--ink)}
 dl.gloss dd{margin:0;color:var(--dim)}
 @media (max-width:560px){dl.gloss{grid-template-columns:1fr;gap:2px}dl.gloss dd{margin-bottom:10px}}
-ol.sources{padding-left:22px;margin:0;max-width:820px}
+ol.sources{padding-left:22px;margin:0}
 ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 .loading{color:var(--text-3);font-size:14px}
 [hidden]{display:none!important}
