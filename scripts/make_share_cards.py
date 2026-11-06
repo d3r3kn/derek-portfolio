@@ -5,6 +5,7 @@ Writes, with no embedded metadata:
   shots/share-get-help.png   Get help page
   shots/share-brand-race.png Brand Race page; figures come from data/brand-race/summary.json
   shots/share-ai-adoption.png AI Adoption page; figures come from data/ai-adoption/summary.json
+  shots/share-satellites.png Satellite Physics page; figures come from data/satellites/summary.json
 
 Uses the site's own self-hosted fonts (Fraunces, Source Sans 3) and Field Notebook colors.
 The Medicaid card is drawn separately by data/medicaid/make_share_card.py.
@@ -190,8 +191,55 @@ def ai_adoption_card():
     save(img, "share-ai-adoption.png")
 
 
+def satellites_card():
+    import math
+    s = json.loads((ROOT / "data" / "satellites" / "summary.json").read_text(encoding="utf-8"))
+    g = {x["name"]: x for x in s["groups"]}
+    c = s["constants"]
+    ping = lambda h: 4 * h / c["c_kms"] * 1000
+    img, d = canvas()
+    # chart panel on the right: every drawn satellite's period against its altitude, on the physics curve
+    cx0, cy0, cx1, cy1 = 620, 110, W - M, 470
+    d.rounded_rectangle([p(cx0), p(cy0), p(cx1), p(cy1)], radius=p(14), fill=PANEL, outline=LINE, width=p(1))
+    d.text((p(cx0 + 28), p(cy0 + 22)), "Hours per orbit against altitude", font=font("sans", 17, 600), fill=INK)
+    px0, py0, px1, py1 = cx0 + 60, cy0 + 66, cx1 - 36, cy1 - 56
+    lo, hi, ymax = 150, 100000, 50  # km (log), hours
+    X = lambda h: px0 + (math.log10(h) - math.log10(lo)) / (math.log10(hi) - math.log10(lo)) * (px1 - px0)
+    Y = lambda v: py1 - min(v, ymax) / ymax * (py1 - py0)
+    tick = font("sans", 14)
+    for v in (0, 12, 24, 36, 48):
+        d.line([p(px0), p(Y(v)), p(px1), p(Y(v))], fill=(236, 230, 218), width=p(1))
+        d.text((p(px0 - 10) - d.textlength(str(v), font=tick), p(Y(v) - 9)), str(v), font=tick, fill=DIM)
+    for h, lab in ((200, "200"), (1000, "1,000"), (5000, "5,000"), (20000, "20,000"), (50000, "50,000")):
+        d.text((p(X(h)) - d.textlength(lab, font=tick) / 2, p(py1 + 10)), lab, font=tick, fill=DIM)
+    d.text((p(px1) - d.textlength("km above Earth (log scale)", font=tick), p(py1 + 30)), "km above Earth (log scale)", font=tick, fill=DIM)
+    for alt, period, _ in s["points"]:
+        x, y = X(alt), Y(period / 60)
+        d.ellipse([p(x - 2.5), p(y - 2.5), p(x + 2.5), p(y + 2.5)], fill=(205, 198, 184))
+    pts = [(p(X(r["alt"])), p(Y(r["period_min"] / 60))) for r in s["curve"] if lo <= r["alt"] <= hi and r["period_min"] / 60 <= ymax]
+    d.line(pts, fill=ORANGE, width=p(3), joint="curve")
+    lab = font("sans", 17, 600)
+    for name, text, dx, dy in (("Starlink", "Starlink", 8, -34), ("Geostationary belt", "Geostationary", -150, -34)):
+        x, y = X(g[name]["alt"]), Y(g[name]["period"] / 60)
+        d.ellipse([p(x - 6), p(y - 6), p(x + 6), p(y + 6)], fill=ORANGE, outline=PANEL, width=p(2))
+        d.text((p(x + dx), p(y + dy)), text, font=lab, fill=INK)
+
+    # left column
+    d.text((p(M), p(M - 4)), "DATA ANALYSIS  ·  DEREK NYE", font=font("sans", 15, 700), fill=ACCENT)
+    title = font("serif", 48, 650)
+    d.text((p(M), p(M + 30)), "Satellite", font=title, fill=INK)
+    d.text((p(M), p(M + 86)), "Physics", font=title, fill=INK)
+    d.text((p(M), p(262)), f"{ping(g['Starlink']['alt']):.0f} ms vs {ping(g['Geostationary belt']['alt']):.0f} ms", font=font("serif", 56, 650), fill=INK)
+    sub = font("sans", 20)
+    d.text((p(M), p(338)), "The shortest signal round trip in low orbit", font=sub, fill=DIM)
+    d.text((p(M), p(364)), f"vs. the geostationary belt, from {s['total']:,} satellites", font=sub, fill=DIM)
+    footer(d, f"{len(s['checks'])} automated checks on the data", "dereknye.com/satellites", check=True)
+    save(img, "share-satellites.png")
+
+
 if __name__ == "__main__":
     site_card()
     get_help_card()
     brand_race_card()
     ai_adoption_card()
+    satellites_card()

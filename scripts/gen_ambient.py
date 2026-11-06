@@ -1,4 +1,4 @@
-"""Engraved ambient header scenes for the three data pages: one ink, hatch and cross-hatch
+"""Engraved ambient header scenes for the data pages: one ink, hatch and cross-hatch
 fills, slow looping motion. Run: python -I scripts/gen_ambient.py  (rewrites each page's .ambient block)."""
 import math, random, re, pathlib
 
@@ -380,7 +380,94 @@ def net():
             f'<g opacity=".5">{smoke}</g></g>')
     return wrap("sc-net", "", body)
 
-SCENES = {"data-analysis.html": ecg(), "brand-race.html": road(), "ai-adoption.html": net()}
+# ---------------------------------------------------------------- Satellites: an engraved night sky over the curve of the Earth
+def sky():
+    rnd = random.Random(11)
+    LIMB = "M-20 150Q600 96 1220 150"            # the Earth's edge, higher in the middle
+    def limb(x):
+        t = (x + 20) / 1240
+        return (1 - t) ** 2 * 150 + 2 * (1 - t) * t * 96 + t * t * 150
+
+    # stars, a few of them twinkling
+    stars = []
+    for _ in range(90):
+        x = rnd.uniform(0, W); y = rnd.uniform(4, limb(x) - 10)
+        r = rnd.choice((.6, .6, .8, 1.0, 1.3))
+        if rnd.random() < .2:
+            stars.append(f'<circle class="amb-win" cx="{x:.0f}" cy="{y:.0f}" r="{r+.4}" style="--d:-{rnd.uniform(0,14):.1f}s;--p:{rnd.uniform(5,11):.1f}s"/>')
+        else:
+            stars.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" opacity="{rnd.uniform(.35,.8):.2f}"/>')
+    stars = f'<g fill="currentColor" stroke="none">{"".join(stars)}</g>'
+    # two meteors: a short dash running down a long path
+    meteors = ('<path d="M250 6L330 58" pathLength="100" class="amb-pkt" stroke-width="1" opacity=".7" style="animation-duration:17s;animation-delay:-5s"/>'
+               '<path d="M1040 12L1130 70" pathLength="100" class="amb-pkt" stroke-width="1" opacity=".7" style="animation-duration:23s;animation-delay:-14s"/>')
+    # the moon: a hatched shadow side and three craters
+    moon = ('<g transform="translate(1000 42)"><clipPath id="amb-moon"><circle r="17"/></clipPath>'
+            '<circle r="17" fill="var(--bg)" stroke-width="1.1"/>'
+            '<path d="M6-17A17 17 0 0 1 6 17A11 17 0 0 0 6-17Z" fill="url(#amb-h1)" stroke="none" clip-path="url(#amb-moon)"/>'
+            '<circle cx="-6" cy="-4" r="3.2" fill="url(#amb-dots)" stroke-width=".8"/><circle cx="-1" cy="7" r="2.2" fill="url(#amb-dots)" stroke-width=".8"/>'
+            '<circle cx="-9" cy="6" r="1.4" stroke-width=".7"/></g>')
+
+    # the ground: paper below the limb, hatched toward the bottom, dotted along the edge
+    ground = (f'<path d="{LIMB}V{H}H-20Z" fill="var(--bg)" stroke="none"/>'
+              f'<path d="{LIMB}V{H}H-20Z" fill="url(#amb-h1)" stroke="none" opacity=".35"/>'
+              f'<rect x="0" y="152" width="{W}" height="28" fill="url(#amb-h3)" stroke="none" opacity=".25"/>'
+              f'<path d="{LIMB}" stroke-width="1.4"/>')
+    # thin air: three faint arcs above the edge, fading upward
+    air = "".join(f'<use href="#amb-limb" y="{-dy}" stroke-width=".8" opacity="{op}"/>' for dy, op in ((5, .35), (11, .22), (19, .12), (29, .06)))
+    # mountains and city lights on the edge, outside the phone crop
+    mts = []
+    for x, h in ((70, 14), (120, 22), (160, 11), (1020, 12), (1080, 20), (1140, 15)):
+        g = limb(x); bw = h * 1.6
+        mts.append(f'<path d="M{x-bw:.0f} {g+1:.0f}L{x} {g-h:.0f}L{x+bw:.0f} {g+1:.0f}Z" fill="var(--bg)" stroke-width="1"/>'
+                   f'<path d="M{x} {g-h:.0f}L{x+bw:.0f} {g+1:.0f}H{x}Z" fill="url(#amb-h1)" stroke="none"/>')
+    lights = "".join(f'<circle cx="{x}" cy="{limb(x)-1.5:.1f}" r=".8" fill="currentColor" stroke="none" opacity=".7"/>'
+                     for x in (210, 216, 224, 236, 241, 250, 258, 880, 889, 896, 908, 915, 927))
+
+    # ground station: a dish on a post, aimed at the geostationary satellite
+    dx, dy = 470, limb(470)
+    dish = (f'<path d="M{dx} {dy+2}V{dy-14}" stroke-width="1.4"/>'
+            f'<g transform="translate({dx} {dy-16}) rotate(-26)">'
+            '<path d="M-3-11A13 13 0 0 0 -3 11Z" fill="url(#amb-h1)" stroke-width="1.1"/>'
+            '<path d="M-3-11A13 13 0 0 0 -3 11" stroke-width="1.2"/>'
+            '<path d="M-1 0H8" stroke-width="1"/><circle cx="8" r="1.4" fill="currentColor" stroke="none"/></g>'
+            f'<path d="M{dx-9} {dy+2}H{dx+9}" stroke-width="1.2"/>')
+    # a house with a rooftop dish, receiving the relay
+    hx, hy = 752, limb(752)
+    house = (f'<path d="M{hx} {hy+1}V{hy-16}H{hx+26}V{hy+1}Z" fill="var(--bg)" stroke-width="1.1"/>'
+             f'<path d="M{hx-3} {hy-16}L{hx+13} {hy-28}L{hx+29} {hy-16}Z" fill="url(#amb-h1)" stroke-width="1.1"/>'
+             f'<path d="M{hx+10} {hy+1}V{hy-9}H{hx+16}V{hy+1}" fill="url(#amb-hv)" stroke-width=".9"/>'
+             f'<rect class="amb-win" x="{hx+4}" y="{hy-12}" width="4" height="4" fill="currentColor" stroke="none" style="--d:-3s;--p:9s"/>'
+             f'<g transform="translate({hx+22} {hy-24}) rotate(-40)"><path d="M-2-5A6 6 0 0 0 -2 5Z" fill="url(#amb-h1)" stroke-width="1"/><path d="M-1 0H4" stroke-width=".9"/></g>')
+
+    # the geostationary satellite: fixed above the station, dish down, a blinking light
+    def sat(scale=1.0, cls=""):
+        return (f'<g transform="scale({scale})">'
+                '<path d="M-26-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M10-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/>'
+                '<path d="M-10 0H-7M7 0H10" stroke-width="1.2"/>'
+                '<path d="M-7-6h14v12h-14z" fill="url(#amb-h2)" stroke-width="1.2"/>'
+                '<path d="M0 6V11" stroke-width="1"/><path d="M-5 13A5 4 0 0 0 5 13Z" fill="var(--bg)" stroke-width="1"/>'
+                '<path d="M0-6V-11" stroke-width="1"/><g class="amb-fa"><circle cy="-12" r="1.4" fill="currentColor" stroke="none"/></g></g>')
+    gx, gy = 640, 34
+    geo = f'<g transform="translate({gx} {gy})">{sat(1.0)}</g>'
+    # the signal: a faint dashed path up to the satellite and down to the house, with packets running along it
+    up = f"M{dx+6} {dy-24}L{gx-4} {gy+14}"; down = f"M{gx+4} {gy+14}L{hx+24} {hy-30}"
+    signal = (f'<path d="{up}" stroke-width=".8" stroke-dasharray="2 4" opacity=".4"/><path d="{down}" stroke-width=".8" stroke-dasharray="2 4" opacity=".4"/>'
+              f'<path d="{up}" pathLength="100" class="amb-pkt" stroke-width="2.2" style="animation-duration:5s"/>'
+              f'<path d="{down}" pathLength="100" class="amb-pkt" stroke-width="2.2" style="animation-duration:5s;animation-delay:2.5s"/>')
+
+    # low satellites crossing the sky: the lower ones move faster, as they do
+    passes = ""
+    for y, dur, delay, sc, rot in ((24, 30, -4, .75, 8), (62, 22, -13, .85, -6), (88, 17, -7, .7, 14)):
+        passes += (f'<g transform="translate(0 {y})"><g class="amb-fly" style="animation-duration:{dur}s;animation-delay:{delay}s">'
+                   f'<g transform="rotate({rot})">{sat(sc)}</g></g></g>')
+
+    defs = f'<path id="amb-limb" d="{LIMB}"/>'
+    body = (f'<g {INK}>{stars}{meteors}{moon}{passes}{geo}{signal}'
+            f'{air}{ground}{"".join(mts)}{lights}{dish}{house}</g>')
+    return wrap("sc-sky", defs, body)
+
+SCENES = {"data-analysis.html": ecg(), "brand-race.html": road(), "ai-adoption.html": net(), "satellites.html": sky()}
 
 def insert():
     for name, svg in SCENES.items():

@@ -42,7 +42,7 @@
 </head>
 <body data-page="data">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261104b"></script>
+<script src="site-nav.js?v=20261106"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
@@ -87,6 +87,17 @@
         <p class="ex-meta">Data: Gallup, with Pew and Census &middot; <span data-fill="aInd"></span> industries</p>
         <span class="ex-go">Explore the charts</span>
       </a>
+      <a class="ex-card" href="satellites.html">
+        <p class="ex-kicker">CelesTrak &middot; Active satellites</p>
+        <p class="ex-title">Satellite Physics</p>
+        <p class="ex-desc">What <span data-fill="sTotal">16,872</span> tracked satellites show about how orbits work, why height sets the lag, and whether the hot upper air is a problem for them.</p>
+        <div class="ex-stats">
+          <div class="ex-stat"><b data-fill="sPing"></b><span>shortest round trip, low orbit vs. geostationary</span></div>
+          <div class="ex-stat"><b data-fill="sAir"></b><span>of sunlight's heat is all the hot upper air delivers at 400 km</span></div>
+        </div>
+        <p class="ex-meta">Data: CelesTrak catalog, NRLMSIS 2.1 atmosphere model &middot; <span data-fill="sGroups"></span> constellations</p>
+        <span class="ex-go">Explore the charts</span>
+      </a>
     </div>
   </section>
 
@@ -117,6 +128,15 @@
     fill('aTotal',o[0].total+'% → '+o[o.length-1].total+'%');
     fill('aRange',m[0].pct+'% to '+m[m.length-1].pct+'%');
     fill('aInd',String(s.industries.length));
+  }).catch(function(){});
+  fetch('data/satellites/summary.json').then(function(r){return r.json();}).then(function(s){
+    var K=s.constants,g={};s.groups.forEach(function(x){g[x.name]=x;});
+    var ping=function(h){return 4*h/K.c_kms*1000;};
+    fill('sTotal',s.total.toLocaleString('en-US'));
+    fill('sPing',ping(g['Starlink'].alt).toFixed(0)+' ms vs. '+ping(g['Geostationary belt'].alt).toFixed(0)+' ms');
+    var b=s.budget.filter(function(x){return x.alt===400;})[0],air=b.air_ram.high+b.air_thermal.high;
+    fill('sAir',(air/b.sunlight*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'%');
+    fill('sGroups',String(s.groups.length-2));
   }).catch(function(){});
 })();
 </script>
