@@ -25,7 +25,7 @@
 <script src="theme.js?v=20261106"></script>
 <style>
 /* chart tokens come from styles.css */
-:root{--low:var(--s1); --mod:var(--s2); --high:var(--s5)}
+:root{--low:#73aaf0; --mod:#f28c5c; --high:#ec6f9f; --sky-ink:#f1ebdd; --sky-halo:#0f1a33}
 .lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
 header .tag{max-width:none}
@@ -66,7 +66,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .axlbl{font-size:12px;fill:var(--text-3)}
 .blbl{font-size:12.5px;fill:var(--text-1);font-weight:600}
 .band{font-size:12px;fill:var(--text-3);letter-spacing:.08em;text-transform:uppercase}
-.pt{fill:var(--accent);opacity:.5}
+.pt{fill:#86c4aa;opacity:.6}
 .pt:hover{opacity:1}
 .mk{cursor:default}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--text-2);margin:0 0 10px}
@@ -475,23 +475,49 @@ function xAxis(svg,L,R,y,narrow){
   XTICKS.forEach(function(t,i){if(narrow&&i%2)return;txt(svg,xlog(t[0],L,R),y,t[1],{'text-anchor':'middle','class':'tick'});});
   txt(svg,(L+R)/2,y+18,'Altitude above Earth, km (log scale) →',{'text-anchor':'middle','class':'axlbl'});
 }
-function groupMarkers(svg,L,R,yOf,narrow,valueOf,darkTop){
-  /* darkTop: the y where a dark backdrop begins; markers sit inside it, labels may sit above it */
-  var dark=darkTop!=null,fg=dark?'#f1ebdd':'var(--text-1)',bg=dark?'#0b1a33':'var(--surface)',ln=dark?'rgba(150,160,180,.8)':'var(--axis)';
-  /* labeled markers for the constellations; labels alternate above/below to avoid piling up */
-  var gs=GROUPS.slice().sort(function(a,b){return a.alt-b.alt;}),lastX=-1e9,row=0;
+/* ---------- the night sky every chart sits on ---------- */
+var SKY_N=0;
+function sky(svg,x0,y0,w,h,seed){
+  /* blue at low orbit on the left, through navy, into the dark-mode page color on the right; stars seeded so they stay put on resize */
+  var id='sky'+(SKY_N++),defs=E('defs',null,svg),gr=E('linearGradient',{id:id,x1:0,y1:0,x2:1,y2:0},defs);
+  [[0,'#2a5a9c'],[.35,'#15306a'],[.7,'#0d1430'],[1,'#1a1816']].forEach(function(st){E('stop',{offset:st[0],'stop-color':st[1]},gr);});
+  E('rect',{x:x0,y:y0,width:w,height:h,rx:6,fill:'url(#'+id+')'},svg);
+  var rnd=function(){seed=(seed*16807)%2147483647;return seed/2147483647;};
+  for(var i=0,ns=Math.round(w*h/1200);i<ns;i++){var sx=x0+3+rnd()*(w-6),sy=y0+3+rnd()*(h-6),t=(sx-x0)/w,big=rnd()<.08;
+    E('circle',{cx:sx.toFixed(1),cy:sy.toFixed(1),r:big?1.3:.4+rnd()*.5,fill:'var(--sky-ink)',opacity:((.15+rnd()*.5)*(.35+.65*t)).toFixed(2)},svg);}
+}
+var SKY_GRID='rgba(241,235,221,.14)',SKY_LINE='rgba(241,235,221,.3)';
+
+function groupMarkers(svg,L,R,yOf,narrow,valueOf,skyTop){
+  /* labeled markers for the constellations. Labels are packed into rows above their markers so none overlaps another label or a marker;
+     a label that cannot fit above goes below. skyTop is where the night sky begins: labels above it use the page's own text color. */
+  var fg='var(--sky-ink)',bg='var(--sky-halo)',ln='rgba(241,235,221,.55)';
+  var gs=GROUPS.slice().sort(function(a,b){return a.alt-b.alt;}),boxes=[],items=[];
   gs.forEach(function(g){
     var x=xlog(g.alt,L,R),y=yOf(g);
-    if(x-lastX<(narrow?34:54))row++;else row=0;lastX=x;
     var m=E('g',{'class':'mk',tabindex:0,'aria-label':g.name+': '+n0(g.count)+' satellites at about '+km(g.alt)},svg);
     E('path',{d:'M'+x+' '+(y-6)+'l5 6-5 6-5-6z',fill:bg,stroke:fg,'stroke-width':1.6},m);
-    var ly=y-12-row*13,lab=g.name==='Geostationary belt'?'GEO belt':g.name==='Space station'?'Station':g.name;
+    boxes.push([x-7,y-7,x+7,y+7]);
+    var lab=g.name==='Geostationary belt'?'GEO belt':g.name==='Space station'?'Station':g.name;
     if(narrow&&['Qianfan','Guowang','Globalstar','Galileo','BeiDou','Kuiper','Space station','Iridium'].indexOf(g.name)>=0)lab='';
-    if(lab){var inside=dark&&ly>darkTop+4;txt(m,x,ly,lab,{'text-anchor':'middle','class':'blbl',style:'fill:'+(inside?fg:'var(--text-1)')+';paint-order:stroke;stroke:'+(inside?bg:'var(--surface)')+';stroke-width:3px'});
-      if(row)E('line',{x1:x,y1:ly+3,x2:x,y2:y-7,stroke:ln},m);}
+    items.push({g:g,m:m,x:x,y:y,lab:lab});
     var show=function(){tipAt(m,g.name,[{value:n0(g.count)+(g.count===1?' satellite':' satellites')},{value:km(g.alt),name:g.count>1?'median altitude ('+n0(g.alt_lo)+' to '+n0(g.alt_hi)+')':'altitude'},{value:per(g.period),name:'per orbit'},{value:kms(g.speed),name:'speed'}].concat(valueOf?[valueOf(g)]:[]),
       g.name==='Geostationary belt'?'Grouped by orbit: every satellite with a day-long period.':null);};
     m.addEventListener('pointerenter',show);m.addEventListener('focus',show);m.addEventListener('pointerleave',hideTip);m.addEventListener('blur',hideTip);
+  });
+  function free(b){for(var i=0;i<boxes.length;i++){var o=boxes[i];if(b[0]<o[2]&&b[2]>o[0]&&b[1]<o[3]&&b[3]>o[1])return false;}return true;}
+  /* the crowded ones first: larger counts get the nearest slot */
+  items.slice().sort(function(a,b){return b.g.count-a.g.count;}).forEach(function(it){
+    if(!it.lab)return;
+    var w=it.lab.length*6.9+6,lx=Math.max(L+w/2,Math.min(R-w/2,it.x)),placed=null;
+    for(var r=0;r<9&&!placed;r++){var ly=it.y-12-r*13,b=[lx-w/2,ly-11,lx+w/2,ly+3];if(free(b))placed=b;}
+    for(r=0;r<4&&!placed;r++){ly=it.y+20+r*13;b=[lx-w/2,ly-11,lx+w/2,ly+3];if(free(b))placed=b;}
+    if(!placed)return;
+    boxes.push(placed);ly=placed[3]-3;
+    var inside=skyTop==null||ly>skyTop+4;
+    txt(it.m,lx,ly,it.lab,{'text-anchor':'middle','class':'blbl',style:'fill:'+(inside?fg:'var(--text-1)')+';paint-order:stroke;stroke:'+(inside?bg:'var(--surface)')+';stroke-width:3px'});
+    var below=ly>it.y;
+    if(below?ly-11>it.y+8:ly+3<it.y-8)E('line',{x1:it.x,y1:below?it.y+7:it.y-7,x2:lx,y2:below?ly-11:ly+3,stroke:ln},it.m);
   });
 }
 
@@ -502,25 +528,18 @@ function hist(){
   var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Histogram of active satellites by altitude, log scale. Use the Table button for the constellation counts.'},box);
   var maxN=Math.max.apply(null,S.histogram.map(function(b){return b.n;})),top=Math.ceil(Math.log10(maxN));
   function y(n){return n<1?H-B:H-B-Math.log10(n)/top*(H-B-Tp);}
-  /* the backdrop: blue at low orbit, black at the far end, deeper into space as the altitude climbs */
-  var defs=E('defs',null,svg),gr=E('linearGradient',{id:'deep',x1:0,y1:0,x2:1,y2:0},defs);
-  [[0,'#2a5a9c'],[.35,'#15306a'],[.7,'#070f26'],[1,'#000']].forEach(function(st){E('stop',{offset:st[0],'stop-color':st[1]},gr);});
-  E('rect',{x:L,y:Tp-8,width:W-R-L,height:H-B-Tp+8,rx:6,fill:'url(#deep)'},svg);
-  /* stars: a seeded scatter so they stay put on resize, fainter where the sky is still blue */
-  var seed=7,rnd=function(){seed=(seed*16807)%2147483647;return seed/2147483647;},pw=W-R-L,ph=H-B-Tp+8;
-  for(var i=0,ns=Math.round(pw/5);i<ns;i++){var sx=L+4+rnd()*(pw-8),sy=Tp-4+rnd()*(ph-8),t=(sx-L)/pw,big=rnd()<.08;
-    E('circle',{cx:sx.toFixed(1),cy:sy.toFixed(1),r:big?1.3:.4+rnd()*.5,fill:'#f1ebdd',opacity:((.15+rnd()*.5)*(.35+.65*t)).toFixed(2)},svg);}
-  for(var d=0;d<=top;d++){var v=Math.pow(10,d),yy=y(v);E('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'rgba(241,235,221,.14)'},svg);txt(svg,L-8,yy+4,v.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});}
+  sky(svg,L,Tp-8,W-R-L,H-B-Tp+8,7);
+  for(var d=0;d<=top;d++){var v=Math.pow(10,d),yy=y(v);E('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:SKY_GRID},svg);txt(svg,L-8,yy+4,v.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});}
   if(!narrow)txt(svg,L,Tp-30,'Satellites (log)',{'class':'axlbl'});
   /* bands */
   [[AMIN,2000,'Low orbit'],[2000,35000,'Medium'],[35000,AMAX,'Geostationary & beyond']].forEach(function(b,i){
     var x0=xlog(b[0],L,R>0?W-R:W),x1=xlog(b[1],L,W-R);
-    if(i)E('line',{x1:x0,x2:x0,y1:Tp-8,y2:H-B,stroke:'rgba(241,235,221,.25)','stroke-dasharray':'3 4'},svg);
+    if(i)E('line',{x1:x0,x2:x0,y1:Tp-8,y2:H-B,stroke:SKY_LINE,'stroke-dasharray':'3 4'},svg);
     txt(svg,(x0+x1)/2,H-B+14,narrow&&i===2?'GEO & beyond':b[2],{'text-anchor':'middle','class':'band'});
   });
   S.histogram.forEach(function(b){
     if(!b.n)return;
-    var x0=xlog(b.lo,L,W-R),x1=xlog(b.hi,L,W-R),r=E('rect',{x:x0+.5,y:y(b.n),width:Math.max(1,x1-x0-1),height:H-B-y(b.n),fill:'#f1ebdd',opacity:.85,tabindex:0,'aria-label':n0(b.n)+' satellites between '+km(b.lo)+' and '+km(b.hi)},svg);
+    var x0=xlog(b.lo,L,W-R),x1=xlog(b.hi,L,W-R),r=E('rect',{x:x0+.5,y:y(b.n),width:Math.max(1,x1-x0-1),height:H-B-y(b.n),fill:'var(--sky-ink)',opacity:.85,tabindex:0,'aria-label':n0(b.n)+' satellites between '+km(b.lo)+' and '+km(b.hi)},svg);
     var show=function(){r.setAttribute('opacity',1);tipAt(r,km(b.lo)+' to '+km(b.hi),[{value:n0(b.n)+' satellites'}],null);};
     var hide=function(){r.setAttribute('opacity',.85);hideTip();};
     r.addEventListener('pointerenter',show);r.addEventListener('focus',show);r.addEventListener('pointerleave',hide);r.addEventListener('blur',hide);
@@ -552,18 +571,19 @@ function scatter(){
   var ymax=Math.max(ticks[ticks.length-1],vmax*1.02);
   function y(v){return H-B-v/ymax*(H-B-Tp);}
   var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':m.label+' against altitude for '+n0(POINTS.length)+' satellites. Use the Table button for values at landmark altitudes.'},box);
-  ticks.forEach(function(t){E('line',{x1:L,x2:W-R,y1:y(t),y2:y(t),stroke:'var(--grid)'},svg);txt(svg,L-8,y(t)+4,t.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});});
+  sky(svg,L,Tp-8,W-R-L,H-B-Tp+8,11);
+  ticks.forEach(function(t){E('line',{x1:L,x2:W-R,y1:y(t),y2:y(t),stroke:SKY_GRID},svg);txt(svg,L-8,y(t)+4,t.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});});
   txt(svg,L,Tp-26,m.label,{'class':'axlbl'});
   /* the physics curve */
   var d='';for(var i=0;i<=200;i++){var h=Math.pow(10,Math.log10(AMIN)+(Math.log10(AMAX)-Math.log10(AMIN))*i/200);d+=(i?'L':'M')+xlog(h,L,W-R).toFixed(1)+' '+y(m.of(h)).toFixed(1);}
-  E('path',{d:d,fill:'none',stroke:'var(--text-1)','stroke-width':1.4,opacity:.55},svg);
+  E('path',{d:d,fill:'none',stroke:'var(--sky-ink)','stroke-width':1.4,opacity:.7},svg);
   POINTS.forEach(function(p,i){
     var c=E('circle',{cx:xlog(p[0],L,W-R),cy:y(vals[i]),r:narrow?2:2.4,'class':'pt'},svg);
     var show=function(){tipAt(c,p[2],[{value:km(p[0]),name:'mean altitude'},{value:m.fmt(vals[i]),name:m.label.toLowerCase().replace(/,.*$/,'')}],p[1]>1426&&p[1]<1446?'Geostationary: one lap per day.':null);};
     c.addEventListener('pointerenter',show);c.addEventListener('pointerleave',hideTip);
   });
   xAxis(svg,L,W-R,H-B+30,narrow);
-  groupMarkers(svg,L,W-R,function(g){return y(m.of(g.alt));},narrow,function(g){return {value:m.fmt(m.of(g.alt)),name:m.label.toLowerCase().replace(/,.*$/,'')};});
+  groupMarkers(svg,L,W-R,function(g){return y(m.of(g.alt));},narrow,function(g){return {value:m.fmt(m.of(g.alt)),name:m.label.toLowerCase().replace(/,.*$/,'')};},Tp-8);
   if(!document.getElementById('scatter-table').hidden)scatterTable();
 }
 function scatterTable(){
@@ -610,13 +630,14 @@ function atmPanel(id,get,yscale,ylabels,fmt,extra){
   var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':id.replace('atm-','Atmosphere panel: ')},box);
   function x(h){return L+h/HMAX*(W-L-R);}
   var y=yscale(H-B,Tp);
-  ylabels.forEach(function(t){E('line',{x1:L,x2:W-R,y1:y(t[0]),y2:y(t[0]),stroke:'var(--grid)'},svg);txt(svg,L-7,y(t[0])+4,t[1],{'text-anchor':'end','class':'tick'});});
+  sky(svg,L,Tp,W-L-R,H-B-Tp,id.length*131);
+  ylabels.forEach(function(t){E('line',{x1:L,x2:W-R,y1:y(t[0]),y2:y(t[0]),stroke:SKY_GRID},svg);txt(svg,L-7,y(t[0])+4,t[1],{'text-anchor':'end','class':'tick'});});
   [0,300,600,900,1200].forEach(function(h){txt(svg,x(h),H-B+16,h.toLocaleString('en-US'),{'text-anchor':'middle','class':'tick'});});
   txt(svg,(L+W-R)/2,H-6,'Altitude, km',{'text-anchor':'middle','class':'axlbl'});
   if(extra)extra(svg,x,y,W,L,R);
   LEVELS.forEach(function(lv){var d='',on=false;ATM[lv[0]].forEach(function(r){var v=get(r);if(v==null||!(v>0)&&yscale.log){on=false;return;}var yy=Math.max(Tp,Math.min(H-B,y(v)));d+=(on?'L':'M')+x(r.alt).toFixed(1)+' '+yy.toFixed(1);on=true;});
     E('path',{d:d,fill:'none',stroke:lv[2],'stroke-width':2,'stroke-linejoin':'round'},svg);});
-  var cur=E('line',{x1:0,x2:0,y1:Tp,y2:H-B,stroke:'var(--axis)','stroke-dasharray':'3 3',opacity:0},svg);
+  var cur=E('line',{x1:0,x2:0,y1:Tp,y2:H-B,stroke:'rgba(241,235,221,.6)','stroke-dasharray':'3 3',opacity:0},svg);
   var hit=E('rect',{x:L,y:Tp,width:W-L-R,height:H-B-Tp,fill:'transparent'},svg);
   function move(ev){var b=svg.getBoundingClientRect(),h=Math.round(Math.max(0,Math.min(HMAX,(ev.clientX-b.left)/b.width*W-L)/(W-L-R)*HMAX)/10)*10;
     cur.setAttribute('x1',x(h));cur.setAttribute('x2',x(h));cur.setAttribute('opacity',1);
@@ -630,7 +651,7 @@ function atm(){
   atmPanel('atm-dens',function(r){return r.density/sea;},logs(1e-15,1),[[1,'same'],[1e-3,'1/thousand'],[1e-6,'1/million'],[1e-9,'1/billion'],[1e-12,'1/trillion'],[1e-15,'1/quadrillion']],
     function(v){return v==null?'—':v>=0.5?'about the same':'1 / '+big(1/v);});
   atmPanel('atm-heat',function(r){return r.ram_wm2;},logs(1e-5,1e7),[[1e6,'1 MW'],[1e3,'1 kW'],[1,'1 W'],[1e-3,'1 mW'],[1e-5,'10 µW']],function(v){return wm2(v);},
-    function(svg,x,y,W,L,R){E('line',{x1:L,x2:W-R,y1:y(SUN),y2:y(SUN),stroke:'var(--text-2)','stroke-dasharray':'5 4'},svg);txt(svg,W-R,y(SUN)-5,'Direct sunlight, '+n0(SUN)+' W',{'text-anchor':'end','class':'tick'});});
+    function(svg,x,y,W,L,R){E('line',{x1:L,x2:W-R,y1:y(SUN),y2:y(SUN),stroke:'var(--sky-ink)',opacity:.8,'stroke-dasharray':'5 4'},svg);txt(svg,W-R-4,y(SUN)-5,'Direct sunlight, '+n0(SUN)+' W',{'text-anchor':'end','class':'tick',style:'fill:var(--sky-ink)'});});
 }
 
 /* ---------- energy budget bars ---------- */
