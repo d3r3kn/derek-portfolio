@@ -35,6 +35,9 @@ SOLAR = 1360.0         # W/m^2, total solar irradiance at Earth's distance (NASA
 EARTH_IR = 240.0       # W/m^2, sunlight Earth absorbs on average, and so radiates back out as heat in balance
 ALBEDO = 0.29          # fraction of sunlight Earth reflects
 MIN_ELEVATION = 25.0   # degrees above the horizon a user antenna needs (Starlink's published minimum)
+DC_EMISSIVITY = 0.9    # radiator surface emissivity (a good white or black thermal coating)
+DC_CELL_EFF = 0.30     # solar cell efficiency, the better end of today's space cells
+DC_ALT = 550.0         # km, the altitude the data-center budget is worked at
 
 # Solar activity levels for the atmosphere model: F10.7 radio flux in solar flux units.
 SOLAR_LEVELS = {"low": 70, "moderate": 150, "high": 250}
@@ -86,6 +89,28 @@ def physics(h):
         "pass_min": gamma * period / math.pi,               # time overhead on a pass through the zenith
         "earth_ir_wm2": EARTH_IR * view, "albedo_max_wm2": ALBEDO * SOLAR * view,
     }
+
+
+def datacenter(h):
+    """What one megawatt of computing in a circular orbit at h km demands: radiator area to
+    shed the heat (radiation is the only way out), and solar panel area to supply it."""
+    ph = physics(h)
+    r = RE + h
+    shadow = 2 * math.asin(RE / r) / (2 * math.pi)      # worst case: the sun lies in the orbit plane
+    sun_frac = 1 - shadow
+    per_m2 = SOLAR * DC_CELL_EFF                          # electrical watts from one square meter in full sun
+    radiators = []
+    for t in (30, 60, 90):
+        T = 273.15 + t
+        emit = 2 * DC_EMISSIVITY * SIGMA * T ** 4          # both faces, edge-on to the sun
+        absorb = DC_EMISSIVITY * ph["earth_ir_wm2"]        # one face toward Earth soaks up its glow
+        net = emit - absorb
+        radiators.append({"temp_c": t, "emit_wm2": emit, "net_wm2": net, "m2_per_mw": 1e6 / net})
+    return {"alt": h, "sun_frac_worst": sun_frac, "shadow_min_worst": shadow * ph["period_min"],
+            "solar_w_per_m2": per_m2, "solar_m2_per_mw_continuous": 1e6 / per_m2,
+            "solar_m2_per_mw_average": 1e6 / (per_m2 * sun_frac),
+            "ping_ms": ph["ping_overhead_ms"], "radiators": radiators,
+            "assumptions": {"emissivity": DC_EMISSIVITY, "cell_efficiency": DC_CELL_EFF}}
 
 
 def atmosphere(alts_km):
@@ -200,11 +225,13 @@ def main():
         "shadow_earth_glow_400km_c": (physics(400)["earth_ir_wm2"] / SIGMA) ** 0.25 - 273.15,
     }
 
+    dc = datacenter(DC_ALT)
+
     epochs = sorted(s["epoch"] for s in sats)
     pipeline = {"raw": len(raw), "with_orbit": len(sats), "low": sum(s["band"] == "low" for s in sats),
                 "sampled": len(points), "groups": sum(g["count"] for g in groups if g["name"] not in ("Geostationary belt", "Space station"))}
 
-    checks = run_checks(raw, raw_bytes, sats, geo, iss, atm, budget, bands, pipeline)
+    checks = run_checks(raw, raw_bytes, sats, geo, iss, atm, budget, bands, pipeline, dc)
 
     def rnd(d, nd=4):
         return {k: (round(v, nd) if isinstance(v, float) else v) for k, v in d.items()}
@@ -232,6 +259,7 @@ def main():
         "atmosphere": atm,
         "budget": budget,
         "temperatures_c": {k: round(v, 1) for k, v in temps.items()},
+        "datacenter": dc,
         "checks": checks,
     }
     (HERE / "summary.json").write_text(json.dumps(out, separators=(",", ":")), encoding="utf-8")
@@ -240,7 +268,7 @@ def main():
     sys.exit(1 if any(not c["ok"] for c in checks) else 0)
 
 
-def run_checks(raw, raw_bytes, sats, geo, iss, atm, budget, bands, pipeline):
+def run_checks(raw, raw_bytes, sats, geo, iss, atm, budget, bands, pipeline, dc):
     checks = []
 
     def check(name, ok, detail):
@@ -290,6 +318,13 @@ def run_checks(raw, raw_bytes, sats, geo, iss, atm, budget, bands, pipeline):
 
     epochs = sorted(s["epoch"] for s in sats)
     check("element sets are fresh", epochs[0] >= "2026-09-20", f"oldest {epochs[0][:10]}, newest {epochs[-1][:10]}")
+
+    # A radiator near room temperature sheds a few hundred watts per square meter net; the
+    # figure should land between 300 and 2,000 W/m2 for 30 to 90 C, and the shadow fraction
+    # of a low orbit should be a bit over a third.
+    nets = [x["net_wm2"] for x in dc["radiators"]]
+    check("radiator budget is in the expected range", 300 < min(nets) and max(nets) < 2000 and 0.3 < 1 - dc["sun_frac_worst"] < 0.45,
+          f"{nets[0]:.0f} to {nets[-1]:.0f} W/m2 net at 30 to 90 C; worst-case shadow {100*(1-dc['sun_frac_worst']):.0f}% of the orbit")
 
     check("pipeline reconciles", pipeline["with_orbit"] == pipeline["raw"] == len(sats),
           f"{pipeline['raw']:,} rows in, {pipeline['with_orbit']:,} orbits out, {pipeline['sampled']:,} drawn")

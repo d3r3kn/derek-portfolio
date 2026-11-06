@@ -5,7 +5,7 @@ Every number on the Satellite Physics page ([satellites.html](../../satellites.h
 | File | What it is |
 |---|---|
 | `raw/celestrak-active.csv` | CelesTrak's untouched "Active Satellites" catalog in CSV form (see Source). Not edited by hand. Kept out of the repo; download it as described below and check its SHA-256. |
-| `build_summary.py` | Reads the raw CSV, works out each satellite's period, altitude and speed from its mean motion, groups the catalog by orbit band and constellation, thins the low-orbit crowd for the scatter, runs the NRLMSIS 2.1 atmosphere model at three solar levels, works out the radiation budget in orbit, runs 13 checks, and writes `summary.json`. Exits with an error if any check fails. |
+| `build_summary.py` | Reads the raw CSV, works out each satellite's period, altitude and speed from its mean motion, groups the catalog by orbit band and constellation, thins the low-orbit crowd for the scatter, runs the NRLMSIS 2.1 atmosphere model at three solar levels, works out the radiation budget in orbit, runs 14 checks, and writes `summary.json`. Exits with an error if any check fails. |
 | `summary.json` | What the page charts: orbit bands, an altitude histogram, the constellation summaries, 2,821 drawn satellites, the physics curve, the atmosphere profile (0 to 1,200 km, three solar levels), the energy budget at four altitudes, equilibrium temperatures, and the check results. |
 
 Run: download the CSV (see Source), save it as `raw/celestrak-active.csv`, then `python build_summary.py` (needs numpy and pymsis). The script stops if the file's fingerprint doesn't match. CelesTrak refreshes the catalog every few hours, so a later download will differ; update the fingerprint and the expected row count only after reviewing the new file.
@@ -30,6 +30,7 @@ Run: download the CSV (see Source), save it as `raw/celestrak-active.csv`, then 
 - Air heating on the front face = ½ ρ v³ (free-molecular flow, full accommodation). The resting air's own heat flux = n v̄ / 4 × 2kT. Both are upper bounds.
 - Earth's glow and reflected sunlight at altitude are scaled by the view factor (R / r)².
 - Equilibrium temperatures assume equal absorptivity and emissivity (a gray plate).
+- Data-center budget: radiator net = 2 ε σ T⁴ − ε × Earth glow at altitude; solar = 1,360 × 0.30 W per m²; worst-case shadow fraction = 2 asin(R / r) / 2π.
 
 ## Decisions
 
@@ -47,6 +48,8 @@ Run: download the CSV (see Source), save it as `raw/celestrak-active.csv`, then 
 | 2026-11-06 | Solar irradiance 1,360 W/m² and albedo 29%, matching the NASA page cited, not the more precise literature values. |
 | 2026-11-06 | The station's exterior temperature swing is not quoted: the NASA article giving it survives only as reprints. The page uses equilibrium temperatures worked out from the radiation budget instead. |
 | 2026-11-06 | The 100 km standard-atmosphere density is not used as a check: the NTRS PDF could not be opened to confirm it. Only the sea-level value is checked. |
+| 2026-11-06 | A data-centers-in-orbit section works a 1 MW budget at 550 km: radiator area at 30/60/90 C (emissivity 0.9, both faces, one toward Earth), solar area at 30% cells for a no-shadow orbit and for the worst-case shadow fraction, no battery or conversion losses (stated). Proposals cited from Google's own posts, NVIDIA's Starcloud post and NPR; Google's cost claim is quoted as an energy-cost comparison only. |
+| 2026-11-06 | Body text runs the full content width on every data page (Derek's call), and the copy states its conclusions outright. |
 
 ## Known limitations
 
