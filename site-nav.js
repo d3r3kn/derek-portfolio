@@ -5,10 +5,9 @@
 (function () {
   'use strict';
   var EMAIL = 'd3r3kn@gmail.com';
+  /* Technical Projects and Freelance are reached from the Resume page, not this menu */
   var WORK = [
-    ['technical-projects', 'technical-projects.html', 'Technical Projects', 'Data and software projects, built end to end'],
     ['data', 'data.html', 'Data Analysis', 'Explorations of public data: Medicaid spending, automaker trends, AI adoption, and satellite orbits'],
-    ['freelance', 'freelance.html', 'Freelance', 'Independent client work since July 2025'],
     ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work'],
     ['education-channel', 'anatomy-channel.html', 'A&P Educational Channel', 'Anatomy and physiology lessons on YouTube since 2017']
   ];
@@ -17,8 +16,8 @@
   if (!host) return;
   var base = host.getAttribute('data-base') || '';
   var page = document.body.getAttribute('data-page') || '';
-  /* exploration pages live under Data Analysis and highlight it */
-  var PARENT = { 'data-analysis': 'data', 'brand-race': 'data', 'ai-adoption': 'data', 'satellites': 'data' };
+  /* exploration pages live under Data Analysis and highlight it; resume subpages highlight Resume */
+  var PARENT = { 'data-analysis': 'data', 'brand-race': 'data', 'ai-adoption': 'data', 'satellites': 'data', 'technical-projects': 'resume', 'freelance': 'resume' };
   var section = PARENT[page] || page;
   var inWork = WORK.some(function (w) { return w[0] === section; });
 

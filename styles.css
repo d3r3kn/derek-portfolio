@@ -231,6 +231,12 @@ h1,h2,h3,.t,.role-title,.ht{text-wrap:balance}
 .help-note a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .help-note a::after{content:"\2192";display:inline-block;margin-left:.25em;text-decoration:none}
 .help-note + footer{margin-top:28px}
+.back-link{display:inline-block;margin:28px 0 0;font-size:16px;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+.back-link::before{content:"\2190";display:inline-block;margin-right:.35em}
+.back-link + header{padding-top:28px}
+.back-note{margin:48px 0 0}
+.help-note + .back-note{margin-top:20px}
+.back-note + footer{margin-top:28px}
 
 /* Ambient header scenes on the data pages: one-ink line drawings that loop slowly.
    Pure CSS motion; stands still when the visitor asks for reduced motion. */

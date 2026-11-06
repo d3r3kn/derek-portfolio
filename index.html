@@ -43,11 +43,11 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="styles.css?v=20261106b">
+<link rel="stylesheet" href="styles.css?v=20261106c">
 <script src="theme.js?v=20261106"></script>
 <style>
 /* Home page */
-.home-hero{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:64px 0 36px}
+.home-hero{display:grid;grid-template-columns:auto auto;justify-content:center;gap:48px;align-items:center;padding:64px 0 36px}
 .home-hero .kicker{font:italic 500 16px var(--serif);color:var(--clay);margin:0 0 12px}
 .home-hero h1{margin:0 0 16px}
 .home-hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--dim);max-width:60ch;margin:0 0 28px}
@@ -68,8 +68,7 @@
 }
 
 .tools-h{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 10px}
-.creds-line{color:var(--dim);font-size:15.5px;margin:12px 0 0}
-@media (max-width:860px){.tools-h,.creds-line{text-align:center}}
+@media (max-width:860px){.tools-h{text-align:center}}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .facts div{padding:4px 20px;border-left:1px solid var(--line)}
 .facts div:first-child{padding-left:0;border-left:0}
@@ -99,7 +98,7 @@
 .viz .vv{font-size:13px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
 
 .home .help-strip{margin-top:48px}
-.more{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.more{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media (max-width:860px){.more{grid-template-columns:1fr 1fr}}
 @media (max-width:420px){.more{grid-template-columns:1fr}}
 .more a{display:block;padding:16px 18px;border:1px solid var(--line);border-radius:6px;background:var(--panel);text-decoration:none;color:var(--ink)}
@@ -110,7 +109,7 @@
 </head>
 <body data-page="home" class="home">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261106b"></script>
+<script src="site-nav.js?v=20261106c"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
@@ -122,20 +121,19 @@
       <div class="cta-row">
         <a class="btn" href="get-help.html">Book a free 20-minute intro call</a>
       </div>
-      <p class="work-links">Or see my work: <a href="data.html">Data</a> &middot; <a href="technical-projects.html">Technical projects</a> &middot; <a href="content-production.html">Creative</a> &middot; <a href="resume.html">Resume</a></p>
+      <p class="work-links">Or see my work: <a href="data.html">Data</a> &middot; <a href="content-production.html">Creative</a> &middot; <a href="resume.html">Resume</a></p>
     </div>
     <img class="me" src="img/derek-nye.jpg" width="800" height="800" alt="Derek Nye">
   </header>
 
   <section class="tools-strip" aria-labelledby="tools-h">
-  <h2 id="tools-h" class="tools-h">AI tools I use every day</h2>
+  <h2 id="tools-h" class="tools-h">Current favorite AI tools</h2>
   <dl class="facts">
-    <div><dt>Writing, research and building tools</dt><dd>Claude, Grok, Grok Bot</dd></div>
-    <div><dt>Images and video</dt><dd>Grok Imagine, ComfyUI and Comfy Cloud, Higgsfield</dd></div>
-    <div><dt>3D models</dt><dd>Meshy, Tripo</dd></div>
-    <div><dt>Running AI on your own computer</dt><dd>Local models like Qwen</dd></div>
+    <div><dt>Frontier models</dt><dd>Claude, Grok</dd></div>
+    <div><dt>Image and video models</dt><dd>Grok Imagine, ComfyUI and Comfy Cloud, Higgsfield</dd></div>
+    <div><dt>3D mesh models</dt><dd>Meshy, Tripo</dd></div>
+    <div><dt>Local models</dt><dd>Qwen</dd></div>
   </dl>
-  <p class="creds-line">MS, Data Science &middot; MBA (Eastern University) &middot; Registered Nurse</p>
   </section>
 
   <section class="home-sec" id="work">
@@ -181,9 +179,8 @@
     <h2>More</h2>
     <div class="more">
       <a href="resume.html"><b>Resume</b><span>Experience, tools I've built, and skills</span></a>
-      <a href="technical-projects.html"><b>Technical Projects</b><span>Data and software projects, built end to end</span></a>
       <a href="data.html"><b>Data Analysis</b><span>All data explorations</span></a>
-      <a href="freelance.html"><b>Freelance</b><span>Independent client work since July 2025</span></a>
+      <a href="anatomy-channel.html"><b>A&amp;P Educational Channel</b><span>Anatomy and physiology lessons on YouTube since 2017</span></a>
     </div>
   </section>
 
