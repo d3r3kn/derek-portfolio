@@ -51,6 +51,7 @@ Run: download the CSV (see Source), save it as `raw/celestrak-active.csv`, then 
 | 2026-11-06 | A data-centers-in-orbit section works a 1 MW budget at 550 km: radiator area at 30/60/90 C (emissivity 0.9, both faces, one toward Earth), solar area at 30% cells for a no-shadow orbit and for the worst-case shadow fraction, no battery or conversion losses (stated). Proposals cited from Google's own posts, NVIDIA's Starcloud post and NPR; Google's cost claim is quoted as an energy-cost comparison only. |
 | 2026-11-06 | Body text runs the full content width on every data page (Derek's call), and the copy states its conclusions outright. |
 | 2026-11-06 | The data-center section states its verdict plainly: the physics allows data centers in orbit and the hardware already flies; the page prices them in area and names launch, radiation and repair as engineering and cost questions, not physics. |
+| 2026-11-06 | The data-center verdict is backed by a fact list filled from the data (sun per m², radiator and panel area per MW at 60 C, lag, air share) plus two verified launches: Starcloud-1 (Nov 2, 2025, DCD) and Google's four-TPU prototype (Oct 1, 2026, NPR). NPR's correction is honored: the prototype flies a standard orbit on batteries, so the page no longer says it flies dawn-to-dusk. NPR's 15-minutes-at-a-time heat limit is quoted as the cost signal. |
 
 ## Known limitations
 
