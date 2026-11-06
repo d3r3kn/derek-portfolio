@@ -60,6 +60,11 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .tbl-btn:hover{color:var(--text-1);border-color:var(--axis)}
 .card-foot{font-size:12.5px;color:var(--text-3);margin:14px 0 0}
 .card-foot + .card-foot{margin-top:4px}
+.card-foot b.lead{color:var(--text-1);font-weight:650}
+.card-foot b.lead.flash{animation:leadflash 1.6s ease-out}
+@keyframes leadflash{0%{background:rgba(134,196,170,.45)}100%{background:transparent}}
+.card-sub.swap{transition:opacity .18s}.card-sub.swap.out{opacity:0}
+@media (prefers-reduced-motion:reduce){.card-foot b.lead.flash{animation:none}.card-sub.swap{transition:none}}
 
 .chart{position:relative}
 .chart svg{display:block;width:100%;overflow:visible}
@@ -557,18 +562,30 @@ function groupTable(id){
 /* ---------- scatter ---------- */
 var MET={period:{label:'Time per orbit, hours',unit:'h',of:function(h){return phys(h).period/60;},fmt:function(v){return per(v*60);},ticks:[0,12,24,36,48,60,72,84,96],
     sub:'Every satellite\'s time per orbit against its altitude. Higher means slower: an orbit at 400 km takes an hour and a half, one at 35,786 km takes a day.',
-    note:'Every dot sits on the same line. Not one of the drawn satellites, or the 16,872 behind them, breaks Kepler\'s third law, which fixed this curve in 1619. Altitude decides orbit time, and nothing else does.'},
+    lead:'Every dot sits on the same line.',note:'Not one of the drawn satellites, or the 16,872 behind them, breaks Kepler\'s third law, which fixed this curve in 1619. Altitude decides orbit time, and nothing else does.'},
   speed:{label:'Speed, km/s',unit:'km/s',of:function(h){return phys(h).speed;},fmt:function(v){return kms(v);},ticks:[0,1,2,3,4,5,6,7,8],
     sub:'Orbital speed against altitude. Lower orbits must move faster to keep from falling: the station covers 7.7 km every second, a geostationary satellite about 3.1.',
-    note:'Speed is not a choice. At each altitude exactly one speed holds a circular orbit, and every satellite drawn here is at it. One that slowed down would fall; one that sped up would climb.'},
+    lead:'Speed is not a choice.',note:'At each altitude exactly one speed holds a circular orbit, and every satellite drawn here is at it. One that slowed down would fall; one that sped up would climb.'},
   ping:{label:'Round-trip floor, ms',unit:'ms',of:function(h){return phys(h).ping;},fmt:function(v){return ms(v);},ticks:[0,200,400,600,800,1000,1200],
     sub:'The shortest possible round trip for a signal: up to the satellite, down to a ground station, and back the same way, at the speed of light.',
-    note:'Low orbit wins outright. The floor at Starlink\'s altitude is single-digit milliseconds; at the geostationary belt it is nearly half a second before any computer has touched the signal. No engineering closes that gap, because the gap is the speed of light.'}};
+    lead:'Low orbit wins outright.',note:'The floor at Starlink\'s altitude is single-digit milliseconds; at the geostationary belt it is nearly half a second before any computer has touched the signal. No engineering closes that gap, because the gap is the speed of light.'}};
 var state={metric:'period',budget:400};
-function scatter(){
+var typeTimer=null;
+function scatterText(animate){
+  /* the subtitle and the verdict under the chart. On a metric switch the subtitle fades over and the verdict is retyped, lead sentence first and bold, so the change is seen. */
+  var m=MET[state.metric],sub=document.getElementById('scatter-sub'),note=document.getElementById('scatter-note');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  clearTimeout(typeTimer);note.textContent='';
+  var lead=el('b','lead',''),rest=document.createTextNode('');note.appendChild(lead);note.appendChild(rest);
+  if(!animate||reduce){sub.textContent=m.sub;lead.textContent=m.lead;rest.textContent=' '+m.note;return;}
+  sub.classList.add('swap','out');setTimeout(function(){sub.textContent=m.sub;sub.classList.remove('out');},180);
+  var i=0,full=m.lead;
+  (function tick(){lead.textContent=full.slice(0,++i);if(i<full.length){typeTimer=setTimeout(tick,22);}else{lead.classList.add('flash');rest.textContent=' '+m.note;}})();
+}
+function scatter(animateText){
   var box=document.getElementById('scatter');box.textContent='';
   var m=MET[state.metric],W=Math.max(box.clientWidth,320),narrow=W<560,H=narrow?360:420,L=narrow?40:56,R=16,Tp=56,B=48;
-  document.getElementById('scatter-sub').textContent=m.sub;document.getElementById('scatter-note').textContent=m.note;
+  scatterText(!!animateText);
   var vals=POINTS.map(function(p){return m.of(p[0]);}),vmax=Math.max.apply(null,vals),ticks=m.ticks.filter(function(t){return t<=vmax*1.08||t===m.ticks[0];});
   var ymax=Math.max(ticks[ticks.length-1],vmax*1.02);
   function y(v){return H-B-v/ymax*(H-B-Tp);}
@@ -713,7 +730,7 @@ document.querySelectorAll('.tbl-btn').forEach(function(b){
 /* ---------- controls ---------- */
 function seg(id,fn){document.querySelectorAll('#'+id+' button').forEach(function(btn){btn.addEventListener('click',function(){
   document.querySelectorAll('#'+id+' button').forEach(function(o){o.setAttribute('aria-pressed',String(o===btn));});fn(btn);});});}
-seg('metric',function(b){state.metric=b.dataset.metric;scatter();});
+seg('metric',function(b){state.metric=b.dataset.metric;scatter(true);});
 seg('budgetAlt',function(b){state.budget=+b.dataset.alt;budget();});
 seg('dcTemp',function(b){dcState.t=+b.dataset.t;dc();});
 hist();scatter();atm();budget();dc();
