@@ -26,18 +26,18 @@
 <style>
 /* chart tokens come from styles.css */
 :root{--low:#73aaf0; --mod:#f28c5c; --high:#ec6f9f; --sky-ink:#f1ebdd; --sky-halo:#0f1a33}
-.lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
+.lede{font-size:18px;color:var(--text-2);margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
 header .tag{max-width:none}
 sup a{color:var(--accent);text-decoration:none;font-size:11px;font-weight:700;padding:0 1px}
 
-.srcbox{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0;font-size:14.5px}
+.srcbox{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0;font-size:15.5px}
 .srcbox dt{color:var(--text-3)}
 .srcbox dd{margin:0;color:var(--text-1)}
 .srcbox a,.prose a,.card-sub a,.card-foot a,.sources a,ul.limits a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
 @media (max-width:560px){.srcbox{grid-template-columns:1fr;gap:2px}.srcbox dd{margin-bottom:8px}}
 
-.prose{font-size:15.5px;color:var(--dim);margin:0 0 16px}
+.prose{font-size:17px;color:var(--dim);margin:0 0 16px}
 ul.facts{padding-left:22px}ul.facts li{margin:0 0 8px}
 .prose b{color:var(--ink);font-weight:600}
 h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
@@ -57,15 +57,15 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 @media (max-width:640px){.card{padding:18px 12px 14px}}
 .card-head{display:flex;flex-direction:column;gap:12px;align-items:flex-start;margin-bottom:16px}
 .card-title{font-weight:650;font-size:17px;margin:0 0 4px}
-.card-sub{font-size:14.5px;color:var(--text-2);margin:0}
+.card-sub{font-size:15.5px;color:var(--text-2);margin:0}
 .card-sub b{color:var(--text-1);font-weight:600}
 .card-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .tbl-btn{font:inherit;font-size:13px;color:var(--text-2);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
 .tbl-btn:hover{color:var(--text-1);border-color:var(--axis)}
-.card-foot{font-size:12.5px;color:var(--text-3);margin:14px 0 0}
+.card-foot{font-size:13.5px;color:var(--text-3);margin:14px 0 0}
 .card-foot + .card-foot{margin-top:4px}
 .card-foot b.lead{color:var(--text-1);font-weight:650}
-.card-foot.lead-note{font-size:14px;color:var(--text-2);margin:8px 0 16px}
+.card-foot.lead-note{font-size:15px;color:var(--text-2);margin:8px 0 16px}
 .card-foot b.lead.flash{animation:leadflash 1.6s ease-out}
 @keyframes leadflash{0%{background:rgba(134,196,170,.45)}100%{background:transparent}}
 .card-sub.swap{transition:opacity .18s}.card-sub.swap.out{opacity:0}
@@ -81,7 +81,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .pt{fill:#86c4aa;opacity:.6}
 .pt:hover{opacity:1}
 .mk{cursor:default}
-.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--text-2);margin:0 0 10px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px;color:var(--text-2);margin:0 0 10px}
 .legend i{width:14px;height:3px;border-radius:2px;display:inline-block;margin-right:7px;vertical-align:middle}
 
 /* slider card */
@@ -97,17 +97,17 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px}
 .stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .stat b{display:block;font-size:22px;font-weight:650;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
-.stat span{display:block;font-size:12.5px;color:var(--text-3);margin-top:4px}
-.nearby{font-size:13.5px;color:var(--text-2);margin:0}
+.stat span{display:block;font-size:13.5px;color:var(--text-3);margin-top:4px}
+.nearby{font-size:14.5px;color:var(--text-2);margin:0}
 .nearby b{color:var(--text-1);font-weight:600}
 
 /* small multiples */
 .multi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 @media (max-width:760px){.multi{grid-template-columns:1fr}}
-.multi .mt{font-size:13.5px;font-weight:600;color:var(--text-1);margin:0 0 6px}
+.multi .mt{font-size:14.5px;font-weight:600;color:var(--text-1);margin:0 0 6px}
 
 /* energy bars */
-.bars{display:grid;grid-template-columns:max-content 1fr max-content;gap:10px 14px;align-items:center;font-size:14px}
+.bars{display:grid;grid-template-columns:max-content 1fr max-content;gap:10px 14px;align-items:center;font-size:15px}
 .bars .bl{color:var(--text-1)}
 .bars .bl small{display:block;color:var(--text-3);font-size:12px}
 .bars .bt{height:18px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden}
@@ -135,18 +135,18 @@ table.dt td.n,table.dt th.n{text-align:right;font-variant-numeric:tabular-nums;w
 .pipe table.dt td,.pipe table.dt th{padding:9px 14px}
 .pipe tr.final td{color:var(--ink);font-weight:600;border-bottom:0}
 .checks{list-style:none;padding:0;margin:0 0 16px}
-.checks li{display:flex;gap:10px;font-size:14.5px;color:var(--dim);margin-bottom:8px}
+.checks li{display:flex;gap:10px;font-size:16px;color:var(--dim);margin-bottom:8px}
 .checks li b{color:var(--ink);font-weight:600}
 .checks svg{flex:none;margin-top:4px}
 ul.limits{padding-left:20px;margin:0}
-ul.limits li{font-size:14.5px;color:var(--dim);margin-bottom:9px}
+ul.limits li{font-size:16px;color:var(--dim);margin-bottom:9px}
 ul.limits li b{color:var(--ink);font-weight:600}
-dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;margin:0;font-size:14.5px}
+dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;margin:0;font-size:16px}
 dl.gloss dt{font-weight:650;color:var(--ink)}
 dl.gloss dd{margin:0;color:var(--dim)}
 @media (max-width:560px){dl.gloss{grid-template-columns:1fr;gap:2px}dl.gloss dd{margin-bottom:10px}}
 ol.sources{padding-left:22px;margin:0}
-ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
+ol.sources li{font-size:15px;color:var(--dim);margin-bottom:8px}
 .loading{color:var(--text-3);font-size:14px}
 [hidden]{display:none!important}
 </style>
