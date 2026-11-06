@@ -21,13 +21,12 @@
 <meta name="twitter:description" content="14 automakers ranked on 0–60, horsepower, and real-world MPG from 1980 to 2025, using EPA Automotive Trends data.">
 <meta name="twitter:image" content="https://dereknye.com/shots/share-brand-race.png?v=1">
 <meta name="twitter:image:alt" content="Chart of the industry average 0 to 60 time falling from 15.6 seconds in 1980 to 7.3 seconds in 2025.">
-<link rel="stylesheet" href="styles.css?v=20261105">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
 <style>
-:root{
-  --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
-  --text-1:#1f1d1a; --text-2:#4a463f; --text-3:#6b665c;
-  --ok:#2e7d32;
-}
+/* chart tokens come from styles.css; the brand palette lives here and brightens in dark mode */
+:root{--p1:#2563b8;--p2:#c2531c;--p3:#12805c;--p4:#946200;--p5:#b8336a;--p6:#3b7d23;--p7:#6a4fc4;--p8:#c23b3b;--p9:#0e6f86;--p10:#8a5a2b;--p11:#4f5d75;--p12:#9a3fa6;--p13:#5e6e00;--p14:#d16b00}
+html[data-theme="dark"]{--p1:#73aaf0;--p2:#f28c5c;--p3:#4fc896;--p4:#e3b94e;--p5:#ec6f9f;--p6:#8fcf6a;--p7:#a995f0;--p8:#f07a7a;--p9:#5cc3de;--p10:#d6a070;--p11:#a8b4c8;--p12:#d58ae0;--p13:#b9cc3a;--p14:#f5a24a}
 .lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
 header .tag{max-width:none}
@@ -48,8 +47,8 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{font:inherit;font-size:13px;color:var(--text-2);background:none;border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
 .seg button:hover{color:var(--text-1)}
-.seg button[aria-pressed="true"]{background:#ece6da;color:var(--text-1);font-weight:600}
-.seg button:focus-visible,.tbl-btn:focus-visible,.chip:focus-visible{outline:2px solid #2563b8;outline-offset:1px}
+.seg button[aria-pressed="true"]{background:var(--grid);color:var(--text-1);font-weight:600}
+.seg button:focus-visible,.tbl-btn:focus-visible,.chip:focus-visible{outline:2px solid var(--s1);outline-offset:1px}
 .viewnote{font-size:13.5px;color:var(--text-3);margin:0 0 18px}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
@@ -91,8 +90,8 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .heat th.b{text-align:left;font-weight:600;color:var(--text-1);white-space:nowrap}
 .heat th.b i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:7px}
 .heat td{text-align:center;padding:7px 4px;border-radius:4px;cursor:default;outline:none}
-.heat td.na{color:var(--text-3);background:#f3eee3}
-.heat td:focus-visible{box-shadow:0 0 0 2px #1f1d1a}
+.heat td.na{color:var(--text-3);background:var(--wash)}
+.heat td:focus-visible{box-shadow:0 0 0 2px var(--ink)}
 .heat tr.ind th,.heat tr.ind td{border-top:2px solid var(--axis)}
 .heat tr.ind td{background:none;color:var(--text-1);font-weight:600}
 .heat.dim tbody tr:not(.hl):not(.ind){opacity:.25}
@@ -101,7 +100,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .ramp span.bar{display:inline-flex;height:10px;width:160px;border-radius:3px;overflow:hidden}
 .ramp span.bar i{flex:1}
 
-.tip{position:fixed;z-index:40;pointer-events:none;background:#fffdf8;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
+.tip{position:fixed;z-index:40;pointer-events:none;background:var(--panel);border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
 .tip.on{opacity:1}
 .tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
 .tip .t-row{display:flex;align-items:center;gap:8px}
@@ -137,7 +136,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 </head>
 <body data-page="brand-race">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261106"></script>
+<script src="site-nav.js?v=20261106b"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
@@ -331,7 +330,7 @@ var BRANDS=[];S.rows.forEach(function(r){if(BRANDS.indexOf(r.brand)<0)BRANDS.pus
 /* One color per automaker, fixed across views and charts. 14 colors can't all be told apart,
    so every chart also names each brand directly and a brand can be highlighted. */
 // light-theme brand colors: each at least 3:1 against the chart surface, and at least dE 16 apart
-var PAL=['#2563b8','#c2531c','#12805c','#946200','#b8336a','#3b7d23','#6a4fc4','#c23b3b','#0e6f86','#8a5a2b','#4f5d75','#9a3fa6','#5e6e00','#d16b00'];
+var PAL=[];for(var pi=1;pi<=14;pi++)PAL.push('var(--p'+pi+')');
 var COLOR={};BRANDS.forEach(function(b,i){COLOR[b]=PAL[i];});
 var M={zero60:{name:'0–60',long:'0–60 time',unit:' s',d:1,better:'lower'},hp:{name:'Horsepower',long:'Horsepower',unit:' hp',d:0,better:'higher'},mpg:{name:'MPG',long:'Real-world MPG',unit:' mpg',d:1,better:'higher'}};
 var VIEWNAME={all:'all vehicles',cars:'cars',trucks:'trucks'};
@@ -457,8 +456,8 @@ function scatter(){
   for(var zv=zMin;zv<=zMax;zv+=2){E('line',{x1:L,x2:W-R,y1:y(zv),y2:y(zv),stroke:'var(--grid)'},svg);var t2=E('text',{x:L-8,y:y(zv)+4,'text-anchor':'end','class':'tick'},svg);t2.textContent=zv+'s';}
   var xl=E('text',{x:(L+W-R)/2,y:H-6,'text-anchor':'middle','class':'axlbl'},svg);xl.textContent='Horsepower →';
   var yl=E('text',{x:L,y:T-2,'class':'axlbl'},svg);yl.textContent=narrow?'':'↑ Quicker 0–60';
-  marker('ar-ind','#6b665c');
-  E('line',{x1:x(i0.hp),y1:y(i0.zero60),x2:x(i1.hp),y2:y(i1.zero60),stroke:'#6b665c','stroke-width':2,'stroke-dasharray':'5 4','marker-end':'url(#ar-ind)'},svg);
+  marker('ar-ind','var(--text-3)');
+  E('line',{x1:x(i0.hp),y1:y(i0.zero60),x2:x(i1.hp),y2:y(i1.zero60),stroke:'var(--text-3)','stroke-width':2,'stroke-dasharray':'5 4','marker-end':'url(#ar-ind)'},svg);
   var il=E('text',{x:x(i0.hp)+8,y:y(i0.zero60)+16,'class':'axlbl'},svg);il.textContent='Industry avg. '+YEARS[0];
   var labels=[];
   arrows.forEach(function(a,ai){

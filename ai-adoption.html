@@ -21,13 +21,11 @@
 <meta name="twitter:description" content="AI use at work across 10 U.S. industries, with the sources, checks, and limits behind every number.">
 <meta name="twitter:image" content="https://dereknye.com/shots/share-ai-adoption.png?v=1">
 <meta name="twitter:image:alt" content="Chart of AI use at work among U.S. employees rising from 21% in 2023 to 52% in 2026, with 10 industries shown in gray.">
-<link rel="stylesheet" href="styles.css?v=20261105">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
 <style>
-:root{
-  --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
-  --text-1:#1f1d1a; --text-2:#4a463f; --text-3:#6b665c;
-  --ok:#2e7d32; --c-total:#12805c; --c-freq:#c2531c; --c-daily:#2563b8;
-}
+/* chart tokens come from styles.css */
+:root{--c-total:var(--s3); --c-freq:var(--s2); --c-daily:var(--s1)}
 .lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
 header .tag{max-width:none}
@@ -54,7 +52,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .card-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .tbl-btn{font:inherit;font-size:13px;color:var(--text-2);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
 .tbl-btn:hover{color:var(--text-1);border-color:var(--axis)}
-.tbl-btn:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid #2563b8;outline-offset:2px}
+.tbl-btn:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
 .card-foot{font-size:12.5px;color:var(--text-3);margin:14px 0 0}
 .card-foot + .card-foot{margin-top:4px}
 .chart{position:relative}
@@ -78,7 +76,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 
 .pair{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:24px;align-items:center}
 @media (max-width:760px){.pair{grid-template-columns:1fr}}
-.aside{background:#f6f3ec;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.aside{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .aside + .aside{margin-top:12px}
 .aside b{display:block;font-family:var(--serif);font-size:30px;font-weight:650;line-height:1.1;font-variant-numeric:tabular-nums}
 .aside span{display:block;font-size:13.5px;color:var(--text-2);margin-top:5px}
@@ -102,7 +100,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .brow .bw b{font-size:12.5px;font-weight:650;font-variant-numeric:tabular-nums}
 @media (max-width:560px){.brow{grid-template-columns:1fr;gap:1px;padding:5px 0}}
 
-.tip{position:fixed;z-index:40;pointer-events:none;background:#fffdf8;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .1s}
+.tip{position:fixed;z-index:40;pointer-events:none;background:var(--panel);border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .1s}
 .tip.on{opacity:1}
 .tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
 .tip .t-row{display:flex;align-items:center;gap:8px}
@@ -137,7 +135,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 </head>
 <body data-page="ai-adoption">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261106"></script>
+<script src="site-nav.js?v=20261106b"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
@@ -352,13 +350,13 @@ function showTip(head,rows,note,x,y){
 function hideTip(){tip.classList.remove('on');}
 window.addEventListener('scroll',hideTip,{passive:true});
 
-var COL={total:'#12805c',frequent:'#c2531c',daily:'#2563b8'};
+var COL={total:'var(--s3)',frequent:'var(--s2)',daily:'var(--s1)'};
 var pct=function(v){return v+'%';};
 function useRows(p){return [{color:COL.total,value:pct(p.total),name:'total'},{color:COL.frequent,value:pct(p.frequent),name:'frequent'},{color:COL.daily,value:pct(p.daily),name:'daily'}];}
 function marker(kind,x,y,parent){
-  if(kind==='total')return E('circle',{cx:x,cy:y,r:6,fill:COL.total,stroke:'#fffdf8','stroke-width':2},parent);
-  if(kind==='frequent')return E('rect',{x:x-5,y:y-5,width:10,height:10,fill:COL.frequent,stroke:'#fffdf8','stroke-width':2},parent);
-  return E('polygon',{points:x+','+(y-7)+' '+(x-6.5)+','+(y+5)+' '+(x+6.5)+','+(y+5),fill:COL.daily,stroke:'#fffdf8','stroke-width':2},parent);
+  if(kind==='total')return E('circle',{cx:x,cy:y,r:6,fill:COL.total,stroke:'var(--surface)','stroke-width':2},parent);
+  if(kind==='frequent')return E('rect',{x:x-5,y:y-5,width:10,height:10,fill:COL.frequent,stroke:'var(--surface)','stroke-width':2},parent);
+  return E('polygon',{points:x+','+(y-7)+' '+(x-6.5)+','+(y+5)+' '+(x+6.5)+','+(y+5),fill:COL.daily,stroke:'var(--surface)','stroke-width':2},parent);
 }
 function table(id,head,rows,numFrom){
   var host=document.getElementById(id+'-table'),t=H('table','dt',null,host),tr=H('tr',null,null,H('thead',null,null,t)),b=H('tbody',null,null,t);
@@ -396,12 +394,12 @@ function nm(n){return SHORT[n]||n;}
     H('h4',null,nm(it.name),p);
     H('p',null,s[0].total+'% to '+s[6].total+'%',p);
     var g=E('svg',{viewBox:'0 0 '+W+' '+Hh,'aria-hidden':'true'},p);
-    [0,50,100].forEach(function(v){E('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v?'#ece6da':'#b9b09e'},g);T(W-R+4,y(v)+4,v+'%','tick','start',g);});
-    S.industries.forEach(function(o){if(o!==it)E('path',{d:path(o.series),fill:'none',stroke:'#b9b09e','stroke-opacity':.5,'stroke-width':1},g);});
+    [0,50,100].forEach(function(v){E('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v?'var(--grid)':'var(--axis)'},g);T(W-R+4,y(v)+4,v+'%','tick','start',g);});
+    S.industries.forEach(function(o){if(o!==it)E('path',{d:path(o.series),fill:'none',stroke:'var(--axis)','stroke-opacity':.5,'stroke-width':1},g);});
     E('path',{d:path(s),fill:'none',stroke:COL.total,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},g);
-    s.forEach(function(q,i){E('circle',{cx:x(i),cy:y(q.total),r:i===6?4:2.5,fill:COL.total,stroke:'#fffdf8','stroke-width':1},g);});
+    s.forEach(function(q,i){E('circle',{cx:x(i),cy:y(q.total),r:i===6?4:2.5,fill:COL.total,stroke:'var(--surface)','stroke-width':1},g);});
     T(x(0),Hh-4,'2023','tick','start',g);T(x(6),Hh-4,'2026','tick','end',g);
-    var cross=E('line',{y1:Tp,y2:Hh-B,stroke:'#6b665c','stroke-width':1,visibility:'hidden'},g),cur=6;
+    var cross=E('line',{y1:Tp,y2:Hh-B,stroke:'var(--text-3)','stroke-width':1,visibility:'hidden'},g),cur=6;
     function show(i){cur=i;cross.setAttribute('x1',x(i));cross.setAttribute('x2',x(i));cross.setAttribute('visibility','visible');
       var b=g.getBoundingClientRect();showTip(nm(it.name)+', '+s[i].wave,useRows(s[i]),null,b.left+x(i)/W*b.width,b.top+y(s[i].total)/Hh*b.height);}
     function off(){cross.setAttribute('visibility','hidden');hideTip();}
@@ -426,11 +424,11 @@ function nm(n){return SHORT[n]||n;}
     var W=Math.max(300,host.clientWidth),small=W<560,L=small?10:210,R=44,rowH=small?50:34,Tp=4,n=S.industries.length,Hh=Tp+n*rowH+24;
     function x(v){return L+v/100*(W-L-R);}
     var g=E('svg',{viewBox:'0 0 '+W+' '+Hh,role:'img','aria-label':'Total, frequent and daily AI use for 10 industries in Q2 2026. Values are in the table view.'},host);
-    [0,25,50,75,100].forEach(function(v){E('line',{x1:x(v),x2:x(v),y1:Tp,y2:Hh-22,stroke:'#ece6da'},g);T(x(v),Hh-6,v+'%','tick','middle',g);});
+    [0,25,50,75,100].forEach(function(v){E('line',{x1:x(v),x2:x(v),y1:Tp,y2:Hh-22,stroke:'var(--grid)'},g);T(x(v),Hh-6,v+'%','tick','middle',g);});
     S.industries.forEach(function(it,i){
       var q=it.series[6],top=Tp+i*rowH,cy=top+(small?rowH-15:rowH/2);
       T(small?L:0,small?top+16:cy+5,nm(it.name),'rowlbl','start',g);
-      E('line',{x1:x(q.daily),x2:x(q.total),y1:cy,y2:cy,stroke:'#b9b09e','stroke-width':1.5},g);
+      E('line',{x1:x(q.daily),x2:x(q.total),y1:cy,y2:cy,stroke:'var(--axis)','stroke-width':1.5},g);
       marker('daily',x(q.daily),cy,g);marker('frequent',x(q.frequent),cy,g);marker('total',x(q.total),cy,g);
       T(x(q.total)+11,cy+4,pct(q.total),'val','start',g);
       var hit=E('rect',{x:0,y:top,width:W,height:rowH,fill:'transparent',tabindex:0,'aria-label':nm(it.name)+': total '+q.total+', frequent '+q.frequent+', daily '+q.daily+' percent'},g);
@@ -451,11 +449,11 @@ function nm(n){return SHORT[n]||n;}
     function x(i){return L+i*(W-L-R)/(P.length-1);}
     function y(v){return Tp+(60-v)/60*(Hh-Tp-B);}
     var g=E('svg',{viewBox:'0 0 '+W+' '+Hh,role:'img','aria-label':'Share of U.S. adults who have used ChatGPT: 18 percent in 2023, 23 in 2024, 34 in 2025, 44 in 2026. The 2026 question wording changed.'},host);
-    [0,20,40,60].forEach(function(v){E('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v?'#ece6da':'#b9b09e'},g);T(L-8,y(v)+4,v+'%','tick','end',g);});
+    [0,20,40,60].forEach(function(v){E('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v?'var(--grid)':'var(--axis)'},g);T(L-8,y(v)+4,v+'%','tick','end',g);});
     E('path',{d:'M'+x(0)+' '+y(P[0].pct)+' L'+x(1)+' '+y(P[1].pct)+' L'+x(2)+' '+y(P[2].pct),fill:'none',stroke:COL.total,'stroke-width':2,'stroke-linejoin':'round'},g);
     E('line',{x1:x(2),y1:y(P[2].pct),x2:x(3),y2:y(P[3].pct),stroke:COL.total,'stroke-width':2,'stroke-dasharray':'3 5','stroke-linecap':'round'},g);
     P.forEach(function(p,i){
-      E('circle',{cx:x(i),cy:y(p.pct),r:6,fill:COL.total,stroke:'#fffdf8','stroke-width':2},g);
+      E('circle',{cx:x(i),cy:y(p.pct),r:6,fill:COL.total,stroke:'var(--surface)','stroke-width':2},g);
       T(x(i),y(p.pct)-13,pct(p.pct),'val','middle',g);T(x(i),Hh-6,String(p.year),'tick','middle',g);
       var hit=E('rect',{x:x(i)-30,y:Tp-20,width:60,height:Hh-Tp,fill:'transparent'},g);
       function on(){var b=hit.getBoundingClientRect();showTip(String(p.year),[{color:COL.total,value:pct(p.pct),name:'of U.S. adults'}],p.wording_changed?'Wording changed in 2026.':null,b.left+b.width/2,b.top+20);}

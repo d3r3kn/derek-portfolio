@@ -21,13 +21,11 @@
 <meta name="twitter:description" content="Every active satellite's altitude, speed and signal delay worked out from public tracking data, plus what the upper atmosphere can and can't do to them.">
 <meta name="twitter:image" content="https://dereknye.com/shots/share-satellites.png?v=1">
 <meta name="twitter:image:alt" content="Chart of satellite altitude against orbital period: every one of 16,872 satellites sits on the same curve.">
-<link rel="stylesheet" href="styles.css?v=20261105">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
 <style>
-:root{
-  --surface:var(--panel); --grid:#ece6da; --axis:#b9b09e;
-  --text-1:#1f1d1a; --text-2:#4a463f; --text-3:#6b665c;
-  --ok:#2e7d32; --low:#2563b8; --mod:#c2531c; --high:#b8336a;
-}
+/* chart tokens come from styles.css */
+:root{--low:var(--s1); --mod:var(--s2); --high:var(--s5)}
 .lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
 .lede b{color:var(--ink);font-weight:600}
 header .tag{max-width:none}
@@ -46,8 +44,8 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px;flex-wrap:wrap}
 .seg button{font:inherit;font-size:13px;color:var(--text-2);background:none;border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
 .seg button:hover{color:var(--text-1)}
-.seg button[aria-pressed="true"]{background:#ece6da;color:var(--text-1);font-weight:600}
-.seg button:focus-visible,.tbl-btn:focus-visible,.preset:focus-visible{outline:2px solid #2563b8;outline-offset:1px}
+.seg button[aria-pressed="true"]{background:var(--grid);color:var(--text-1);font-weight:600}
+.seg button:focus-visible,.tbl-btn:focus-visible,.preset:focus-visible{outline:2px solid var(--s1);outline-offset:1px}
 
 .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 24px 18px;margin-bottom:22px;min-width:0}
 @media (max-width:640px){.card{padding:18px 12px 14px}}
@@ -85,7 +83,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .range output{font-size:26px;font-weight:650;letter-spacing:-.01em;min-width:9ch;font-variant-numeric:tabular-nums}
 .range output small{font-size:14px;font-weight:400;color:var(--text-3);margin-left:4px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px}
-.stat{background:#f6f3ec;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .stat b{display:block;font-size:22px;font-weight:650;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
 .stat span{display:block;font-size:12.5px;color:var(--text-3);margin-top:4px}
 .nearby{font-size:13.5px;color:var(--text-2);margin:0}
@@ -107,7 +105,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .bars .bv small{display:block;color:var(--text-3);font-weight:400;font-size:12px}
 @media (max-width:560px){.bars{grid-template-columns:1fr;gap:4px 0}.bars .bv{text-align:left;margin-bottom:8px}}
 
-.tip{position:fixed;z-index:40;pointer-events:none;background:#fffdf8;border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
+.tip{position:fixed;z-index:40;pointer-events:none;background:var(--panel);border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
 .tip.on{opacity:1}
 .tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
 .tip .t-row{display:flex;align-items:center;gap:8px}
@@ -143,7 +141,7 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
 </head>
 <body data-page="satellites">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261106"></script>
+<script src="site-nav.js?v=20261106b"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 

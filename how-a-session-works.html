@@ -21,11 +21,11 @@
 <meta name="twitter:image" content="https://dereknye.com/shots/share-get-help.png?v=1">
 <meta name="twitter:image:alt" content="Technology doesn&#x27;t have to feel intimidating. One-on-one computer and AI help by phone or video, with a free 20-minute intro call.">
 <link rel="canonical" href="https://dereknye.com/how-a-session-works">
-<link rel="stylesheet" href="styles.css?v=20261026">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
 <style>
 /* Field Notebook theme: fonts, colors, and nav come from styles.css; page-specific rules below (shared with get-help.html) */
 body.theme-notebook{
-  --bg:#f6f3ec;--panel:#fffdf8;--line:#e3dccd;--ink:#1f1d1a;--dim:#5a554c;--accent:#2f5d50;--clay:#9a5b2e;
   background:var(--bg);color:var(--ink);
   font:18px/1.6 "Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
 }
@@ -36,9 +36,9 @@ body.theme-notebook{
 .kicker{font:italic 500 16px "Fraunces",Georgia,serif;color:var(--clay);margin:0 0 14px}
 .hs-hero h1{font-size:clamp(40px,5.4vw,64px);line-height:1.05;letter-spacing:-.02em;margin:0 0 20px;font-weight:650}
 .lede{font-size:20px;color:var(--dim);margin:0;max-width:56ch}
-.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font:600 18px/1 "Source Sans 3","Segoe UI",system-ui,sans-serif;padding:16px 24px;border-radius:6px;border:0;cursor:pointer}
-.btn:hover{background:#264c42}
-.btn:focus-visible,.theme-notebook a:focus-visible{outline:3px solid #c98a3d;outline-offset:2px}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);text-decoration:none;font:600 18px/1 "Source Sans 3","Segoe UI",system-ui,sans-serif;padding:16px 24px;border-radius:6px;border:0;cursor:pointer}
+.btn:hover{background:var(--accent-hover)}
+.btn:focus-visible,.theme-notebook a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .cta-note{display:block;margin-top:12px;font-size:15.5px;color:var(--dim)}
 
 .gh-sec{padding:40px 0 24px}
@@ -63,7 +63,7 @@ body.theme-notebook{
 </head>
 <body data-page="how-a-session-works" class="theme-notebook">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261106"></script>
+<script src="site-nav.js?v=20261106b"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 <main>
