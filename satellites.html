@@ -61,6 +61,7 @@ h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
 .card-foot{font-size:12.5px;color:var(--text-3);margin:14px 0 0}
 .card-foot + .card-foot{margin-top:4px}
 .card-foot b.lead{color:var(--text-1);font-weight:650}
+.card-foot.lead-note{font-size:14px;color:var(--text-2);margin:8px 0 16px}
 .card-foot b.lead.flash{animation:leadflash 1.6s ease-out}
 @keyframes leadflash{0%{background:rgba(134,196,170,.45)}100%{background:transparent}}
 .card-sub.swap{transition:opacity .18s}.card-sub.swap.out{opacity:0}
@@ -203,7 +204,6 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <div class="card-head">
         <div>
           <p class="card-title">Altitude sets everything</p>
-          <p class="card-sub" id="scatter-sub"></p>
         </div>
         <div class="card-tools">
           <div class="seg" id="metric" role="group" aria-label="Show">
@@ -214,9 +214,10 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
           <button type="button" class="tbl-btn" data-table="scatter">Table</button>
         </div>
       </div>
+      <p class="card-sub" id="scatter-sub"></p>
+      <p class="card-foot lead-note" id="scatter-note"></p>
       <div class="chart" id="scatter"></div>
       <div class="tablewrap" id="scatter-table" hidden></div>
-      <p class="card-foot" id="scatter-note"></p>
       <p class="card-foot">Each dot is one satellite (every 8th low-orbit satellite is drawn so the chart stays light; everything higher is drawn in full). The line is the physics for a circular orbit. Hover a dot to name it.</p>
     </div>
 
