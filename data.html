@@ -21,7 +21,8 @@
 <meta name="twitter:image" content="https://dereknye.com/shots/share-site.png?v=1">
 <meta name="twitter:image:alt" content="Derek Nye: computer and AI help, training and tools. Based in Middle Tennessee.">
 <link rel="canonical" href="https://dereknye.com/data">
-<link rel="stylesheet" href="styles.css?v=20261026">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
 <style>
 .explore{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));margin-top:8px}
 .ex-card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px 26px 22px;text-decoration:none;color:var(--ink);transition:border-color .15s}
@@ -31,7 +32,7 @@
 .ex-title{font-size:22px;font-weight:650;letter-spacing:-.01em;margin:0 0 8px}
 .ex-desc{font-size:15px;color:var(--dim);margin:0 0 20px;max-width:56ch}
 .ex-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 20px}
-.ex-stat{background:#f6f3ec;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.ex-stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .ex-stat b{display:block;font-size:24px;font-weight:650;letter-spacing:-.02em;line-height:1.15;min-height:1.15em}
 .ex-stat span{display:block;font-size:13px;color:var(--dim);margin-top:4px}
 .ex-meta{font-size:13px;color:var(--dim);margin:auto 0 14px}
@@ -42,7 +43,7 @@
 </head>
 <body data-page="data">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261104b"></script>
+<script src="site-nav.js?v=20261106b"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
@@ -87,6 +88,17 @@
         <p class="ex-meta">Data: Gallup, with Pew and Census &middot; <span data-fill="aInd"></span> industries</p>
         <span class="ex-go">Explore the charts</span>
       </a>
+      <a class="ex-card" href="satellites.html">
+        <p class="ex-kicker">CelesTrak &middot; Active satellites</p>
+        <p class="ex-title">Satellite Physics</p>
+        <p class="ex-desc">What <span data-fill="sTotal">16,872</span> tracked satellites show about how orbits work, why height sets the lag, why the hot upper air is no threat to them, and what that means for data centers in orbit.</p>
+        <div class="ex-stats">
+          <div class="ex-stat"><b data-fill="sPing"></b><span>shortest round trip, low orbit vs. geostationary</span></div>
+          <div class="ex-stat"><b data-fill="sAir"></b><span>of sunlight's heat is all the hot upper air delivers at 400 km</span></div>
+        </div>
+        <p class="ex-meta">Data: CelesTrak catalog, NRLMSIS 2.1 atmosphere model &middot; <span data-fill="sGroups"></span> constellations</p>
+        <span class="ex-go">Explore the charts</span>
+      </a>
     </div>
   </section>
 
@@ -117,6 +129,15 @@
     fill('aTotal',o[0].total+'% → '+o[o.length-1].total+'%');
     fill('aRange',m[0].pct+'% to '+m[m.length-1].pct+'%');
     fill('aInd',String(s.industries.length));
+  }).catch(function(){});
+  fetch('data/satellites/summary.json').then(function(r){return r.json();}).then(function(s){
+    var K=s.constants,g={};s.groups.forEach(function(x){g[x.name]=x;});
+    var ping=function(h){return 4*h/K.c_kms*1000;};
+    fill('sTotal',s.total.toLocaleString('en-US'));
+    fill('sPing',ping(g['Starlink'].alt).toFixed(0)+' ms vs. '+ping(g['Geostationary belt'].alt).toFixed(0)+' ms');
+    var b=s.budget.filter(function(x){return x.alt===400;})[0],air=b.air_ram.high+b.air_thermal.high;
+    fill('sAir',(air/b.sunlight*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'%');
+    fill('sGroups',String(s.groups.length-2));
   }).catch(function(){});
 })();
 </script>

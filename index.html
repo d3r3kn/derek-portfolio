@@ -43,7 +43,8 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="styles.css?v=20261026">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
 <style>
 /* Home page */
 .home-hero{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:64px 0 36px}
@@ -51,14 +52,14 @@
 .home-hero h1{margin:0 0 16px}
 .home-hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--dim);max-width:60ch;margin:0 0 28px}
 .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
-.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:17px;line-height:1;padding:15px 22px;border-radius:6px}
-.btn:hover{background:#264c42}
-.btn:focus-visible,.text-link:focus-visible,.feat:focus-visible{outline:3px solid #c98a3d;outline-offset:2px}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);text-decoration:none;font-weight:600;font-size:17px;line-height:1;padding:15px 22px;border-radius:6px}
+.btn:hover{background:var(--accent-hover)}
+.btn:focus-visible,.text-link:focus-visible,.feat:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .work-links{margin:16px 0 0;color:var(--dim);font-size:16px}
 .work-links a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-.work-links a:focus-visible{outline:3px solid #c98a3d;outline-offset:2px}
+.work-links a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .text-link{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-.me{width:200px;height:200px;object-fit:cover;border-radius:4px;box-shadow:12px 12px 0 #ddd3bf;display:block}
+.me{width:200px;height:200px;object-fit:cover;border-radius:4px;box-shadow:12px 12px 0 var(--block);display:block}
 @media (max-width:760px){
   .home-hero{grid-template-columns:1fr;gap:20px;padding:32px 0 28px;text-align:center;justify-items:center}
   .home-hero .lede{margin-left:auto;margin-right:auto;text-wrap:balance}
@@ -74,7 +75,7 @@
 .facts div:first-child{padding-left:0;border-left:0}
 .facts dt{font-weight:600;color:var(--ink);font-size:16px}
 .facts dd{margin:2px 0 0;color:var(--dim);font-size:14.5px}
-.facts a{color:inherit;text-decoration:underline;text-decoration-color:#c9bfa9;text-underline-offset:3px}
+.facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
 @media (max-width:860px){.facts{grid-template-columns:1fr 1fr;gap:14px 0}.facts div{padding:4px 12px;text-align:center}.facts div:nth-child(3){border-left:0}.facts div:first-child{padding-left:12px}}
 
 .home-sec{padding:56px 0 0}
@@ -85,7 +86,7 @@
 @media (max-width:640px){.feats{grid-template-columns:1fr}}
 .feat{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;text-decoration:none;color:var(--ink)}
 .feat:hover{border-color:var(--accent);box-shadow:0 10px 28px rgba(31,29,26,.08)}
-.feat .viz{height:170px;background:#f6f3ec;border-bottom:1px solid var(--line);position:relative}
+.feat .viz{height:170px;background:var(--bg);border-bottom:1px solid var(--line);position:relative}
 .feat .viz svg{display:block;width:100%;height:100%}
 .feat .viz img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%}
 .feat .body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
@@ -109,7 +110,7 @@
 </head>
 <body data-page="home" class="home">
 <div id="site-nav"></div>
-<script src="site-nav.js?v=20261104b"></script>
+<script src="site-nav.js?v=20261106b"></script>
 <script src="motion.js?v=20261022" defer></script>
 <div class="wrap">
 
@@ -207,9 +208,9 @@
     var X=function(i){return L+i*(f.w-L-R)/(d.length-1);},Y=function(v){return Tp+(1-v/max)*(f.h-Tp-B);};
     E('line',{x1:L,x2:f.w-R,y1:f.h-B,y2:f.h-B,stroke:'var(--line)','stroke-width':1},f.svg);
     var pts=d.map(function(m,i){return X(i)+','+Y(m.paid);});
-    E('polygon',{points:X(0)+','+(f.h-B)+' '+pts.join(' ')+' '+X(d.length-1)+','+(f.h-B),fill:'#2563b8','fill-opacity':.08},f.svg);
-    E('polyline',{points:pts.join(' '),fill:'none',stroke:'#2563b8','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},f.svg);
-    var last=d[d.length-1];E('circle',{cx:X(d.length-1),cy:Y(last.paid),r:3.5,fill:'#2563b8'},f.svg);
+    E('polygon',{points:X(0)+','+(f.h-B)+' '+pts.join(' ')+' '+X(d.length-1)+','+(f.h-B),fill:'var(--s1)','fill-opacity':.08},f.svg);
+    E('polyline',{points:pts.join(' '),fill:'none',stroke:'var(--s1)','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},f.svg);
+    var last=d[d.length-1];E('circle',{cx:X(d.length-1),cy:Y(last.paid),r:3.5,fill:'var(--s1)'},f.svg);
     T(f.svg,L,18,'Paid to providers per month','vl');
     T(f.svg,f.w-R,Y(last.paid)-10,'$'+(last.paid/1e9).toFixed(1)+'B','vv','end');
     T(f.svg,L,f.h-8,'Jan 2018','vl');T(f.svg,f.w-R,f.h-8,'Oct 2024','vl','end');
@@ -223,8 +224,8 @@
     var max=Math.ceil(Math.max.apply(null,ys)),min=Math.floor(Math.min.apply(null,ys))-1;
     var X=function(y){return L+(y-1980)/(2025-1980)*(f.w-L-R);},Y=function(v){return Tp+(1-(v-min)/(max-min))*(f.h-Tp-B);};
     E('line',{x1:L,x2:f.w-R,y1:f.h-B,y2:f.h-B,stroke:'var(--line)','stroke-width':1},f.svg);
-    E('polyline',{points:d.map(function(r){return X(r.year)+','+Y(r.zero60);}).join(' '),fill:'none',stroke:'#c2531c','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},f.svg);
-    d.forEach(function(r){E('circle',{cx:X(r.year),cy:Y(r.zero60),r:3.5,fill:r.preliminary?'var(--panel)':'#c2531c',stroke:'#c2531c','stroke-width':1.5},f.svg);});
+    E('polyline',{points:d.map(function(r){return X(r.year)+','+Y(r.zero60);}).join(' '),fill:'none',stroke:'var(--s2)','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},f.svg);
+    d.forEach(function(r){E('circle',{cx:X(r.year),cy:Y(r.zero60),r:3.5,fill:r.preliminary?'var(--panel)':'var(--s2)',stroke:'var(--s2)','stroke-width':1.5},f.svg);});
     var a=d[0],b=d[d.length-1];
     T(f.svg,L,18,'Average 0 to 60 time, all new vehicles','vl');
     T(f.svg,X(a.year)+8,Y(a.zero60)+4,a.zero60.toFixed(1)+'s','vv');

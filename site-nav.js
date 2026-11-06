@@ -7,7 +7,7 @@
   var EMAIL = 'd3r3kn@gmail.com';
   var WORK = [
     ['technical-projects', 'technical-projects.html', 'Technical Projects', 'Data and software projects, built end to end'],
-    ['data', 'data.html', 'Data Analysis', 'Explorations of public data: Medicaid spending, automaker trends, and AI adoption'],
+    ['data', 'data.html', 'Data Analysis', 'Explorations of public data: Medicaid spending, automaker trends, AI adoption, and satellite orbits'],
     ['freelance', 'freelance.html', 'Freelance', 'Independent client work since July 2025'],
     ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work'],
     ['education-channel', 'anatomy-channel.html', 'A&P Educational Channel', 'Anatomy and physiology lessons on YouTube since 2017']
@@ -18,7 +18,7 @@
   var base = host.getAttribute('data-base') || '';
   var page = document.body.getAttribute('data-page') || '';
   /* exploration pages live under Data Analysis and highlight it */
-  var PARENT = { 'data-analysis': 'data', 'brand-race': 'data', 'ai-adoption': 'data' };
+  var PARENT = { 'data-analysis': 'data', 'brand-race': 'data', 'ai-adoption': 'data', 'satellites': 'data' };
   var section = PARENT[page] || page;
   var inWork = WORK.some(function (w) { return w[0] === section; });
 
@@ -40,6 +40,27 @@
     s.appendChild(p);
     return s;
   }
+  /* sun/moon button; both copies (desktop bar, phone bar) stay in step */
+  var themeBtns = [];
+  function themeBtn() {
+    var b = el('button', { type: 'button', 'class': 'sn-theme' });
+    [['sun', 'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'],
+     ['moon', 'M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z']].forEach(function (p) {
+      var s = icon(p[1], 24, 24); s.setAttribute('class', p[0]); s.firstChild.setAttribute('stroke-width', '1.8'); s.firstChild.setAttribute('stroke-linecap', 'round'); b.appendChild(s);
+    });
+    b.addEventListener('click', function () {
+      var dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+      syncTheme();
+    });
+    themeBtns.push(b);
+    return b;
+  }
+  function syncTheme() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    themeBtns.forEach(function (b) { b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode'); b.setAttribute('title', dark ? 'Light mode' : 'Dark mode'); });
+  }
   function current(a, key) {
     if (key === page) { a.className += ' on'; a.setAttribute('aria-current', 'page'); }
     else if (key === section) a.className += ' on';
@@ -56,13 +77,15 @@
   var links = el('nav', { 'class': 'sn-links', 'aria-label': 'Main' }, [
     dd,
     current(el('a', { href: base + 'resume.html', 'class': 'sn-link', text: 'Resume' }), 'resume'),
+    themeBtn(),
     current(el('a', { href: base + 'get-help.html', 'class': 'sn-contact', text: 'Get help' }), 'get-help')
   ]);
   var menuBtn = el('button', { type: 'button', 'class': 'sn-menu-btn', 'aria-expanded': 'false', 'aria-controls': 'sn-overlay' },
     [icon('M0 1h16M0 6h16M0 11h16', 16, 12), document.createTextNode('Menu')]);
   var brand = el('a', { href: base ? base : 'index.html', 'class': 'sn-brand', text: 'Derek Nye' });
   if (page === 'home') brand.setAttribute('aria-current', 'page');
-  var bar = el('div', { 'class': 'sn-bar' }, [el('div', { 'class': 'sn-in' }, [brand, links, menuBtn])]);
+  var bar = el('div', { 'class': 'sn-bar' }, [el('div', { 'class': 'sn-in' }, [brand, links, el('div', { 'class': 'sn-phone' }, [themeBtn(), menuBtn])])]);
+  syncTheme();
 
   /* phone menu */
   var closeBtn = el('button', { type: 'button', 'class': 'sn-menu-btn sn-close', text: 'Close' });

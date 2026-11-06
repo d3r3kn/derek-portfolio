@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satellite Physics, Derek Nye</title>
+<meta name="description" content="What 16,872 tracked satellites show about how orbits work, why altitude sets the lag, why the hot upper air is no threat to them, and what that means for data centers in orbit, from CelesTrak data and the NRLMSIS atmosphere model.">
+<link rel="canonical" href="https://dereknye.com/satellites">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Derek Nye">
+<meta property="og:url" content="https://dereknye.com/satellites">
+<meta property="og:title" content="Satellite Physics: Orbits, Lag, and the Hot Thin Air">
+<meta property="og:description" content="Every active satellite's altitude, speed and signal delay worked out from public tracking data, plus what the upper atmosphere can and can't do to them.">
+<meta property="og:image" content="https://dereknye.com/shots/share-satellites.png?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Chart of satellite altitude against orbital period: every one of 16,872 satellites sits on the same curve.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@DerekNyeX">
+<meta name="twitter:title" content="Satellite Physics: Orbits, Lag, and the Hot Thin Air">
+<meta name="twitter:description" content="Every active satellite's altitude, speed and signal delay worked out from public tracking data, plus what the upper atmosphere can and can't do to them.">
+<meta name="twitter:image" content="https://dereknye.com/shots/share-satellites.png?v=1">
+<meta name="twitter:image:alt" content="Chart of satellite altitude against orbital period: every one of 16,872 satellites sits on the same curve.">
+<link rel="stylesheet" href="styles.css?v=20261106b">
+<script src="theme.js?v=20261106"></script>
+<style>
+/* chart tokens come from styles.css */
+:root{--low:#73aaf0; --mod:#f28c5c; --high:#ec6f9f; --sky-ink:#f1ebdd; --sky-halo:#0f1a33}
+.lede{font-size:16.5px;color:var(--text-2);margin:0 0 14px}
+.lede b{color:var(--ink);font-weight:600}
+header .tag{max-width:none}
+sup a{color:var(--accent);text-decoration:none;font-size:11px;font-weight:700;padding:0 1px}
+
+.srcbox{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0;font-size:14.5px}
+.srcbox dt{color:var(--text-3)}
+.srcbox dd{margin:0;color:var(--text-1)}
+.srcbox a,.prose a,.card-sub a,.card-foot a,.sources a,ul.limits a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px}
+@media (max-width:560px){.srcbox{grid-template-columns:1fr;gap:2px}.srcbox dd{margin-bottom:8px}}
+
+.prose{font-size:15.5px;color:var(--dim);margin:0 0 16px}
+ul.facts{padding-left:22px}ul.facts li{margin:0 0 8px}
+.prose b{color:var(--ink);font-weight:600}
+h3.sub{font-size:17px;font-weight:650;margin:30px 0 10px}
+
+.seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:13px;color:var(--text-2);background:none;border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
+.seg button:hover{color:var(--text-1)}
+.seg button[aria-pressed="true"]{background:var(--grid);color:var(--text-1);font-weight:600}
+.seg button:focus-visible,.tbl-btn:focus-visible,.preset:focus-visible{outline:2px solid var(--s1);outline-offset:1px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 24px 18px;margin-bottom:22px;min-width:0}
+/* every card is a piece of night sky in both themes: the dark-mode tokens, on the color the sky gradient ends in */
+.card{position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='480'><circle cx='77.8' cy='241.2' r='0.7' fill='%23f1ebdd' opacity='0.12'/><circle cx='144.0' cy='288.1' r='0.7' fill='%23f1ebdd' opacity='0.22'/><circle cx='466.6' cy='367.6' r='0.6' fill='%23f1ebdd' opacity='0.15'/><circle cx='392.6' cy='54.7' r='0.6' fill='%23f1ebdd' opacity='0.28'/><circle cx='437.8' cy='325.4' r='0.5' fill='%23f1ebdd' opacity='0.32'/><circle cx='593.0' cy='385.2' r='0.6' fill='%23f1ebdd' opacity='0.12'/><circle cx='218.5' cy='267.3' r='0.6' fill='%23f1ebdd' opacity='0.29'/><circle cx='449.7' cy='276.9' r='1.1' fill='%23f1ebdd' opacity='0.41'/><circle cx='233.2' cy='203.0' r='0.6' fill='%23f1ebdd' opacity='0.21'/><circle cx='76.1' cy='243.0' r='0.6' fill='%23f1ebdd' opacity='0.21'/><circle cx='585.1' cy='125.1' r='0.8' fill='%23f1ebdd' opacity='0.21'/><circle cx='331.4' cy='14.1' r='0.5' fill='%23f1ebdd' opacity='0.11'/><circle cx='450.2' cy='424.1' r='0.6' fill='%23f1ebdd' opacity='0.2'/><circle cx='308.6' cy='111.0' r='0.7' fill='%23f1ebdd' opacity='0.2'/><circle cx='300.5' cy='444.4' r='0.6' fill='%23f1ebdd' opacity='0.22'/><circle cx='428.0' cy='148.4' r='0.6' fill='%23f1ebdd' opacity='0.21'/><circle cx='564.5' cy='208.1' r='0.5' fill='%23f1ebdd' opacity='0.11'/><circle cx='419.0' cy='286.3' r='0.6' fill='%23f1ebdd' opacity='0.21'/><circle cx='588.1' cy='125.8' r='0.6' fill='%23f1ebdd' opacity='0.28'/><circle cx='515.9' cy='267.5' r='0.7' fill='%23f1ebdd' opacity='0.17'/><circle cx='585.1' cy='48.8' r='0.7' fill='%23f1ebdd' opacity='0.21'/><circle cx='290.1' cy='461.5' r='0.7' fill='%23f1ebdd' opacity='0.21'/><circle cx='42.9' cy='128.8' r='0.4' fill='%23f1ebdd' opacity='0.26'/><circle cx='263.6' cy='215.9' r='1.1' fill='%23f1ebdd' opacity='0.16'/><circle cx='371.3' cy='445.7' r='1.1' fill='%23f1ebdd' opacity='0.44'/><circle cx='159.6' cy='297.6' r='0.8' fill='%23f1ebdd' opacity='0.25'/><circle cx='406.1' cy='75.7' r='0.6' fill='%23f1ebdd' opacity='0.27'/><circle cx='606.2' cy='236.2' r='0.5' fill='%23f1ebdd' opacity='0.15'/><circle cx='375.9' cy='458.1' r='0.6' fill='%23f1ebdd' opacity='0.12'/><circle cx='427.2' cy='447.1' r='0.8' fill='%23f1ebdd' opacity='0.17'/><circle cx='264.1' cy='386.6' r='0.5' fill='%23f1ebdd' opacity='0.1'/><circle cx='69.5' cy='424.6' r='1.1' fill='%23f1ebdd' opacity='0.28'/><circle cx='226.8' cy='368.3' r='1.1' fill='%23f1ebdd' opacity='0.34'/><circle cx='210.5' cy='146.5' r='0.4' fill='%23f1ebdd' opacity='0.31'/><circle cx='365.5' cy='385.2' r='0.6' fill='%23f1ebdd' opacity='0.2'/><circle cx='216.0' cy='286.8' r='0.4' fill='%23f1ebdd' opacity='0.19'/><circle cx='126.3' cy='440.6' r='1.1' fill='%23f1ebdd' opacity='0.35'/><circle cx='535.6' cy='217.1' r='0.5' fill='%23f1ebdd' opacity='0.26'/><circle cx='560.3' cy='63.5' r='0.7' fill='%23f1ebdd' opacity='0.21'/><circle cx='610.4' cy='78.3' r='0.6' fill='%23f1ebdd' opacity='0.19'/><circle cx='265.4' cy='39.4' r='0.5' fill='%23f1ebdd' opacity='0.16'/><circle cx='318.5' cy='373.4' r='0.6' fill='%23f1ebdd' opacity='0.17'/><circle cx='308.6' cy='59.2' r='0.7' fill='%23f1ebdd' opacity='0.28'/><circle cx='541.2' cy='112.1' r='0.8' fill='%23f1ebdd' opacity='0.24'/><circle cx='261.5' cy='374.9' r='0.7' fill='%23f1ebdd' opacity='0.31'/><circle cx='225.8' cy='76.6' r='0.6' fill='%23f1ebdd' opacity='0.22'/><circle cx='71.8' cy='342.8' r='0.6' fill='%23f1ebdd' opacity='0.15'/><circle cx='189.4' cy='129.6' r='0.4' fill='%23f1ebdd' opacity='0.16'/><circle cx='609.3' cy='83.5' r='0.7' fill='%23f1ebdd' opacity='0.26'/><circle cx='120.0' cy='301.9' r='0.5' fill='%23f1ebdd' opacity='0.28'/><circle cx='187.1' cy='151.8' r='0.4' fill='%23f1ebdd' opacity='0.19'/><circle cx='573.2' cy='371.7' r='0.4' fill='%23f1ebdd' opacity='0.12'/><circle cx='16.6' cy='60.6' r='0.6' fill='%23f1ebdd' opacity='0.31'/><circle cx='224.8' cy='373.2' r='0.7' fill='%23f1ebdd' opacity='0.24'/><circle cx='590.1' cy='152.4' r='0.6' fill='%23f1ebdd' opacity='0.32'/><circle cx='560.7' cy='328.8' r='0.7' fill='%23f1ebdd' opacity='0.3'/><circle cx='249.4' cy='452.8' r='0.7' fill='%23f1ebdd' opacity='0.2'/><circle cx='17.0' cy='333.0' r='0.8' fill='%23f1ebdd' opacity='0.28'/><circle cx='79.8' cy='367.5' r='0.8' fill='%23f1ebdd' opacity='0.22'/><circle cx='219.8' cy='269.0' r='0.4' fill='%23f1ebdd' opacity='0.24'/><circle cx='77.2' cy='61.8' r='0.7' fill='%23f1ebdd' opacity='0.24'/><circle cx='20.3' cy='277.2' r='0.6' fill='%23f1ebdd' opacity='0.15'/><circle cx='269.7' cy='106.5' r='0.6' fill='%23f1ebdd' opacity='0.25'/><circle cx='596.4' cy='327.5' r='0.5' fill='%23f1ebdd' opacity='0.13'/><circle cx='16.9' cy='133.8' r='0.5' fill='%23f1ebdd' opacity='0.17'/><circle cx='602.5' cy='284.6' r='0.6' fill='%23f1ebdd' opacity='0.24'/><circle cx='613.4' cy='246.7' r='0.7' fill='%23f1ebdd' opacity='0.27'/><circle cx='203.9' cy='315.1' r='1.1' fill='%23f1ebdd' opacity='0.5'/><circle cx='301.3' cy='463.8' r='0.7' fill='%23f1ebdd' opacity='0.3'/><circle cx='578.2' cy='192.0' r='0.8' fill='%23f1ebdd' opacity='0.15'/></svg>");background-size:640px 480px}
+.card>*{position:relative}
+.card{--bg:#1a1816;--panel:#242019;--surface:#1a1816;--line:#3a352e;--ink:#ebe5d9;--dim:#b1a899;--accent:#86c4aa;--clay:#d9a06c;--grid:#36312b;--axis:#6f685c;--text-1:#ebe5d9;--text-2:#c9c1b2;--text-3:#a19889;--s1:#73aaf0;--s2:#f28c5c;--s3:#4fc896;--s4:#e3b94e;--s5:#ec6f9f;--muted-mark:#574f45;--s1-soft:#3b5f8e;--ok:#72c879;color:var(--ink);background:#1a1816;border-color:#3a352e}
+@media (max-width:640px){.card{padding:18px 12px 14px}}
+.card-head{display:flex;flex-direction:column;gap:12px;align-items:flex-start;margin-bottom:16px}
+.card-title{font-weight:650;font-size:17px;margin:0 0 4px}
+.card-sub{font-size:14.5px;color:var(--text-2);margin:0}
+.card-sub b{color:var(--text-1);font-weight:600}
+.card-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tbl-btn{font:inherit;font-size:13px;color:var(--text-2);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tbl-btn:hover{color:var(--text-1);border-color:var(--axis)}
+.card-foot{font-size:12.5px;color:var(--text-3);margin:14px 0 0}
+.card-foot + .card-foot{margin-top:4px}
+.card-foot b.lead{color:var(--text-1);font-weight:650}
+.card-foot.lead-note{font-size:14px;color:var(--text-2);margin:8px 0 16px}
+.card-foot b.lead.flash{animation:leadflash 1.6s ease-out}
+@keyframes leadflash{0%{background:rgba(134,196,170,.45)}100%{background:transparent}}
+.card-sub.swap{transition:opacity .18s}.card-sub.swap.out{opacity:0}
+@media (prefers-reduced-motion:reduce){.card-foot b.lead.flash{animation:none}.card-sub.swap{transition:none}}
+
+.chart{position:relative}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart text{font-family:inherit}
+.tick{font-size:12px;fill:var(--text-3);font-variant-numeric:tabular-nums}
+.axlbl{font-size:12px;fill:var(--text-3)}
+.blbl{font-size:12.5px;fill:var(--text-1);font-weight:600}
+.band{font-size:12px;fill:var(--text-3);letter-spacing:.08em;text-transform:uppercase}
+.pt{fill:#86c4aa;opacity:.6}
+.pt:hover{opacity:1}
+.mk{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--text-2);margin:0 0 10px}
+.legend i{width:14px;height:3px;border-radius:2px;display:inline-block;margin-right:7px;vertical-align:middle}
+
+/* slider card */
+.pick{display:grid;grid-template-columns:1fr;gap:16px}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.preset{font:inherit;font-size:12.5px;color:var(--text-2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 11px;cursor:pointer}
+.preset:hover{color:var(--text-1);border-color:var(--axis)}
+.preset[aria-pressed="true"]{color:var(--text-1);border-color:var(--text-2);font-weight:600}
+.range{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.range input{flex:1;min-width:200px;accent-color:var(--accent)}
+.range output{font-size:26px;font-weight:650;letter-spacing:-.01em;min-width:9ch;font-variant-numeric:tabular-nums}
+.range output small{font-size:14px;font-weight:400;color:var(--text-3);margin-left:4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:22px;font-weight:650;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:12.5px;color:var(--text-3);margin-top:4px}
+.nearby{font-size:13.5px;color:var(--text-2);margin:0}
+.nearby b{color:var(--text-1);font-weight:600}
+
+/* small multiples */
+.multi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:760px){.multi{grid-template-columns:1fr}}
+.multi .mt{font-size:13.5px;font-weight:600;color:var(--text-1);margin:0 0 6px}
+
+/* energy bars */
+.bars{display:grid;grid-template-columns:max-content 1fr max-content;gap:10px 14px;align-items:center;font-size:14px}
+.bars .bl{color:var(--text-1)}
+.bars .bl small{display:block;color:var(--text-3);font-size:12px}
+.bars .bt{height:18px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden}
+.bars .bt i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:4px;min-width:2px}
+.bars .bt i.air{background:var(--high)}
+.bars .bv{font-variant-numeric:tabular-nums;color:var(--text-1);font-weight:600;text-align:right;white-space:nowrap}
+.bars .bv small{display:block;color:var(--text-3);font-weight:400;font-size:12px}
+@media (max-width:560px){.bars{grid-template-columns:1fr;gap:4px 0}.bars .bv{text-align:left;margin-bottom:8px}}
+
+.tip{position:fixed;z-index:40;pointer-events:none;background:var(--panel);border:1px solid var(--axis);border-radius:8px;padding:9px 12px;box-shadow:0 8px 24px rgba(31,29,26,.16);font-size:13px;min-width:140px;max-width:300px;opacity:0;transition:opacity .08s}
+.tip.on{opacity:1}
+.tip .t-head{color:var(--text-3);font-size:12px;margin-bottom:4px}
+.tip .t-row{display:flex;align-items:center;gap:8px}
+.tip .t-key{width:10px;height:10px;border-radius:50%;flex:none}
+.tip .t-val{color:var(--text-1);font-weight:650;font-variant-numeric:tabular-nums}
+.tip .t-name{color:var(--text-2)}
+.tip .t-note{color:var(--text-3);font-size:12px;margin-top:4px}
+
+table.dt{width:100%;border-collapse:collapse;font-size:13.5px}
+table.dt th,table.dt td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+table.dt th{color:var(--text-3);font-weight:600;font-size:12.5px}
+table.dt td.n,table.dt th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{max-height:420px;overflow:auto}
+.pipe{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 16px}
+.pipe table.dt td,.pipe table.dt th{padding:9px 14px}
+.pipe tr.final td{color:var(--ink);font-weight:600;border-bottom:0}
+.checks{list-style:none;padding:0;margin:0 0 16px}
+.checks li{display:flex;gap:10px;font-size:14.5px;color:var(--dim);margin-bottom:8px}
+.checks li b{color:var(--ink);font-weight:600}
+.checks svg{flex:none;margin-top:4px}
+ul.limits{padding-left:20px;margin:0}
+ul.limits li{font-size:14.5px;color:var(--dim);margin-bottom:9px}
+ul.limits li b{color:var(--ink);font-weight:600}
+dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;margin:0;font-size:14.5px}
+dl.gloss dt{font-weight:650;color:var(--ink)}
+dl.gloss dd{margin:0;color:var(--dim)}
+@media (max-width:560px){dl.gloss{grid-template-columns:1fr;gap:2px}dl.gloss dd{margin-bottom:10px}}
+ol.sources{padding-left:22px;margin:0}
+ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
+.loading{color:var(--text-3);font-size:14px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body data-page="satellites">
+<div id="site-nav"></div>
+<script src="site-nav.js?v=20261106b"></script>
+<script src="motion.js?v=20261022" defer></script>
+<div class="wrap">
+
+  <header class="scene">
+  <p class="crumb"><a href="data.html">← Data Analysis</a></p>
+    <h1>Satellite Physics</h1>
+    <p class="tag">What <b>16,872 tracked satellites</b> show about how orbits work, why height sets the lag, why the hot upper air is no threat to them, and what all that means for putting data centers in orbit.</p>
+<div class="ambient sc-sky" aria-hidden="true"><svg viewBox="0 0 1200 180" preserveAspectRatio="xMidYMax slice" focusable="false"><defs><pattern id="amb-h1" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 7L7-1M-1 1L1-1M5 7L7 5" fill="none" stroke="currentColor" stroke-width=".7"/></pattern><pattern id="amb-h2" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 7L7-1M-1 1L1-1M5 7L7 5M-1-1L7 7M-1 5L1 7M5-1L7 1" fill="none" stroke="currentColor" stroke-width=".7"/></pattern><pattern id="amb-h2w" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 7L7-1M-1 1L1-1M5 7L7 5M-1-1L7 7M-1 5L1 7M5-1L7 1" fill="none" stroke="var(--bg)" stroke-width=".7"/></pattern><pattern id="amb-h3" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M0 2H4" fill="none" stroke="currentColor" stroke-width=".6"/></pattern><pattern id="amb-hv" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M2 0V4" fill="none" stroke="currentColor" stroke-width=".6"/></pattern><pattern id="amb-dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r=".55" fill="currentColor"/></pattern><clipPath id="amb-c"><rect width="1200" height="180"/></clipPath><path id="amb-limb" d="M-20 150Q600 96 1220 150"/></defs><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round"><g fill="currentColor" stroke="none"><circle cx="543" cy="65" r="1.0" opacity="0.73"/><circle cx="228" cy="99" r="1.0" opacity="0.71"/><circle cx="113" cy="42" r="0.6" opacity="0.75"/><circle cx="761" cy="70" r="1.0" opacity="0.64"/><circle cx="739" cy="21" r="0.6" opacity="0.38"/><circle class="amb-win" cx="43" cy="119" r="1.7000000000000002" style="--d:-6.5s;--p:7.6s"/><circle cx="1011" cy="67" r="0.8" opacity="0.65"/><circle cx="549" cy="34" r="1.3" opacity="0.73"/><circle cx="849" cy="40" r="0.6" opacity="0.36"/><circle cx="676" cy="16" r="0.6" opacity="0.52"/><circle cx="1150" cy="114" r="0.6" opacity="0.77"/><circle cx="63" cy="53" r="1.0" opacity="0.60"/><circle class="amb-win" cx="238" cy="84" r="1.2000000000000002" style="--d:-4.7s;--p:10.8s"/><circle cx="910" cy="18" r="0.6" opacity="0.35"/><circle class="amb-win" cx="558" cy="57" r="1.7000000000000002" style="--d:-7.1s;--p:10.9s"/><circle class="amb-win" cx="923" cy="53" r="1.4" style="--d:-5.9s;--p:6.3s"/><circle cx="324" cy="115" r="1.3" opacity="0.75"/><circle cx="253" cy="50" r="1.3" opacity="0.40"/><circle class="amb-win" cx="1187" cy="32" r="1.2000000000000002" style="--d:-8.5s;--p:10.0s"/><circle cx="463" cy="12" r="0.6" opacity="0.46"/><circle class="amb-win" cx="722" cy="45" r="1.4" style="--d:-8.2s;--p:10.0s"/><circle cx="163" cy="51" r="0.6" opacity="0.45"/><circle cx="733" cy="84" r="0.6" opacity="0.77"/><circle cx="236" cy="116" r="1.0" opacity="0.54"/><circle cx="125" cy="9" r="0.8" opacity="0.67"/><circle cx="308" cy="99" r="1.3" opacity="0.58"/><circle cx="1115" cy="129" r="0.6" opacity="0.60"/><circle cx="1023" cy="79" r="0.8" opacity="0.76"/><circle cx="899" cy="12" r="1.0" opacity="0.38"/><circle cx="212" cy="48" r="1.3" opacity="0.39"/><circle cx="166" cy="59" r="0.8" opacity="0.66"/><circle cx="701" cy="19" r="0.6" opacity="0.56"/><circle class="amb-win" cx="429" cy="39" r="1.0" style="--d:-8.9s;--p:7.9s"/><circle class="amb-win" cx="877" cy="40" r="1.0" style="--d:-7.6s;--p:9.4s"/><circle cx="1080" cy="96" r="0.6" opacity="0.76"/><circle cx="422" cy="80" r="0.6" opacity="0.54"/><circle class="amb-win" cx="949" cy="105" r="1.7000000000000002" style="--d:-9.3s;--p:7.3s"/><circle cx="15" cy="14" r="0.6" opacity="0.80"/><circle cx="1056" cy="94" r="1.0" opacity="0.66"/><circle class="amb-win" cx="549" cy="55" r="1.7000000000000002" style="--d:-10.5s;--p:5.2s"/><circle cx="722" cy="57" r="0.6" opacity="0.40"/><circle cx="936" cy="81" r="1.0" opacity="0.36"/><circle cx="361" cy="81" r="0.6" opacity="0.69"/><circle cx="411" cy="108" r="1.0" opacity="0.50"/><circle cx="799" cy="26" r="1.0" opacity="0.69"/><circle cx="240" cy="29" r="0.6" opacity="0.49"/><circle cx="163" cy="65" r="0.6" opacity="0.78"/><circle cx="332" cy="23" r="1.0" opacity="0.77"/><circle cx="997" cy="50" r="1.3" opacity="0.49"/><circle cx="1007" cy="122" r="1.0" opacity="0.72"/><circle cx="334" cy="73" r="0.8" opacity="0.49"/><circle cx="950" cy="6" r="0.6" opacity="0.44"/><circle cx="923" cy="35" r="0.6" opacity="0.79"/><circle cx="138" cy="18" r="1.3" opacity="0.71"/><circle cx="1150" cy="93" r="0.6" opacity="0.47"/><circle cx="857" cy="90" r="1.3" opacity="0.43"/><circle cx="327" cy="43" r="1.3" opacity="0.80"/><circle class="amb-win" cx="191" cy="106" r="1.0" style="--d:-13.1s;--p:9.3s"/><circle cx="156" cy="60" r="0.6" opacity="0.61"/><circle cx="1055" cy="102" r="0.8" opacity="0.64"/><circle cx="246" cy="89" r="0.6" opacity="0.75"/><circle cx="1177" cy="133" r="1.3" opacity="0.77"/><circle cx="314" cy="86" r="0.6" opacity="0.39"/><circle cx="529" cy="64" r="0.8" opacity="0.36"/><circle class="amb-win" cx="971" cy="12" r="1.0" style="--d:-4.7s;--p:9.7s"/><circle cx="169" cy="22" r="1.3" opacity="0.58"/><circle cx="813" cy="53" r="1.0" opacity="0.66"/><circle cx="909" cy="55" r="1.3" opacity="0.68"/><circle cx="767" cy="62" r="1.3" opacity="0.65"/><circle cx="1146" cy="117" r="1.3" opacity="0.73"/><circle cx="1162" cy="73" r="1.3" opacity="0.53"/><circle class="amb-win" cx="137" cy="5" r="1.4" style="--d:-13.6s;--p:8.1s"/><circle class="amb-win" cx="481" cy="92" r="1.7000000000000002" style="--d:-1.3s;--p:6.0s"/><circle cx="1117" cy="63" r="1.0" opacity="0.56"/><circle cx="152" cy="57" r="1.0" opacity="0.40"/><circle class="amb-win" cx="503" cy="7" r="1.2000000000000002" style="--d:-10.9s;--p:5.1s"/><circle cx="233" cy="31" r="0.8" opacity="0.51"/><circle class="amb-win" cx="744" cy="16" r="1.7000000000000002" style="--d:-7.1s;--p:6.5s"/><circle class="amb-win" cx="237" cy="67" r="1.4" style="--d:-8.9s;--p:10.0s"/><circle cx="739" cy="63" r="1.3" opacity="0.59"/><circle cx="1022" cy="78" r="0.6" opacity="0.68"/><circle cx="973" cy="111" r="0.8" opacity="0.75"/><circle cx="234" cy="96" r="0.6" opacity="0.41"/><circle cx="287" cy="88" r="0.8" opacity="0.55"/><circle cx="1129" cy="74" r="0.6" opacity="0.63"/><circle cx="959" cy="15" r="1.3" opacity="0.76"/><circle cx="1162" cy="19" r="1.3" opacity="0.50"/><circle cx="1198" cy="116" r="0.6" opacity="0.36"/><circle cx="914" cy="75" r="1.3" opacity="0.44"/><circle cx="138" cy="25" r="0.6" opacity="0.77"/></g><path d="M250 6L330 58" pathLength="100" class="amb-pkt" stroke-width="1" opacity=".7" style="animation-duration:17s;animation-delay:-5s"/><path d="M1040 12L1130 70" pathLength="100" class="amb-pkt" stroke-width="1" opacity=".7" style="animation-duration:23s;animation-delay:-14s"/><g transform="translate(1000 42)"><clipPath id="amb-moon"><circle r="17"/></clipPath><circle r="17" fill="var(--bg)" stroke-width="1.1"/><path d="M6-17A17 17 0 0 1 6 17A11 17 0 0 0 6-17Z" fill="url(#amb-h1)" stroke="none" clip-path="url(#amb-moon)"/><circle cx="-6" cy="-4" r="3.2" fill="url(#amb-dots)" stroke-width=".8"/><circle cx="-1" cy="7" r="2.2" fill="url(#amb-dots)" stroke-width=".8"/><circle cx="-9" cy="6" r="1.4" stroke-width=".7"/></g><g transform="translate(0 24)"><g class="amb-fly" style="animation-duration:30s;animation-delay:-4s"><g transform="rotate(8)"><g transform="scale(0.75)"><path d="M-26-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M10-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M-10 0H-7M7 0H10" stroke-width="1.2"/><path d="M-7-6h14v12h-14z" fill="url(#amb-h2)" stroke-width="1.2"/><path d="M0 6V11" stroke-width="1"/><path d="M-5 13A5 4 0 0 0 5 13Z" fill="var(--bg)" stroke-width="1"/><path d="M0-6V-11" stroke-width="1"/><g class="amb-fa"><circle cy="-12" r="1.4" fill="currentColor" stroke="none"/></g></g></g></g></g><g transform="translate(0 62)"><g class="amb-fly" style="animation-duration:22s;animation-delay:-13s"><g transform="rotate(-6)"><g transform="scale(0.85)"><path d="M-26-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M10-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M-10 0H-7M7 0H10" stroke-width="1.2"/><path d="M-7-6h14v12h-14z" fill="url(#amb-h2)" stroke-width="1.2"/><path d="M0 6V11" stroke-width="1"/><path d="M-5 13A5 4 0 0 0 5 13Z" fill="var(--bg)" stroke-width="1"/><path d="M0-6V-11" stroke-width="1"/><g class="amb-fa"><circle cy="-12" r="1.4" fill="currentColor" stroke="none"/></g></g></g></g></g><g transform="translate(0 88)"><g class="amb-fly" style="animation-duration:17s;animation-delay:-7s"><g transform="rotate(14)"><g transform="scale(0.7)"><path d="M-26-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M10-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M-10 0H-7M7 0H10" stroke-width="1.2"/><path d="M-7-6h14v12h-14z" fill="url(#amb-h2)" stroke-width="1.2"/><path d="M0 6V11" stroke-width="1"/><path d="M-5 13A5 4 0 0 0 5 13Z" fill="var(--bg)" stroke-width="1"/><path d="M0-6V-11" stroke-width="1"/><g class="amb-fa"><circle cy="-12" r="1.4" fill="currentColor" stroke="none"/></g></g></g></g></g><g transform="translate(640 34)"><g transform="scale(1.0)"><path d="M-26-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M10-4h16v8h-16z" fill="url(#amb-hv)" stroke-width="1"/><path d="M-10 0H-7M7 0H10" stroke-width="1.2"/><path d="M-7-6h14v12h-14z" fill="url(#amb-h2)" stroke-width="1.2"/><path d="M0 6V11" stroke-width="1"/><path d="M-5 13A5 4 0 0 0 5 13Z" fill="var(--bg)" stroke-width="1"/><path d="M0-6V-11" stroke-width="1"/><g class="amb-fa"><circle cy="-12" r="1.4" fill="currentColor" stroke="none"/></g></g></g><path d="M476 100.18704474505724L636 48" stroke-width=".8" stroke-dasharray="2 4" opacity=".4"/><path d="M644 48L776 94.62280957336108" stroke-width=".8" stroke-dasharray="2 4" opacity=".4"/><path d="M476 100.18704474505724L636 48" pathLength="100" class="amb-pkt" stroke-width="2.2" style="animation-duration:5s"/><path d="M644 48L776 94.62280957336108" pathLength="100" class="amb-pkt" stroke-width="2.2" style="animation-duration:5s;animation-delay:2.5s"/><use href="#amb-limb" y="-5" stroke-width=".8" opacity="0.35"/><use href="#amb-limb" y="-11" stroke-width=".8" opacity="0.22"/><use href="#amb-limb" y="-19" stroke-width=".8" opacity="0.12"/><use href="#amb-limb" y="-29" stroke-width=".8" opacity="0.06"/><path d="M-20 150Q600 96 1220 150V180H-20Z" fill="var(--bg)" stroke="none"/><path d="M-20 150Q600 96 1220 150V180H-20Z" fill="url(#amb-h1)" stroke="none" opacity=".35"/><rect x="0" y="152" width="1200" height="28" fill="url(#amb-h3)" stroke="none" opacity=".25"/><path d="M-20 150Q600 96 1220 150" stroke-width="1.4"/><path d="M48 144L70 129L92 144Z" fill="var(--bg)" stroke-width="1"/><path d="M70 129L92 144H70Z" fill="url(#amb-h1)" stroke="none"/><path d="M85 140L120 117L155 140Z" fill="var(--bg)" stroke-width="1"/><path d="M120 117L155 140H120Z" fill="url(#amb-h1)" stroke="none"/><path d="M142 138L160 126L178 138Z" fill="var(--bg)" stroke-width="1"/><path d="M160 126L178 138H160Z" fill="url(#amb-h1)" stroke="none"/><path d="M1001 136L1020 123L1039 136Z" fill="var(--bg)" stroke-width="1"/><path d="M1020 123L1039 136H1020Z" fill="url(#amb-h1)" stroke="none"/><path d="M1048 140L1080 119L1112 140Z" fill="var(--bg)" stroke-width="1"/><path d="M1080 119L1112 140H1080Z" fill="url(#amb-h1)" stroke="none"/><path d="M1116 144L1140 128L1164 144Z" fill="var(--bg)" stroke-width="1"/><path d="M1140 128L1164 144H1140Z" fill="url(#amb-h1)" stroke="none"/><circle cx="210" cy="132.2" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="216" cy="131.9" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="224" cy="131.4" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="236" cy="130.8" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="241" cy="130.6" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="250" cy="130.1" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="258" cy="129.7" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="880" cy="127.0" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="889" cy="127.4" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="896" cy="127.7" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="908" cy="128.2" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="915" cy="128.5" r=".8" fill="currentColor" stroke="none" opacity=".7"/><circle cx="927" cy="129.0" r=".8" fill="currentColor" stroke="none" opacity=".7"/><path d="M470 126.18704474505724V110.18704474505724" stroke-width="1.4"/><g transform="translate(470 108.18704474505724) rotate(-26)"><path d="M-3-11A13 13 0 0 0 -3 11Z" fill="url(#amb-h1)" stroke-width="1.1"/><path d="M-3-11A13 13 0 0 0 -3 11" stroke-width="1.2"/><path d="M-1 0H8" stroke-width="1"/><circle cx="8" r="1.4" fill="currentColor" stroke="none"/></g><path d="M461 126.18704474505724H479" stroke-width="1.2"/><path d="M752 125.62280957336108V108.62280957336108H778V125.62280957336108Z" fill="var(--bg)" stroke-width="1.1"/><path d="M749 108.62280957336108L765 96.62280957336108L781 108.62280957336108Z" fill="url(#amb-h1)" stroke-width="1.1"/><path d="M762 125.62280957336108V115.62280957336108H768V125.62280957336108" fill="url(#amb-hv)" stroke-width=".9"/><rect class="amb-win" x="756" y="112.62280957336108" width="4" height="4" fill="currentColor" stroke="none" style="--d:-3s;--p:9s"/><g transform="translate(774 100.62280957336108) rotate(-40)"><path d="M-2-5A6 6 0 0 0 -2 5Z" fill="url(#amb-h1)" stroke-width="1"/><path d="M-1 0H4" stroke-width=".9"/></g></g></svg></div>
+  </header>
+
+  <section>
+    <h2>Every working satellite is tracked, and the tracking data is public.</h2>
+    <p class="lede">Each record holds one key number: how many times a day the satellite circles Earth. For a satellite on a near-circular orbit, that single number is enough to work out almost everything else, because gravity leaves no freedom. Orbits per day gives the orbit time. The orbit time gives the height, since only one altitude circles Earth in that time. The height gives the speed, since only one speed holds a circular orbit there. The height also gives the lag, since a signal has to go up to the satellite and back at the speed of light, and it gives how much of Earth the satellite can see and how long it stays overhead.</p>
+    <p class="lede">Two things the number does not give are the orbit's tilt and its shape. The catalog carries those separately, and this page uses the shape to set aside the <b data-fill="nEll"></b> stretched orbits where "one height" does not apply.</p>
+    <p class="lede">The catalog holds <b data-fill="total"></b> active satellites. <b data-fill="nStar"></b> of them are Starlink, orbiting about <b data-fill="altStar"></b> up, where a signal's round trip can't take less than <b data-fill="pingStar"></b>. The <b data-fill="nGeo"></b> satellites in the geostationary belt sit at <b data-fill="altGeo"></b>, so the same round trip can't take less than <b data-fill="pingGeo"></b>. That one difference explains why the new internet constellations fly low and need thousands of satellites.</p>
+    <p class="lede">Three things come out of the data plainly. <b>Low orbit is the only place a satellite internet can have low lag</b>, which is why the new constellations fly under 600 km and need thousands of satellites to do it. <b>Every one of the <span data-fill="total"></span> satellites sits exactly where gravity says it should</b>; not one breaks the physics. And <b>the hot upper air is no danger to any of them</b>: at 400 km it delivers <span data-fill="airPct"></span> of what sunlight does.</p>
+    <p class="lede">The charts below show each of those with the real satellites. A <a href="#heat" style="color:var(--accent)">section further down</a> takes up the heat doubt directly, because it is a fair question and the data answers it. The <a href="#datacenters" style="color:var(--accent)">last section</a> turns the same numbers on the newest idea in orbit: data centers (cue scary music).</p>
+  </section>
+
+  <section style="padding-top:36px">
+    <h2>The Data</h2>
+    <dl class="srcbox">
+      <dt>Dataset</dt><dd><a href="https://celestrak.org/NORAD/elements/" target="_blank" rel="noopener">CelesTrak current element sets</a>, Active Satellites group, CSV<sup><a href="#src-1" aria-label="Source 1">1</a></sup></dd>
+      <dt>Publisher</dt><dd>CelesTrak, from U.S. Space Force tracking data</dd>
+      <dt>Accessed</dt><dd>November 6, 2026</dd>
+      <dt>Coverage</dt><dd>Every active satellite in the public catalog, each with its latest orbit, dated <span data-fill="epochs"></span></dd>
+      <dt>One row equals</dt><dd>One satellite: its name, catalog number, and the shape of its orbit (revolutions per day, eccentricity, inclination)</dd>
+      <dt>Used here</dt><dd>Revolutions per day and eccentricity, to work out altitude, period, speed and signal delay; the name, to group constellations</dd>
+      <dt>Atmosphere</dt><dd><a href="https://swxtrec.github.io/pymsis/" target="_blank" rel="noopener">NRLMSIS 2.1</a>, the U.S. Naval Research Laboratory's empirical model of the upper atmosphere, run at three levels of solar activity<sup><a href="#src-3" aria-label="Source 3">3</a></sup></dd>
+      <dt>Size</dt><dd><span data-fill="rawRows"></span> rows, 17 columns, 2.5 MB CSV</dd>
+    </dl>
+  </section>
+
+  <section style="padding-top:44px" id="charts">
+    <h2>What the Data Shows</h2>
+    <p class="loading" id="loading">Loading data&hellip;</p>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">Where everything is</p>
+        </div>
+        <div class="card-tools"><button type="button" class="tbl-btn" data-table="hist">Table</button></div>
+      </div>
+      <p class="card-sub">Count of active satellites by altitude. The scale is logarithmic both ways: each step along the bottom multiplies the altitude, and each step up multiplies the count by ten.</p>
+      <p class="card-foot lead-note"><b class="lead"><span data-fill="lowShare"></span> of everything up there is in low orbit.</b> The crowd below 600 km is mostly Starlink. The thin spike at 35,786 km is the geostationary belt, where a satellite's day matches Earth's and it hangs over one spot. The lopsidedness has a reason: low orbit is where low lag and cheap launches are.</p>
+      <div class="chart" id="hist"></div>
+      <div class="tablewrap" id="hist-table" hidden></div>
+      <p class="card-foot">Hover a bar for its count, or a label for that constellation.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">Altitude sets everything</p>
+        </div>
+        <div class="card-tools">
+          <div class="seg" id="metric" role="group" aria-label="Show">
+            <button type="button" data-metric="period" aria-pressed="true">Orbit time</button>
+            <button type="button" data-metric="speed">Speed</button>
+            <button type="button" data-metric="ping">Signal delay</button>
+          </div>
+          <button type="button" class="tbl-btn" data-table="scatter">Table</button>
+        </div>
+      </div>
+      <p class="card-sub" id="scatter-sub"></p>
+      <p class="card-foot lead-note" id="scatter-note"></p>
+      <div class="chart" id="scatter"></div>
+      <div class="tablewrap" id="scatter-table" hidden></div>
+      <p class="card-foot">Each dot is one satellite (every 8th low-orbit satellite is drawn so the chart stays light; everything higher is drawn in full). The line is the physics for a circular orbit. Hover a dot to name it.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">Pick an altitude</p>
+        </div>
+      </div>
+      <p class="card-sub">Slide to any height and see what gravity and the speed of light force on a satellite there. Antennas are assumed to need the satellite at least 25&deg; above the horizon.</p>
+      <p class="card-foot lead-note"><b class="lead">One number sets all of these.</b> Move the slider and every tile changes together, because each one is worked from the altitude alone.</p>
+      <div class="pick">
+        <div class="presets" id="presets" role="group" aria-label="Jump to"></div>
+        <div class="range">
+          <input type="range" id="alt" min="0" max="1000" value="500" aria-label="Altitude">
+          <output id="altOut" for="alt"></output>
+        </div>
+        <div class="stats" id="stats"></div>
+        <p class="nearby" id="nearby"></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:44px" id="heat">
+    <h2>Does the Hot Upper Air Cook Satellites?</h2>
+    <p class="prose"><b>No. The data is clear on this.</b> The doubt is still a fair one, because the temperature is real. Above about 100 km the air is called the thermosphere because its temperature climbs with height, to <b data-fill="hot400"></b> at 400 km when the sun is active. The space station flies through it. So does every Starlink satellite. They don't melt, and the reason is not a technicality.</p>
+    <p class="prose"><b>Temperature and heat are different things.</b> Temperature says how fast the molecules move. Heat transfer depends on how many of them hit you. At 400 km the air is about <b data-fill="thin400"></b> times thinner than at sea level. Each molecule arrives fast, but there are so few that the energy they bring adds up to almost nothing. It is the same reason a sparkler's sparks, hotter than <span class="nb">1,000 &deg;C</span>, land on your hand without burning: each one carries almost no energy.</p>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">Hot, but nearly empty</p>
+        </div>
+      </div>
+      <p class="card-sub">The upper atmosphere from the ground to 1,200 km, at low, moderate and high solar activity. Temperature rises; density collapses; the heat the air can deliver collapses with it.</p>
+      <p class="card-foot lead-note"><b class="lead">Above 300 km the air never comes within a hundredfold of sunlight.</b> That holds at any level of solar activity, and the right-hand panel is where to see it. Below about 150 km the air wins, which is why re-entry is violent and why nothing orbits there.</p>
+      <div class="legend"><span><i style="background:var(--low)"></i>Quiet sun</span><span><i style="background:var(--mod)"></i>Moderate</span><span><i style="background:var(--high)"></i>Active sun</span></div>
+      <div class="multi">
+        <div><p class="mt">Air temperature</p><div class="chart" id="atm-temp"></div></div>
+        <div><p class="mt">Air density, compared with sea level</p><div class="chart" id="atm-dens"></div></div>
+        <div><p class="mt">Heat the air can deliver, per m&sup2;</p><div class="chart" id="atm-heat"></div></div>
+      </div>
+      <p class="card-foot">Hover any panel to read values at an altitude. The heating curve is for the face of a satellite plowing through the air at orbital speed, which is far more than the resting air's own warmth. The dashed line is direct sunlight.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">The energy budget on one square meter</p>
+        </div>
+        <div class="card-tools">
+          <div class="seg" id="budgetAlt" role="group" aria-label="Altitude">
+            <button type="button" data-alt="200">200 km</button>
+            <button type="button" data-alt="400" aria-pressed="true">400 km</button>
+            <button type="button" data-alt="550">550 km</button>
+            <button type="button" data-alt="1200">1,200 km</button>
+          </div>
+        </div>
+      </div>
+      <p class="card-sub">Where the heat comes from for a satellite at a chosen altitude, on an active-sun day. The air is the smallest line by a very long way.</p>
+      <p class="card-foot lead-note" id="budget-note"></p>
+      <div class="bars" id="budget"></div>
+    </div>
+
+    <p class="prose"><b>The real problem is the opposite one.</b> In sunlight a satellite's challenge is getting rid of heat, because there is no air to carry it away. A vacuum insulates like a thermos. The only way out is to radiate. A flat panel facing the sun with nothing else around it settles near <b data-fill="tSun"></b>; the same panel in Earth's shadow, warmed only by Earth's own glow, settles near <b data-fill="tShade"></b>. Every satellite crosses between those two every orbit, roughly every <b data-fill="dayNight"></b> in low orbit.</p>
+    <p class="prose">So satellites are built for radiation, not for air. Foil blankets reflect sunlight, radiator panels dump waste heat toward dark sky, and small electric heaters cover the shadow half of the orbit. None of that would be needed if the air mattered, and none of it would work if the air were thick. The thin, hot thermosphere is not the threat. The sun is.</p>
+    <p class="prose"><b>Where the air does win.</b> Drop to 100 km and the same calculation gives about <b data-fill="ram100"></b> on the front face, roughly <b data-fill="ram100x"></b> times direct sunlight. That is re-entry, and it is why every orbit in the catalog stays well above it.</p>
+    <p class="prose"><b>So the doubt gets a straight answer.</b> Satellites fly through air hotter than <span class="nb">1,000 &deg;C</span>, and it does not matter, because there is almost no air. That is not a guess about satellites. It is the same atmosphere model the people who fly them use to plan their orbits, and the same sunlight figure NASA uses to balance Earth's energy budget.</p>
+  </section>
+
+  <section style="padding-top:44px" id="datacenters">
+    <h2>What About Data Centers in Space?</h2>
+    <p class="prose">The idea is real and funded. Google announced Project Suncatcher in November 2025: solar-powered satellites carrying its TPU chips, linked by laser<sup><a href="#src-8" aria-label="Source 8">8</a></sup>. Its first prototype, built with Planet and carrying four TPUs, reached orbit on October 1, 2026<sup><a href="#src-10" aria-label="Source 10">10</a></sup>. A startup called Starcloud put a 60 kg satellite carrying an NVIDIA H100, a data-center chip, into a 325 km orbit on November 2, 2025<sup><a href="#src-9" aria-label="Source 9">9</a>, <a href="#src-11" aria-label="Source 11">11</a></sup>. The pitch is the same each time: endless sun for power, and the vacuum of space as a heat sink.</p>
+    <p class="prose"><b>The physics says yes. A data center in orbit is possible, and this page's own numbers show why.</b></p>
+    <ul class="prose facts">
+      <li><b>The power is there.</b> In orbit the sun delivers <b data-fill="dcSun3"></b> to every square meter, with no night in a dawn-to-dusk orbit and no weather in any orbit. At 30% cells that is <b data-fill="dcSolar3"></b> of panel per megawatt.</li>
+      <li><b>The heat has a way out.</b> Radiation is the only way, and it is enough: a radiator at 60 &deg;C sheds <b data-fill="dcNet60"></b> net, so a megawatt needs <b data-fill="dcRad60"></b>. Every one of the <b data-fill="total2"></b> satellites in the catalog cools itself this way already, because nothing else is available up there.</li>
+      <li><b>The lag is ordinary.</b> <b data-fill="dcPing3"></b> round trip from <span data-fill="dcAlt3"></span>, no worse than any Starlink satellite.</li>
+      <li><b>The hot air is nothing.</b> At 400 km it delivers <b data-fill="airPct2"></b> of what sunlight does.</li>
+      <li><b>It has been done, small.</b> An H100 has been operating in orbit since November 2, 2025<sup><a href="#src-11" aria-label="Source 11">11</a></sup>, and four of Google's TPUs since October 1, 2026<sup><a href="#src-10" aria-label="Source 10">10</a></sup>.</li>
+    </ul>
+    <p class="prose"><b>What the physics does not do is make it cheap, and the prototype already shows where the cost lands.</b> Google's TPUs run for 15 minutes at a time because of heat<sup><a href="#src-10" aria-label="Source 10">10</a></sup>: the vacuum takes heat only as fast as a radiator can shed it. Scale that to a megawatt and the budget below is the result, <b data-fill="dcHardware"></b> of panel and radiator before a single kilogram is launched. The pitch gets the sun right and the heat sink half right, and the half it gets wrong costs area.</p>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <p class="card-title">The budget for one megawatt of computing in low orbit</p>
+        </div>
+        <div class="card-tools">
+          <div class="seg" id="dcTemp" role="group" aria-label="Radiator temperature">
+            <button type="button" data-t="30">30 &deg;C</button>
+            <button type="button" data-t="60" aria-pressed="true">60 &deg;C</button>
+            <button type="button" data-t="90">90 &deg;C</button>
+          </div>
+        </div>
+      </div>
+      <p class="card-sub">What a 1 MW facility at <span data-fill="dcAlt"></span> must carry, worked from the same constants as the rest of the page. Every watt of electricity the chips use becomes heat, and the only way to get rid of heat in a vacuum is to radiate it. Pick how hot the radiators run.</p>
+      <p class="card-foot lead-note" id="dcNote"></p>
+      <div class="stats" id="dcStats"></div>
+      <p class="card-foot">Assumptions: radiator surfaces with 90% emissivity, radiating from both faces with one face toward Earth; solar cells at 30% efficiency; no losses in batteries or power conversion, so the real areas are larger. For scale, an American football field is about 5,350 m&sup2;.</p>
+    </div>
+
+    <p class="prose"><b>Space is not a cold sink. It is an empty one.</b> On the ground, air and water carry heat away by touch. In orbit nothing touches the radiator, so it sheds only what it can radiate, and at <span data-fill="dcT"></span> that is about <b data-fill="dcNet"></b> net. A megawatt of chips needs about <b data-fill="dcRad"></b> of radiator at that temperature. Run the chips hotter and the radiators shrink; run them cooler for longer life and the radiators grow. That is the same radiation physics that keeps the thermosphere from mattering, now working against the engineer instead of for them.</p>
+    <p class="prose"><b>The sun is the real upside.</b> Full sunlight is <b data-fill="dcSun"></b> every second of the orbit in a dawn-to-dusk orbit, the orbit Google plans for its constellation, with no night and no weather. Its first prototype flies an ordinary orbit on batteries<sup><a href="#src-10" aria-label="Source 10">10</a></sup>. At 30% cell efficiency that is <b data-fill="dcSolar"></b> of panel per megawatt. In an ordinary low orbit the worst case is <b data-fill="dcShadow"></b> of every orbit in Earth's shadow, so a facility needs about <b data-fill="dcSolarAvg"></b> of panel plus batteries to average the same megawatt.</p>
+    <p class="prose"><b>Lag is not the obstacle.</b> At <span data-fill="dcAlt2"></span> the round-trip floor is <b data-fill="dcPing"></b>, the same as any other low-orbit satellite. A data center in orbit answers about as fast as one in the next state.</p>
+    <p class="prose"><b>What this page can't settle.</b> Launch cost: Google's own analysis puts the break-even near $200 per kilogram to orbit, a price it expects by the mid-2030s, and even then compares only to a ground data center's energy bill, not its whole cost<sup><a href="#src-8" aria-label="Source 8">8</a></sup>. Radiation: Google reports its chips survived a test dose well past a five-year mission, but that is one chip and one test<sup><a href="#src-8" aria-label="Source 8">8</a></sup>. Repair: there is no technician in orbit, and the researchers quoted on the prototype put the cost of that at ten to a hundred times what it is on the ground<sup><a href="#src-10" aria-label="Source 10">10</a></sup>. None of those is physics. All of them are money.</p>
+    <p class="prose"><b>So the verdict is yes, with a price tag.</b> Data centers in space are physically possible, and this page's own numbers say so: roughly a thousand square meters of radiator and two and a half thousand of solar panel for every megawatt, before a single kilogram is launched. The hot upper air is not the obstacle, and neither is lag. Area, launch and repair are, and all three are engineering and money, not physics.</p>
+  </section>
+
+  <section style="padding-top:44px" id="prep">
+    <h2>How the Data Was Prepared</h2>
+    <p class="prose">A Python script reads the untouched catalog, works out each orbit from its revolutions per day with the standard gravity formula, and runs the atmosphere model. Each step:</p>
+    <div class="pipe"><table class="dt" id="pipeline"></table></div>
+    <p class="prose"><b>How altitude comes out of one number.</b> A satellite that circles Earth 15.1 times a day takes 95.4 minutes per lap. For any orbit, the lap time fixes the orbit's size (Kepler's third law), so the size, and the altitude above Earth's surface, follow directly. Speed follows from the size too. Nothing is measured by hand; it is the same arithmetic every tracking program uses.</p>
+
+    <h3 class="sub">How the numbers were checked</h3>
+    <ul class="checks">
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>The physics lands on known values.</b> The satellites with a day-long period come out at a median altitude of <span data-fill="geoCheck"></span>, against the textbook 35,786 km. The space station comes out at <span data-fill="issCheck"></span>, matching NASA's "about 250 miles."</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>The atmosphere model lands on known values.</b> Its sea-level density is within 6% of the standard 1.225 kg/m&sup3;, and its upper-air temperatures fall inside the range the thermosphere is known for.</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.3 3.3L15 7" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>The catalog is whole.</b> The script confirms the raw file's fingerprint, that every satellite appears once with a real orbit, that the orbit bands add back up to the total, and that no element set is stale.</span></li>
+    </ul>
+    <p class="prose">All <span data-fill="checkCount"></span> checks run every time the numbers are rebuilt, and the build fails if any don't pass. The <a href="https://github.com/d3r3kn/derek-portfolio/tree/main/data/satellites" target="_blank" rel="noopener">script and summary data are on GitHub</a>, with the steps to download the same catalog and confirm it matches.</p>
+  </section>
+
+  <section style="padding-top:44px">
+    <h2>What the Data Can't Tell Us</h2>
+    <ul class="limits">
+      <li><b>It covers working satellites only.</b> Dead satellites, rocket stages and debris are tracked too, but they are in other catalog groups and are left out here.</li>
+      <li><b>Altitude is an average.</b> Most orbits are nearly circular, but a few swing between a low point and a high point thousands of kilometers apart. Those are shown at the average of the two and labeled elliptical.</li>
+      <li><b>Signal delay here is a floor, not a measurement.</b> It is the time light needs to go up and down twice. Real connections add routing, processing and the trip through the ground network, so measured delays are higher. The ranking between altitudes still holds.</li>
+      <li><b>The atmosphere model is a model.</b> It gives typical values for one place and time (the equator at local noon, quiet geomagnetic conditions). The real upper air changes with latitude, time of day and solar storms. The three solar levels bracket most of that range.</li>
+      <li><b>The air-heating figures are upper bounds.</b> They assume every molecule gives up all its energy to a cold surface. A real satellite absorbs less, so the gap with sunlight is wider, not narrower.</li>
+      <li><b>Constellations are grouped by name.</b> A satellite is counted as Starlink if its catalog name begins with Starlink, and so on. The geostationary belt is grouped by orbit instead, since its satellites carry many names.</li>
+      <li><b>Nothing here says how any one satellite is built.</b> Thermal design, radiator size and battery life differ from one spacecraft to the next. The page shows the environment they all share.</li>
+    </ul>
+  </section>
+
+  <section style="padding-top:44px">
+    <h2>Glossary</h2>
+    <dl class="gloss">
+      <dt>Element set</dt><dd>The handful of numbers that describe a satellite's current orbit, published for every tracked object and refreshed as it is re-observed.</dd>
+      <dt>Revolutions per day</dt><dd>How many laps of Earth a satellite completes in 24 hours. In the catalog it is called mean motion. About 15.5 for the lowest orbits, exactly 1 for the geostationary belt.</dd>
+      <dt>Period</dt><dd>The time for one lap. 24 hours divided by revolutions per day.</dd>
+      <dt>Low Earth orbit</dt><dd>Anything below 2,000 km. Nearly every satellite is here, most of them below 600 km.</dd>
+      <dt>Geostationary</dt><dd>An orbit at 35,786 km above the equator, where one lap takes exactly one day, so the satellite stays over the same spot. Used by TV, weather and older internet satellites.</dd>
+      <dt>Thermosphere</dt><dd>The layer of the atmosphere from about 90 km up to several hundred kilometers, where the thin air is heated to hundreds or thousands of degrees by the sun's ultraviolet light.</dd>
+      <dt>Solar activity</dt><dd>How active the sun is, measured here by its radio output (the F10.7 index). It swells the upper atmosphere: the same altitude holds far more air at an active sun than at a quiet one.</dd>
+      <dt>W/m&sup2;</dt><dd>Watts per square meter: how much energy lands on one square meter each second. Direct sunlight in space is about 1,360.</dd>
+    </dl>
+  </section>
+
+  <section style="padding-top:44px">
+    <h2>Sources</h2>
+    <ol class="sources">
+      <li id="src-1">CelesTrak. <a href="https://celestrak.org/NORAD/elements/" target="_blank" rel="noopener">Current GP element sets</a>, Active Satellites group, CSV format. Accessed November 6, 2026. Field definitions follow the CCSDS <a href="https://public.ccsds.org/Pubs/502x0b3e1.pdf" target="_blank" rel="noopener">Orbit Data Messages standard</a> (502.0-B-3).</li>
+      <li id="src-2">CelesTrak. <a href="https://celestrak.org/NORAD/documentation/gp-data-formats.php" target="_blank" rel="noopener">GP data formats</a>.</li>
+      <li id="src-3">Emmert, J. T., et al. (2022). NRLMSIS 2.1: An empirical model of nitric oxide incorporated into MSIS. <em>Journal of Geophysical Research: Space Physics</em>, 127. <a href="https://doi.org/10.1029/2022JA030896" target="_blank" rel="noopener">doi:10.1029/2022JA030896</a>. Run through <a href="https://swxtrec.github.io/pymsis/" target="_blank" rel="noopener">pymsis</a>.</li>
+      <li id="src-4">NASA Earth Observatory. <a href="https://science.nasa.gov/earth/earth-observatory/climate-and-earths-energy-budget" target="_blank" rel="noopener">Climate and Earth's Energy Budget</a>: total solar irradiance about 1,360 W/m&sup2;, about 29% reflected, about 240 W/m&sup2; absorbed on average.</li>
+      <li id="src-5">NASA. <a href="https://www.nasa.gov/international-space-station/" target="_blank" rel="noopener">International Space Station</a>: orbit about 250 miles up; <a href="https://www.nasa.gov/international-space-station/space-station-facts-and-figures/" target="_blank" rel="noopener">Facts and Figures</a>: about five miles per second, one orbit about every 90 minutes.</li>
+      <li id="src-6">NOAA Space Weather Prediction Center. <a href="https://www.spaceweather.gov/phenomena/f107-cm-radio-emissions" target="_blank" rel="noopener">F10.7 cm radio emissions</a>: the index runs from below 50 to above 300 solar flux units over a solar cycle.</li>
+      <li id="src-7">NOAA, NASA and USAF (1976). <a href="https://ntrs.nasa.gov/citations/19770009539" target="_blank" rel="noopener">U.S. Standard Atmosphere, 1976</a>: sea-level air density 1.225 kg/m&sup3;.</li>
+      <li id="src-8">Google (November 4, 2025). <a href="https://blog.google/technology/research/google-project-suncatcher/" target="_blank" rel="noopener">Exploring a space-based, scalable AI infrastructure system design</a> and the <a href="https://research.google/blog/exploring-a-space-based-scalable-ai-infrastructure-system-design/" target="_blank" rel="noopener">research post</a> behind it: solar-powered satellites with TPUs and free-space optical links; radiation testing; launch prices under $200/kg by the mid-2030s making the cost "roughly comparable" to a ground data center's energy cost per kilowatt-year; two prototypes with Planet by early 2027.</li>
+      <li id="src-9">NVIDIA (October 15, 2025). <a href="https://blogs.nvidia.com/blog/starcloud/" target="_blank" rel="noopener">Starcloud</a>: the 60 kg Starcloud-1 satellite carrying an H100 GPU, launch planned for November 2025; space as a heat sink and constant sun as the pitch.</li>
+      <li id="src-10">Ruwitch, J. and Brumfiel, G., NPR (October 2, 2026). <a href="https://www.opb.org/article/2026/10/01/google-launches-project-suncatcher-a-step-towards-ai-data-centers-in-space/" target="_blank" rel="noopener">Google launches Project Suncatcher, a step towards AI data centers in space</a>: a prototype with four TPUs launched October 1, 2026; the chips run Gemma "for 15 minutes at a time due to heat management constraints"; repair and economics as the open questions. A correction of October 2 notes the prototype is in a standard orbit with batteries, not the sun-synchronous orbit planned for later satellites.</li>
+      <li id="src-11">Moss, S., Data Center Dynamics (November 3, 2025). <a href="https://www.datacenterdynamics.com/en/news/starcloud-1-satellite-reaches-space-with-nvidia-h100-gpu-now-operating-in-orbit/" target="_blank" rel="noopener">Starcloud-1 satellite reaches space, with Nvidia H100 GPU now operating in orbit</a>: launched November 2, 2025 on a SpaceX rocket; 60 kg, 325 km orbit, 11-month mission, the first H100 in space; "Nominal Operations" per the company.</li>
+    </ol>
+  </section>
+
+  <p class="help-note">Want to make sense of your own data, or learn to use AI for it? I can help. <a href="get-help.html">Get help</a></p>
+
+  <footer>&copy; 2026 Derek Nye &middot; d3r3kn@gmail.com<p class="elsewhere"><a href="https://www.linkedin.com/in/dereknye01/" rel="me">LinkedIn</a> &middot; <a href="https://github.com/d3r3kn" rel="me">GitHub</a> &middot; <a href="https://x.com/dereknyex" rel="me">X</a></p></footer>
+</div>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+fetch('data/satellites/summary.json').then(function(r){if(!r.ok)throw new Error();return r.json();})
+  .then(init)
+  .catch(function(){document.getElementById('loading').textContent='The chart data could not be loaded. Please refresh the page.';});
+
+/* ---------- tooltip (textContent only) ---------- */
+var tip=document.getElementById('tip');
+function placeTip(x,y){var w=tip.offsetWidth,h=tip.offsetHeight,px=x+14,py=y-h-12;
+  if(px+w>window.innerWidth-8)px=Math.max(8,x-w-14);if(py<8)py=y+18;tip.style.left=px+'px';tip.style.top=py+'px';}
+function showTip(head,rows,note,x,y){
+  tip.textContent='';
+  var h=document.createElement('div');h.className='t-head';h.textContent=head;tip.appendChild(h);
+  rows.forEach(function(rw){
+    var row=document.createElement('div');row.className='t-row';
+    if(rw.color){var k=document.createElement('span');k.className='t-key';k.style.background=rw.color;row.appendChild(k);}
+    var v=document.createElement('span');v.className='t-val';v.textContent=rw.value;row.appendChild(v);
+    if(rw.name){var n=document.createElement('span');n.className='t-name';n.textContent=rw.name;row.appendChild(n);}
+    tip.appendChild(row);});
+  if(note){var nt=document.createElement('div');nt.className='t-note';nt.textContent=note;tip.appendChild(nt);}
+  tip.classList.add('on');placeTip(x,y);
+}
+function hideTip(){tip.classList.remove('on');}
+function tipAt(el,head,rows,note){var b=el.getBoundingClientRect();showTip(head,rows,note,b.left+b.width/2,b.top);}
+window.addEventListener('scroll',hideTip,{passive:true});
+
+var NS='http://www.w3.org/2000/svg';
+function E(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)if(attrs[k]!=null)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function txt(parent,x,y,s,attrs){var t=E('text',Object.assign({x:x,y:y},attrs||{}),parent);t.textContent=s;return t;}
+
+function init(S){
+document.getElementById('loading').hidden=true;
+var K=S.constants,MU=K.mu_km3s2,RE=K.earth_radius_km,C=K.c_kms,SUN=K.solar_wm2,ELEV=K.min_elevation_deg;
+var GROUPS=S.groups,POINTS=S.points,ATM=S.atmosphere,LEVELS=[['low','Quiet sun','var(--low)'],['moderate','Moderate','var(--mod)'],['high','Active sun','var(--high)']];
+var byName={};GROUPS.forEach(function(g){byName[g.name]=g;});
+var geo=byName['Geostationary belt'],star=byName['Starlink'],iss=byName['Space station'];
+
+/* ---------- physics: the same formulas as the build script ---------- */
+function phys(h){var r=RE+h,T=2*Math.PI*Math.sqrt(r*r*r/MU)/60,v=Math.sqrt(MU/r),e=ELEV*Math.PI/180,
+  slant=Math.sqrt(r*r-Math.pow(RE*Math.cos(e),2))-RE*Math.sin(e),g=Math.acos(RE*Math.cos(e)/r)-e;
+  return {alt:h,period:T,speed:v,ping:4*h/C*1000,pingEdge:4*slant/C*1000,share:(1-Math.cos(g))/2,pass:g*T/Math.PI};}
+function atmAt(level,h){var rows=ATM[level];for(var i=1;i<rows.length;i++){if(rows[i].alt>=h){var a=rows[i-1],b=rows[i],f=(h-a.alt)/(b.alt-a.alt),o={};
+  ['temp_k','density','thermal_wm2','ram_wm2'].forEach(function(k){o[k]=a[k]==null?b[k]:b[k]==null?a[k]:a[k]+(b[k]-a[k])*f;});return o;}}return rows[rows.length-1];}
+
+/* ---------- formatting ---------- */
+function n0(v){return Math.round(v).toLocaleString('en-US');}
+function n1(v){return v.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
+function km(v){return n0(v)+' km';}
+function per(min){return min<180?n1(min)+' min':(min/60).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})+' h';}
+function ms(v){return (v<10?n1(v):n0(v))+' ms';}
+function kms(v){return v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' km/s';}
+function wm2(v){if(v==null)return '—';if(v>=100)return n0(v)+' W';if(v>=1)return n1(v)+' W';if(v>=0.001)return (v*1000).toLocaleString('en-US',{maximumFractionDigits:v*1000>=10?0:1})+' mW';return (v*1e6).toLocaleString('en-US',{maximumFractionDigits:v*1e6>=10?0:1})+' µW';}
+function big(v){var u=[[1e12,'trillion'],[1e9,'billion'],[1e6,'million'],[1e3,'thousand']];for(var i=0;i<u.length;i++)if(v>=u[i][0]){var q=v/u[i][0];return (q>=10?Math.round(q/10)*10:Math.round(q))+' '+u[i][1];}return n0(v);}
+function degC(k){return n0(k-273.15)+' °C';}
+
+/* ---------- narrative numbers ---------- */
+var hi400=atmAt('high',400),mod400=atmAt('moderate',400),sea=ATM.moderate[0].density,mod100=atmAt('moderate',100);
+var T=S.temperatures_c;
+var fills={total:n0(S.total),nStar:n0(star.count),altStar:km(star.alt),pingStar:ms(phys(star.alt).ping),
+  nGeo:n0(geo.count),altGeo:km(geo.alt),pingGeo:ms(phys(geo.alt).ping),
+  epochs:new Date(S.source.epoch_oldest+'T12:00').toLocaleDateString('en-US',{month:'long',day:'numeric'})+' to '+new Date(S.source.epoch_newest+'T12:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}),
+  rawRows:n0(S.pipeline.raw),
+  hot400:'about '+n0(Math.round((hi400.temp_k-273.15)/50)*50)+' °C',
+  thin400:big(sea/mod400.density),
+  tSun:n0(T.sun_plate_one_side_c)+' °C',tShade:'−'+n0(-T.shadow_earth_glow_400km_c)+' °C',
+  dayNight:n0(iss.period)+' minutes',
+  ram100:n0(mod100.ram_wm2/1000)+' kW per square meter',ram100x:n0(Math.round(mod100.ram_wm2/SUN/10)*10),
+  geoCheck:km(geo.alt),issCheck:km(iss.alt)+' ('+n0(iss.alt/1.609)+' miles)',
+  airPct:((hi400.ram_wm2+hi400.thermal_wm2)/SUN*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'%',
+  airPct2:((hi400.ram_wm2+hi400.thermal_wm2)/SUN*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'%',
+  nEll:n0(S.bands.filter(function(b){return b.band==='elliptical';})[0].count),
+  lowShare:Math.round(S.bands.filter(function(b){return b.band==='low';})[0].count/S.total*100)+'%',
+  dcAlt:km(S.datacenter.alt),dcAlt2:km(S.datacenter.alt),dcAlt3:km(S.datacenter.alt),dcSun3:n0(SUN)+' W',dcSolar3:n0(S.datacenter.solar_m2_per_mw_continuous)+' m²',
+  dcNet60:n0(S.datacenter.radiators[1].net_wm2)+' W per square meter',dcRad60:n0(S.datacenter.radiators[1].m2_per_mw)+' m²',dcPing3:ms(S.datacenter.ping_ms),total2:n0(S.total),
+  dcHardware:'about '+n0(Math.round((S.datacenter.radiators[1].m2_per_mw+S.datacenter.solar_m2_per_mw_continuous)/100)*100)+' m²',dcSun:n0(SUN)+' W/m²',dcSolar:n0(S.datacenter.solar_m2_per_mw_continuous)+' m²',
+  dcSolarAvg:n0(S.datacenter.solar_m2_per_mw_average)+' m²',dcShadow:n0((1-S.datacenter.sun_frac_worst)*100)+'%',dcPing:ms(S.datacenter.ping_ms),
+  checkCount:String(S.checks.length)};
+document.querySelectorAll('[data-fill]').forEach(function(n){if(fills[n.dataset.fill]!=null)n.textContent=fills[n.dataset.fill];});
+
+/* ---------- pipeline table ---------- */
+(function(){
+  var p=S.pipeline,t=document.getElementById('pipeline');
+  var steps=[['Download the active-satellite catalog from CelesTrak',p.raw],
+    ['Work out each orbit: period, size, altitude, speed',p.with_orbit],
+    ['Group by orbit band and, by name, into constellations ('+n0(p.groups)+' in the ten named ones)',p.with_orbit],
+    ['Thin the low-orbit crowd for the scatter: every 8th, plus everything higher in full',p.sampled],
+    ['Run the atmosphere model: '+n0(S.atmosphere.moderate.length)+' altitudes × 3 solar levels',S.atmosphere.moderate.length*3],
+    ['Result: '+n0(p.with_orbit)+' orbits, '+n0(p.sampled)+' drawn, '+String(S.checks.length)+' checks',p.with_orbit]];
+  var th=el('thead'),tr=el('tr');tr.appendChild(el('th',null,'Step'));tr.appendChild(el('th','n','Rows'));th.appendChild(tr);t.appendChild(th);
+  var tb=el('tbody');steps.forEach(function(s,i){var r=el('tr',i===steps.length-1?'final':null);
+    r.appendChild(el('td',null,(i<steps.length-1?(i+1)+'. ':'')+s[0]));r.appendChild(el('td','n',s[1].toLocaleString('en-US')));tb.appendChild(r);});
+  t.appendChild(tb);
+})();
+
+/* ---------- shared log altitude axis ---------- */
+var AMIN=150,AMAX=100000;
+function xlog(h,L,R){return L+(Math.log10(h)-Math.log10(AMIN))/(Math.log10(AMAX)-Math.log10(AMIN))*(R-L);}
+var XTICKS=[[200,'200'],[500,'500'],[1000,'1,000'],[2000,'2,000'],[5000,'5,000'],[10000,'10,000'],[20000,'20,000'],[50000,'50,000']];
+function xAxis(svg,L,R,y,narrow){
+  XTICKS.forEach(function(t,i){if(narrow&&i%2)return;txt(svg,xlog(t[0],L,R),y,t[1],{'text-anchor':'middle','class':'tick'});});
+  txt(svg,(L+R)/2,y+18,'Altitude above Earth, km (log scale) →',{'text-anchor':'middle','class':'axlbl'});
+}
+/* ---------- the night sky every chart sits on ---------- */
+var SKY_N=0;
+function sky(svg,x0,y0,w,h,seed){
+  /* blue at low orbit on the left, through navy, into the dark-mode page color on the right; stars seeded so they stay put on resize */
+  var id='sky'+(SKY_N++),defs=E('defs',null,svg),gr=E('linearGradient',{id:id,x1:0,y1:0,x2:1,y2:0},defs);
+  [[0,'#2a5a9c'],[.35,'#15306a'],[.7,'#0d1430'],[1,'#1a1816']].forEach(function(st){E('stop',{offset:st[0],'stop-color':st[1]},gr);});
+  E('rect',{x:x0,y:y0,width:w,height:h,rx:6,fill:'url(#'+id+')'},svg);
+  var rnd=function(){seed=(seed*16807)%2147483647;return seed/2147483647;};
+  for(var i=0,ns=Math.round(w*h/1200);i<ns;i++){var sx=x0+3+rnd()*(w-6),sy=y0+3+rnd()*(h-6),t=(sx-x0)/w,big=rnd()<.08;
+    E('circle',{cx:sx.toFixed(1),cy:sy.toFixed(1),r:big?1.3:.4+rnd()*.5,fill:'var(--sky-ink)',opacity:((.15+rnd()*.5)*(.35+.65*t)).toFixed(2)},svg);}
+}
+var SKY_GRID='rgba(241,235,221,.14)',SKY_LINE='rgba(241,235,221,.3)';
+
+function groupMarkers(svg,L,R,yOf,narrow,valueOf,skyTop){
+  /* labeled markers for the constellations. Labels are packed into rows above their markers so none overlaps another label or a marker;
+     a label that cannot fit above goes below. skyTop is where the night sky begins: labels above it use the page's own text color. */
+  var fg='var(--sky-ink)',bg='var(--sky-halo)',ln='rgba(241,235,221,.55)';
+  var gs=GROUPS.slice().sort(function(a,b){return a.alt-b.alt;}),boxes=[],items=[];
+  gs.forEach(function(g){
+    var x=xlog(g.alt,L,R),y=yOf(g);
+    var m=E('g',{'class':'mk',tabindex:0,'aria-label':g.name+': '+n0(g.count)+' satellites at about '+km(g.alt)},svg);
+    E('path',{d:'M'+x+' '+(y-6)+'l5 6-5 6-5-6z',fill:bg,stroke:fg,'stroke-width':1.6},m);
+    boxes.push([x-7,y-7,x+7,y+7]);
+    var lab=g.name==='Geostationary belt'?'GEO belt':g.name==='Space station'?'Station':g.name;
+    if(narrow&&['Qianfan','Guowang','Globalstar','Galileo','BeiDou','Kuiper','Space station','Iridium'].indexOf(g.name)>=0)lab='';
+    items.push({g:g,m:m,x:x,y:y,lab:lab});
+    var show=function(){tipAt(m,g.name,[{value:n0(g.count)+(g.count===1?' satellite':' satellites')},{value:km(g.alt),name:g.count>1?'median altitude ('+n0(g.alt_lo)+' to '+n0(g.alt_hi)+')':'altitude'},{value:per(g.period),name:'per orbit'},{value:kms(g.speed),name:'speed'}].concat(valueOf?[valueOf(g)]:[]),
+      g.name==='Geostationary belt'?'Grouped by orbit: every satellite with a day-long period.':null);};
+    m.addEventListener('pointerenter',show);m.addEventListener('focus',show);m.addEventListener('pointerleave',hideTip);m.addEventListener('blur',hideTip);
+  });
+  function free(b){for(var i=0;i<boxes.length;i++){var o=boxes[i];if(b[0]<o[2]&&b[2]>o[0]&&b[1]<o[3]&&b[3]>o[1])return false;}return true;}
+  /* the crowded ones first: larger counts get the nearest slot */
+  items.slice().sort(function(a,b){return b.g.count-a.g.count;}).forEach(function(it){
+    if(!it.lab)return;
+    var w=it.lab.length*6.9+6,lx=Math.max(L+w/2,Math.min(R-w/2,it.x)),placed=null;
+    for(var r=0;r<9&&!placed;r++){var ly=it.y-12-r*13,b=[lx-w/2,ly-11,lx+w/2,ly+3];if(free(b))placed=b;}
+    for(r=0;r<4&&!placed;r++){ly=it.y+20+r*13;b=[lx-w/2,ly-11,lx+w/2,ly+3];if(free(b))placed=b;}
+    if(!placed)return;
+    boxes.push(placed);ly=placed[3]-3;
+    var inside=skyTop==null||ly>skyTop+4;
+    txt(it.m,lx,ly,it.lab,{'text-anchor':'middle','class':'blbl',style:'fill:'+(inside?fg:'var(--text-1)')+';paint-order:stroke;stroke:'+(inside?bg:'var(--surface)')+';stroke-width:3px'});
+    var below=ly>it.y;
+    if(below?ly-11>it.y+8:ly+3<it.y-8)E('line',{x1:it.x,y1:below?it.y+7:it.y-7,x2:lx,y2:below?ly-11:ly+3,stroke:ln},it.m);
+  });
+}
+
+/* ---------- histogram ---------- */
+function hist(){
+  var box=document.getElementById('hist');box.textContent='';
+  var W=Math.max(box.clientWidth,320),narrow=W<560,H=narrow?300:340,L=narrow?40:52,R=16,Tp=78,B=48;
+  var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Histogram of active satellites by altitude, log scale. Use the Table button for the constellation counts.'},box);
+  var maxN=Math.max.apply(null,S.histogram.map(function(b){return b.n;})),top=Math.ceil(Math.log10(maxN));
+  function y(n){return n<1?H-B:H-B-Math.log10(n)/top*(H-B-Tp);}
+  sky(svg,L,Tp-8,W-R-L,H-B-Tp+8,7);
+  for(var d=0;d<=top;d++){var v=Math.pow(10,d),yy=y(v);E('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:SKY_GRID},svg);txt(svg,L-8,yy+4,v.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});}
+  if(!narrow)txt(svg,L,Tp-30,'Satellites (log)',{'class':'axlbl'});
+  /* bands */
+  [[AMIN,2000,'Low orbit'],[2000,35000,'Medium'],[35000,AMAX,'Geostationary & beyond']].forEach(function(b,i){
+    var x0=xlog(b[0],L,R>0?W-R:W),x1=xlog(b[1],L,W-R);
+    if(i)E('line',{x1:x0,x2:x0,y1:Tp-8,y2:H-B,stroke:SKY_LINE,'stroke-dasharray':'3 4'},svg);
+    txt(svg,(x0+x1)/2,H-B+14,narrow&&i===2?'GEO & beyond':b[2],{'text-anchor':'middle','class':'band'});
+  });
+  S.histogram.forEach(function(b){
+    if(!b.n)return;
+    var x0=xlog(b.lo,L,W-R),x1=xlog(b.hi,L,W-R),r=E('rect',{x:x0+.5,y:y(b.n),width:Math.max(1,x1-x0-1),height:H-B-y(b.n),fill:'var(--sky-ink)',opacity:.85,tabindex:0,'aria-label':n0(b.n)+' satellites between '+km(b.lo)+' and '+km(b.hi)},svg);
+    var show=function(){r.setAttribute('opacity',1);tipAt(r,km(b.lo)+' to '+km(b.hi),[{value:n0(b.n)+' satellites'}],null);};
+    var hide=function(){r.setAttribute('opacity',.85);hideTip();};
+    r.addEventListener('pointerenter',show);r.addEventListener('focus',show);r.addEventListener('pointerleave',hide);r.addEventListener('blur',hide);
+  });
+  xAxis(svg,L,W-R,H-B+30,narrow);
+  groupMarkers(svg,L,W-R,function(g){var b=S.histogram.filter(function(b){return g.alt>=b.lo&&g.alt<b.hi;})[0];return y(b?b.n:1)-8;},narrow,null,Tp-8);
+}
+function groupTable(id){
+  table(id,['Group','Satellites','Altitude (median)','Per orbit','Speed','Round-trip floor','Inclination'],
+    GROUPS.map(function(g){return [g.name,n0(g.count),km(g.alt),per(g.period),kms(g.speed),ms(phys(g.alt).ping),n0(g.inc)+'°'];}));
+}
+
+/* ---------- scatter ---------- */
+var MET={period:{label:'Time per orbit, hours',unit:'h',of:function(h){return phys(h).period/60;},fmt:function(v){return per(v*60);},ticks:[0,12,24,36,48,60,72,84,96],
+    sub:'Every satellite\'s time per orbit against its altitude. Higher means slower: an orbit at 400 km takes an hour and a half, one at 35,786 km takes a day.',
+    lead:'Every dot sits on the same line.',note:'Not one of the drawn satellites, or the 16,872 behind them, breaks Kepler\'s third law, which fixed this curve in 1619. Altitude decides orbit time, and nothing else does.'},
+  speed:{label:'Speed, km/s',unit:'km/s',of:function(h){return phys(h).speed;},fmt:function(v){return kms(v);},ticks:[0,1,2,3,4,5,6,7,8],
+    sub:'Orbital speed against altitude. Lower orbits must move faster to keep from falling: the station covers 7.7 km every second, a geostationary satellite about 3.1.',
+    lead:'Speed is not a choice.',note:'At each altitude exactly one speed holds a circular orbit, and every satellite drawn here is at it. One that slowed down would fall; one that sped up would climb.'},
+  ping:{label:'Round-trip floor, ms',unit:'ms',of:function(h){return phys(h).ping;},fmt:function(v){return ms(v);},ticks:[0,200,400,600,800,1000,1200],
+    sub:'The shortest possible round trip for a signal: up to the satellite, down to a ground station, and back the same way, at the speed of light.',
+    lead:'Low orbit wins outright.',note:'The floor at Starlink\'s altitude is single-digit milliseconds; at the geostationary belt it is nearly half a second before any computer has touched the signal. No engineering closes that gap, because the gap is the speed of light.'}};
+var state={metric:'period',budget:400};
+var typeTimers={};
+function verdict(id,lead,rest,animate){
+  /* a card's verdict: lead sentence bold, then the rest. On an option switch the lead is retyped and flashed so the change is seen. */
+  var note=document.getElementById(id),reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  clearTimeout(typeTimers[id]);note.textContent='';
+  var b=el('b','lead',''),r=document.createTextNode('');note.appendChild(b);note.appendChild(r);
+  if(!animate||reduce){b.textContent=lead;r.textContent=' '+rest;return;}
+  var i=0;(function tick(){b.textContent=lead.slice(0,++i);if(i<lead.length){typeTimers[id]=setTimeout(tick,22);}else{b.classList.add('flash');r.textContent=' '+rest;}})();
+}
+function scatterText(animate){
+  var m=MET[state.metric],sub=document.getElementById('scatter-sub'),reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(animate&&!reduce){sub.classList.add('swap','out');setTimeout(function(){sub.textContent=m.sub;sub.classList.remove('out');},180);}else sub.textContent=m.sub;
+  verdict('scatter-note',m.lead,m.note,animate);
+}
+function scatter(animateText){
+  var box=document.getElementById('scatter');box.textContent='';
+  var m=MET[state.metric],W=Math.max(box.clientWidth,320),narrow=W<560,H=narrow?360:420,L=narrow?40:56,R=16,Tp=56,B=48;
+  scatterText(!!animateText);
+  var vals=POINTS.map(function(p){return m.of(p[0]);}),vmax=Math.max.apply(null,vals),ticks=m.ticks.filter(function(t){return t<=vmax*1.08||t===m.ticks[0];});
+  var ymax=Math.max(ticks[ticks.length-1],vmax*1.02);
+  function y(v){return H-B-v/ymax*(H-B-Tp);}
+  var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':m.label+' against altitude for '+n0(POINTS.length)+' satellites. Use the Table button for values at landmark altitudes.'},box);
+  sky(svg,L,Tp-8,W-R-L,H-B-Tp+8,11);
+  ticks.forEach(function(t){E('line',{x1:L,x2:W-R,y1:y(t),y2:y(t),stroke:SKY_GRID},svg);txt(svg,L-8,y(t)+4,t.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});});
+  txt(svg,L,Tp-26,m.label,{'class':'axlbl'});
+  /* the physics curve */
+  var d='';for(var i=0;i<=200;i++){var h=Math.pow(10,Math.log10(AMIN)+(Math.log10(AMAX)-Math.log10(AMIN))*i/200);d+=(i?'L':'M')+xlog(h,L,W-R).toFixed(1)+' '+y(m.of(h)).toFixed(1);}
+  E('path',{d:d,fill:'none',stroke:'var(--sky-ink)','stroke-width':1.4,opacity:.7},svg);
+  POINTS.forEach(function(p,i){
+    var c=E('circle',{cx:xlog(p[0],L,W-R),cy:y(vals[i]),r:narrow?2:2.4,'class':'pt'},svg);
+    var show=function(){tipAt(c,p[2],[{value:km(p[0]),name:'mean altitude'},{value:m.fmt(vals[i]),name:m.label.toLowerCase().replace(/,.*$/,'')}],p[1]>1426&&p[1]<1446?'Geostationary: one lap per day.':null);};
+    c.addEventListener('pointerenter',show);c.addEventListener('pointerleave',hideTip);
+  });
+  xAxis(svg,L,W-R,H-B+30,narrow);
+  groupMarkers(svg,L,W-R,function(g){return y(m.of(g.alt));},narrow,function(g){return {value:m.fmt(m.of(g.alt)),name:m.label.toLowerCase().replace(/,.*$/,'')};},Tp-8);
+  if(!document.getElementById('scatter-table').hidden)scatterTable();
+}
+function scatterTable(){
+  var marks=[['Space station',iss.alt],['Starlink (median)',star.alt],['Kuiper (median)',byName['Kuiper']?byName['Kuiper'].alt:630],['OneWeb (median)',byName['OneWeb'].alt],['GPS (median)',byName['GPS'].alt],['Geostationary belt',geo.alt]];
+  table('scatter',['Altitude','Example','Per orbit','Speed','Round-trip floor','Share of Earth in view (25°+)'],
+    marks.map(function(mk){var p=phys(mk[1]);return [km(mk[1]),mk[0],per(p.period),kms(p.speed),ms(p.ping),(p.share*100).toLocaleString('en-US',{maximumFractionDigits:p.share<.01?2:1})+'%'];}));
+}
+
+/* ---------- slider ---------- */
+var SMIN=160,SMAX=50000,slider=document.getElementById('alt'),out=document.getElementById('altOut');
+function sAlt(){return Math.round(Math.pow(10,Math.log10(SMIN)+(Math.log10(SMAX)-Math.log10(SMIN))*slider.value/1000));}
+function sPos(h){return Math.round((Math.log10(h)-Math.log10(SMIN))/(Math.log10(SMAX)-Math.log10(SMIN))*1000);}
+var PRESETS=[['Station',Math.round(iss.alt)],['Starlink',Math.round(star.alt)],['OneWeb',Math.round(byName['OneWeb'].alt)],['GPS',Math.round(byName['GPS'].alt)],['Geostationary',35786]];
+var pbox=document.getElementById('presets');
+PRESETS.forEach(function(p){var b=el('button','preset',p[0]+' · '+km(p[1]));b.type='button';b.setAttribute('aria-pressed','false');b.dataset.alt=p[1];
+  b.addEventListener('click',function(){slider.value=sPos(p[1]);pick(p[1]);});pbox.appendChild(b);});
+function pick(h){
+  h=h||sAlt();var p=phys(h),geoLike=Math.abs(p.period-1436.07)<12;
+  out.textContent='';out.appendChild(document.createTextNode(km(h)));var sm=el('small',null,' up');out.appendChild(sm);
+  pbox.querySelectorAll('.preset').forEach(function(b){b.setAttribute('aria-pressed',String(Math.abs(+b.dataset.alt-h)<=Math.max(2,h*.004)));});
+  var st=document.getElementById('stats');st.textContent='';
+  var hi=atmAt('high',h),air=hi.ram_wm2+hi.thermal_wm2;
+  [[per(p.period),'per orbit'],[kms(p.speed),'speed, about '+n0(p.speed*3600)+' km/h'],
+   [ms(p.ping),'round-trip floor, satellite overhead'],[ms(p.pingEdge),'round-trip floor at the edge of view'],
+   [(p.share*100).toLocaleString('en-US',{maximumFractionDigits:p.share<.01?2:1})+'%','of Earth\'s surface in view at 25° or higher'],
+   ['≥ '+n0(Math.ceil(1/p.share)),'satellites to see all of Earth at once (lower bound)'],
+   [geoLike?'Stays put':(p.pass<120?n1(p.pass)+' min':(p.pass/60).toLocaleString('en-US',{maximumFractionDigits:1})+' h'),geoLike?'a geostationary satellite never passes':'overhead per pass, horizon to horizon'],
+   [h<=1200?wm2(air):'< 1 µW','heat from the air per m², active sun ('+(h<=1200?(air/SUN*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'% of sunlight':'nothing left')+')']
+  ].forEach(function(s){var d=el('div','stat');d.appendChild(el('b',null,s[0]));d.appendChild(el('span',null,s[1]));st.appendChild(d);});
+  /* real satellites nearest this altitude */
+  var near=POINTS.map(function(q){return {d:Math.abs(Math.log(q[0]/h)),q:q};}).sort(function(a,b){return a.d-b.d;}).slice(0,3);
+  var nb=document.getElementById('nearby');nb.textContent='';
+  if(near[0].d<0.2){nb.appendChild(document.createTextNode('Real satellites near this altitude: '));near.forEach(function(x,i){nb.appendChild(el('b',null,x.q[2]));nb.appendChild(document.createTextNode(' ('+km(x.q[0])+')'+(i<2?', ':'.')));});}
+  else nb.textContent='Nothing in the catalog orbits near this altitude.';
+}
+slider.addEventListener('input',function(){pick();});
+slider.value=sPos(Math.round(star.alt));pick(Math.round(star.alt));
+
+/* ---------- atmosphere small multiples ---------- */
+var HMAX=1200;
+function atmPanel(id,get,yscale,ylabels,fmt,extra){
+  var box=document.getElementById(id);box.textContent='';
+  var W=Math.max(box.clientWidth,240),H=240,L=58,R=10,Tp=14,B=40;
+  var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':id.replace('atm-','Atmosphere panel: ')},box);
+  function x(h){return L+h/HMAX*(W-L-R);}
+  var y=yscale(H-B,Tp);
+  sky(svg,L,Tp,W-L-R,H-B-Tp,id.length*131);
+  ylabels.forEach(function(t){E('line',{x1:L,x2:W-R,y1:y(t[0]),y2:y(t[0]),stroke:SKY_GRID},svg);txt(svg,L-7,y(t[0])+4,t[1],{'text-anchor':'end','class':'tick'});});
+  [0,300,600,900,1200].forEach(function(h){txt(svg,x(h),H-B+16,h.toLocaleString('en-US'),{'text-anchor':'middle','class':'tick'});});
+  txt(svg,(L+W-R)/2,H-6,'Altitude, km',{'text-anchor':'middle','class':'axlbl'});
+  if(extra)extra(svg,x,y,W,L,R);
+  LEVELS.forEach(function(lv){var d='',on=false;ATM[lv[0]].forEach(function(r){var v=get(r);if(v==null||!(v>0)&&yscale.log){on=false;return;}var yy=Math.max(Tp,Math.min(H-B,y(v)));d+=(on?'L':'M')+x(r.alt).toFixed(1)+' '+yy.toFixed(1);on=true;});
+    E('path',{d:d,fill:'none',stroke:lv[2],'stroke-width':2,'stroke-linejoin':'round'},svg);});
+  var cur=E('line',{x1:0,x2:0,y1:Tp,y2:H-B,stroke:'rgba(241,235,221,.6)','stroke-dasharray':'3 3',opacity:0},svg);
+  var hit=E('rect',{x:L,y:Tp,width:W-L-R,height:H-B-Tp,fill:'transparent'},svg);
+  function move(ev){var b=svg.getBoundingClientRect(),h=Math.round(Math.max(0,Math.min(HMAX,(ev.clientX-b.left)/b.width*W-L)/(W-L-R)*HMAX)/10)*10;
+    cur.setAttribute('x1',x(h));cur.setAttribute('x2',x(h));cur.setAttribute('opacity',1);
+    showTip(km(h),LEVELS.map(function(lv){var r=atmAt(lv[0],h);return {color:lv[2],value:fmt(get(r)),name:lv[1]};}),null,ev.clientX,b.top+Tp+8);}
+  hit.addEventListener('pointermove',move);hit.addEventListener('pointerleave',function(){cur.setAttribute('opacity',0);hideTip();});
+}
+function linear(lo,hi){return function(bottom,top){return function(v){return bottom-(v-lo)/(hi-lo)*(bottom-top);};};}
+function logs(lo,hi){var f=function(bottom,top){return function(v){return bottom-(Math.log10(v)-Math.log10(lo))/(Math.log10(hi)-Math.log10(lo))*(bottom-top);};};f.log=true;return f;}
+function atm(){
+  atmPanel('atm-temp',function(r){return r.temp_k-273.15;},linear(-100,1300),[[0,'0 °C'],[300,'300'],[600,'600'],[900,'900'],[1200,'1,200']],function(v){return v==null?'—':n0(v)+' °C';});
+  atmPanel('atm-dens',function(r){return r.density/sea;},logs(1e-15,1),[[1,'same'],[1e-3,'1/thousand'],[1e-6,'1/million'],[1e-9,'1/billion'],[1e-12,'1/trillion'],[1e-15,'1/quadrillion']],
+    function(v){return v==null?'—':v>=0.5?'about the same':'1 / '+big(1/v);});
+  atmPanel('atm-heat',function(r){return r.ram_wm2;},logs(1e-5,1e7),[[1e6,'1 MW'],[1e3,'1 kW'],[1,'1 W'],[1e-3,'1 mW'],[1e-5,'10 µW']],function(v){return wm2(v);},
+    function(svg,x,y,W,L,R){E('line',{x1:L,x2:W-R,y1:y(SUN),y2:y(SUN),stroke:'var(--sky-ink)',opacity:.8,'stroke-dasharray':'5 4'},svg);txt(svg,W-R-4,y(SUN)-5,'Direct sunlight, '+n0(SUN)+' W',{'text-anchor':'end','class':'tick',style:'fill:var(--sky-ink)'});});
+}
+
+/* ---------- energy budget bars ---------- */
+function budget(animate){
+  var b=S.budget.filter(function(x){return x.alt===state.budget;})[0],box=document.getElementById('budget');box.textContent='';
+  var air=b.air_ram.high+b.air_thermal.high;
+  var rows=[['Direct sunlight','the sun, face on',b.sunlight,false],
+    ['Earth\'s glow','the planet\'s own heat, face toward Earth',b.earth_ir,false],
+    ['Reflected sunlight','at most, over the bright side of the day',b.albedo_max,false],
+    ['The air','everything the thin air can deliver at an active sun, '+degC(b.air_temp_k.high),air,true]];
+  rows.forEach(function(r){
+    var l=el('div','bl',r[0]);l.appendChild(el('small',null,r[1]));box.appendChild(l);
+    var t=el('div','bt'),i=el('i',r[3]?'air':null);i.style.width=(r[2]/b.sunlight*100).toFixed(2)+'%';t.appendChild(i);box.appendChild(t);
+    var v=el('div','bv',wm2(r[2]));v.appendChild(el('small',null,r[3]?(air/b.sunlight*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'% of sunlight':Math.round(r[2]/b.sunlight*100)+'% of sunlight'));box.appendChild(v);
+  });
+  var note={200:['Even this low, the air loses.','At 200 km the air finally shows up on the chart, and it is still under a tenth of sunlight. No satellite stays this low for long; the drag, not the heat, brings it down within weeks.'],
+    400:['The air hands the station less heat than a nightlight.','This is the space station\'s altitude. The air it flies through is over 1,000 °C at an active sun, and that is all the heat it can deliver.'],
+    550:['Milliwatts of air against 1,360 watts of sun.','A typical altitude for the internet constellations. The air\'s contribution is a few hundred milliwatts per square meter.'],
+    1200:['The air is effectively gone.','OneWeb\'s altitude. What is left is microwatts per square meter.']};
+  verdict('budget-note',note[state.budget][0],note[state.budget][1],!!animate);
+}
+
+/* ---------- the data-center budget ---------- */
+var dcState={t:60};
+function dc(animate){
+  var D=S.datacenter,r=D.radiators.filter(function(x){return x.temp_c===dcState.t;})[0],st=document.getElementById('dcStats');st.textContent='';
+  [[n0(r.m2_per_mw)+' m²','of radiator per megawatt, at '+r.temp_c+' °C'],
+   [n0(r.net_wm2)+' W/m²','shed by each square meter of radiator, net'],
+   [n0(D.solar_m2_per_mw_continuous)+' m²','of solar panel per megawatt, always in sun'],
+   [n0(D.solar_m2_per_mw_average)+' m²','of solar panel per megawatt, ordinary orbit, plus batteries'],
+   [n0(D.shadow_min_worst)+' min','in shadow per orbit, worst case ('+n0((1-D.sun_frac_worst)*100)+'% of the orbit)'],
+   [ms(D.ping_ms),'round-trip floor to the ground']
+  ].forEach(function(x){var d=el('div','stat');d.appendChild(el('b',null,x[0]));d.appendChild(el('span',null,x[1]));st.appendChild(d);});
+  var fills2={dcT:r.temp_c+' °C',dcNet:n0(r.net_wm2)+' W per square meter',dcRad:n0(r.m2_per_mw)+' m²'};
+  document.querySelectorAll('[data-fill]').forEach(function(n){if(fills2[n.dataset.fill]!=null)n.textContent=fills2[n.dataset.fill];});
+  var notes={30:['Cool chips need the most radiator.','Cool surfaces radiate weakly, because radiation goes as the fourth power of temperature, so chips kept near room temperature pay for it in area.'],
+    60:['About a thousand square meters of radiator per megawatt.','A typical coolant temperature for packed electronics. That is a sixth of a football field before any solar panel.'],
+    90:['Running hot cuts the radiator by a third.','The price is shorter chip life. Even so, the radiators are nearly as large as the solar array.']};
+  verdict('dcNote',notes[dcState.t][0],notes[dcState.t][1],!!animate);
+}
+
+/* ---------- table-view twins ---------- */
+function table(id,head,rs){
+  var w=document.getElementById(id+'-table');w.textContent='';
+  var t=el('table','dt'),th=el('thead'),tr=el('tr');head.forEach(function(h,i){tr.appendChild(el('th',i?'n':null,h));});th.appendChild(tr);t.appendChild(th);
+  var tb=el('tbody');rs.forEach(function(r){var row=el('tr');r.forEach(function(c,i){row.appendChild(el('td',i?'n':null,c));});tb.appendChild(row);});
+  t.appendChild(tb);w.appendChild(t);
+}
+document.querySelectorAll('.tbl-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    var id=b.dataset.table,tw=document.getElementById(id+'-table'),show=tw.hidden;
+    tw.hidden=!show;document.getElementById(id).hidden=show;b.textContent=show?'Chart':'Table';hideTip();
+    if(show)(id==='hist'?function(){groupTable('hist');}:scatterTable)();else(id==='hist'?hist:scatter)();
+  });
+});
+
+/* ---------- controls ---------- */
+function seg(id,fn){document.querySelectorAll('#'+id+' button').forEach(function(btn){btn.addEventListener('click',function(){
+  document.querySelectorAll('#'+id+' button').forEach(function(o){o.setAttribute('aria-pressed',String(o===btn));});fn(btn);});});}
+seg('metric',function(b){state.metric=b.dataset.metric;scatter(true);});
+seg('budgetAlt',function(b){state.budget=+b.dataset.alt;budget(true);});
+seg('dcTemp',function(b){dcState.t=+b.dataset.t;dc(true);});
+hist();scatter();atm();budget();dc();
+var rt,lastW=window.innerWidth;window.addEventListener('resize',function(){if(window.innerWidth===lastW)return;lastW=window.innerWidth;clearTimeout(rt);rt=setTimeout(function(){if(!document.getElementById('hist').hidden)hist();if(!document.getElementById('scatter').hidden)scatter();atm();},120);});
+}
+})();
+</script>
+</body>
+</html>
