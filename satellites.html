@@ -191,13 +191,14 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <div class="card-head">
         <div>
           <p class="card-title">Where everything is</p>
-          <p class="card-sub">Count of active satellites by altitude. The scale is logarithmic both ways: each step along the bottom multiplies the altitude, and each step up multiplies the count by ten.</p>
         </div>
         <div class="card-tools"><button type="button" class="tbl-btn" data-table="hist">Table</button></div>
       </div>
+      <p class="card-sub">Count of active satellites by altitude. The scale is logarithmic both ways: each step along the bottom multiplies the altitude, and each step up multiplies the count by ten.</p>
+      <p class="card-foot lead-note"><b class="lead"><span data-fill="lowShare"></span> of everything up there is in low orbit.</b> The crowd below 600 km is mostly Starlink. The thin spike at 35,786 km is the geostationary belt, where a satellite's day matches Earth's and it hangs over one spot. The lopsidedness has a reason: low orbit is where low lag and cheap launches are.</p>
       <div class="chart" id="hist"></div>
       <div class="tablewrap" id="hist-table" hidden></div>
-      <p class="card-foot">Hover a bar for its count, or a label for that constellation. The crowd below 600 km is mostly Starlink. The thin spike at 35,786 km is the geostationary belt, where a satellite's day matches Earth's and it hangs over one spot. The picture is lopsided for a reason: <span data-fill="lowShare"></span> of active satellites are in low orbit, because that is where low lag and cheap launches are.</p>
+      <p class="card-foot">Hover a bar for its count, or a label for that constellation.</p>
     </div>
 
     <div class="card">
@@ -225,9 +226,10 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <div class="card-head">
         <div>
           <p class="card-title">Pick an altitude</p>
-          <p class="card-sub">Slide to any height and see what gravity and the speed of light force on a satellite there. Antennas are assumed to need the satellite at least 25&deg; above the horizon.</p>
         </div>
       </div>
+      <p class="card-sub">Slide to any height and see what gravity and the speed of light force on a satellite there. Antennas are assumed to need the satellite at least 25&deg; above the horizon.</p>
+      <p class="card-foot lead-note"><b class="lead">One number sets all of these.</b> Move the slider and every tile changes together, because each one is worked from the altitude alone.</p>
       <div class="pick">
         <div class="presets" id="presets" role="group" aria-label="Jump to"></div>
         <div class="range">
@@ -249,23 +251,23 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <div class="card-head">
         <div>
           <p class="card-title">Hot, but nearly empty</p>
-          <p class="card-sub">The upper atmosphere from the ground to 1,200 km, at low, moderate and high solar activity. Temperature rises; density collapses; the heat the air can deliver collapses with it.</p>
         </div>
       </div>
+      <p class="card-sub">The upper atmosphere from the ground to 1,200 km, at low, moderate and high solar activity. Temperature rises; density collapses; the heat the air can deliver collapses with it.</p>
+      <p class="card-foot lead-note"><b class="lead">Above 300 km the air never comes within a hundredfold of sunlight.</b> That holds at any level of solar activity, and the right-hand panel is where to see it. Below about 150 km the air wins, which is why re-entry is violent and why nothing orbits there.</p>
       <div class="legend"><span><i style="background:var(--low)"></i>Quiet sun</span><span><i style="background:var(--mod)"></i>Moderate</span><span><i style="background:var(--high)"></i>Active sun</span></div>
       <div class="multi">
         <div><p class="mt">Air temperature</p><div class="chart" id="atm-temp"></div></div>
         <div><p class="mt">Air density, compared with sea level</p><div class="chart" id="atm-dens"></div></div>
         <div><p class="mt">Heat the air can deliver, per m&sup2;</p><div class="chart" id="atm-heat"></div></div>
       </div>
-      <p class="card-foot">Hover any panel to read values at an altitude. The heating curve is for the face of a satellite plowing through the air at orbital speed, which is far more than the resting air's own warmth. The dashed line is direct sunlight. The verdict is in the right-hand panel: above 300 km the air never comes within a hundredfold of sunlight, at any level of solar activity. Below about 150 km the air wins, which is why re-entry is violent and why nothing orbits there.</p>
+      <p class="card-foot">Hover any panel to read values at an altitude. The heating curve is for the face of a satellite plowing through the air at orbital speed, which is far more than the resting air's own warmth. The dashed line is direct sunlight.</p>
     </div>
 
     <div class="card">
       <div class="card-head">
         <div>
           <p class="card-title">The energy budget on one square meter</p>
-          <p class="card-sub">Where the heat comes from for a satellite at a chosen altitude, on an active-sun day. The air is the smallest line by a very long way.</p>
         </div>
         <div class="card-tools">
           <div class="seg" id="budgetAlt" role="group" aria-label="Altitude">
@@ -276,8 +278,9 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
           </div>
         </div>
       </div>
+      <p class="card-sub">Where the heat comes from for a satellite at a chosen altitude, on an active-sun day. The air is the smallest line by a very long way.</p>
+      <p class="card-foot lead-note" id="budget-note"></p>
       <div class="bars" id="budget"></div>
-      <p class="card-foot" id="budget-note"></p>
     </div>
 
     <p class="prose"><b>The real problem is the opposite one.</b> In sunlight a satellite's challenge is getting rid of heat, because there is no air to carry it away. A vacuum insulates like a thermos. The only way out is to radiate. A flat panel facing the sun with nothing else around it settles near <b data-fill="tSun"></b>; the same panel in Earth's shadow, warmed only by Earth's own glow, settles near <b data-fill="tShade"></b>. Every satellite crosses between those two every orbit, roughly every <b data-fill="dayNight"></b> in low orbit.</p>
@@ -295,7 +298,6 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
       <div class="card-head">
         <div>
           <p class="card-title">The budget for one megawatt of computing in low orbit</p>
-          <p class="card-sub">What a 1 MW facility at <span data-fill="dcAlt"></span> must carry, worked from the same constants as the rest of the page. Every watt of electricity the chips use becomes heat, and the only way to get rid of heat in a vacuum is to radiate it. Pick how hot the radiators run.</p>
         </div>
         <div class="card-tools">
           <div class="seg" id="dcTemp" role="group" aria-label="Radiator temperature">
@@ -305,8 +307,9 @@ ol.sources li{font-size:14px;color:var(--dim);margin-bottom:8px}
           </div>
         </div>
       </div>
+      <p class="card-sub">What a 1 MW facility at <span data-fill="dcAlt"></span> must carry, worked from the same constants as the rest of the page. Every watt of electricity the chips use becomes heat, and the only way to get rid of heat in a vacuum is to radiate it. Pick how hot the radiators run.</p>
+      <p class="card-foot lead-note" id="dcNote"></p>
       <div class="stats" id="dcStats"></div>
-      <p class="card-foot" id="dcNote"></p>
       <p class="card-foot">Assumptions: radiator surfaces with 90% emissivity, radiating from both faces with one face toward Earth; solar cells at 30% efficiency; no losses in batteries or power conversion, so the real areas are larger. For scale, an American football field is about 5,350 m&sup2;.</p>
     </div>
 
@@ -571,17 +574,19 @@ var MET={period:{label:'Time per orbit, hours',unit:'h',of:function(h){return ph
     sub:'The shortest possible round trip for a signal: up to the satellite, down to a ground station, and back the same way, at the speed of light.',
     lead:'Low orbit wins outright.',note:'The floor at Starlink\'s altitude is single-digit milliseconds; at the geostationary belt it is nearly half a second before any computer has touched the signal. No engineering closes that gap, because the gap is the speed of light.'}};
 var state={metric:'period',budget:400};
-var typeTimer=null;
+var typeTimers={};
+function verdict(id,lead,rest,animate){
+  /* a card's verdict: lead sentence bold, then the rest. On an option switch the lead is retyped and flashed so the change is seen. */
+  var note=document.getElementById(id),reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  clearTimeout(typeTimers[id]);note.textContent='';
+  var b=el('b','lead',''),r=document.createTextNode('');note.appendChild(b);note.appendChild(r);
+  if(!animate||reduce){b.textContent=lead;r.textContent=' '+rest;return;}
+  var i=0;(function tick(){b.textContent=lead.slice(0,++i);if(i<lead.length){typeTimers[id]=setTimeout(tick,22);}else{b.classList.add('flash');r.textContent=' '+rest;}})();
+}
 function scatterText(animate){
-  /* the subtitle and the verdict under the chart. On a metric switch the subtitle fades over and the verdict is retyped, lead sentence first and bold, so the change is seen. */
-  var m=MET[state.metric],sub=document.getElementById('scatter-sub'),note=document.getElementById('scatter-note');
-  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  clearTimeout(typeTimer);note.textContent='';
-  var lead=el('b','lead',''),rest=document.createTextNode('');note.appendChild(lead);note.appendChild(rest);
-  if(!animate||reduce){sub.textContent=m.sub;lead.textContent=m.lead;rest.textContent=' '+m.note;return;}
-  sub.classList.add('swap','out');setTimeout(function(){sub.textContent=m.sub;sub.classList.remove('out');},180);
-  var i=0,full=m.lead;
-  (function tick(){lead.textContent=full.slice(0,++i);if(i<full.length){typeTimer=setTimeout(tick,22);}else{lead.classList.add('flash');rest.textContent=' '+m.note;}})();
+  var m=MET[state.metric],sub=document.getElementById('scatter-sub'),reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(animate&&!reduce){sub.classList.add('swap','out');setTimeout(function(){sub.textContent=m.sub;sub.classList.remove('out');},180);}else sub.textContent=m.sub;
+  verdict('scatter-note',m.lead,m.note,animate);
 }
 function scatter(animateText){
   var box=document.getElementById('scatter');box.textContent='';
@@ -675,7 +680,7 @@ function atm(){
 }
 
 /* ---------- energy budget bars ---------- */
-function budget(){
+function budget(animate){
   var b=S.budget.filter(function(x){return x.alt===state.budget;})[0],box=document.getElementById('budget');box.textContent='';
   var air=b.air_ram.high+b.air_thermal.high;
   var rows=[['Direct sunlight','the sun, face on',b.sunlight,false],
@@ -687,16 +692,16 @@ function budget(){
     var t=el('div','bt'),i=el('i',r[3]?'air':null);i.style.width=(r[2]/b.sunlight*100).toFixed(2)+'%';t.appendChild(i);box.appendChild(t);
     var v=el('div','bv',wm2(r[2]));v.appendChild(el('small',null,r[3]?(air/b.sunlight*100).toLocaleString('en-US',{maximumSignificantDigits:2})+'% of sunlight':Math.round(r[2]/b.sunlight*100)+'% of sunlight'));box.appendChild(v);
   });
-  var note={200:'At 200 km the air finally shows up on the chart, and it is still under a tenth of sunlight. No satellite stays this low for long; the drag, not the heat, brings it down within weeks.',
-    400:'This is the space station\'s altitude. The air it flies through is over 1,000 °C at an active sun, and it delivers less heat than a nightlight.',
-    550:'A typical altitude for the internet constellations. The air\'s contribution is a few hundred milliwatts, against 1,360 watts of sun.',
-    1200:'OneWeb\'s altitude. The air is effectively gone: microwatts per square meter.'};
-  document.getElementById('budget-note').textContent=note[state.budget];
+  var note={200:['Even this low, the air loses.','At 200 km the air finally shows up on the chart, and it is still under a tenth of sunlight. No satellite stays this low for long; the drag, not the heat, brings it down within weeks.'],
+    400:['The air hands the station less heat than a nightlight.','This is the space station\'s altitude. The air it flies through is over 1,000 °C at an active sun, and that is all the heat it can deliver.'],
+    550:['Milliwatts of air against 1,360 watts of sun.','A typical altitude for the internet constellations. The air\'s contribution is a few hundred milliwatts per square meter.'],
+    1200:['The air is effectively gone.','OneWeb\'s altitude. What is left is microwatts per square meter.']};
+  verdict('budget-note',note[state.budget][0],note[state.budget][1],!!animate);
 }
 
 /* ---------- the data-center budget ---------- */
 var dcState={t:60};
-function dc(){
+function dc(animate){
   var D=S.datacenter,r=D.radiators.filter(function(x){return x.temp_c===dcState.t;})[0],st=document.getElementById('dcStats');st.textContent='';
   [[n0(r.m2_per_mw)+' m²','of radiator per megawatt, at '+r.temp_c+' °C'],
    [n0(r.net_wm2)+' W/m²','shed by each square meter of radiator, net'],
@@ -707,10 +712,10 @@ function dc(){
   ].forEach(function(x){var d=el('div','stat');d.appendChild(el('b',null,x[0]));d.appendChild(el('span',null,x[1]));st.appendChild(d);});
   var fills2={dcT:r.temp_c+' °C',dcNet:n0(r.net_wm2)+' W per square meter',dcRad:n0(r.m2_per_mw)+' m²'};
   document.querySelectorAll('[data-fill]').forEach(function(n){if(fills2[n.dataset.fill]!=null)n.textContent=fills2[n.dataset.fill];});
-  var notes={30:'Chips kept near room temperature need the most radiator: cool surfaces radiate weakly, because radiation goes as the fourth power of temperature.',
-    60:'A typical coolant temperature for packed electronics. About a thousand square meters of radiator for every megawatt, a sixth of a football field, before any solar panel.',
-    90:'Running the chips hot cuts the radiator area by a third, at the price of shorter chip life. Even so, the radiators are nearly as large as the solar array.'};
-  document.getElementById('dcNote').textContent=notes[dcState.t];
+  var notes={30:['Cool chips need the most radiator.','Cool surfaces radiate weakly, because radiation goes as the fourth power of temperature, so chips kept near room temperature pay for it in area.'],
+    60:['About a thousand square meters of radiator per megawatt.','A typical coolant temperature for packed electronics. That is a sixth of a football field before any solar panel.'],
+    90:['Running hot cuts the radiator by a third.','The price is shorter chip life. Even so, the radiators are nearly as large as the solar array.']};
+  verdict('dcNote',notes[dcState.t][0],notes[dcState.t][1],!!animate);
 }
 
 /* ---------- table-view twins ---------- */
@@ -732,8 +737,8 @@ document.querySelectorAll('.tbl-btn').forEach(function(b){
 function seg(id,fn){document.querySelectorAll('#'+id+' button').forEach(function(btn){btn.addEventListener('click',function(){
   document.querySelectorAll('#'+id+' button').forEach(function(o){o.setAttribute('aria-pressed',String(o===btn));});fn(btn);});});}
 seg('metric',function(b){state.metric=b.dataset.metric;scatter(true);});
-seg('budgetAlt',function(b){state.budget=+b.dataset.alt;budget();});
-seg('dcTemp',function(b){dcState.t=+b.dataset.t;dc();});
+seg('budgetAlt',function(b){state.budget=+b.dataset.alt;budget(true);});
+seg('dcTemp',function(b){dcState.t=+b.dataset.t;dc(true);});
 hist();scatter();atm();budget();dc();
 var rt,lastW=window.innerWidth;window.addEventListener('resize',function(){if(window.innerWidth===lastW)return;lastW=window.innerWidth;clearTimeout(rt);rt=setTimeout(function(){if(!document.getElementById('hist').hidden)hist();if(!document.getElementById('scatter').hidden)scatter();atm();},120);});
 }
