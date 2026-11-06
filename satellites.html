@@ -477,18 +477,20 @@ function xAxis(svg,L,R,y,narrow){
   XTICKS.forEach(function(t,i){if(narrow&&i%2)return;txt(svg,xlog(t[0],L,R),y,t[1],{'text-anchor':'middle','class':'tick'});});
   txt(svg,(L+R)/2,y+18,'Altitude above Earth, km (log scale) →',{'text-anchor':'middle','class':'axlbl'});
 }
-function groupMarkers(svg,L,R,yOf,narrow,valueOf){
+function groupMarkers(svg,L,R,yOf,narrow,valueOf,darkTop){
+  /* darkTop: the y where a dark backdrop begins; markers sit inside it, labels may sit above it */
+  var dark=darkTop!=null,fg=dark?'#f1ebdd':'var(--text-1)',bg=dark?'#0b1a33':'var(--surface)',ln=dark?'rgba(150,160,180,.8)':'var(--axis)';
   /* labeled markers for the constellations; labels alternate above/below to avoid piling up */
   var gs=GROUPS.slice().sort(function(a,b){return a.alt-b.alt;}),lastX=-1e9,row=0;
   gs.forEach(function(g){
     var x=xlog(g.alt,L,R),y=yOf(g);
     if(x-lastX<(narrow?34:54))row++;else row=0;lastX=x;
     var m=E('g',{'class':'mk',tabindex:0,'aria-label':g.name+': '+n0(g.count)+' satellites at about '+km(g.alt)},svg);
-    E('path',{d:'M'+x+' '+(y-6)+'l5 6-5 6-5-6z',fill:'var(--surface)',stroke:'var(--text-1)','stroke-width':1.6},m);
+    E('path',{d:'M'+x+' '+(y-6)+'l5 6-5 6-5-6z',fill:bg,stroke:fg,'stroke-width':1.6},m);
     var ly=y-12-row*13,lab=g.name==='Geostationary belt'?'GEO belt':g.name==='Space station'?'Station':g.name;
     if(narrow&&['Qianfan','Guowang','Globalstar','Galileo','BeiDou','Kuiper','Space station','Iridium'].indexOf(g.name)>=0)lab='';
-    if(lab){txt(m,x,ly,lab,{'text-anchor':'middle','class':'blbl',style:'paint-order:stroke;stroke:var(--surface);stroke-width:3px'});
-      if(row)E('line',{x1:x,y1:ly+3,x2:x,y2:y-7,stroke:'var(--axis)'},m);}
+    if(lab){var inside=dark&&ly>darkTop+4;txt(m,x,ly,lab,{'text-anchor':'middle','class':'blbl',style:'fill:'+(inside?fg:'var(--text-1)')+';paint-order:stroke;stroke:'+(inside?bg:'var(--surface)')+';stroke-width:3px'});
+      if(row)E('line',{x1:x,y1:ly+3,x2:x,y2:y-7,stroke:ln},m);}
     var show=function(){tipAt(m,g.name,[{value:n0(g.count)+(g.count===1?' satellite':' satellites')},{value:km(g.alt),name:g.count>1?'median altitude ('+n0(g.alt_lo)+' to '+n0(g.alt_hi)+')':'altitude'},{value:per(g.period),name:'per orbit'},{value:kms(g.speed),name:'speed'}].concat(valueOf?[valueOf(g)]:[]),
       g.name==='Geostationary belt'?'Grouped by orbit: every satellite with a day-long period.':null);};
     m.addEventListener('pointerenter',show);m.addEventListener('focus',show);m.addEventListener('pointerleave',hideTip);m.addEventListener('blur',hideTip);
@@ -502,23 +504,27 @@ function hist(){
   var svg=E('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Histogram of active satellites by altitude, log scale. Use the Table button for the constellation counts.'},box);
   var maxN=Math.max.apply(null,S.histogram.map(function(b){return b.n;})),top=Math.ceil(Math.log10(maxN));
   function y(n){return n<1?H-B:H-B-Math.log10(n)/top*(H-B-Tp);}
-  for(var d=0;d<=top;d++){var v=Math.pow(10,d),yy=y(v);E('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'var(--grid)'},svg);txt(svg,L-8,yy+4,v.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});}
+  /* the backdrop: blue at low orbit, black at the far end, deeper into space as the altitude climbs */
+  var defs=E('defs',null,svg),gr=E('linearGradient',{id:'deep',x1:0,y1:0,x2:1,y2:0},defs);
+  [[0,'#2a5a9c'],[.35,'#15306a'],[.7,'#070f26'],[1,'#000']].forEach(function(st){E('stop',{offset:st[0],'stop-color':st[1]},gr);});
+  E('rect',{x:L,y:Tp-8,width:W-R-L,height:H-B-Tp+8,rx:6,fill:'url(#deep)'},svg);
+  for(var d=0;d<=top;d++){var v=Math.pow(10,d),yy=y(v);E('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'rgba(241,235,221,.14)'},svg);txt(svg,L-8,yy+4,v.toLocaleString('en-US'),{'text-anchor':'end','class':'tick'});}
   if(!narrow)txt(svg,L,Tp-30,'Satellites (log)',{'class':'axlbl'});
   /* bands */
   [[AMIN,2000,'Low orbit'],[2000,35000,'Medium'],[35000,AMAX,'Geostationary & beyond']].forEach(function(b,i){
     var x0=xlog(b[0],L,R>0?W-R:W),x1=xlog(b[1],L,W-R);
-    if(i%2)E('rect',{x:x0,y:Tp-8,width:x1-x0,height:H-B-Tp+8,fill:'#f3eee3'},svg);
+    if(i)E('line',{x1:x0,x2:x0,y1:Tp-8,y2:H-B,stroke:'rgba(241,235,221,.25)','stroke-dasharray':'3 4'},svg);
     txt(svg,(x0+x1)/2,H-B+14,narrow&&i===2?'GEO & beyond':b[2],{'text-anchor':'middle','class':'band'});
   });
   S.histogram.forEach(function(b){
     if(!b.n)return;
-    var x0=xlog(b.lo,L,W-R),x1=xlog(b.hi,L,W-R),r=E('rect',{x:x0+.5,y:y(b.n),width:Math.max(1,x1-x0-1),height:H-B-y(b.n),fill:'var(--accent)',opacity:.8,tabindex:0,'aria-label':n0(b.n)+' satellites between '+km(b.lo)+' and '+km(b.hi)},svg);
+    var x0=xlog(b.lo,L,W-R),x1=xlog(b.hi,L,W-R),r=E('rect',{x:x0+.5,y:y(b.n),width:Math.max(1,x1-x0-1),height:H-B-y(b.n),fill:'#f1ebdd',opacity:.85,tabindex:0,'aria-label':n0(b.n)+' satellites between '+km(b.lo)+' and '+km(b.hi)},svg);
     var show=function(){r.setAttribute('opacity',1);tipAt(r,km(b.lo)+' to '+km(b.hi),[{value:n0(b.n)+' satellites'}],null);};
-    var hide=function(){r.setAttribute('opacity',.8);hideTip();};
+    var hide=function(){r.setAttribute('opacity',.85);hideTip();};
     r.addEventListener('pointerenter',show);r.addEventListener('focus',show);r.addEventListener('pointerleave',hide);r.addEventListener('blur',hide);
   });
   xAxis(svg,L,W-R,H-B+30,narrow);
-  groupMarkers(svg,L,W-R,function(g){var b=S.histogram.filter(function(b){return g.alt>=b.lo&&g.alt<b.hi;})[0];return y(b?b.n:1)-8;},narrow);
+  groupMarkers(svg,L,W-R,function(g){var b=S.histogram.filter(function(b){return g.alt>=b.lo&&g.alt<b.hi;})[0];return y(b?b.n:1)-8;},narrow,null,Tp-8);
 }
 function groupTable(id){
   table(id,['Group','Satellites','Altitude (median)','Per orbit','Speed','Round-trip floor','Inclination'],
