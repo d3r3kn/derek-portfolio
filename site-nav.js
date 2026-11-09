@@ -9,7 +9,8 @@
   var WORK = [
     ['data', 'data.html', 'Data Analysis', 'Explorations of public data: Medicaid spending, automaker trends, AI adoption, and satellite orbits'],
     ['creative', 'content-production.html', 'Creative', 'Editing, compositing, and AI video, 3D, and image work'],
-    ['education-channel', 'anatomy-channel.html', 'A&P Educational Channel', 'Anatomy and physiology lessons on YouTube since 2017']
+    ['education-channel', 'anatomy-channel.html', 'A&P Educational Channel', 'Anatomy and physiology lessons on YouTube since 2017'],
+    ['burning-village', 'burning-village.html', 'Burning Village Studios', 'My creative studio for art, game ideas, and short films']
   ];
 
   var host = document.getElementById('site-nav');
